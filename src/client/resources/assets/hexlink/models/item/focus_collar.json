@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hexlink:item/potion_focus"
+    "layer0": "hexlink:item/focus_collar"
   },
   "overrides": [
     {
-      "model": "hexlink:item/filled_potion_focus",
+      "model": "hexlink:item/filled_focus_collar",
       "predicate": { "hexlink:is_filled": 1.0 }
     }
   ]
