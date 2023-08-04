@@ -1,6 +1,7 @@
 package jempasam.hexlink.item
 
 import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.common.items.ItemFocus
 import at.petrak.hexcasting.xplat.IXplatAbstractions
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.iota.spiritual.BlockSpiritIota
@@ -30,19 +31,35 @@ object HexlinkItems {
         for(entry in items )Registry.register(Registry.ITEM, Identifier(HexlinkMod.MODID, entry.key), entry.value)
     }
 
-    val PotionFocus=make("potion_focus", GreatFocus(epicProps(), ::greatFocusPotion))
-    val BlockFocus=make("block_focus", GreatFocus(epicProps(), ::greatFocusBlock))
-    val EntityFocus=make("entity_focus", GreatFocus(epicProps(), ::greatFocusEntity))
-    val ItemFocus=make("item_focus", GreatFocus(epicProps(), ::greatFocusItem))
-    val UltimateFocus=make("ultimate_focus", GreatFocus(epicProps(), ::greatFocusUltimate))
+    val PotionFocus=make("potion_focus", GreatFocusItem(epicProps(), ::greatFocusPotion))
+    val BlockFocus=make("block_focus", GreatFocusItem(epicProps(), ::greatFocusBlock))
+    val EntityFocus=make("entity_focus", GreatFocusItem(epicProps(), ::greatFocusEntity))
+    val ItemFocus=make("item_focus", GreatFocusItem(epicProps(), ::greatFocusItem))
+    val UltimateFocus=make("ultimate_focus", GreatFocusItem(epicProps(), ::greatFocusUltimate))
 
-    var UpgradedBook=make("upgraded_book", UpgradedBook(epicProps()))
+    var UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
+    var FocusCollar=make("focus_collar", ItemFocus(simpleProps()))
+    var MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
 
     fun epicProps(): Item.Settings{
         return Item.Settings()
                 .group(IXplatAbstractions.INSTANCE.tab)
                 .maxCount(1)
                 .rarity(Rarity.EPIC)
+    }
+
+    fun simpleProps(): Item.Settings{
+        return Item.Settings()
+                .group(IXplatAbstractions.INSTANCE.tab)
+                .maxCount(1)
+                .rarity(Rarity.COMMON)
+    }
+
+    fun stackableProps(): Item.Settings{
+        return Item.Settings()
+                .group(IXplatAbstractions.INSTANCE.tab)
+                .maxCount(64)
+                .rarity(Rarity.COMMON)
     }
 
     fun greatFocusPotion(target: Entity): PotionSpiritIota?{

@@ -16,7 +16,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.Text
 import net.minecraft.world.World
 
-class GreatFocus<T: Iota>(settings: Item.Settings, val filter: (Entity)->T?) : Item(settings), IotaHolderItem {
+class GreatFocusItem<T: Iota>(settings: Settings, val filter: (Entity)->T?) : Item(settings), IotaHolderItem {
 
     override fun writeDatum(stack: ItemStack, datum: Iota?) {
         if(datum!=null){

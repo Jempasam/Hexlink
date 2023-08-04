@@ -21,7 +21,7 @@ class OpManisfestSpirit : SpellAction {
     override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>>? {
         val spirit=args[0]
         val target=args[1]
-        val power=args.getIntBetween(2,1,100)
+        val power=args.getIntBetween(2,1,100, 3)
         if(spirit is SpiritIota){
             if(target is Vec3Iota){
                 if(ctx.position.distanceTo(target.vec3)>30)throw MishapLocationTooFarAway(target.vec3)

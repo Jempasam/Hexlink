@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hexlink:item/mixed1",
+    "layer1": "hexlink:item/mixed2"
+  }
+}

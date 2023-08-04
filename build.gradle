@@ -76,6 +76,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}")
 
+	modImplementation "dev.emi:trinkets:$trinketsVersion"
 	modImplementation "at.petra-k.paucal:paucal-fabric-$minecraft_version:$paucalVersion"
 	modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouliVersion-FABRIC"
 	modImplementation("at.petra-k.hexcasting:hexcasting-fabric-$minecraft_version:$hexcastingVersion"){

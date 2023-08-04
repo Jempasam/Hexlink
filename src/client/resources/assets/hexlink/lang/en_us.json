@@ -11,6 +11,8 @@
   "item.hexlink.item_focus": "Black-Smith Great Focus",
   "item.hexlink.ultimate_focus": "Ultimate Great Focus",
   "item.hexlink.upgraded_book": "Upgraded Spellbook",
+  "item.hexlink.mixed_pigment": "Mixed Pigment",
+  "item.hexlink.focus_collar": "Focus Collar",
 
   "item.hexlink.potion_focus.filled": "Filled Alchemist Great Focus",
   "item.hexlink.block_focus.filled": "Filled Architect Great Focus",
@@ -25,16 +27,17 @@
 
   "hexlink.mishap.need_great_focus": "suitable empty Great Focus",
 
-  "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack with a right click. If it contains a Pattern iota or a List of Pattern, it is evaluated like with Hermes Gambit else the iota is added on top of my stack.",
+  "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
 
-  "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physic object or properties in the world and allow me to control them.",
+  "hexlink.spell.spirit_spells": "Manipulation of spirits",
+  "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them.",
   "hexlink.spell.spirit_extract.desc.2": "I need a Alchemist Great Focus to extract potion effect spirit, Architect Great Focus to extract block spirit. I read there is a special Great Focus able to extract any spirit.",
-  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst.",
+  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest.",
   "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
 
   "hexlink.page.great_focuses": "Great Focuses",
-  "hexlink.page.great_focuses.desc": "Great focuses are a special type of focuses not rewritable but able to extract a spirit right from a physical object. I can find these in dungeon chests.",
+  "hexlink.page.great_focuses.desc": "Great focuses are of a special type of focus, not rewritable but able to extract a spirit right from a physical object. I can find these in dungeon chests but most of them are not empty. If I find one I'll try to use $(l:patterns/spirit_spells#hexcasting:read)these patterns/$",
   "hexlink.page.block_focus.desc": "This great focus can contain the spirit of a block.",
   "hexlink.page.item_focus.desc": "This great focus can contain the spirit of an item.",
   "hexlink.page.entity_focus.desc": "This great focus can contain the spirit of an entity.",

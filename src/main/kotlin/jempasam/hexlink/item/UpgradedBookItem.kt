@@ -1,45 +1,28 @@
 package jempasam.hexlink.item
 
-import at.petrak.hexcasting.api.item.HexHolderItem
-import at.petrak.hexcasting.common.items.ItemSpellbook
-import at.petrak.hexcasting.api.item.IotaHolderItem
-import at.petrak.hexcasting.api.item.MediaHolderItem
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.iota.NullIota
-import at.petrak.hexcasting.api.spell.iota.PatternIota
-import at.petrak.hexcasting.api.spell.iota.ListIota
-import at.petrak.hexcasting.api.spell.casting.CastingContext
 import at.petrak.hexcasting.api.spell.casting.CastingHarness
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
+import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.spell.iota.ListIota
+import at.petrak.hexcasting.api.spell.iota.PatternIota
+import at.petrak.hexcasting.common.items.ItemSpellbook
 import at.petrak.hexcasting.xplat.IXplatAbstractions
-import org.jetbrains.annotations.Nullable
-
-import java.util.stream.Stream
-import net.minecraft.client.item.TooltipContext
-import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtElement
-import net.minecraft.text.Text
-import net.minecraft.util.Formatting
-import net.minecraft.util.math.MathHelper
-import net.minecraft.util.TypedActionResult
-import net.minecraft.util.Hand
-import net.minecraft.world.World
-import net.minecraft.server.world.ServerWorld
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.Hand
+import net.minecraft.util.TypedActionResult
+import net.minecraft.world.World
 
 
-class UpgradedBook(settings: Item.Settings): ItemSpellbook(settings){
+class UpgradedBookItem(settings: Settings): ItemSpellbook(settings){
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack>{
-        val stack = user.getStackInHand(hand);
+        val stack = user.getStackInHand(hand)
         if(world is ServerWorld){
-            val iota=readIota(stack, world);
+            val iota=readIota(stack, world)
 
-            if(iota==null)return TypedActionResult.fail(stack);
+            if(iota==null)return TypedActionResult.fail(stack)
 
             val harness = IXplatAbstractions.INSTANCE.getHarness(user as ServerPlayerEntity, hand)
             val success = useIota(iota, harness)
@@ -55,7 +38,7 @@ class UpgradedBook(settings: Item.Settings): ItemSpellbook(settings){
             if(!info.resolutionType.success)return false
         }
         else if(iota is ListIota && doList){
-            for(element in iota.getList()){
+            for(element in iota.list){
                 val success=useIota(element, harness, false)
                 if(!success)return false
             }

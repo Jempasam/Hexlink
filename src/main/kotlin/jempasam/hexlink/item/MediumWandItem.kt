@@ -2,17 +2,15 @@ package jempasam.hexlink.item
 
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import at.petrak.hexcasting.api.item.IotaHolderItem
 import at.petrak.hexcasting.common.items.magic.ItemArtifact
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.nbt.NbtHelper
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.utils.*
 
-class MediumWand(settings: Item.Settings, maximum_spell: Int) : ItemArtifact(settings){
+class MediumWandItem(settings: Item.Settings, maximum_spell: Int) : ItemArtifact(settings){
     
     companion object{
         const val TAG_SELECTED: String="selectedPattern";

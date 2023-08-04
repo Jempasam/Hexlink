@@ -1,4 +1,4 @@
-package jempasam.hexlink.render;
+package jempasam.hexlink.render
 
 import at.petrak.hexcasting.api.spell.math.HexPattern
 import com.mojang.blaze3d.systems.RenderSystem
@@ -51,8 +51,8 @@ object RenderHelper {
         direction.rotate(Quaternion.fromEulerXyz(0f, 0f, (pattern.startDir.ordinal)*angle_step+angle_step/2))
 
         val last_dest=Vec3f(
-                centerx - size_ratio*size.x + shapecenter.x*size_ratio,
-                centery - size_ratio*size.y + shapecenter.y*size_ratio,
+                centerx - size_ratio*size.x/2 + shapecenter.x*size_ratio,
+                centery - size_ratio*size.y/2 + shapecenter.y*size_ratio,
                 0.0f
         )
         val dest=last_dest.copy().apply { move.set(direction); move.multiplyComponentwise(size_ratio,size_ratio,size_ratio); add(move) }
@@ -75,10 +75,10 @@ object RenderHelper {
         val last_dest=Vec3f.ZERO.copy()
         val dest=last_dest.copy().apply { add(direction) }
 
-        var minx=last_dest.x;
-        var miny=last_dest.y;
-        var maxx=last_dest.x;
-        var maxy=last_dest.y;
+        var minx=last_dest.x
+        var miny=last_dest.y
+        var maxx=last_dest.x
+        var maxy=last_dest.y
 
         for(line in pattern.angles){
             last_dest.set(dest)
