@@ -7,8 +7,10 @@ import net.minecraft.client.render.Tessellator
 import net.minecraft.client.render.VertexFormat
 import net.minecraft.client.render.VertexFormats
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.util.math.*
-import kotlin.math.max
+import net.minecraft.util.math.ColorHelper
+import net.minecraft.util.math.Quaternion
+import net.minecraft.util.math.Vec2f
+import net.minecraft.util.math.Vec3f
 
 object RenderHelper {
 

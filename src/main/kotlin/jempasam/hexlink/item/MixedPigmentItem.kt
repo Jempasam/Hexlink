@@ -10,7 +10,7 @@ import java.util.*
 /**
  * Customizable pigment with bugged transition
  */
-class MixedPigmentItem(settings: Item.Settings) : Item(settings), ColorizerItem {
+class MixedPigmentItem(settings: Settings) : Item(settings), ColorizerItem {
     override fun color(stack: ItemStack, owner: UUID, time: Float, position: Vec3d): Int {
         val roading=Math.sin(Math.PI*time)
         val color1=getColor1(stack)

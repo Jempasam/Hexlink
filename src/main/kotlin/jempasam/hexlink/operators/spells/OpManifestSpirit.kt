@@ -47,7 +47,7 @@ class OpManisfestSpirit : SpellAction {
                 )
 
             }
-            else throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")));
+            else throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
         }
         else throw MishapInvalidIota(spirit, 2, Text.translatable("hexlink.spirit_iota"))
     }

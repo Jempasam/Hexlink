@@ -44,7 +44,7 @@ class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(sett
         val actual_spell=getSelectedSpellNbt(stack)
         if(actual_spell==null)return emptyList()
 
-        var out = ArrayList<Iota>()
+        val out = ArrayList<Iota>()
         for (patTag in actual_spell.asList) {
             val tag=patTag.asCompound
             out.add(HexIotaTypes.deserialize(tag, level))
