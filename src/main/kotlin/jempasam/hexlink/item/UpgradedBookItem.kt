@@ -34,7 +34,7 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings){
 
     fun useIota(iota: Iota, harness: CastingHarness, doList: Boolean=true): Boolean{
         if(iota is PatternIota){
-            var info = harness.executeIotas(listOf(iota), harness.ctx.caster.getWorld())
+            val info = harness.executeIotas(listOf(iota), harness.ctx.caster.getWorld())
             if(!info.resolutionType.success)return false
         }
         else if(iota is ListIota && doList){

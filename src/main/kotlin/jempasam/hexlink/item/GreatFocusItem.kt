@@ -28,7 +28,7 @@ class GreatFocusItem<T: Iota>(settings: Settings, val filter: (Entity)->T?) : It
         return super.getTranslationKey(stack) + if (stack.containsTag(ItemFocus.TAG_DATA)) ".filled" else ""
     }
 
-    override fun emptyIota(stack: ItemStack?): Iota? {
+    override fun emptyIota(stack: ItemStack?): Iota {
         return NullIota()
     }
 

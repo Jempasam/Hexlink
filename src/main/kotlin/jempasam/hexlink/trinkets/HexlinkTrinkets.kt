@@ -6,6 +6,6 @@ import jempasam.hexlink.item.HexlinkItems
 
 object HexlinkTrinkets{
     fun registerTrinkets(){
-        TrinketsApi.registerTrinket(HexlinkItems.FocusCollar, object: Trinket{});
+        TrinketsApi.registerTrinket(HexlinkItems.FocusCollar, object: Trinket{})
     }
 }

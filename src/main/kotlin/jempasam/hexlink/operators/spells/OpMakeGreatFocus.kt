@@ -1,11 +1,11 @@
-package jempasam.hexlink.operators.spells;
+package jempasam.hexlink.operators.spells
 
 import at.petrak.hexcasting.api.spell.ParticleSpray
 import at.petrak.hexcasting.api.spell.RenderedSpell
 import at.petrak.hexcasting.api.spell.SpellAction
 import at.petrak.hexcasting.api.spell.casting.CastingContext
+import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.*
 import at.petrak.hexcasting.api.spell.mishaps.MishapBadOffhandItem
 import at.petrak.hexcasting.api.spell.mishaps.MishapLocationTooFarAway
 import jempasam.hexlink.item.GreatFocusItem
@@ -17,7 +17,7 @@ import net.minecraft.util.Hand
 class OpMakeGreatFocus : SpellAction{
     override val argc: Int get() = 1
 
-    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>>? {
+    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
         val target=args.getEntity(0, 1)
         val stack=ctx.caster.offHandStack
         val item=stack.item

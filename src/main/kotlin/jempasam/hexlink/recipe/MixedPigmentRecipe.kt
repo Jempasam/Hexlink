@@ -3,7 +3,6 @@ package jempasam.hexlink.recipe
 import at.petrak.hexcasting.common.lib.HexItems
 import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
-import jempasam.hexlink.item.HexlinkItems
 import jempasam.hexlink.item.MixedPigmentItem
 import net.minecraft.inventory.CraftingInventory
 import net.minecraft.item.DyeItem
@@ -12,15 +11,12 @@ import net.minecraft.item.Items
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.CraftingRecipe
 import net.minecraft.recipe.Ingredient
-import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.recipe.RecipeType
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
-import java.lang.Exception
 
 class MixedPigmentRecipe(private val id: Identifier, val result: MixedPigmentItem) : CraftingRecipe {
     override fun craft(inventory: CraftingInventory): ItemStack {
@@ -50,7 +46,7 @@ class MixedPigmentRecipe(private val id: Identifier, val result: MixedPigmentIte
         var dyes_count=0
         var powder_count=0
         for(i in 0 until inventory.size()){
-            var item=inventory.getStack(i).item
+            val item=inventory.getStack(i).item
             if(item is DyeItem){
                 dyes_count++
                 if(dyes_count>2)return false
