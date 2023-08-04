@@ -1,0 +1,43 @@
+{
+
+  "hexlink.spirit": " Spirit",
+  "hexlink.or": " or ",
+  "hexlink.spirit_iota": "Spirit Iota",
+  "hexlink.spirit_iota.good": "valid Spirit Iota",
+
+  "item.hexlink.potion_focus": "Alchemist Great Focus",
+  "item.hexlink.block_focus": "Architect Great Focus",
+  "item.hexlink.entity_focus": "Hunter Great Focus",
+  "item.hexlink.item_focus": "Black-Smith Great Focus",
+  "item.hexlink.ultimate_focus": "Ultimate Great Focus",
+  "item.hexlink.upgraded_book": "Upgraded Spellbook",
+
+  "item.hexlink.potion_focus.filled": "Filled Alchemist Great Focus",
+  "item.hexlink.block_focus.filled": "Filled Architect Great Focus",
+  "item.hexlink.entity_focus.filled": "Filled Hunter Great Focus",
+  "item.hexlink.item_focus.filled": "Filled Black-Smith Great Focus",
+  "item.hexlink.ultimate_focus.filled": "Filled Ultimate Great Focus",
+
+
+  "hexcasting.spell.hexlink:spirit_extract": "Spirit Extraction",
+  "hexcasting.spell.hexlink:spirit_manifestation": "Spirit Manifestation",
+  "hexcasting.spell.hexlink:spirit_look": "Spirit Look",
+
+  "hexlink.mishap.need_great_focus": "suitable empty Great Focus",
+
+  "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack with a right click. If it contains a Pattern iota or a List of Pattern, it is evaluated like with Hermes Gambit else the iota is added on top of my stack.",
+  "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
+
+  "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physic object or properties in the world and allow me to control them.",
+  "hexlink.spell.spirit_extract.desc.2": "I need a Alchemist Great Focus to extract potion effect spirit, Architect Great Focus to extract block spirit. I read there is a special Great Focus able to extract any spirit.",
+  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst.",
+  "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
+
+  "hexlink.page.great_focuses": "Great Focuses",
+  "hexlink.page.great_focuses.desc": "Great focuses are a special type of focuses not rewritable but able to extract a spirit right from a physical object. I can find these in dungeon chests.",
+  "hexlink.page.block_focus.desc": "This great focus can contain the spirit of a block.",
+  "hexlink.page.item_focus.desc": "This great focus can contain the spirit of an item.",
+  "hexlink.page.entity_focus.desc": "This great focus can contain the spirit of an entity.",
+  "hexlink.page.potion_focus.desc": "This great focus can contain the spirit of a potion effect.",
+  "hexlink.page.ultimate_focus.desc": "This great focus can contain the spirit of anything."
+}

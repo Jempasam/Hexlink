@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+	"id": "hexlink",
+	"version": "${version}",
+	"name": "Hexlink",
+	"description": "Hex casting cool addon.",
+	"authors": [
+		"jempasam"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/hexlink/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "jempasam.hexlink.HexlinkMod",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "jempasam.hexlink.HexlinkModClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"hexlink.mixins.json",
+		{
+			"config": "hexlink.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.19.2",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fabric-language-kotlin": ">=1.9.0"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

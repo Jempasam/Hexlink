@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "hexcasting:charged_amethyst"
+    },
+    "B": {
+      "item": "hexcasting:spellbook"
+    },
+    "F": {
+      "item": "minecraft:nether_star"
+    },
+    "N": [
+      {
+        "item": "minecraft:gold_nugget"
+      },
+      {
+        "tag": "c:gold_nuggets"
+      }
+    ]
+  },
+  "pattern": [
+    "NBA",
+    "NFA",
+    "NBA"
+  ],
+  "result": {
+    "item": "hexlink:upgraded_book"
+  }
+}

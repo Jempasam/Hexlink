@@ -1,0 +1,98 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {"type": "minecraft:item", "name": "hexlink:entity_focus"},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:bat\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:fireball\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:boat\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:wolf\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:arrow\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:bat\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:horse\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:iron_golem\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:snow_golem\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:chicken\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:entity_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:entity_spirit\",\"hexcasting:data\":\"minecraft:egg\"}}"}]},
+
+        {"type": "minecraft:item", "name": "hexlink:block_focus"},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:dirt\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:stone\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:lava\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:fire\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:glass\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:magma_block\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:damaged_anvil\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:block_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:block_spirit\",\"hexcasting:data\":\"minecraft:ladder\"}}"}]},
+
+        {"type": "minecraft:item", "name": "hexlink:potion_focus"},
+        {"type": "minecraft:item", "name": "hexlink:potion_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:potion_spirit\",\"hexcasting:data\":\"minecraft:poison\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:potion_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:potion_spirit\",\"hexcasting:data\":\"minecraft:regeneration\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:potion_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:potion_spirit\",\"hexcasting:data\":\"minecraft:strength\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:potion_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:potion_spirit\",\"hexcasting:data\":\"minecraft:slow_falling\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:potion_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:potion_spirit\",\"hexcasting:data\":\"minecraft:invisibility\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:potion_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:potion_spirit\",\"hexcasting:data\":\"minecraft:water_breathing\"}}"}]},
+
+        {"type": "minecraft:item", "name": "hexlink:item_focus"},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:arrow\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:ender_pearl\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:fireball\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:wooden_hoe\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:chorus_fruit\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:bow\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:bread\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:golden_apple\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:goat_horn\"}}"}]},
+        {"type": "minecraft:item", "name": "hexlink:item_focus",
+          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:arrow\"}}"}]},
+
+        { "type": "minecraft:item", "name": "hexlink:ultimate_focus" }
+      ],
+      "functions": [
+        {
+          "function": "hexcasting:pattern_scroll"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": -3.0
+      }
+    }
+  ]
+}

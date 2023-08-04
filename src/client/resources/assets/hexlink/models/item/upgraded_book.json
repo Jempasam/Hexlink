@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "hexlink:item/upgraded_book",
+      "predicate": {
+        "hexcasting:overlay_layer": 0.0
+      }
+    },
+    {
+      "model": "hexlink:item/upgraded_book_filled",
+      "predicate": {
+        "hexcasting:overlay_layer": 1.0
+      }
+    },
+    {
+      "model": "hexlink:item/upgraded_book_sealed",
+      "predicate": {
+        "hexcasting:overlay_layer": 2.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "hexlink:item/upgraded_book_empty"
+  }
+}

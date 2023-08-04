@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "jempasam.hexlink.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"MsgShiftScrollSynMixin",
+		"ShiftScrollListenerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
