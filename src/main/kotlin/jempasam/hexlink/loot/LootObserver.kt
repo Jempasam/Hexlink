@@ -6,19 +6,27 @@ import net.fabricmc.fabric.api.loot.v2.LootTableSource
 import net.minecraft.loot.LootManager
 import net.minecraft.loot.LootTable
 import net.minecraft.resource.ResourceManager
-import net.minecraft.server.MinecraftServer
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 object LootObserver : LootTableEvents.Modify{
     fun register(){
         LootTableEvents.MODIFY.register(this)
     }
 
+    private val magic_loots= mapOf(
+            Identifier.of("minecraft","chests/simple_dungeon") to 1,
+            Identifier.of("minecraft","chests/desert_pyramid") to 1,
+            Identifier.of("minecraft","chests/stronghold_library") to 3,
+            Identifier.of("minecraft","chests/village_temple") to 3,
+            Identifier.of("minecraft","chests/woodland_mansion") to 2
+    )
     override fun modifyLootTable(resourceManager: ResourceManager, lootManager: LootManager, id: Identifier, tableBuilder: LootTable.Builder, source: LootTableSource) {
-        if(id==Identifier.of("minecraft","chests/simple_dungeon")){
-            val focuses=lootManager.getTable(Identifier(HexlinkMod.MODID,"great_focuses"))
-            for(pool in focuses.pools)tableBuilder.pool(pool)
+        val count= magic_loots.get(id)
+        val focuses=lootManager.getTable(Identifier(HexlinkMod.MODID,"magic_loots"))
+        if(count!=null){
+            for(i in 0 until count){
+                for(pool in focuses.pools)tableBuilder.pool(pool)
+            }
         }
     }
 }

@@ -1,0 +1,14 @@
+{
+  "name": "item.hexlink.focus_collar",
+  "icon": "hexlink:focus_collar",
+  "category": "hexcasting:items",
+  "sortnum": 100,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "text": "hexlink.page.focus_collar",
+      "recipe": "hexlink:focus_collar"
+    }
+  ]
+}

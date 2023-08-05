@@ -38,6 +38,7 @@ class MixedPigmentRecipe(private val id: Identifier, val result: MixedPigmentIte
         val ret=result.defaultStack
         result.setColor1(ret,dyes.get(0).fireworkColor)
         if(dyes.size>1)result.setColor2(ret,dyes.get(1).fireworkColor)
+        else result.setColor2(ret,dyes.get(0).fireworkColor)
         return ret
     }
 

@@ -1,5 +1,5 @@
 {
-  "name": "hexcasting.spell.hexlink:spirit_spells",
+  "name": "hexlink.spell.spirit_spells",
   "category": "hexcasting:patterns/spells",
   "icon": "hexlink:potion_focus",
   "sortnum": 100,

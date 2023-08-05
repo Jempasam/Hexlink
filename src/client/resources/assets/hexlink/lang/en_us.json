@@ -1,9 +1,14 @@
 {
+  "hexlink.mishap.emtpy_collar": "Your focus collar is empty",
+  "hexlink.mishap.no_collar_item": "You don't have any focus collar",
+  "hexlink.mishap.need_great_focus": "suitable empty Great Focus",
+
 
   "hexlink.spirit": " Spirit",
   "hexlink.or": " or ",
   "hexlink.spirit_iota": "Spirit Iota",
   "hexlink.spirit_iota.good": "valid Spirit Iota",
+
 
   "item.hexlink.potion_focus": "Alchemist Great Focus",
   "item.hexlink.block_focus": "Architect Great Focus",
@@ -24,11 +29,12 @@
   "hexcasting.spell.hexlink:spirit_extract": "Spirit Extraction",
   "hexcasting.spell.hexlink:spirit_manifestation": "Spirit Manifestation",
   "hexcasting.spell.hexlink:spirit_look": "Spirit Look",
+  "hexcasting.spell.hexlink:read_trinket": "Gathier's Reflection",
+  "hexcasting.spell.hexlink:write_trinket": "Gathier's Gambit",
 
-  "hexlink.mishap.need_great_focus": "suitable empty Great Focus",
-
-  "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
-  "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
+  "hexlink.entry.readwrite_trinkets": "Trinket Read and Write",
+  "hexlink.page.write_trinket": "This pattern can write a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
+  "hexlink.page.read_trinket": "This pattern can read a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
 
   "hexlink.spell.spirit_spells": "Manipulation of spirits",
   "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them.",
@@ -36,11 +42,17 @@
   "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest.",
   "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
 
+
   "hexlink.page.great_focuses": "Great Focuses",
-  "hexlink.page.great_focuses.desc": "Great focuses are of a special type of focus, not rewritable but able to extract a spirit right from a physical object. I can find these in dungeon chests but most of them are not empty. If I find one I'll try to use $(l:patterns/spirit_spells#hexcasting:read)these patterns/$",
+  "hexlink.page.great_focuses.desc": "Great focuses are of a special type of focus, not rewritable but able to extract a spirit right from a physical object. I can find these in dungeon chests but most of them are not empty. If I find one I'll try to use $(l:hexlink:patterns/spirit_spells)these patterns/$",
   "hexlink.page.block_focus.desc": "This great focus can contain the spirit of a block.",
   "hexlink.page.item_focus.desc": "This great focus can contain the spirit of an item.",
   "hexlink.page.entity_focus.desc": "This great focus can contain the spirit of an entity.",
   "hexlink.page.potion_focus.desc": "This great focus can contain the spirit of a potion effect.",
-  "hexlink.page.ultimate_focus.desc": "This great focus can contain the spirit of anything."
+  "hexlink.page.ultimate_focus.desc": "This great focus can contain the spirit of anything.",
+
+  "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
+  "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
+
+  "hexlink.page.focus_collar": "With this focus around my neck, I can read from it with my left hand empty. I have to use $(l:hexlink:patterns/readwrite)these patterns/$."
 }
