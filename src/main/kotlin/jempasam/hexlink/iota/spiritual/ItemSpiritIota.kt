@@ -75,10 +75,14 @@ class ItemSpiritIota(val item: Item): Iota(TYPE, item), SpiritIota {
             val success=getItemType().use(world, cast, Hand.MAIN_HAND)
             if(action!=UseAction.NONE && action!=UseAction.BLOCK && success.result.isAccepted){
                 getItemType().onStoppedUsing(stack, world, cast, 0)
+                getItemType().finishUsing(stack,world,cast)
             }
         }
-        else if(entity is LivingEntity){
-            getItemType().useOnEntity(stack, cast, entity, Hand.MAIN_HAND)
+        else{
+            if(entity is LivingEntity){
+                getItemType().useOnEntity(stack, cast, entity, Hand.MAIN_HAND)
+            }
+            entity.interact(cast,Hand.MAIN_HAND)
         }
         cast.setStackInHand(Hand.MAIN_HAND, old_hand_item)
     }
@@ -115,7 +119,7 @@ class ItemSpiritIota(val item: Item): Iota(TYPE, item), SpiritIota {
             ItemUsageContext(
                 cast,
                 Hand.MAIN_HAND,
-                BlockHitResult(position, Direction.DOWN, BlockPos(position), true)
+                BlockHitResult(position, Direction.UP, BlockPos(position), true)
             )
         )
         cast.setStackInHand(Hand.MAIN_HAND, old_hand_item)

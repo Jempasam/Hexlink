@@ -61,8 +61,6 @@
 
         {"type": "minecraft:item", "name": "hexlink:item_focus"},
         {"type": "minecraft:item", "name": "hexlink:item_focus",
-          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:arrow\"}}"}]},
-        {"type": "minecraft:item", "name": "hexlink:item_focus",
           "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:ender_pearl\"}}"}]},
         {"type": "minecraft:item", "name": "hexlink:item_focus",
           "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:fireball\"}}"}]},
@@ -78,8 +76,6 @@
           "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:golden_apple\"}}"}]},
         {"type": "minecraft:item", "name": "hexlink:item_focus",
           "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:goat_horn\"}}"}]},
-        {"type": "minecraft:item", "name": "hexlink:item_focus",
-          "functions": [{"function": "minecraft:set_nbt", "tag":"{\"data\":{\"hexcasting:type\":\"hexlink:item_spirit\",\"hexcasting:data\":\"minecraft:arrow\"}}"}]},
 
         { "type": "minecraft:item", "name": "hexlink:ultimate_focus" },
 
