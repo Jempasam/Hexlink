@@ -2,7 +2,6 @@ package jempasam.hexlink.operators
 
 import at.petrak.hexcasting.api.spell.ConstMediaAction
 import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.BooleanIota
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
@@ -20,10 +19,10 @@ class OpSpiritTest : ConstMediaAction {
         val target=args[1]
         if(spirit is SpiritIota){
             if(target is Vec3d){
-                return listOf(BooleanIota(spirit.testPos(ctx.world,target)))
+                return listOf(BooleanIota(spirit.testPos(ctx.caster,ctx.world,target)))
             }
             else if(target is Entity){
-                return listOf(BooleanIota(spirit.testEntity(ctx.world,target)))
+                return listOf(BooleanIota(spirit.testEntity(ctx.caster,ctx.world,target)))
             }
             else throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")));
         }

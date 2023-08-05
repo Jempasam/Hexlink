@@ -28,7 +28,7 @@ class OpManisfestSpirit : SpellAction {
         if(spirit is SpiritIota){
             if(target is Vec3Iota){
                 if(ctx.position.distanceTo(target.vec3)>30)throw MishapLocationTooFarAway(target.vec3)
-                val cost=spirit.canDrop(ctx.world, target.vec3, power)
+                val cost=spirit.canDrop(ctx.caster,ctx.world, target.vec3, power)
                 if(cost==SpiritIota.CANNOT_DO)throw MishapInvalidIota(spirit,2, Text.translatable("hexlink.spirit_iota.good"))
                 return Triple(
                         VecSpell(ctx.world, target.vec3, power, spirit),
@@ -38,7 +38,7 @@ class OpManisfestSpirit : SpellAction {
             }
             else if(target is EntityIota){
                 if(ctx.position.distanceTo(target.entity.pos)>30)throw MishapEntityTooFarAway(target.entity)
-                val cost=spirit.canInfuse(ctx.world,target.entity,power)
+                val cost=spirit.canInfuse(ctx.caster,ctx.world,target.entity,power)
                 if(cost==SpiritIota.CANNOT_DO)throw MishapInvalidIota(spirit,2, Text.translatable("hexlink.spirit_iota.good"))
                 return Triple(
                         EntitySpell(ctx.world, target.entity, power, spirit),
@@ -54,13 +54,13 @@ class OpManisfestSpirit : SpellAction {
 
     class VecSpell(val world: ServerWorld, val target: Vec3d, val power: Int, val spirit: SpiritIota) : RenderedSpell{
         override fun cast(ctx: CastingContext) {
-            spirit.drop(world, target, power)
+            spirit.drop(ctx.caster,world, target, power)
         }
     }
 
     class EntitySpell(val world: ServerWorld, val target: Entity, val power: Int, val spirit: SpiritIota) : RenderedSpell{
         override fun cast(ctx: CastingContext) {
-            spirit.infuse(world, target, power)
+            spirit.infuse(ctx.caster,world, target, power)
         }
     }
 }
