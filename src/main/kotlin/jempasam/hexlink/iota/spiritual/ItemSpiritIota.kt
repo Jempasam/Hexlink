@@ -25,7 +25,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
-class ItemSpiritIota(val item: Item): Iota(TYPE, item), SpiritIota {
+class ItemSpiritIota(val item: Item): SpiritIota(TYPE, item) {
 
     fun getItemType(): Item = payload as Item
 

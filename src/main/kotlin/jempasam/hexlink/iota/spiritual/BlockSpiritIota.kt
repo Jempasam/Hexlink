@@ -20,7 +20,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
-class BlockSpiritIota(blocktype: Block): Iota(TYPE, blocktype), SpiritIota {
+class BlockSpiritIota(blocktype: Block): SpiritIota(TYPE, blocktype) {
 
     fun getBlockType(): Block = payload as Block
 

@@ -1,7 +1,13 @@
 {
-  "hexlink.mishap.emtpy_collar": "Your focus collar is empty",
+  "hexlink.mishap.empty_collar": "Your focus collar is empty",
   "hexlink.mishap.no_collar_item": "You don't have any focus collar",
   "hexlink.mishap.need_great_focus": "suitable empty Great Focus",
+
+
+  "hexlink.unlucky": "Extraction has fail, try again",
+
+
+  "gamerule.spiritExtractionSuccessProb": "Spirit Extraction Success Probability",
 
 
   "hexlink.spirit": " Spirit",

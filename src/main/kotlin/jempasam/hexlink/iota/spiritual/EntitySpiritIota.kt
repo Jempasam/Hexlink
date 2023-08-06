@@ -17,7 +17,7 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
-class EntitySpiritIota(val entitytype: EntityType<*>): Iota(TYPE, entitytype), SpiritIota {
+class EntitySpiritIota(val entitytype: EntityType<*>): SpiritIota(TYPE, entitytype) {
 
     fun getEntityType(): EntityType<*> = payload as EntityType<*>
 

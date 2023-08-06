@@ -10,7 +10,7 @@ import net.minecraft.util.DyeColor
 
 class MishapEmptyCollarItem(val stack: ItemStack) : Mishap() {
     override fun errorMessage(ctx: CastingContext, errorCtx: Context): Text {
-        return stack.name.copy().append(Text.translatable("hexlink.mishap.emtpy_collar"))
+        return stack.name.copy().append(Text.translatable("hexlink.mishap.empty_collar"))
     }
 
     override fun accentColor(ctx: CastingContext, errorCtx: Context): FrozenColorizer = dyeColor(DyeColor.BROWN)

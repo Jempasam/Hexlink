@@ -8,6 +8,8 @@ import at.petrak.hexcasting.api.utils.getCompound
 import at.petrak.hexcasting.api.utils.putTag
 import at.petrak.hexcasting.common.items.ItemFocus
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
+import jempasam.hexlink.iota.spiritual.SpiritIota
+import jempasam.hexlink.item.greatfocus.GreatFocusExtracter
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
 import net.minecraft.item.Item
@@ -16,7 +18,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.Text
 import net.minecraft.world.World
 
-class GreatFocusItem<T: Iota>(settings: Settings, val filter: (Entity)->T?) : Item(settings), IotaHolderItem {
+class GreatFocusItem<T: SpiritIota>(settings: Settings, val extracter: GreatFocusExtracter<T>) : Item(settings), IotaHolderItem {
 
     override fun writeDatum(stack: ItemStack, datum: Iota?) {
         if(datum!=null){
@@ -45,7 +47,7 @@ class GreatFocusItem<T: Iota>(settings: Settings, val filter: (Entity)->T?) : It
     }
 
     fun writeEntity(stack: ItemStack, target: Entity): Boolean{
-        val result=filter(target)
+        val result=extracter.extract(target)
         if(result==null)return false
         else{
             writeDatum(stack,result)
@@ -54,6 +56,30 @@ class GreatFocusItem<T: Iota>(settings: Settings, val filter: (Entity)->T?) : It
     }
 
     fun canWriteEntity(stack: ItemStack, target: Entity): Boolean {
-        return !stack.containsTag(ItemFocus.TAG_DATA) && filter(target)!=null
+        return !stack.containsTag(ItemFocus.TAG_DATA) && extracter.canExtract(target)
+    }
+
+    class ExtractionResult<T> private constructor(public val type: Type, public val iota: T?){
+
+        companion object{
+            fun <T>invalid(): ExtractionResult<T>{
+                return ExtractionResult<T>(Type.INVALID, null)
+            }
+
+            fun <T>unlucky(): ExtractionResult<T>{
+                return ExtractionResult<T>(Type.UNLUCKY, null)
+            }
+
+            fun <T>success(iota: T): ExtractionResult<T>{
+                return ExtractionResult<T>(Type.SUCCESS, iota)
+            }
+
+        }
+        enum class Type{
+            SUCCESS,
+            INVALID,
+            UNLUCKY
+        }
+
     }
 }

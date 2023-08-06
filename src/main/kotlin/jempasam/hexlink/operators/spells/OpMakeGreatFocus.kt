@@ -8,10 +8,13 @@ import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapBadOffhandItem
 import at.petrak.hexcasting.api.spell.mishaps.MishapLocationTooFarAway
+import jempasam.hexlink.iota.spiritual.SpiritIota
 import jempasam.hexlink.item.GreatFocusItem
 import net.minecraft.entity.Entity
 import net.minecraft.item.ItemStack
+import net.minecraft.text.Style
 import net.minecraft.text.Text
+import net.minecraft.util.DyeColor
 import net.minecraft.util.Hand
 
 class OpMakeGreatFocus : SpellAction{
@@ -27,8 +30,8 @@ class OpMakeGreatFocus : SpellAction{
                         Spell(stack, item, target),
                         500,
                         listOf(
-                                ParticleSpray.burst(target.pos,1.0,1),
-                                ParticleSpray.burst(ctx.position,1.0,1)
+                                ParticleSpray.burst(target.pos,1.0,10),
+                                ParticleSpray.burst(ctx.position,1.0,10)
                         )
                 )
             }
@@ -37,9 +40,9 @@ class OpMakeGreatFocus : SpellAction{
         else throw MishapBadOffhandItem(stack, Hand.OFF_HAND, Text.translatable("hexlink.mishap.need_great_focus"))
     }
 
-    private data class Spell<T: Iota>(val stack: ItemStack, val item: GreatFocusItem<T>, val target: Entity) : RenderedSpell {
+    private data class Spell<T: SpiritIota>(val stack: ItemStack, val item: GreatFocusItem<T>, val target: Entity) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
-            item.writeEntity(stack,target)
+            if(!item.writeEntity(stack,target))ctx.caster.sendMessage(Text.translatable("hexlink.unlucky").setStyle(Style.EMPTY.withBold(true).withColor(DyeColor.CYAN.signColor)))
         }
     }
 }

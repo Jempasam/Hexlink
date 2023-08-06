@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
-class PotionSpiritIota(potioneffect: StatusEffect): Iota(TYPE, potioneffect), SpiritIota {
+class PotionSpiritIota(potioneffect: StatusEffect): SpiritIota(TYPE, potioneffect)  {
 
     fun getEffect(): StatusEffect = payload as StatusEffect
 

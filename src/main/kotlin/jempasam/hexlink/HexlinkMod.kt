@@ -1,12 +1,13 @@
 package jempasam.hexlink
 
 import HexlinkIotas
+import jempasam.hexlink.gamerule.HexlinkGamerules
 import jempasam.hexlink.item.HexlinkItems
 import jempasam.hexlink.loot.LootObserver
-import net.fabricmc.api.ModInitializer
-import org.slf4j.LoggerFactory
 import jempasam.hexlink.recipe.HexlinkRecipes
 import jempasam.hexlink.trinkets.HexlinkTrinkets
+import net.fabricmc.api.ModInitializer
+import org.slf4j.LoggerFactory
 
 object HexlinkMod : ModInitializer {
 	val logger = LoggerFactory.getLogger("hexlink")
@@ -19,5 +20,6 @@ object HexlinkMod : ModInitializer {
 		LootObserver.register()
 		HexlinkTrinkets.registerTrinkets()
 		HexlinkRecipes.registerRecipes()
+		HexlinkGamerules.EXTRACTION_PROBABILITY
 	}
 }
