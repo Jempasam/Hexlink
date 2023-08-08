@@ -2,7 +2,9 @@ package jempasam.hexlink.item
 
 import at.petrak.hexcasting.api.item.ColorizerItem
 import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
+import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.Vec3d
 import java.util.*
 
@@ -42,5 +44,14 @@ class MixedPigmentItem(settings: Settings) : Item(settings), ColorizerItem {
         setColor1(ret,0xFFFFFF)
         setColor2(ret, 0xFFFFFF)
         return ret
+    }
+
+    override fun appendStacks(group: ItemGroup, stacks: DefaultedList<ItemStack>) {
+        if(isIn(group)){
+            val stack=defaultStack
+            setColor1(stack, (Math.random()*0xFFFFFF).toInt())
+            setColor2(stack, (Math.random()*0xFFFFFF).toInt())
+            stacks.add(stack)
+        }
     }
 }

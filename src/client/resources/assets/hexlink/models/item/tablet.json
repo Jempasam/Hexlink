@@ -1,11 +1,12 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hexlink:item/potion_focus"
+    "layer0": "hexlink:item/tablet_back",
+    "layer1": "hexlink:item/tablet_front"
   },
   "overrides": [
     {
-      "model": "hexlink:item/filled_potion_focus",
+      "model": "hexlink:item/filled_tablet",
       "predicate": { "hexlink:is_filled": 1.0 }
     }
   ]

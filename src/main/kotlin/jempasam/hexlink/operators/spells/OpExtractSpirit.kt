@@ -8,7 +8,7 @@ import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapBadOffhandItem
 import at.petrak.hexcasting.api.spell.mishaps.MishapLocationTooFarAway
-import jempasam.hexlink.item.GreatFocusItem
+import jempasam.hexlink.item.SpiritExtracterItem
 import jempasam.hexlink.mishap.MishapNotExtractable
 import net.minecraft.entity.Entity
 import net.minecraft.item.ItemStack
@@ -17,14 +17,14 @@ import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Hand
 
-class OpMakeGreatFocus : SpellAction{
+class OpExtractSpirit : SpellAction{
     override val argc: Int get() = 1
 
     override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
         val target=args.getEntity(0, 1)
         val stack=ctx.caster.offHandStack
         val item=stack.item
-        if(item is GreatFocusItem){
+        if(item is SpiritExtracterItem){
             if(item.canExtractFrom(stack,target)){
                 if(target.pos.distanceTo(ctx.position)<30){
                     return Triple(
@@ -44,9 +44,9 @@ class OpMakeGreatFocus : SpellAction{
         else throw MishapBadOffhandItem(stack, Hand.OFF_HAND, Text.translatable("hexlink.mishap.need_great_focus"))
     }
 
-    private data class Spell(val stack: ItemStack, val item: GreatFocusItem, val target: Entity) : RenderedSpell {
+    private data class Spell(val stack: ItemStack, val item: SpiritExtracterItem, val target: Entity) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
-            if(item.extractFrom(stack,target)!=GreatFocusItem.ExtractionResult.SUCCESS)
+            if(item.extractFrom(stack,target)!=SpiritExtracterItem.ExtractionResult.SUCCESS)
                 ctx.caster.sendMessage(Text.translatable("hexlink.unlucky").setStyle(Style.EMPTY.withBold(true).withColor(DyeColor.CYAN.signColor)))
         }
     }

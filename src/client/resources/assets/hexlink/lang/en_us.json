@@ -23,27 +23,18 @@
   "hexlink.spirit.item": "Item Spirit",
 
 
-  "hexlink.extractor.item": "Item Spirits",
-  "hexlink.extractor.entity": "Entity Spirits",
-  "hexlink.extractor.block": "Block Spirits",
-  "hexlink.extractor.potion": "Potion Spirits",
-  "hexlink.extractor.everything": "Every Spirits",
+  "hexlink.extractor.item": "Item",
+  "hexlink.extractor.entity": "Entity",
+  "hexlink.extractor.block": "Block",
+  "hexlink.extractor.potion": "Potion",
+  "hexlink.extractor.everything": "Anything",
 
 
-  "item.hexlink.potion_focus": "Alchemist Great Focus",
-  "item.hexlink.block_focus": "Architect Great Focus",
-  "item.hexlink.entity_focus": "Hunter Great Focus",
-  "item.hexlink.item_focus": "Black-Smith Great Focus",
-  "item.hexlink.ultimate_focus": "Ultimate Great Focus",
   "item.hexlink.upgraded_book": "Upgraded Spellbook",
   "item.hexlink.mixed_pigment": "Mixed Pigment",
   "item.hexlink.focus_collar": "Focus Collar",
-
-  "item.hexlink.potion_focus.filled": "Filled Alchemist Great Focus",
-  "item.hexlink.block_focus.filled": "Filled Architect Great Focus",
-  "item.hexlink.entity_focus.filled": "Filled Hunter Great Focus",
-  "item.hexlink.item_focus.filled": "Filled Black-Smith Great Focus",
-  "item.hexlink.ultimate_focus.filled": "Filled Ultimate Great Focus",
+  "item.hexlink.tablet": "Spiritual Tablet",
+  "item.hexlink.tablet.filled": "Filled Spiritual Tablet",
 
 
   "hexcasting.spell.hexlink:spirit_extract": "Spirit Extraction",
@@ -58,18 +49,18 @@
 
   "hexlink.spell.spirit_spells": "Manipulation of spirits",
   "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them. The physical object is destroyed in the process and I have a high chance of failing so I should get a lot of material. It seem I also need to lower living entities life to a very low value before being able to extract their spirits.",
-  "hexlink.spell.spirit_extract.desc.2": "I need a Alchemist Great Focus to extract potion effect spirit, Architect Great Focus to extract block spirit. I read there is a special Great Focus able to extract any spirit.",
+  "hexlink.spell.spirit_extract.desc.2": "I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit.",
   "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest.",
   "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
 
 
-  "hexlink.page.great_focuses": "Great Focuses",
-  "hexlink.page.great_focuses.desc": "Great focuses are of a special type of focus, not rewritable but able to extract a spirit right from a physical object. I can find these in dungeon chests but most of them are not empty. If I find one I'll try to use $(l:hexlink:patterns/spirit_spells)these patterns/$",
-  "hexlink.page.block_focus.desc": "This great focus can contain the spirit of a block.",
-  "hexlink.page.item_focus.desc": "This great focus can contain the spirit of an item.",
-  "hexlink.page.entity_focus.desc": "This great focus can contain the spirit of an entity.",
-  "hexlink.page.potion_focus.desc": "This great focus can contain the spirit of a potion effect.",
-  "hexlink.page.ultimate_focus.desc": "This great focus can contain the spirit of anything.",
+  "hexlink.page.tablets": "Spirit Tablets",
+  "hexlink.page.tablets.desc": "Spirit Tablets contains spirits of a physical object. I can read Spirit Iota from them to use $(l:hexlink:patterns/spirit_spells)these patterns/$. I can find these in dungeon chests but most of them are not empty. If I find an empty, I'll try to use $(l:hexlink:patterns/spirit_spells)Spirit Extraction/$ to fill it with any Spirit from a physical object.",
+  "hexlink.page.tablets.block": "This type of tablet can contain the spirit of a block. With a Block Spirit, I can summon blocks and simulate interaction with one.",
+  "hexlink.page.tablets.item": "This type of tablet can contain the spirit of an item. With an Item Spirit, I can simulate the use of an item.",
+  "hexlink.page.tablets.entity": "This type of tablet can contain the spirit of an entity. With an Entity Spirit, I can summon an entity.",
+  "hexlink.page.tablets.potion": "This type of tablet can contain the spirit of a potion effect. With a Potion Spirit, I can give an effect to an entity or summon an effect cloud.",
+  "hexlink.page.tablets.anything": "This type of tablet can contain the spirit of anything.",
 
   "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",

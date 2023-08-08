@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hexlink:item/tablet_back",
+    "layer1": "hexlink:item/tablet_front",
+    "layer2": "hexlink:item/tablet_overlay"
+  }
+}

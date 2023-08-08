@@ -4,6 +4,7 @@ import jempasam.hexlink.spirit.EntitySpirit
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.text.Text
+import net.minecraft.util.DyeColor
 
 object EntityExtractor : SpiritExtractor<EntitySpirit> {
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<EntitySpirit> {
@@ -19,5 +20,9 @@ object EntityExtractor : SpiritExtractor<EntitySpirit> {
 
     override fun getExtractedName(): Text {
         return Text.translatable("hexlink.extractor.entity")
+    }
+
+    override fun getColor(): Int {
+        return DyeColor.RED.fireworkColor
     }
 }

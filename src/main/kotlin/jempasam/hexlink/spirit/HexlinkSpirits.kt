@@ -23,7 +23,7 @@ object HexlinkSpirits {
     val BLOCK_SPIRIT=create("block", BlockSpirit.Type)
 
     val ITEM_SPIRIT_EXTRACTER= create("item", ItemExtractor)
-    val BLOCK_SPIRIT_EXTRACTER= create("blovk", BlockExtractor)
+    val BLOCK_SPIRIT_EXTRACTER= create("block", BlockExtractor)
     val ENTITY_SPIRIT_EXTRACTER= create("entity", EntityExtractor)
     val POTION_SPIRIT_EXTRACTER= create("potion", PotionExtractor)
     val EVERYTHING_SPIRIT_EXTRACTER= create("everything", EverythingExtractor)

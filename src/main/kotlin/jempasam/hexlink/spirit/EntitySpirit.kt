@@ -63,7 +63,7 @@ class EntitySpirit(val entity_type: EntityType<*>): Spirit {
 
 
 
-    override fun getColor(): Int = DyeColor.MAGENTA.signColor
+    override fun getColor(): Int = DyeColor.RED.fireworkColor
 
     override fun getName(): Text = entity_type.name
 

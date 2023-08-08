@@ -3,7 +3,6 @@ package jempasam.hexlink.item
 import at.petrak.hexcasting.common.items.ItemFocus
 import at.petrak.hexcasting.xplat.IXplatAbstractions
 import jempasam.hexlink.HexlinkMod
-import jempasam.hexlink.item.greatfocus.*
 import net.minecraft.item.Item
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
@@ -22,11 +21,7 @@ object HexlinkItems {
         for(entry in items )Registry.register(Registry.ITEM, Identifier(HexlinkMod.MODID, entry.key), entry.value)
     }
 
-    val PotionFocus=make("potion_focus", GreatFocusItem(epicProps(), PotionExtracter))
-    val BlockFocus=make("block_focus", GreatFocusItem(epicProps(), BlockExtracter))
-    val EntityFocus=make("entity_focus", GreatFocusItem(epicProps(), EntityExtracter))
-    val ItemFocus=make("item_focus", GreatFocusItem(epicProps(), ItemExtracter))
-    val UltimateFocus=make("ultimate_focus", GreatFocusItem(epicProps(), EverythingExtracter))
+    val Tablet=make("tablet", SpiritExtracterItem(epicProps()))
 
     var UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
     var FocusCollar=make("focus_collar", ItemFocus(simpleProps()))

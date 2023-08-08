@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.ItemEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.text.Text
+import net.minecraft.util.DyeColor
 
 object BlockExtractor : SpiritExtractor<BlockSpirit> {
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<BlockSpirit> {
@@ -21,5 +22,9 @@ object BlockExtractor : SpiritExtractor<BlockSpirit> {
 
     override fun getExtractedName(): Text {
         return Text.translatable("hexlink.extractor.block")
+    }
+
+    override fun getColor(): Int {
+        return DyeColor.LIGHT_GRAY.fireworkColor
     }
 }

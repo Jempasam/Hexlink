@@ -6,6 +6,7 @@ import net.minecraft.entity.ItemEntity
 import net.minecraft.item.Items
 import net.minecraft.potion.PotionUtil
 import net.minecraft.text.Text
+import net.minecraft.util.DyeColor
 
 object PotionExtractor : SpiritExtractor<PotionSpirit> {
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
@@ -24,5 +25,9 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
 
     override fun getExtractedName(): Text {
         return Text.translatable("hexlink.extractor.potion")
+    }
+
+    override fun getColor(): Int {
+        return DyeColor.MAGENTA.fireworkColor
     }
 }

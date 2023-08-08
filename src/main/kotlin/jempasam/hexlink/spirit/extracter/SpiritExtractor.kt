@@ -26,9 +26,16 @@ interface SpiritExtractor<T: Spirit>{
      */
     fun getExtractedName(): Text
 
+    /**
+     * Get a color representation of extracted spirits
+     */
+    fun getColor(): Int
+
     class ExtractionResult<T: Spirit>(val spirit: T, val count: Int)
 
     fun result(spirit: T, count: Int): ExtractionResult<T>{
         return ExtractionResult<T>(spirit,count)
     }
+
+
 }

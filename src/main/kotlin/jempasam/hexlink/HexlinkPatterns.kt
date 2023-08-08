@@ -7,7 +7,7 @@ import at.petrak.hexcasting.api.spell.math.HexPattern
 import jempasam.hexlink.operators.OpSpiritTest
 import jempasam.hexlink.operators.rw.OpReadTrinket
 import jempasam.hexlink.operators.rw.OpWriteTrinket
-import jempasam.hexlink.operators.spells.OpMakeGreatFocus
+import jempasam.hexlink.operators.spells.OpExtractSpirit
 import jempasam.hexlink.operators.spells.OpManisfestSpirit
 import net.minecraft.util.Identifier
 
@@ -20,7 +20,7 @@ object HexlinkPatterns {
     fun registerAll(){
         register("spirit_extract",
                 HexPattern.fromAngles("aawddaweddwaa",HexDir.NORTH_EAST),
-                OpMakeGreatFocus()
+                OpExtractSpirit()
         )
 
         register("spirit_manifestation",

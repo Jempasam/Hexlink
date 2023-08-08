@@ -4,6 +4,7 @@ import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.iota.IotaType
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.utils.NbtHelper
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.server.world.ServerWorld
@@ -17,28 +18,22 @@ class SpiritIota(spirit: Spirit) : Iota(Type, spirit) {
 
     override fun isTruthy(): Boolean = true
 
-    override fun serialize(): NbtElement = getSpirit().serialize()
+    override fun serialize(): NbtElement = NbtHelper.writeSpirit(getSpirit())
 
     object Type : IotaType<SpiritIota>(){
-        override fun color(): Int = 0xF1F400
+        override fun color(): Int = 0xCDE7FF
 
-        override fun deserialize(tag: NbtElement, world: ServerWorld): SpiritIota {
+        override fun deserialize(tag: NbtElement, world: ServerWorld): SpiritIota? {
             if(tag is NbtCompound){
-                val spirit_type_id=tag.getString("type")
-                val spirit_value_nbt=tag.get("value")
-                if(spirit_type_id=="")throw IllegalArgumentException()
-                if(spirit_value_nbt==null)throw IllegalArgumentException()
-
-                val spirit_type=HexlinkRegistry.SPIRIT.get(Identifier(spirit_type_id))
-                if(spirit_type==null)throw IllegalArgumentException()
-
-                val spirit=spirit_type.deserialize(spirit_value_nbt)
+                val spirit=NbtHelper.readSpirit(tag)
+                if(spirit==null)return null
                 return SpiritIota(spirit)
             }
             throw IllegalArgumentException()
         }
 
         override fun display(tag: NbtElement): Text {
+
             if(tag is NbtCompound){
                 val spirit_type_id=tag.getString("type")
                 val spirit_value_nbt=tag.get("value")
@@ -49,7 +44,7 @@ class SpiritIota(spirit: Spirit) : Iota(Type, spirit) {
                 if(spirit_type==null)return Text.of("Invalid Block Spirit")
 
                 val spirit=spirit_type.deserialize(spirit_value_nbt)
-                return spirit.getName().copy().append("hexlink.spirit")
+                return spirit.getName().copy().append(Text.translatable("hexlink.spirit"))
             }
             return Text.of("Invalid Block Spirit")
         }

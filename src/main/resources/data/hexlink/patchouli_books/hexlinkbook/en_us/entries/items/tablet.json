@@ -1,0 +1,43 @@
+{
+  "name": "hexlink.page.tablets",
+  "icon": "hexlink:tablet",
+  "category": "hexcasting:items",
+  "sortnum": 100,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.page.tablets.desc"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:tablet{extractor:'hexlink:block'}",
+      "text": "hexlink.page.tablets.block",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:tablet{extractor:'hexlink:potion'}",
+      "text": "hexlink.page.tablets.potion",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:tablet{extractor:'hexlink:item'}",
+      "text": "hexlink.page.tablets.item",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:tablet{extractor:'hexlink:entity'}",
+      "text": "hexlink.page.tablets.entity",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:tablet{extractor:'hexlink:everything'}",
+      "text": "hexlink.page.tablets.everything",
+      "link_recipe": true
+    }
+  ]
+}
