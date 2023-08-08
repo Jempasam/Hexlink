@@ -16,20 +16,11 @@
   "hexlink.spirit_iota.good": "有效的灵体iota",
 
 
-  "item.hexlink.potion_focus": "炼金师卓越核心",
-  "item.hexlink.block_focus": "建筑师卓越核心",
-  "item.hexlink.entity_focus": "猎人卓越核心",
-  "item.hexlink.item_focus": "铁匠卓越核心",
-  "item.hexlink.ultimate_focus": "终极卓越核心",
   "item.hexlink.upgraded_book": "升级法术书",
   "item.hexlink.mixed_pigment": "混合染色剂",
   "item.hexlink.focus_collar": "核心项圈",
-
-  "item.hexlink.potion_focus.filled": "存满的炼金师卓越核心",
-  "item.hexlink.block_focus.filled": "存满的建筑师卓越核心",
-  "item.hexlink.entity_focus.filled": "存满的猎人卓越核心",
-  "item.hexlink.item_focus.filled": "存满的铁匠卓越核心",
-  "item.hexlink.ultimate_focus.filled": "存满的终极卓越核心",
+  "item.hexlink.tablet": "卓越核心",
+  "item.hexlink.tablet.filled": "存满的卓越核心",
 
 
   "hexcasting.spell.hexlink:spirit_extract": "灵体提取",
@@ -49,13 +40,13 @@
   "hexlink.spell.spirit_look.desc": "此图案可使我感受灵体与某物体的接近程度。",
 
 
-  "hexlink.page.great_focuses": "卓越核心",
-  "hexlink.page.great_focuses.desc": "卓越核心是一类特殊的核心，不可覆写但可从物体中提取出灵体。我能在地牢箱子内找到这种核心，但其中大多数都不是空的。如果真能找到空的，可以尝试使用$(l:hexlink:patterns/spirit_spells)这些图案/$。",
-  "hexlink.page.block_focus.desc": "此卓越核心可以装入方块灵体。",
-  "hexlink.page.item_focus.desc": "此卓越核心可以装入物品灵体。",
-  "hexlink.page.entity_focus.desc": "此卓越核心可以装入实体灵体。",
-  "hexlink.page.potion_focus.desc": "此卓越核心可以装入药水效果灵体。",
-  "hexlink.page.ultimate_focus.desc": "此卓越核心可以装入任意灵体。",
+  "hexlink.page.tablets": "卓越核心",
+  "hexlink.page.tablets.desc": "卓越核心是一类特殊的核心，不可覆写但可从物体中提取出灵体。我能在地牢箱子内找到这种核心，但其中大多数都不是空的。如果真能找到空的，可以尝试使用$(l:hexlink:patterns/spirit_spells)这些图案/$。",
+  "hexlink.page.tablets.block": "此卓越核心可以装入方块灵体。",
+  "hexlink.page.tablets.item": "此卓越核心可以装入物品灵体。",
+  "hexlink.page.tablets.entity": "此卓越核心可以装入实体灵体。",
+  "hexlink.page.tablets.potion": "此卓越核心可以装入药水效果灵体。",
+  "hexlink.page.tablets.anything": "此卓越核心可以装入任意灵体。",
 
   "hexlink.page.upgraded_book.1": "$(l:hexlink:items/upgraded_book)$(item)升级法术书/$有如一整个图书馆的造物。它不需要绘制图案就能使用我的栈来施法。若其中存有图案 iota，则会像赫尔墨斯之策略一样运行，否则会将 iota 压入栈顶。若存有列表，则会依次对其中每个成员执行上述操作。",
   "hexlink.page.upgraded_book.2": "以下省略！",
