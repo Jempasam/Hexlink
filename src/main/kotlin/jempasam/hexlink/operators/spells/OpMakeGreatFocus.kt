@@ -8,8 +8,8 @@ import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapBadOffhandItem
 import at.petrak.hexcasting.api.spell.mishaps.MishapLocationTooFarAway
-import jempasam.hexlink.iota.spiritual.SpiritIota
 import jempasam.hexlink.item.GreatFocusItem
+import jempasam.hexlink.mishap.MishapNotExtractable
 import net.minecraft.entity.Entity
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Style
@@ -24,25 +24,30 @@ class OpMakeGreatFocus : SpellAction{
         val target=args.getEntity(0, 1)
         val stack=ctx.caster.offHandStack
         val item=stack.item
-        if(item is GreatFocusItem<*> && item.canWriteEntity(stack,target)){
-            if(target.pos.distanceTo(ctx.position)<30){
-                return Triple(
-                        Spell(stack, item, target),
-                        500,
-                        listOf(
-                                ParticleSpray.burst(target.pos,1.0,10),
-                                ParticleSpray.burst(ctx.position,1.0,10)
-                        )
-                )
+        if(item is GreatFocusItem){
+            if(item.canExtractFrom(stack,target)){
+                if(target.pos.distanceTo(ctx.position)<30){
+                    return Triple(
+                            Spell(stack, item, target),
+                            500,
+                            listOf(
+                                    ParticleSpray.burst(target.pos,1.0,10),
+                                    ParticleSpray.burst(ctx.position,1.0,10)
+                            )
+                    )
+                }
+                else throw MishapLocationTooFarAway(target.pos)
             }
-            else throw MishapLocationTooFarAway(target.pos)
+            else throw MishapNotExtractable(target,stack)
+
         }
         else throw MishapBadOffhandItem(stack, Hand.OFF_HAND, Text.translatable("hexlink.mishap.need_great_focus"))
     }
 
-    private data class Spell<T: SpiritIota>(val stack: ItemStack, val item: GreatFocusItem<T>, val target: Entity) : RenderedSpell {
+    private data class Spell(val stack: ItemStack, val item: GreatFocusItem, val target: Entity) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
-            if(!item.writeEntity(stack,target))ctx.caster.sendMessage(Text.translatable("hexlink.unlucky").setStyle(Style.EMPTY.withBold(true).withColor(DyeColor.CYAN.signColor)))
+            if(item.extractFrom(stack,target)!=GreatFocusItem.ExtractionResult.SUCCESS)
+                ctx.caster.sendMessage(Text.translatable("hexlink.unlucky").setStyle(Style.EMPTY.withBold(true).withColor(DyeColor.CYAN.signColor)))
         }
     }
 }

@@ -1,0 +1,120 @@
+package jempasam.hexlink.spirit
+
+import com.google.common.base.Predicates
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.BlockItem
+import net.minecraft.item.Item
+import net.minecraft.item.ItemUsageContext
+import net.minecraft.nbt.NbtElement
+import net.minecraft.nbt.NbtString
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.text.Text
+import net.minecraft.util.DyeColor
+import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
+import net.minecraft.util.UseAction
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Box
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.Vec3d
+import net.minecraft.util.registry.Registry
+
+class ItemSpirit(val item: Item): Spirit {
+
+    override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
+        return 10
+    }
+
+    override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
+        val stack=item.defaultStack
+        stack.count=1
+        val old_hand_item=caster.mainHandStack
+        caster.setStackInHand(Hand.MAIN_HAND,stack)
+        item.useOnBlock(
+                ItemUsageContext(
+                        caster,
+                        Hand.MAIN_HAND,
+                        BlockHitResult(position, Direction.UP, BlockPos(position), true)
+                )
+        )
+        caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
+    }
+
+
+
+    override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
+        return 10
+    }
+
+    override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {
+        val stack=item.defaultStack
+        stack.count=1
+        val old_hand_item=caster.mainHandStack
+        caster.setStackInHand(Hand.MAIN_HAND,stack)
+        if(entity==caster){
+            val action=item.getUseAction(stack)
+            val success=item.use(world, caster, Hand.MAIN_HAND)
+            if(action!=UseAction.NONE && action!=UseAction.BLOCK && success.result.isAccepted){
+                item.onStoppedUsing(stack, world, caster, 0)
+                item.finishUsing(stack,world,caster)
+            }
+        }
+        else{
+            if(entity is LivingEntity){
+                item.useOnEntity(stack, caster, entity, Hand.MAIN_HAND)
+            }
+            entity.interact(caster,Hand.MAIN_HAND)
+        }
+        caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
+    }
+
+
+
+    override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
+        return entity is LivingEntity && (entity.getStackInHand(Hand.MAIN_HAND).item==item) && entity.getStackInHand(Hand.OFF_HAND).item==item
+    }
+
+    override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
+        val entities=world.getEntitiesByType( EntityType.ITEM, Box.of(position, 0.7, 0.7, 0.7), Predicates.alwaysTrue())
+        return entities.any { entity -> entity.stack.item==item }
+    }
+
+
+
+    override fun equals(other: Any?): Boolean = other is ItemSpirit && item===other.item
+
+
+
+    override fun getColor(): Int = if(item is BlockItem)item.block.defaultMapColor.color else DyeColor.BROWN.signColor
+
+    override fun getName(): Text = item.name
+
+    override fun serialize(): NbtElement {
+        return NbtString.of(Registry.ITEM.getId(item).toString())
+    }
+
+
+
+    override fun getType(): Spirit.SpiritType<*> = Type
+
+    object Type: Spirit.SpiritType<ItemSpirit>{
+        override fun getName(): Text {
+            return Text.translatable("hexlink.spirit.item")
+        }
+
+        override fun deserialize(nbt: NbtElement): ItemSpirit {
+            if(nbt is NbtString){
+                val type=Registry.ITEM.getOrEmpty(Identifier(nbt.asString())).orElseThrow(::IllegalArgumentException)
+                return ItemSpirit(type)
+            }
+            else throw IllegalArgumentException()
+        }
+    }
+
+
+
+}
