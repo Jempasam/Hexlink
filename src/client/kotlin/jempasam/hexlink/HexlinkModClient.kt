@@ -10,4 +10,5 @@ object HexlinkModClient : ClientModInitializer {
 		HexlinkModelPredicates.registerItemPredicates()
 		//HudRenderCallback.EVENT.register(SpellHUD())
 	}
+
 }

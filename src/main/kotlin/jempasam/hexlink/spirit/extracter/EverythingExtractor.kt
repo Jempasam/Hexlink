@@ -1,16 +1,18 @@
 package jempasam.hexlink.spirit.extracter
 
+import com.google.gson.JsonElement
 import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.spirit.extracter.loaders.SpiritExtractorLoader
 import net.minecraft.entity.Entity
 import net.minecraft.text.Text
 import net.minecraft.util.math.ColorHelper
 
 object EverythingExtractor : SpiritExtractor<Spirit> {
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<Spirit> {
-        if(PotionExtractor.canExtract(target))return set_type(PotionExtractor.extract(target))
-        else if(BlockExtractor.canExtract(target))return set_type(BlockExtractor.extract(target))
-        else if(ItemExtractor.canExtract(target))return set_type(ItemExtractor.extract(target))
-        else return set_type(EntityExtractor.extract(target))
+        if(PotionExtractor.canExtract(target)) return set_type(PotionExtractor.extract(target))
+        if(BlockExtractor.canExtract(target)) return set_type(BlockExtractor.extract(target))
+        if(ItemExtractor.canExtract(target)) return set_type(ItemExtractor.extract(target))
+        return set_type(EntityExtractor.extract(target))
     }
 
     override fun canExtract(target: Entity): Boolean {
@@ -29,9 +31,16 @@ object EverythingExtractor : SpiritExtractor<Spirit> {
     }
 
     override fun getColor(): Int {
-        val red=(Math.sin(System.currentTimeMillis()/1000*Math.PI)*255).toInt()
-        val blue=(Math.sin(System.currentTimeMillis()/1000*Math.PI+Math.PI/3)*255).toInt()
-        val green=(Math.sin(System.currentTimeMillis()/1000*Math.PI+Math.PI/3*2)*255).toInt()
+        val current_pi_time=(System.currentTimeMillis()%2000)/2000f*Math.PI*2
+        val red=(Math.sin(current_pi_time)*127+127).toInt()
+        val blue=(Math.sin(current_pi_time+Math.PI*2/3)*127+127).toInt()
+        val green=(Math.sin(current_pi_time+Math.PI*4/3)*127+127).toInt()
         return ColorHelper.Argb.getArgb(255, red, green, blue)
+    }
+
+    object Serializer : SpiritExtractorLoader<EntityExtractor> {
+        override fun load(element: JsonElement): EntityExtractor {
+            return EntityExtractor
+        }
     }
 }

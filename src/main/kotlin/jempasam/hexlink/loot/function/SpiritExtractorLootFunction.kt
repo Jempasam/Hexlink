@@ -5,7 +5,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonSerializationContext
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.iota.SpiritIota
-import jempasam.hexlink.item.SpiritExtracterItem
+import jempasam.hexlink.item.SpiritContainerItem
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.extracter.SpiritExtractor
 import net.minecraft.item.ItemStack
@@ -20,7 +20,7 @@ import net.minecraft.util.JsonSerializer
 class SpiritExtractorLootFunction(val extractor: SpiritExtractor<*>?, val spirit: Spirit?) : LootFunction{
     override fun apply(t: ItemStack, u: LootContext): ItemStack {
         val item=t.item
-        if(item is SpiritExtracterItem){
+        if(item is SpiritContainerItem){
             if(extractor!=null)item.setExtractor(t,extractor)
             if(spirit!=null)item.writeDatum(t,SpiritIota(spirit))
         }

@@ -1,0 +1,14 @@
+{
+  "type": "hexlink:shaped_extractor",
+  "key": {
+    "#": { "item": "minecraft:phantom_membrane" },
+    "I": { "item": "minecraft:diamond" },
+    "H": { "item": "hexlink:small_bag" }
+  },
+  "pattern": [
+    " I ",
+    "#H#",
+    "###"
+  ],
+  "result": { "item": "hexlink:medium_bag" }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "hexlink:shaped_extractor",
+  "key": {
+    "#": { "item": "minecraft:leather" },
+    "I": { "item": "hexcasting:charged_amethyst" },
+    "H": { "item": "hexlink:tablet" }
+  },
+  "pattern": [
+    " I ",
+    "#H#",
+    "###"
+  ],
+  "result": { "item": "hexlink:small_bag" }
+}

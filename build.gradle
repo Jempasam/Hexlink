@@ -33,6 +33,10 @@ repositories {
 		url = "https://maven.terraformersmc.com/releases"
 	}
 	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
+	maven {
         name = 'Ladysnake Mods'
         url = 'https://maven.ladysnake.org/releases'
     }
@@ -80,12 +84,18 @@ dependencies {
 	modImplementation "dev.emi:trinkets:$trinketsVersion"
 	modImplementation "at.petra-k.paucal:paucal-fabric-$minecraft_version:$paucalVersion"
 	modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouliVersion-FABRIC"
+	modImplementation("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 	modImplementation("at.petra-k.hexcasting:hexcasting-fabric-$minecraft_version:$hexcastingVersion"){
 		exclude module: "phosphor"
 	}
 
-	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.632"
-	modImplementation "curse.maven:emi-loot-681783:4105999"
+	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.632"
+
+	modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+	modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+	modLocalRuntime "curse.maven:emi-loot-681783:4105999"
 	
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

@@ -1,0 +1,28 @@
+{
+  "name": "hexlink.page.bag",
+  "icon": "hexlink:medium_bag",
+  "category": "hexcasting:items",
+  "sortnum": 100,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.page.bag.desc"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "hexlink:small_bag",
+      "text": "hexlink.page.bag.small_bag"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "hexlink:medium_bag",
+      "text": "hexlink.page.bag.medium_bag"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "hexlink:big_bag",
+      "text": "hexlink.page.bag.big_bag"
+    }
+  ]
+}

@@ -12,10 +12,7 @@ import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
-import net.minecraft.util.DyeColor
-import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
-import net.minecraft.util.UseAction
+import net.minecraft.util.*
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -24,6 +21,25 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
 class ItemSpirit(val item: Item): Spirit {
+
+    private var color: Int=0
+    init{
+        if(item.isFireproof)
+            color=DyeColor.ORANGE.fireworkColor
+        else if(item.isFood)
+            color=DyeColor.BROWN.fireworkColor
+        else if(item.isEnchantable(item.defaultStack))
+            color=DyeColor.YELLOW.fireworkColor
+        else if(item.hasGlint(item.defaultStack))
+            color=DyeColor.MAGENTA.fireworkColor
+        else if(item is BlockItem)
+            color=item.block.defaultMapColor.color
+        else if(item.getRarity(item.defaultStack)!=Rarity.COMMON)
+            color=item.getRarity(item.defaultStack).formatting.colorValue ?: DyeColor.BROWN.signColor
+        else
+            color=DyeColor.BROWN.signColor
+    }
+
 
     override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
         return 10
@@ -87,9 +103,11 @@ class ItemSpirit(val item: Item): Spirit {
 
     override fun equals(other: Any?): Boolean = other is ItemSpirit && item===other.item
 
+    override fun hashCode(): Int = item.hashCode()*36
 
-
-    override fun getColor(): Int = if(item is BlockItem)item.block.defaultMapColor.color else DyeColor.BROWN.signColor
+    override fun getColor(): Int{
+        return color
+    }
 
     override fun getName(): Text = item.name
 

@@ -4,6 +4,7 @@ import at.petrak.hexcasting.api.spell.iota.EntityIota
 import com.google.common.base.Predicates
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
@@ -61,9 +62,18 @@ class EntitySpirit(val entity_type: EntityType<*>): Spirit {
 
     override fun equals(other: Any?): Boolean = other is EntitySpirit && entity_type===other.entity_type
 
+    override fun hashCode(): Int = entity_type.hashCode()*36
 
 
-    override fun getColor(): Int = DyeColor.RED.fireworkColor
+
+    override fun getColor(): Int{
+        if(entity_type.isFireImmune)return DyeColor.ORANGE.fireworkColor
+        else{
+            val color=from_group_to_color.get(entity_type.spawnGroup)
+            if(color!=null)return color
+            else return DyeColor.RED.fireworkColor
+        }
+    }
 
     override fun getName(): Text = entity_type.name
 
@@ -87,5 +97,18 @@ class EntitySpirit(val entity_type: EntityType<*>): Spirit {
             }
             else throw IllegalArgumentException()
         }
+    }
+
+    companion object{
+        private val from_group_to_color= mapOf(
+                SpawnGroup.MONSTER to DyeColor.RED.fireworkColor,
+                SpawnGroup.CREATURE to DyeColor.LIME.fireworkColor,
+                SpawnGroup.AMBIENT to DyeColor.WHITE.fireworkColor,
+                SpawnGroup.AXOLOTLS to DyeColor.PINK.fireworkColor,
+                SpawnGroup.UNDERGROUND_WATER_CREATURE to DyeColor.BLUE.fireworkColor,
+                SpawnGroup.WATER_CREATURE to DyeColor.LIGHT_BLUE.fireworkColor,
+                SpawnGroup.WATER_AMBIENT to DyeColor.LIGHT_BLUE.fireworkColor,
+                SpawnGroup.MISC to DyeColor.PURPLE.fireworkColor
+        )
     }
 }

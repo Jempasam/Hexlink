@@ -48,10 +48,12 @@ class MixedPigmentItem(settings: Settings) : Item(settings), ColorizerItem {
 
     override fun appendStacks(group: ItemGroup, stacks: DefaultedList<ItemStack>) {
         if(isIn(group)){
-            val stack=defaultStack
-            setColor1(stack, (Math.random()*0xFFFFFF).toInt())
-            setColor2(stack, (Math.random()*0xFFFFFF).toInt())
-            stacks.add(stack)
+            for(i in 0 until 4){
+                val stack=defaultStack
+                setColor1(stack, (Math.random()*0xFFFFFF).toInt())
+                setColor2(stack, (Math.random()*0xFFFFFF).toInt())
+                stacks.add(stack)
+            }
         }
     }
 }

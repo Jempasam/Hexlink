@@ -1,0 +1,14 @@
+{
+  "type": "hexlink:shaped_extractor",
+  "key": {
+    "#": { "tag": "minecraft:wool" },
+    "I": { "item": "minecraft:chorus_fruit" },
+    "H": { "item": "hexlink:medium_bag" }
+  },
+  "pattern": [
+    " I ",
+    "#H#",
+    "###"
+  ],
+  "result": { "item": "hexlink:big_bag" }
+}

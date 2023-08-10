@@ -12,8 +12,11 @@ import at.petrak.hexcasting.api.spell.mishaps.MishapEntityTooFarAway
 import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.spell.mishaps.MishapLocationTooFarAway
 import jempasam.hexlink.iota.SpiritIota
+import jempasam.hexlink.item.SoulContainerItem
+import jempasam.hexlink.mishap.MishapNoEnoughSoul
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.entity.Entity
+import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.math.Vec3d
@@ -31,8 +34,11 @@ class OpManisfestSpirit : SpellAction {
                 if(ctx.position.distanceTo(target.vec3)>30)throw MishapLocationTooFarAway(target.vec3)
                 val cost=spirit.getSpirit().infuseAtCost(ctx.caster,ctx.world, target.vec3, power)
                 if(cost==Spirit.CANNOT_USE)throw MishapInvalidIota(spirit,2, Text.translatable("hexlink.spirit_iota.good"))
+                val bag=SoulContainerItem.getSpiritConsumable(ctx.caster.inventory,spirit.getSpirit())
+                if(bag==null || !(bag.item as SoulContainerItem).consumeSpirit(bag,spirit.getSpirit()))
+                    throw MishapNoEnoughSoul(spirit.getSpirit(), 1)
                 return Triple(
-                        VecSpell(ctx.world, target.vec3, power, spirit.getSpirit()),
+                        VecSpell(ctx.world, target.vec3, power, spirit.getSpirit(), bag),
                         cost,
                         listOf(ParticleSpray.burst(target.vec3,1.0,5))
                 )
@@ -41,8 +47,11 @@ class OpManisfestSpirit : SpellAction {
                 if(ctx.position.distanceTo(target.entity.pos)>30)throw MishapEntityTooFarAway(target.entity)
                 val cost=spirit.getSpirit().infuseInCost(ctx.caster,ctx.world,target.entity,power)
                 if(cost==Spirit.CANNOT_USE)throw MishapInvalidIota(spirit,2, Text.translatable("hexlink.spirit_iota.good"))
+                val bag=SoulContainerItem.getSpiritConsumable(ctx.caster.inventory,spirit.getSpirit())
+                if(bag==null || !(bag.item as SoulContainerItem).consumeSpirit(bag,spirit.getSpirit()))
+                    throw MishapNoEnoughSoul(spirit.getSpirit(), 1)
                 return Triple(
-                        EntitySpell(ctx.world, target.entity, power, spirit.getSpirit()),
+                        EntitySpell(ctx.world, target.entity, power, spirit.getSpirit(), bag),
                         cost,
                         listOf(ParticleSpray.burst(target.entity.pos,1.0,5))
                 )
@@ -53,14 +62,18 @@ class OpManisfestSpirit : SpellAction {
         else throw MishapInvalidIota(spirit, 2, Text.translatable("hexlink.spirit_iota"))
     }
 
-    class VecSpell(val world: ServerWorld, val target: Vec3d, val power: Int, val spirit: Spirit) : RenderedSpell{
+    class VecSpell(val world: ServerWorld, val target: Vec3d, val power: Int, val spirit: Spirit, val stack: ItemStack) : RenderedSpell{
         override fun cast(ctx: CastingContext) {
+            val item=stack.item
+            if(item is SoulContainerItem)item.consumeSpirit(stack,spirit)
             spirit.infuseAt(ctx.caster,world, target, power)
         }
     }
 
-    class EntitySpell(val world: ServerWorld, val target: Entity, val power: Int, val spirit: Spirit) : RenderedSpell{
+    class EntitySpell(val world: ServerWorld, val target: Entity, val power: Int, val spirit: Spirit, val stack: ItemStack) : RenderedSpell{
         override fun cast(ctx: CastingContext) {
+            val item=stack.item
+            if(item is SoulContainerItem)item.consumeSpirit(stack,spirit)
             spirit.infuseIn(ctx.caster,world, target, power)
         }
     }

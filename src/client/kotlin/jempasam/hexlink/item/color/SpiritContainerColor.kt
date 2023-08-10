@@ -1,14 +1,14 @@
 package jempasam.hexlink.item.color
 
-import jempasam.hexlink.item.SpiritExtracterItem
+import jempasam.hexlink.item.SpiritContainerItem
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.color.item.ItemColorProvider
 import net.minecraft.item.ItemStack
 
-class SpiritExtractorColor : ItemColorProvider {
+class SpiritContainerColor : ItemColorProvider {
     override fun getColor(stack: ItemStack, tintIndex: Int): Int {
         val item=stack.item
-        if(item is SpiritExtracterItem){
+        if(item is SpiritContainerItem){
             if(tintIndex==0)return -1
             else if(tintIndex==1)return item.getExtractor(stack)?.getColor() ?: -1
             else if(tintIndex==2 && MinecraftClient.getInstance().world!=null){

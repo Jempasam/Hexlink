@@ -6,6 +6,7 @@
     { "item": "hexcasting:amethyst_dust" },
     { "item": "hexcasting:amethyst_dust" },
     { "item": "hexcasting:amethyst_dust" },
+    { "tag": "c:dyes" },
     { "tag": "c:dyes" }
   ],
   "result": { "item": "hexlink:mixed_pigment" }

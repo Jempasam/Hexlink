@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory
 
 object HexlinkMod : ModInitializer {
 	val logger = LoggerFactory.getLogger("hexlink")
-	val MODID = "hexlink"
+	const val MODID = "hexlink"
 
 	override fun onInitialize() {
 		logger.info("Hexlink started!")
@@ -24,6 +24,7 @@ object HexlinkMod : ModInitializer {
 		HexlinkTrinkets.registerTrinkets()
 		HexlinkRecipes.registerRecipes()
 		HexlinkLootFunctions.registerLootFunctions()
+
 
 		HexlinkGamerules
 		HexlinkSpirits

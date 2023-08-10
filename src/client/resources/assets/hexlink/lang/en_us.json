@@ -2,7 +2,8 @@
   "hexlink.mishap.empty_collar": "Your focus collar is empty",
   "hexlink.mishap.no_collar_item": "You don't have any focus collar",
   "hexlink.mishap.need_great_focus": "suitable empty Great Focus",
-  "hexlink.mishap.not_extractable": " Spirit is not extractable with ",
+  "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
+  "hexlink.mishap.not_enough_soul": "Missing %d souls",
 
 
   "hexlink.unlucky": "Extraction has fail, try again",
@@ -33,24 +34,33 @@
   "item.hexlink.upgraded_book": "Upgraded Spellbook",
   "item.hexlink.mixed_pigment": "Mixed Pigment",
   "item.hexlink.focus_collar": "Focus Collar",
-  "item.hexlink.tablet": "Spiritual Tablet",
-  "item.hexlink.tablet.filled": "Filled Spiritual Tablet",
+  "item.hexlink.tablet": "Spiritual Tablet of %s",
+  "item.hexlink.tablet.none": "Spiritual Tablet",
+  "item.hexlink.small_bag": "Soul Pocket of %s",
+  "item.hexlink.small_bag.none": "Soul Pocket",
+  "item.hexlink.medium_bag": "Soul Bag of %s",
+  "item.hexlink.medium_bag.none": "Soul Bag",
+  "item.hexlink.big_bag": "Large Soul Bag of %s",
+  "item.hexlink.big_bag.none": "Large Soul Bag",
+
+
+  "itemGroup.hexlink.hexlink": "Hexlink",
 
 
   "hexcasting.spell.hexlink:spirit_extract": "Spirit Extraction",
   "hexcasting.spell.hexlink:spirit_manifestation": "Spirit Manifestation",
   "hexcasting.spell.hexlink:spirit_look": "Spirit Look",
-  "hexcasting.spell.hexlink:read_trinket": "Gathier's Reflection",
-  "hexcasting.spell.hexlink:write_trinket": "Gathier's Gambit",
+  "hexcasting.spell.hexlink:read_trinket": "Boehmer's Reflection",
+  "hexcasting.spell.hexlink:write_trinket": "Boehmer's Gambit",
 
   "hexlink.entry.readwrite_trinkets": "Trinket Read and Write",
   "hexlink.page.write_trinket": "This pattern can write a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
   "hexlink.page.read_trinket": "This pattern can read a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
 
   "hexlink.spell.spirit_spells": "Manipulation of spirits",
-  "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them. The physical object is destroyed in the process and I have a high chance of failing so I should get a lot of material. It seem I also need to lower living entities life to a very low value before being able to extract their spirits.",
-  "hexlink.spell.spirit_extract.desc.2": "I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit.",
-  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest.",
+  "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them. The physical object is destroyed in the process and I have a high chance of failing so I should get a lot of material.",
+  "hexlink.spell.spirit_extract.desc.2": "It seem I also need to lower living entities life to a very low value before being able to extract their spirits. I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit.",
+  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest. I need a $(l:hexlink:items/bag)$(item)Soul Bag/$ filled with souls to manifest a spirit.",
   "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
 
 
@@ -60,7 +70,13 @@
   "hexlink.page.tablets.item": "This type of tablet can contain the spirit of an item. With an Item Spirit, I can simulate the use of an item.",
   "hexlink.page.tablets.entity": "This type of tablet can contain the spirit of an entity. With an Entity Spirit, I can summon an entity.",
   "hexlink.page.tablets.potion": "This type of tablet can contain the spirit of a potion effect. With a Potion Spirit, I can give an effect to an entity or summon an effect cloud.",
-  "hexlink.page.tablets.anything": "This type of tablet can contain the spirit of anything.",
+  "hexlink.page.tablets.everything": "This type of tablet can contain the spirit of anything.",
+
+  "hexlink.page.bag": "Soul Bags",
+  "hexlink.page.bag.desc": "Souls bags contains souls that are used for $(l:hexlink:patterns/spirit_spells)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirit_spells)Spirit Extraction/$.",
+  "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of souls, and 30 of each.",
+  "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of souls, and 100 of each.",
+  "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of souls, and 300 of each.",
 
   "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",

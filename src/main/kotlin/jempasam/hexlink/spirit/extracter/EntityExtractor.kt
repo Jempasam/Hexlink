@@ -1,6 +1,8 @@
 package jempasam.hexlink.spirit.extracter
 
+import com.google.gson.JsonElement
 import jempasam.hexlink.spirit.EntitySpirit
+import jempasam.hexlink.spirit.extracter.loaders.SpiritExtractorLoader
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.text.Text
@@ -24,5 +26,11 @@ object EntityExtractor : SpiritExtractor<EntitySpirit> {
 
     override fun getColor(): Int {
         return DyeColor.RED.fireworkColor
+    }
+
+    object Serializer : SpiritExtractorLoader<EntityExtractor> {
+        override fun load(element: JsonElement): EntityExtractor {
+            return EntityExtractor
+        }
     }
 }

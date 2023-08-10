@@ -10,7 +10,7 @@ object ItemExtractor : SpiritExtractor<ItemSpirit> {
 
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<ItemSpirit> {
         target as ItemEntity
-        return result(ItemSpirit(target.stack.item),target.stack.count)
+        return result(ItemSpirit(target.stack.item), target.stack.count*Math.max(target.stack.maxDamage/2,1))
     }
 
     override fun canExtract(target: Entity): Boolean {

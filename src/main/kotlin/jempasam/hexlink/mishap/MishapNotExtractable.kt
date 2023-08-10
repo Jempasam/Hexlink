@@ -14,7 +14,8 @@ import net.minecraft.util.DyeColor
 
 class MishapNotExtractable(val entity: Entity, val item: ItemStack) : Mishap() {
     override fun errorMessage(ctx: CastingContext, errorCtx: Context): Text {
-        return entity.name.copy().append(Text.translatable("hexlink.mishap.not_extractable")).append(item.name).setStyle(Style.EMPTY.withColor(DyeColor.RED.signColor))
+        return Text.translatable("hexlink.mishap.not_extractable", entity.name, item.name).setStyle(Style.EMPTY.withColor(DyeColor.RED.signColor))
+        //return entity.name.copy().append(Text.translatable("hexlink.mishap.not_extractable")).append(item.name).setStyle(Style.EMPTY.withColor(DyeColor.RED.signColor))
     }
 
     override fun accentColor(ctx: CastingContext, errorCtx: Context): FrozenColorizer {

@@ -1,6 +1,8 @@
 package jempasam.hexlink.spirit.extracter
 
+import com.google.gson.JsonElement
 import jempasam.hexlink.spirit.BlockSpirit
+import jempasam.hexlink.spirit.extracter.loaders.SpiritExtractorLoader
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ItemEntity
 import net.minecraft.item.BlockItem
@@ -26,5 +28,11 @@ object BlockExtractor : SpiritExtractor<BlockSpirit> {
 
     override fun getColor(): Int {
         return DyeColor.LIGHT_GRAY.fireworkColor
+    }
+
+    object Serializer : SpiritExtractorLoader<BlockExtractor>{
+        override fun load(element: JsonElement): BlockExtractor {
+            return BlockExtractor
+        }
     }
 }
