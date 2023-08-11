@@ -38,7 +38,6 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
                     removed.add(entry)
                 }
                 else{
-                    println(spirit_nbt.toString()+" and "+key.toString()+" = "+(spirit_nbt.equals(key)))
                     if(spirit_nbt.equals(key))return entry.asCompound
                 }
 

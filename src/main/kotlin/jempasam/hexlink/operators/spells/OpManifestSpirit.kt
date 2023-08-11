@@ -8,9 +8,7 @@ import at.petrak.hexcasting.api.spell.getIntBetween
 import at.petrak.hexcasting.api.spell.iota.EntityIota
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.iota.Vec3Iota
-import at.petrak.hexcasting.api.spell.mishaps.MishapEntityTooFarAway
 import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
-import at.petrak.hexcasting.api.spell.mishaps.MishapLocationTooFarAway
 import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.iota.SpiritIota
 import jempasam.hexlink.item.SoulContainerItem
@@ -33,7 +31,7 @@ class OpManisfestSpirit : SpellAction {
         val power=args.getIntBetween(2,1,100, 3)
         if(spirit is SpiritIota){
             if(target is Vec3Iota){
-                if(ctx.position.distanceTo(target.vec3)>30)throw MishapLocationTooFarAway(target.vec3)
+                ctx.assertVecInRange(target.vec3)
                 val cost=spirit.getSpirit().infuseAtCost(ctx.caster,ctx.world, target.vec3, power)
                 if(cost==Spirit.CANNOT_USE)throw MishapInvalidIota(spirit,2, Text.translatable("hexlink.spirit_iota.good"))
                 val bag=getBagIfNeeded(spirit.getSpirit(), ctx.caster)
@@ -45,7 +43,7 @@ class OpManisfestSpirit : SpellAction {
                 )
             }
             else if(target is EntityIota){
-                if(ctx.position.distanceTo(target.entity.pos)>30)throw MishapEntityTooFarAway(target.entity)
+                ctx.assertEntityInRange(target.entity)
                 val cost=spirit.getSpirit().infuseInCost(ctx.caster,ctx.world,target.entity,power)
                 if(cost==Spirit.CANNOT_USE)throw MishapInvalidIota(spirit,2, Text.translatable("hexlink.spirit_iota.good"))
                 val bag=getBagIfNeeded(spirit.getSpirit(), ctx.caster)

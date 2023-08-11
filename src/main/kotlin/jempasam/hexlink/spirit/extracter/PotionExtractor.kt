@@ -10,12 +10,13 @@ import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 
 object PotionExtractor : SpiritExtractor<PotionSpirit> {
+    private val potion_items=setOf(Items.POTION, Items.LINGERING_POTION, Items.SPLASH_POTION)
 
     override fun canExtract(target: Entity): Boolean {
         val stack=ExtractorHelper.stack(target)
-        if(stack!=null && stack.item== Items.POTION){
+        if(stack!=null && potion_items.contains(stack.item)){
             val effects= PotionUtil.getPotionEffects(stack)
-            if(!effects.isNotEmpty())return true
+            return effects.isNotEmpty()
         }
         return false
     }
@@ -23,7 +24,7 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
         val stack=ExtractorHelper.stackOrThrow(target)
         val effect= PotionUtil.getPotionEffects(stack).get(0)
-        print(effect.duration)
+        println("DURATION:" + effect.duration)
         return result(PotionSpirit(effect.effectType), Math.max(1,effect.duration/1200)*(effect.amplifier+1))
     }
 
