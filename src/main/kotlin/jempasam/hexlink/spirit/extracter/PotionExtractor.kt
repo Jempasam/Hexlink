@@ -2,25 +2,44 @@ package jempasam.hexlink.spirit.extracter
 
 import jempasam.hexlink.spirit.PotionSpirit
 import net.minecraft.entity.Entity
-import net.minecraft.entity.ItemEntity
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtInt
 import net.minecraft.potion.PotionUtil
+import net.minecraft.potion.Potions
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 
 object PotionExtractor : SpiritExtractor<PotionSpirit> {
-    override fun extract(target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
-        target as ItemEntity
-        val effect= PotionUtil.getPotionEffects(target.stack).get(0)
-        return result(PotionSpirit(effect.effectType), Math.max(1,effect.duration/3600)*(effect.amplifier+1))
-    }
 
     override fun canExtract(target: Entity): Boolean {
-        if(target is ItemEntity && target.stack.item== Items.POTION){
-            val effects= PotionUtil.getPotionEffects(target.stack)
-            if(!effects.isEmpty())return true
+        val stack=ExtractorHelper.stack(target)
+        if(stack!=null && stack.item== Items.POTION){
+            val effects= PotionUtil.getPotionEffects(stack)
+            if(!effects.isNotEmpty())return true
         }
         return false
+    }
+
+    override fun extract(target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
+        val stack=ExtractorHelper.stackOrThrow(target)
+        val effect= PotionUtil.getPotionEffects(stack).get(0)
+        print(effect.duration)
+        return result(PotionSpirit(effect.effectType), Math.max(1,effect.duration/1200)*(effect.amplifier+1))
+    }
+
+    override fun consume(target: Entity) {
+        val stack=ExtractorHelper.stackOrThrow(target)
+        val effects = PotionUtil.getPotionEffects(stack)
+        if (effects.size == 1) ExtractorHelper.killStack(target)
+        else {
+            if (PotionUtil.getPotion(stack) != Potions.EMPTY) {
+                stack.setCustomName(stack.name)
+                stack.orCreateNbt.put(PotionUtil.CUSTOM_POTION_COLOR_KEY, NbtInt.of(PotionUtil.getColor(stack)))
+                PotionUtil.setPotion(stack, Potions.EMPTY)
+            }
+            effects.removeAt(0)
+            PotionUtil.setCustomPotionEffects(stack, effects)
+        }
     }
 
     override fun getExtractedName(): Text {

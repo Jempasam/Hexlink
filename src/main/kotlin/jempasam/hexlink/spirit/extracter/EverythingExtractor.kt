@@ -22,6 +22,13 @@ object EverythingExtractor : SpiritExtractor<Spirit> {
                 EntityExtractor.canExtract(target)
     }
 
+    override fun consume(target: Entity) {
+        if(PotionExtractor.canExtract(target)) PotionExtractor.consume(target)
+        else if(BlockExtractor.canExtract(target)) BlockExtractor.consume(target)
+        else if(ItemExtractor.canExtract(target)) ItemExtractor.consume(target)
+        else EntityExtractor.consume(target)
+    }
+
     fun <T: Spirit>set_type(from: SpiritExtractor.ExtractionResult<T>): SpiritExtractor.ExtractionResult<Spirit>{
         return result(from.spirit, from.count)
     }

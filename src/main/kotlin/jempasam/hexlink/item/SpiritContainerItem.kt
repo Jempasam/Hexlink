@@ -6,7 +6,7 @@ import at.petrak.hexcasting.api.spell.iota.NullIota
 import at.petrak.hexcasting.api.utils.containsTag
 import at.petrak.hexcasting.common.items.ItemFocus
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
-import jempasam.hexlink.gamerule.HexlinkGamerules
+import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.iota.SpiritIota
 import jempasam.hexlink.item.functionnality.ExtractorItem
 import jempasam.hexlink.spirit.Spirit
@@ -73,18 +73,18 @@ class SpiritContainerItem(settings: Settings) : Item(settings), IotaHolderItem, 
             if(canExtract(target)){
                 val extracted=extract(target)
                 println("Extract Count "+extracted.count+" of "+extracted.spirit.toString())
-                if(Math.random()<target.world.gameRules.get(HexlinkGamerules.EXTRACTION_PROBABILITY).get()*extracted.count){
+                val success_rate=HexlinkConfiguration.extractor_settings.get(this)?.success_rate ?: 0.01f
+                if(Math.random()<success_rate*extracted.count){
                     setSpirit(stack, extracted.spirit)
-                    println("Success")
+                    consume(target)
                     return ExtractorItem.ExtractionResult.SUCCESS
                 }
                 else{
-                    println("Unlucky")
+                    consume(target)
                     return ExtractorItem.ExtractionResult.UNLUCKY
                 }
             }
         }
-        println("Fail")
         return ExtractorItem.ExtractionResult.FAIL
     }
 

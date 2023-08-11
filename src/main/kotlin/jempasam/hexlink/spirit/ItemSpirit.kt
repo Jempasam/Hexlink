@@ -42,7 +42,7 @@ class ItemSpirit(val item: Item): Spirit {
 
 
     override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return 10
+        return 1
     }
 
     override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
@@ -63,7 +63,7 @@ class ItemSpirit(val item: Item): Spirit {
 
 
     override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-        return 10
+        return 1
     }
 
     override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {

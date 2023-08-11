@@ -17,7 +17,7 @@ import net.minecraft.util.registry.Registry
 class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
 
     override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return 5*power*power
+        return power*power
     }
 
     override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
@@ -36,7 +36,7 @@ class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
 
 
     override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-        if(entity is LivingEntity)return 5*power*power
+        if(entity is LivingEntity)return power*power
         else return Spirit.CANNOT_USE
     }
 
@@ -59,6 +59,7 @@ class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
 
     override fun equals(other: Any?): Boolean = other is PotionSpirit && potion_effect===other.potion_effect
 
+    override fun hashCode(): Int = potion_effect.hashCode()*36
 
 
     override fun getColor(): Int = potion_effect.color

@@ -19,7 +19,7 @@ import net.minecraft.util.registry.Registry
 class EntitySpirit(val entity_type: EntityType<*>): Spirit {
 
     override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return if(entity_type.isSummonable) 10 else Spirit.CANNOT_USE
+        return if(entity_type.isSummonable) 1 else Spirit.CANNOT_USE
     }
 
     override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {

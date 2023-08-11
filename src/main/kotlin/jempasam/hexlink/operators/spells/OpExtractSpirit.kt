@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapBadOffhandItem
 import at.petrak.hexcasting.api.spell.mishaps.MishapLocationTooFarAway
+import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.item.functionnality.ExtractorItem
 import jempasam.hexlink.mishap.MishapNotExtractable
 import net.minecraft.entity.Entity
@@ -29,7 +30,7 @@ class OpExtractSpirit : SpellAction{
                 if(target.pos.distanceTo(ctx.position)<30){
                     return Triple(
                             Spell(stack, item, target),
-                            500,
+                            HexlinkConfiguration.extractor_settings.get(item.getExtractor(stack))?.extraction_media_cost ?: 500,
                             listOf(
                                     ParticleSpray.burst(target.pos,1.0,10),
                                     ParticleSpray.burst(ctx.position,1.0,10)
@@ -47,7 +48,7 @@ class OpExtractSpirit : SpellAction{
     private data class Spell(val stack: ItemStack, val item: ExtractorItem, val target: Entity) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
             if(item.extractFrom(stack,target)==ExtractorItem.ExtractionResult.SUCCESS){
-                target.kill()
+
             }
             else ctx.caster.sendMessage(Text.translatable("hexlink.unlucky").setStyle(Style.EMPTY.withBold(true).withColor(DyeColor.CYAN.signColor)))
 

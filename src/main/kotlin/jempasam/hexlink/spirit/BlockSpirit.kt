@@ -18,7 +18,7 @@ import net.minecraft.util.registry.Registry
 class BlockSpirit(val block: Block): Spirit{
 
     override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return if(world.getBlockState(BlockPos(position)).isAir)  10 else Spirit.CANNOT_USE
+        return if(world.getBlockState(BlockPos(position)).isAir)  5 else Spirit.CANNOT_USE
     }
 
     override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
@@ -29,7 +29,7 @@ class BlockSpirit(val block: Block): Spirit{
 
 
     override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-       return 2
+       return 1
     }
 
     override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {
@@ -55,6 +55,8 @@ class BlockSpirit(val block: Block): Spirit{
 
 
     override fun equals(other: Any?): Boolean = other is BlockSpirit && block===other.block
+
+    override fun hashCode(): Int = block.hashCode()*36
 
 
 

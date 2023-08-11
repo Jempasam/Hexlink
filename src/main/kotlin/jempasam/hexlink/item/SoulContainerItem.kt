@@ -2,6 +2,7 @@ package jempasam.hexlink.item
 
 import at.petrak.hexcasting.api.utils.asCompound
 import at.petrak.hexcasting.api.utils.getOrCreateList
+import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.item.functionnality.ExtractorItem
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.utils.NbtHelper
@@ -72,10 +73,14 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
             val extract_result=extractor.extract(target)
             if( findEntryNbt(stack,extract_result.spirit)!=null || ((souls(stack)?.size?:0)<max_box_count) ){
                 val entry=findEntryNbtOrCreate(stack,extract_result.spirit)
-                val new_value=Math.min(entry.getInt("count")+extract_result.count, max_soul_count)
+                val count=(HexlinkConfiguration.extractor_settings.get(extractor)?.soul_count ?: 1)*extract_result.count
+
+                val new_value=Math.min(entry.getInt("count")+count, max_soul_count)
                 val offset=new_value-entry.getInt("count")
                 if(offset==0)return ExtractorItem.ExtractionResult.FAIL
                 entry.putInt("count",new_value)
+
+                extractor.consume(target)
                 return ExtractorItem.ExtractionResult.SUCCESS
             }
         }

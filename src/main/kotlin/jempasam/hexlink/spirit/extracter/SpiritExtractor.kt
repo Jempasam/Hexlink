@@ -22,6 +22,11 @@ interface SpiritExtractor<T: Spirit>{
     fun extract(target: Entity): ExtractionResult<T>
 
     /**
+     * Consume the entity you have extracted from
+     */
+    fun consume(target: Entity)
+
+    /**
      * Get a name describing extracted spirits
      */
     fun getExtractedName(): Text
