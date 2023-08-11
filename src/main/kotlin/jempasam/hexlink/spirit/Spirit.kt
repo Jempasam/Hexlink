@@ -70,7 +70,7 @@ interface Spirit {
 
 
     interface SpiritType<T: Spirit>{
-        fun deserialize(nbt: NbtElement): T
+        fun deserialize(nbt: NbtElement): T?
 
         fun getName(): Text
 

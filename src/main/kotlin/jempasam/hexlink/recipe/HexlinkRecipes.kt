@@ -9,7 +9,6 @@ import net.minecraft.util.registry.Registry
 object HexlinkRecipes {
     private fun <T: Recipe<*>>create(id: String, serializer: RecipeSerializer<T>): RecipeSerializer<T>{
         Registry.register(Registry.RECIPE_SERIALIZER, Identifier(HexlinkMod.MODID, id), serializer)
-        println(Identifier(HexlinkMod.MODID, id).toString())
         return serializer
     }
 

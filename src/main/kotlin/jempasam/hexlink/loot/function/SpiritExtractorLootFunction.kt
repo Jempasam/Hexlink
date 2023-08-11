@@ -3,8 +3,9 @@ package jempasam.hexlink.loot.function
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonObject
 import com.google.gson.JsonSerializationContext
+import com.mojang.brigadier.StringReader
+import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.HexlinkRegistry
-import jempasam.hexlink.iota.SpiritIota
 import jempasam.hexlink.item.SpiritContainerItem
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.extracter.SpiritExtractor
@@ -22,7 +23,7 @@ class SpiritExtractorLootFunction(val extractor: SpiritExtractor<*>?, val spirit
         val item=t.item
         if(item is SpiritContainerItem){
             if(extractor!=null)item.setExtractor(t,extractor)
-            if(spirit!=null)item.writeDatum(t,SpiritIota(spirit))
+            if(spirit!=null)item.setSpirit(t,spirit)
         }
         return t
     }
@@ -40,7 +41,10 @@ class SpiritExtractorLootFunction(val extractor: SpiritExtractor<*>?, val spirit
             val spirit_type=spirit_type_id?.let{ HexlinkRegistry.SPIRIT.get(Identifier(it)) }
 
             val spirit=if(spirit_type!=null){
-                spirit_type.deserialize(StringNbtReader.parse(JsonHelper.getString(json, "spirit_value")))
+                val nbt=StringNbtReader(StringReader(JsonHelper.getString(json, "spirit_value"))).parseElement()
+                val ret=spirit_type.deserialize(nbt)
+                if(ret==null) HexlinkMod.logger.error(nbt.toString()+" not a valid "+spirit_type_id)
+                ret
             }
             else null
 

@@ -17,12 +17,10 @@ class HexlinkSpiritDataLoader : JsonDataLoader(Gson(),"hexlink_spirits"), Identi
             val spirit=HexlinkRegistry.SPIRIT.get(entry.key)
             val obj=entry.value
             if(spirit!=null && obj is JsonObject){
-                println(entry.key.toString()+" : "+obj.toString())
                 HexlinkConfiguration.spirit_settings.put(spirit,HexlinkConfiguration.SpiritSettings(
                         obj.get("use_soul")?.asBoolean ?: true,
                         obj.get("media_cost")?.asInt ?: 5
                 ))
-                println(HexlinkConfiguration.spirit_settings.get(spirit)?.use_soul)
             }
         }
     }

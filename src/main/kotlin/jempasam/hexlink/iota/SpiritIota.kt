@@ -44,7 +44,7 @@ class SpiritIota(spirit: Spirit) : Iota(Type, spirit) {
                 if(spirit_type==null)return Text.of("Invalid Block Spirit")
 
                 val spirit=spirit_type.deserialize(spirit_value_nbt)
-                return spirit.getName().copy().append(Text.translatable("hexlink.spirit"))
+                return spirit?.getName()?.copy()?.append(Text.translatable("hexlink.spirit")) ?: throw Error("Should not happen")
             }
             return Text.of("Invalid Block Spirit")
         }

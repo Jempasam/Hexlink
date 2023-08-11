@@ -19,6 +19,7 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
+import kotlin.jvm.optionals.getOrNull
 
 class ItemSpirit(val item: Item): Spirit {
 
@@ -124,10 +125,10 @@ class ItemSpirit(val item: Item): Spirit {
             return Text.translatable("hexlink.spirit.item")
         }
 
-        override fun deserialize(nbt: NbtElement): ItemSpirit {
+        override fun deserialize(nbt: NbtElement): ItemSpirit? {
             if(nbt is NbtString){
-                val type=Registry.ITEM.getOrEmpty(Identifier(nbt.asString())).orElseThrow(::IllegalArgumentException)
-                return ItemSpirit(type)
+                val type=Registry.ITEM.getOrEmpty(Identifier(nbt.asString())).getOrNull()
+                return if(type!=null) ItemSpirit(type) else null
             }
             else throw IllegalArgumentException()
         }
