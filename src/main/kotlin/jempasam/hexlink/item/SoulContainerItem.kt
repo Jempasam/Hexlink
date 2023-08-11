@@ -110,7 +110,7 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
         return true
     }
 
-    override fun isItemBarVisible(stack: ItemStack): Boolean = true
+    override fun isItemBarVisible(stack: ItemStack): Boolean = souls(stack)?.isNotEmpty() ?: false
 
     override fun getItemBarStep(stack: ItemStack): Int {
         val souls=souls(stack)

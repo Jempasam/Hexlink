@@ -3,7 +3,7 @@
 	"package": "jempasam.hexlink.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"ExampleClientMixin"
+      "GuiSpellCastingMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
