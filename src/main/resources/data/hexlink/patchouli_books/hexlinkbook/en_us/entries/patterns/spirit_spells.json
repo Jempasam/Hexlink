@@ -1,22 +1,30 @@
 {
   "name": "hexlink.spell.spirit_spells",
   "category": "hexcasting:patterns/spells",
-  "icon": "hexlink:potion_focus",
+  "icon": "hexlink:tablet{extractor:\"hexlink:everything\"}",
   "sortnum": 100,
   "advancement": "hexcasting:root",
   "read_by_default": true,
   "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.spell.spirit_extraction"
+    },
     {
       "type": "hexcasting:pattern",
       "op_id": "hexlink:spirit_extract",
       "anchor": "hexlink:spirit_extract",
       "input": "entity",
       "output": "",
-      "text": "hexlink.spell.spirit_extract.desc.1"
+      "text": "hexlink.spell.spirit_extract.desc"
     },
     {
-      "type": "patchouli:text",
-      "text": "hexlink.spell.spirit_extract.desc.2"
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_extract_entity",
+      "anchor": "hexlink:spirit_extract_entity",
+      "input": "entity, entity",
+      "output": "",
+      "text": "hexlink.spell.spirit_extract_entity.desc"
     },
     {
       "type": "hexcasting:pattern",

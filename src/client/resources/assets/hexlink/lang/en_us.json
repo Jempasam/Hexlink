@@ -1,7 +1,7 @@
 {
   "hexlink.mishap.empty_collar": "Your focus collar is empty",
   "hexlink.mishap.no_collar_item": "You don't have any focus collar",
-  "hexlink.mishap.need_great_focus": "suitable empty Great Focus",
+  "hexlink.mishap.extractable_to": "suitable extractor item like empty Tablet or Soul Bag",
   "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
   "hexlink.mishap.not_enough_soul": "Missing %d souls",
 
@@ -48,6 +48,7 @@
 
 
   "hexcasting.spell.hexlink:spirit_extract": "Spirit Extraction",
+  "hexcasting.spell.hexlink:spirit_extract_entity": "Spirit Translocation",
   "hexcasting.spell.hexlink:spirit_manifestation": "Spirit Manifestation",
   "hexcasting.spell.hexlink:spirit_look": "Spirit Look",
   "hexcasting.spell.hexlink:read_trinket": "Boehmer's Reflection",
@@ -58,8 +59,10 @@
   "hexlink.page.read_trinket": "This pattern can read a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
 
   "hexlink.spell.spirit_spells": "Manipulation of spirits",
-  "hexlink.spell.spirit_extract.desc.1": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them. The physical object is destroyed in the process and I have a high chance of failing so I should get a lot of material.",
-  "hexlink.spell.spirit_extract.desc.2": "It seem I also need to lower living entities life to a very low value before being able to extract their spirits. I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit.",
+  "hexlink.spell.spirit_extraction": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them. The physical object is destroyed in the process. If I try to extract a Spirit Iota with a Tablet, I have a high chance of failing so I should get a lot of material. It seem I also need to lower living entities life to a very low value before being able to extract their spirits. I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit.",
+  "hexlink.spell.spirit_extract.desc": "With this pattern I can extract a spirit into an item in my offhand.",
+  "hexlink.spell.spirit_extract_entity.desc": "This pattern can extract spirits into an item on ground or in an item frame.",
+
   "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest. I need a $(l:hexlink:items/bag)$(item)Soul Bag/$ filled with souls to manifest a spirit.",
   "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
 
