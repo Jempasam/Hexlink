@@ -2,6 +2,7 @@ package jempasam.hexlink.world
 
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.HexlinkRegistry
+import net.minecraft.entity.decoration.ItemFrameEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtHelper
 import net.minecraft.text.Style
@@ -22,6 +23,7 @@ interface LevelRanks {
     fun ranks(): Collection<Rank>
 
     class Rank(val mana_cost: Float, val artifact_battery: Float, val color: Int){
+
         fun getName(): Text
             = HexlinkRegistry.RANK.getId(this)
                     ?.let{ Text.translatable("rank."+it.toTranslationKey()).setStyle(Style.EMPTY.withColor(color))}
@@ -29,6 +31,8 @@ interface LevelRanks {
     }
 
     fun readRanksFromNbt(tag: NbtCompound) {
+        var a: ItemFrameEntity?=null
+
         clearRanks()
         println("NEED TO READ $tag")
         for(key in tag.keys){
