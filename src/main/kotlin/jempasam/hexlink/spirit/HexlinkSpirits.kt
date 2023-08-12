@@ -6,6 +6,8 @@ import jempasam.hexlink.spirit.extracter.*
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
+
+@Suppress("unused")
 object HexlinkSpirits {
     private fun <T :Spirit>create(id: String, spirit: Spirit.SpiritType<T>): Spirit.SpiritType<T>{
         Registry.register(HexlinkRegistry.SPIRIT, Identifier(HexlinkMod.MODID, id), spirit)
