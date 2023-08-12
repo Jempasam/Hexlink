@@ -5,7 +5,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.text.Text
 
 /**
- * Extract a Spirit Iota from an target entity
+ * Extract a Spirit Iota from a target entity
  */
 interface SpiritExtractor<T: Spirit>{
     /**

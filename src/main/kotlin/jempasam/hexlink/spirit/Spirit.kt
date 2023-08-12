@@ -78,6 +78,6 @@ interface Spirit {
 
 
     companion object{
-        val CANNOT_USE=-1
+        const val CANNOT_USE=-1
     }
 }

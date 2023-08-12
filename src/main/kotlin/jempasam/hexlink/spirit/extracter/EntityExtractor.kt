@@ -21,10 +21,7 @@ object EntityExtractor : SpiritExtractor<EntitySpirit> {
     }
 
     override fun canExtract(target: Entity): Boolean {
-        if(target.type.isSummonable && (target !is LivingEntity || target.health<=4.0f) && !target.isRemoved && !target.type.isIn(NOT_EXTRACTABLE)){
-            return true
-        }
-        return false
+        return target.type.isSummonable && (target !is LivingEntity || target.health<=4.0f) && !target.isRemoved && !target.type.isIn(NOT_EXTRACTABLE)
     }
 
     override fun consume(target: Entity) {

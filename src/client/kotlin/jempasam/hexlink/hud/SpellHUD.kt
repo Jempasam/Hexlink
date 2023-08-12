@@ -13,18 +13,15 @@ import net.minecraft.client.render.VertexFormat
 import net.minecraft.client.render.VertexFormats
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.decoration.ItemFrameEntity
-import net.minecraft.item.ItemFrameItem
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.ColorHelper
 
 class SpellHUD : HudRenderCallback{
     override fun onHudRender(matrixStack: MatrixStack, tickDelta: Float) {
         val mc=MinecraftClient.getInstance()
-        var tessellator= Tessellator.getInstance()
-        var buf= tessellator.buffer
-        var matrix= matrixStack.peek().positionMatrix
+        val tessellator= Tessellator.getInstance()
+        val buf= tessellator.buffer
+        val matrix= matrixStack.peek().positionMatrix
         var normal= matrixStack.peek().normalMatrix
 
 

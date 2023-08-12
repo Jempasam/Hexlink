@@ -41,7 +41,7 @@ class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(sett
     }
 
     override fun getHex(stack: ItemStack, level: ServerWorld): List<Iota> {
-        val actual_spell=getSelectedSpellNbt(stack)
+        val actual_spell= getSelectedSpellNbt(stack)
         if(actual_spell==null)return emptyList()
 
         val out = ArrayList<Iota>()

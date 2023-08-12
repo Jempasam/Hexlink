@@ -22,6 +22,6 @@ object HexlinkIotas{
         for(entry in IOTAS) Registry.register(HexIotaTypes.REGISTRY, Identifier(HexlinkMod.MODID,entry.key), entry.value)
     }
 
-    val BLOCK_TYPE= make("block_type", BlockTypeIota.TYPE);
+    val BLOCK_TYPE= make("block_type", BlockTypeIota.TYPE)
     val SPIRITCK= make("spirit", SpiritIota.Type)
 }

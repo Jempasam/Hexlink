@@ -1,19 +1,14 @@
 package jempasam.hexlink.mixin.client;
 
 import assets.hexlink.config.HexlinkClientConfig;
-import at.petrak.hexcasting.api.spell.casting.ResolvedPattern;
 import at.petrak.hexcasting.api.spell.casting.ResolvedPatternType;
 import at.petrak.hexcasting.client.gui.GuiSpellcasting;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.fabricmc.fabric.impl.client.indigo.renderer.helper.ColorHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.DyeColor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.struct.MemberInfo;
 
 @Mixin(GuiSpellcasting.class)
 public class GuiSpellCastingMixin {

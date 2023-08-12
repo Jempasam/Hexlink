@@ -37,7 +37,7 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
         for(placement in placements)final_pos=placement.getPositions(context, rand, final_pos).findFirst().getOrDefault(final_pos)
 
         val distance=pos.getSquaredDistance(final_pos)
-        println("Distance is "+distance)
+        println("Distance is $distance")
         if(distance<20*20){
             configured.generate(world, world.chunkManager.chunkGenerator, rand, pos)
             return true

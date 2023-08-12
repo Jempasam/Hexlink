@@ -13,7 +13,7 @@ object HexlinkModClient : ClientModInitializer {
 
 	fun config(config: Config, file: String){
 		val gson=GsonBuilder().setPrettyPrinting().create()
-		val client_config_file=MinecraftClient.getInstance().runDirectory.resolve("config/"+file+".json")
+		val client_config_file=MinecraftClient.getInstance().runDirectory.resolve("config/$file.json")
 		if(client_config_file.exists()){
 			client_config_file.reader().apply {
 				val obj=gson.fromJson(this, JsonObject::class.java)

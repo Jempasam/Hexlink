@@ -11,10 +11,7 @@ import net.minecraft.util.DyeColor
 object BlockExtractor : SpiritExtractor<BlockSpirit> {
     override fun canExtract(target: Entity): Boolean {
         val stack= ExtractorHelper.stack(target)
-        if(stack!=null && stack.item is BlockItem && !stack.isIn(ItemExtractor.NOT_EXTRACTABLE)){
-            return true
-        }
-        return false
+        return stack!=null && stack.item is BlockItem && !stack.isIn(ItemExtractor.NOT_EXTRACTABLE)
     }
 
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<BlockSpirit> {

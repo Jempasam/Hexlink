@@ -43,7 +43,7 @@ class SpiritExtractorLootFunction(val extractor: SpiritExtractor<*>?, val spirit
             val spirit=if(spirit_type!=null){
                 val nbt=StringNbtReader(StringReader(JsonHelper.getString(json, "spirit_value"))).parseElement()
                 val ret=spirit_type.deserialize(nbt)
-                if(ret==null) HexlinkMod.logger.error(nbt.toString()+" not a valid "+spirit_type_id)
+                if(ret==null) HexlinkMod.logger.error("$nbt not a valid $spirit_type_id")
                 ret
             }
             else null
