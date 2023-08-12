@@ -26,6 +26,9 @@
 				"value": "jempasam.hexlink.HexlinkModClient",
 				"adapter": "kotlin"
 			}
+		],
+		"cardinal-components": [
+			"jempasam.hexlink.cc.HexlinkComponents"
 		]
 	},
 	"mixins": [
@@ -35,6 +38,13 @@
 			"environment": "client"
 		}
 	],
+
+	"custom": {
+		"cardinal-components": [
+			"hexlink:world_data"
+		]
+	},
+
 	"depends": {
 		"fabricloader": ">=0.14.21",
 		"minecraft": "~1.19.2",
@@ -42,6 +52,7 @@
 		"fabric-api": "*",
 		"fabric-language-kotlin": ">=1.9.0"
 	},
+
 	"suggests": {
 		"another-mod": "*"
 	}
