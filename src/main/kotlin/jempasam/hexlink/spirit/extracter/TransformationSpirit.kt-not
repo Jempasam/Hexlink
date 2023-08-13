@@ -1,0 +1,50 @@
+package jempasam.hexlink.spirit.extracter
+
+import com.sun.jna.platform.unix.X11.Screen
+import jempasam.hexlink.spirit.Spirit
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.inventory.CraftingInventory
+import net.minecraft.inventory.Inventory
+import net.minecraft.item.ItemStack
+import net.minecraft.recipe.Ingredient
+import net.minecraft.recipe.RecipeType
+import net.minecraft.recipe.book.RecipeBook
+import net.minecraft.recipe.book.RecipeBookOptions
+import net.minecraft.screen.CraftingScreenHandler
+import net.minecraft.screen.ScreenHandler
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.text.Text
+import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
+import kotlin.jvm.optionals.getOrNull
+
+class TransformationSpirit(val recipe: List<Int>, val ingredient_count: Int) : Spirit {
+
+    fun getShape(stack: ItemStack, world: ServerWorld): List<Ingredient>{
+        val recipes=world.server.recipeManager.listAllOfType(RecipeType.CRAFTING)
+        for(recipe in recipes){
+            if(recipe.output==stack){
+                return recipe.ingredients
+            }
+        }
+        return listOf()
+    }
+
+    fun craft(world: ServerWorld, stack: List<ItemStack>, putIn: (ItemStack)->Unit): ItemStack?{
+        val tocraft=CraftingInventory(object:ScreenHandler(null, -1){
+            override fun canUse(player: PlayerEntity?): Boolean = true
+            override fun transferSlot(player: PlayerEntity?, index: Int): ItemStack = true
+        }, 3, 3)
+        for(i in 0 until recipe.size){
+            tocraft.setStack(i,stack[recipe[i]])
+        }
+        val result=world.recipeManager.getFirstMatch(RecipeType.CRAFTING, tocraft, world)
+        return result.getOrNull()?.output
+    }
+
+    override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
+        TODO("Not yet implemented")
+    }
+
+
+}
