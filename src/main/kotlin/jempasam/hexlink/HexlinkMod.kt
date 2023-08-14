@@ -1,6 +1,7 @@
 package jempasam.hexlink
 
 import HexlinkIotas
+import jempasam.hexlink.block.HexlinkBlocks
 import jempasam.hexlink.command.HexlinkCommands
 import jempasam.hexlink.data.HexlinkDataLoaders
 import jempasam.hexlink.gamerule.HexlinkGamerules
@@ -26,6 +27,7 @@ object HexlinkMod : ModInitializer {
 		HexlinkIotas.registerAll()
 		HexlinkPatterns.registerAll()
 		HexlinkItems.registerAll()
+		HexlinkBlocks.registerBlocks()
 		LootObserver.register()
 		HexlinkTrinkets.registerTrinkets()
 		HexlinkRecipes.registerRecipes()

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hexlink:block/vortex"
+      },
+      {
+        "model": "hexlink:block/vortex",
+        "y": 90
+      },
+      {
+        "model": "hexlink:block/vortex",
+        "y": 180
+      },
+      {
+        "model": "hexlink:block/vortex",
+        "y": 270
+      }
+    ]
+  }
+}

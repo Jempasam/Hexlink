@@ -3,6 +3,7 @@ package jempasam.hexlink
 import assets.hexlink.config.HexlinkClientConfig
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
+import jempasam.hexlink.block.HexlinkBlockClient
 import jempasam.hexlink.config.Config
 import jempasam.hexlink.item.color.HexlinkColorProviders
 import jempasam.hexlink.model.predicate.HexlinkModelPredicates
@@ -34,6 +35,7 @@ object HexlinkModClient : ClientModInitializer {
 
 		HexlinkColorProviders.registerItemColors()
 		HexlinkModelPredicates.registerItemPredicates()
+		HexlinkBlockClient.registerBlockRender()
 		//HudRenderCallback.EVENT.register(SpellHUD())
 	}
 
