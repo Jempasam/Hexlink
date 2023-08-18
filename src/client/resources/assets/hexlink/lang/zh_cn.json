@@ -1,7 +1,9 @@
 {
   "hexlink.mishap.empty_collar": "核心项圈为空",
   "hexlink.mishap.no_collar_item": "未佩戴核心项圈",
-  "hexlink.mishap.need_great_focus": "合适的空卓越核心",
+  "hexlink.mishap.extractable_to": "空灵体石板和灵魂袋之类的有效提取物品",
+  "hexlink.mishap.not_extractable": "%s灵体无法被%s提取",
+  "hexlink.mishap.not_enough_soul": "缺少%d个灵魂",
 
 
   "hexlink.unlucky": "提取失败，再试一遍",
@@ -16,37 +18,68 @@
   "hexlink.spirit_iota.good": "有效的灵体iota",
 
 
+  "hexlink.spirit.block": "方块灵体",
+  "hexlink.spirit.entity": "实体灵体",
+  "hexlink.spirit.potion": "药水灵体",
+  "hexlink.spirit.item": "物品灵体",
+
+
+  "hexlink.extractor.item": "物品",
+  "hexlink.extractor.entity": "实体",
+  "hexlink.extractor.block": "方块",
+  "hexlink.extractor.potion": "药水",
+  "hexlink.extractor.everything": "任意",
+
+
   "item.hexlink.upgraded_book": "升级法术书",
   "item.hexlink.mixed_pigment": "混合染色剂",
   "item.hexlink.focus_collar": "核心项圈",
-  "item.hexlink.tablet": "卓越核心",
-  "item.hexlink.tablet.filled": "存满的卓越核心",
+  "item.hexlink.tablet": "%s之石板",
+  "item.hexlink.tablet.none": "灵体石板",
+  "item.hexlink.small_bag": "%s之灵魂口袋",
+  "item.hexlink.small_bag.none": "灵魂口袋",
+  "item.hexlink.medium_bag": "%s之灵魂袋",
+  "item.hexlink.medium_bag.none": "灵魂袋",
+  "item.hexlink.big_bag": "%s之大灵魂袋",
+  "item.hexlink.big_bag.none": "大灵魂袋",
+
+
+  "itemGroup.hexlink.hexlink": "Hexlink",
 
 
   "hexcasting.spell.hexlink:spirit_extract": "灵体提取",
+  "hexcasting.spell.hexlink:spirit_extract_entity": "灵体移位",
   "hexcasting.spell.hexlink:spirit_manifestation": "灵体显形",
   "hexcasting.spell.hexlink:spirit_look": "灵体探察",
-  "hexcasting.spell.hexlink:read_trinket": "加捷之精思",
-  "hexcasting.spell.hexlink:write_trinket": "加捷之策略",
+  "hexcasting.spell.hexlink:read_trinket": "伯默之精思",
+  "hexcasting.spell.hexlink:write_trinket": "伯默之策略",
 
   "hexlink.entry.readwrite_trinkets": "读取与写入饰品",
   "hexlink.page.write_trinket": "此图案可从我所佩戴的$(l:hexlink:items/focus_collar)$(item)核心项圈/$中读取 iota。",
   "hexlink.page.read_trinket": "此图案可将 iota 写入我所佩戴的$(l:hexlink:items/focus_collar)$(item)核心项圈/$。",
 
   "hexlink.spell.spirit_spells": "操纵灵体",
-  "hexlink.spell.spirit_extract.desc.1": "这个强力图案应该能将任何物体和物理属性的本质提取成形，并允许我控制它们。",
-  "hexlink.spell.spirit_extract.desc.2": "提取药水效果灵体需要炼金师卓越核心，方块灵体需要建筑师卓越核心。我还曾读到有能提取任意灵体的特殊卓越核心。",
-  "hexlink.spell.spirit_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过实体催化剂或在某一位置令其显形。最后的数 iota 则用于控制显形的强度。",
+  "hexlink.spell.spirit_extraction": "这个强力图案应该能将任何物体和物理属性的本质提取成形，并允许我控制它们。此过程中物体本身会被摧毁。用灵体石板提取灵体 iota 的失败概率很高，因此需要准备大量材料。就提取实体灵体而言，似乎需要将它们的生命值降到很低才行。提取药水效果灵体需要药水灵体石板，方块灵体需要方块灵体石板。我还曾读到有能提取任意灵体的特殊石板。",
+  "hexlink.spell.spirit_extract.desc": "此图案能将灵体提取入我副手中的物品。",
+  "hexlink.spell.spirit_extract_entity.desc": "此图案能将灵体提取入物品实体或物品展示框中的物品。",
+
+  "hexlink.spell.spirit_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过某实体或在某位置令其显形。最后的数 iota 则用于控制显形的强度。需要装有灵魂的$(l:hexlink:items/bag)$(item)灵魂袋/$才可使灵体显形。",
   "hexlink.spell.spirit_look.desc": "此图案可使我感受灵体与某物体的接近程度。",
 
 
-  "hexlink.page.tablets": "卓越核心",
-  "hexlink.page.tablets.desc": "卓越核心是一类特殊的核心，不可覆写但可从物体中提取出灵体。我能在地牢箱子内找到这种核心，但其中大多数都不是空的。如果真能找到空的，可以尝试使用$(l:hexlink:patterns/spirit_spells)这些图案/$。",
-  "hexlink.page.tablets.block": "此卓越核心可以装入方块灵体。",
-  "hexlink.page.tablets.item": "此卓越核心可以装入物品灵体。",
-  "hexlink.page.tablets.entity": "此卓越核心可以装入实体灵体。",
-  "hexlink.page.tablets.potion": "此卓越核心可以装入药水效果灵体。",
-  "hexlink.page.tablets.anything": "此卓越核心可以装入任意灵体。",
+  "hexlink.page.tablets": "灵体石板",
+  "hexlink.page.tablets.desc": "灵体石板可装有物体的灵体。可从其中读取灵体 iota 并用于$(l:hexlink:patterns/spirit_spells)这些图案/$。我能在地牢箱子内找到灵体石板，但其中大多数都不是空的。如果真的找到了空的，可以使用$(l:hexlink:patterns/spirit_spells)灵体提取/$以将物体的灵体装入其中。",
+  "hexlink.page.tablets.block": "此类石板可以装入方块灵体。可通过此类灵体召唤方块，或是模拟与其的交互。",
+  "hexlink.page.tablets.item": "此类石板可以装入物品灵体。可通过此类灵体模拟使用物品。",
+  "hexlink.page.tablets.entity": "此类石板可以装入实体灵体。可通过此类灵体召唤实体。",
+  "hexlink.page.tablets.potion": "此类石板可以装入药水效果灵体。可通过此类灵体给予实体效果，或是召唤效果云。",
+  "hexlink.page.tablets.everything": "此类石板可以装入任意灵体。",
+
+  "hexlink.page.bag": "灵魂袋",
+  "hexlink.page.bag.desc": "灵魂袋可装下用于$(l:hexlink:patterns/spirit_spells)灵体显形/$的灵魂。可用$(l:hexlink:patterns/spirit_spells)灵体提取/$向其中放入灵魂。",
+  "hexlink.page.bag.small_bag": "灵魂口袋可装下最多 2 种灵魂，每种最多 30 个。",
+  "hexlink.page.bag.medium_bag": "灵魂袋可装下最多 5 种灵魂，每种最多 100 个。",
+  "hexlink.page.bag.big_bag": "大灵魂袋可装下最多 10 种灵魂，每种最多 300 个。",
 
   "hexlink.page.upgraded_book.1": "$(l:hexlink:items/upgraded_book)$(item)升级法术书/$有如一整个图书馆的造物。它不需要绘制图案就能使用我的栈来施法。若其中存有图案 iota，则会像赫尔墨斯之策略一样运行，否则会将 iota 压入栈顶。若存有列表，则会依次对其中每个成员执行上述操作。",
   "hexlink.page.upgraded_book.2": "以下省略！",
