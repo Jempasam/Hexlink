@@ -4,6 +4,7 @@ import HexlinkIotas
 import jempasam.hexlink.block.HexlinkBlocks
 import jempasam.hexlink.command.HexlinkCommands
 import jempasam.hexlink.data.HexlinkDataLoaders
+import jempasam.hexlink.entity.HexlinkEntities
 import jempasam.hexlink.gamerule.HexlinkGamerules
 import jempasam.hexlink.item.HexlinkItems
 import jempasam.hexlink.loot.LootObserver
@@ -11,6 +12,7 @@ import jempasam.hexlink.loot.function.HexlinkLootFunctions
 import jempasam.hexlink.recipe.HexlinkRecipes
 import jempasam.hexlink.spirit.HexlinkSpirits
 import jempasam.hexlink.trinkets.HexlinkTrinkets
+import jempasam.hexlink.vortex.HexVortexHandlers
 import jempasam.hexlink.world.LevelRanks
 import net.fabricmc.api.ModInitializer
 import net.minecraft.util.DyeColor
@@ -36,6 +38,8 @@ object HexlinkMod : ModInitializer {
 
 		HexlinkGamerules
 		HexlinkSpirits
+		HexlinkEntities
+		HexVortexHandlers
 
 		HexlinkDataLoaders.registerLoaders()
 

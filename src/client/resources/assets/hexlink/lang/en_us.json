@@ -4,6 +4,7 @@
   "hexlink.mishap.extractable_to": "suitable extractor item like empty Tablet or Soul Bag",
   "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
   "hexlink.mishap.not_enough_soul": "Missing %d souls",
+  "hexlink.mishap.cant_mix_at": "You cannot mix souls at this location, you can mix a soul into a vortex or an empty place",
 
 
   "hexlink.unlucky": "Extraction has fail, try again",
@@ -51,6 +52,8 @@
   "hexcasting.spell.hexlink:spirit_extract_entity": "Spirit Translocation",
   "hexcasting.spell.hexlink:spirit_manifestation": "Spirit Manifestation",
   "hexcasting.spell.hexlink:spirit_look": "Spirit Look",
+  "hexcasting.spell.hexlink:spirit_mix": "Spirit Mix",
+  "hexcasting.spell.hexlink:spirit_transfer": "Spirit Transfer",
   "hexcasting.spell.hexlink:read_trinket": "Boehmer's Reflection",
   "hexcasting.spell.hexlink:write_trinket": "Boehmer's Gambit",
 
@@ -65,6 +68,8 @@
 
   "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest. I need a $(l:hexlink:items/bag)$(item)Soul Bag/$ filled with souls to manifest a spirit.",
   "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
+  "hexlink.spell.spirit_mix.desc": "With this pattern I can merge Spirits into a vortex to obtain new spirits.",
+  "hexlink.spell.spirit_transfer.desc": "With this pattern I can transfer souls from a soul container to another soul container.",
 
 
   "hexlink.page.tablets": "Spirit Tablets",

@@ -1,7 +1,7 @@
 package jempasam.hexlink.spirit.extracter
 
 import jempasam.hexlink.spirit.PotionSpirit
-import jempasam.hexlink.spirit.SpiritHelper
+import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.entity.Entity
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtInt
@@ -14,7 +14,7 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
     private val potion_items=setOf(Items.POTION, Items.LINGERING_POTION, Items.SPLASH_POTION)
 
     override fun canExtract(target: Entity): Boolean {
-        val stack= SpiritHelper.stack(null, target)?.stack
+        val stack= StackHelper.stack(null, target)?.stack
         if(stack!=null && potion_items.contains(stack.item)){
             val effects= PotionUtil.getPotionEffects(stack)
             return effects.isNotEmpty()
@@ -23,14 +23,14 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
     }
 
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
-        val stack= SpiritHelper.stackOrThrow(null, target).stack
+        val stack= StackHelper.stackOrThrow(null, target).stack
         val effect= PotionUtil.getPotionEffects(stack).get(0)
         println("DURATION:" + effect.duration)
         return result(PotionSpirit(effect.effectType), Math.max(1,effect.duration/1200)*(effect.amplifier+1))
     }
 
     override fun consume(target: Entity) {
-        val worldstack= SpiritHelper.stackOrThrow(null, target)
+        val worldstack= StackHelper.stackOrThrow(null, target)
         val stack= worldstack.stack
         val effects = PotionUtil.getPotionEffects(stack)
         if (effects.size == 1) worldstack.killer()

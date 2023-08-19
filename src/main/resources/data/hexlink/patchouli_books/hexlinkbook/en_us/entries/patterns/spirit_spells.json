@@ -41,6 +41,22 @@
       "input": "spirit, vec/entity",
       "output": "",
       "text": "hexlink.spell.spirit_look.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_mix",
+      "anchor": "hexlink:spirit_mix",
+      "input": "spirit, vec",
+      "output": "",
+      "text": "hexlink.spell.spirit_mix.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_transfer",
+      "anchor": "hexlink:spirit_transfer",
+      "input": "spirit, number, vec/entity, vec/entity",
+      "output": "",
+      "text": "hexlink.spell.spirit_transfer.desc"
     }
   ]
 }

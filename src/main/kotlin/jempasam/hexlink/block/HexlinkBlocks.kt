@@ -23,5 +23,5 @@ object HexlinkBlocks {
     }
 
 
-    val VORTEX= create( "vortex", HexVortexBlock(AbstractBlock.Settings.of(Material.AMETHYST).nonOpaque()) )
+    val VORTEX= create( "vortex", HexVortexBlock(AbstractBlock.Settings.of(Material.AMETHYST).nonOpaque().emissiveLighting{_,_,_->true}.luminance{_->6}) )
 }

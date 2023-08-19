@@ -7,9 +7,7 @@ import at.petrak.hexcasting.api.spell.math.HexPattern
 import jempasam.hexlink.operators.OpSpiritTest
 import jempasam.hexlink.operators.rw.OpReadTrinket
 import jempasam.hexlink.operators.rw.OpWriteTrinket
-import jempasam.hexlink.operators.spells.OpEntityExtractSpirit
-import jempasam.hexlink.operators.spells.OpExtractSpirit
-import jempasam.hexlink.operators.spells.OpManisfestSpirit
+import jempasam.hexlink.operators.spells.*
 import net.minecraft.util.Identifier
 
 object HexlinkPatterns {
@@ -37,6 +35,16 @@ object HexlinkPatterns {
         register("spirit_look",
                 HexPattern.fromAngles("aawddawqaa",HexDir.NORTH_EAST),
                 OpSpiritTest()
+        )
+
+        register("spirit_mix",
+                HexPattern.fromAngles("aawddawqdd",HexDir.NORTH_EAST),
+                OpMixSpirit()
+        )
+
+        register("spirit_transfer",
+                HexPattern.fromAngles("aawddaweaqa",HexDir.NORTH_EAST),
+                OpSpiritTransfer()
         )
 
         register("read_trinket",

@@ -12,7 +12,7 @@ object HexlinkItems {
 
     var items=HashMap<String,Item>()
 
-    fun make(id: String, item: Item): Item{
+    fun <T: Item>make(id: String, item: T): T{
         items.put(id, item)
         return item
     }

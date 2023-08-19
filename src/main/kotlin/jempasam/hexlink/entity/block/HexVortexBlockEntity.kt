@@ -1,87 +1,109 @@
 package jempasam.hexlink.entity.block
 
-import at.petrak.hexcasting.api.utils.serializeToNBT
 import jempasam.hexlink.HexlinkMod
-import jempasam.hexlink.utils.RecipeHelper
+import jempasam.hexlink.HexlinkRegistry
+import jempasam.hexlink.entity.HexlinkEntities
+import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.utils.NbtHelper
+import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
-import net.minecraft.recipe.RecipeType
+import net.minecraft.network.Packet
+import net.minecraft.network.listener.ClientPlayPacketListener
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class HexVortexBlockEntity(type: BlockEntityType<out HexVortexBlockEntity>, pos: BlockPos, state: BlockState) : BlockEntity(type, pos, state){
+
+class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HexlinkEntities.HEX_VORTEX, pos, state){
 
     companion object{
         const val LOADING_TIME=20
     }
 
+    fun craft(): Boolean{
+        val inputs=input.toMutableList()
+        inputs.addAll(output)
+        for(handler in HexlinkRegistry.HEXVORTEX_HANDLER){
+            val recipe=handler.findRecipe(inputs)
+            if(recipe!=null){
+                val final_inputs=inputs.subList(0,recipe.ingredientCount())
+                if(recipe.test(final_inputs)){
+                    for(i in 0..<recipe.ingredientCount()){
+                        if(input.size>0)input.removeAt(0)
+                        else if(output.size>0)output.removeAt(0)
+                        else break
+                    }
+                    val result=recipe.mix(final_inputs)
+                    output.addAll(result)
+                    markDirty()
+                    sendToClient()
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    private fun sendToClient(){
+        world?.updateListeners(pos,world?.getBlockState(pos),world?.getBlockState(pos), Block.NOTIFY_LISTENERS)
+    }
+
     fun tick(world: World, pos: BlockPos, state: BlockState) {
+        if(world.isClient)return
         loading++
         if(loading> LOADING_TIME){
             HexlinkMod.logger.info("TICK VORTEX")
-            val inputs=input.toMutableList()
-            inputs.addAll(output)
-            val result= RecipeHelper.craft(world, RecipeType.CRAFTING, inputs)
-            if(result!=null){
-                var toremove=result.second
-                while(toremove>0 && input.size>0){
-                    input.removeAt(0)
-                    toremove--
-                }
-                while(toremove>0 && output.size>0){
-                    output.removeAt(0)
-                    toremove--
-                }
-                for(i in 0 until result.first.count){
-                    val out=result.first.copy()
-                    out.count=1
-                    output.add(out)
-                }
-            }
+            craft()
             loading=0
-            if(input.isEmpty()){
+            if(input.isEmpty() && output.isEmpty()){
                 world.removeBlock(pos,false)
             }
         }
-        markDirty()
     }
 
-    fun give(stack: ItemStack){
-        for(i in 0 until stack.count){
-            val out=stack.copy()
-            out.count=1
-            output.add(out)
-        }
+    fun give(spirit: Spirit){
+        input.add(spirit)
         loading=0
         markDirty()
+        sendToClient()
     }
 
     override fun writeNbt(nbt: NbtCompound) {
         nbt.putInt("loading", loading)
         val input_nbt=NbtList()
         val output_nbt=NbtList()
-        for(item in input)input_nbt.add(item.serializeToNBT())
-        for(item in output)output_nbt.add(item.serializeToNBT())
+        for(spirit in input)input_nbt.add(NbtHelper.writeSpirit(spirit))
+        for(spirit in output)output_nbt.add(NbtHelper.writeSpirit(spirit))
         nbt.put("input",input_nbt)
         nbt.put("output",output_nbt)
     }
 
     override fun readNbt(nbt: NbtCompound) {
         loading=nbt.getInt("loading")
+        input.clear()
         nbt.getList("input",NbtElement.COMPOUND_TYPE.toInt()).forEach{
-            if(it is NbtCompound)input.add(ItemStack.fromNbt(it))
+            if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{input.add(it)}
         }
+        output.clear()
         nbt.getList("output",NbtElement.COMPOUND_TYPE.toInt()).forEach{
-            if(it is NbtCompound)output.add(ItemStack.fromNbt(it))
+            if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{output.add(it)}
         }
     }
 
+    override fun toUpdatePacket(): Packet<ClientPlayPacketListener> {
+        return BlockEntityUpdateS2CPacket.create(this)
+    }
+
+    override fun toInitialChunkDataNbt(): NbtCompound {
+        return createNbt()
+    }
+
     private var loading=0
-    private val input= mutableListOf<ItemStack>()
-    private val output= mutableListOf<ItemStack>()
+    val input= mutableListOf<Spirit>()
+    val output= mutableListOf<Spirit>()
 }
+

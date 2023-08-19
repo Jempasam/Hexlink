@@ -10,7 +10,7 @@ import at.petrak.hexcasting.api.spell.mishaps.MishapBadEntity
 import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.item.functionnality.ExtractorItem
 import jempasam.hexlink.mishap.MishapNotExtractable
-import jempasam.hexlink.spirit.SpiritHelper
+import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.entity.Entity
 import net.minecraft.text.Style
 import net.minecraft.text.Text
@@ -22,7 +22,7 @@ class OpEntityExtractSpirit : SpellAction{
     override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
         val extractable_to_entity=args.getEntity(1, 2)
         val target=args.getEntity(0, 2)
-        val world_stack= SpiritHelper.stack(ctx.caster, extractable_to_entity)
+        val world_stack= StackHelper.stack(ctx.caster, extractable_to_entity)
         if(world_stack==null)throw MishapBadEntity(extractable_to_entity,Text.translatable("hexlink.mishap.extractable_to"))
         val item=world_stack.stack.item
         ctx.assertEntityInRange(target)
@@ -42,7 +42,7 @@ class OpEntityExtractSpirit : SpellAction{
         else throw MishapBadEntity(extractable_to_entity,Text.translatable("hexlink.mishap.extractable_to"))
     }
 
-    data class Spell(val world_stack: SpiritHelper.WorldStack, val item: ExtractorItem, val item_entity: Entity, val target: Entity) : RenderedSpell {
+    data class Spell(val world_stack: StackHelper.WorldStack, val item: ExtractorItem, val item_entity: Entity, val target: Entity) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
             if(item.extractFrom(world_stack.stack,target)==ExtractorItem.ExtractionResult.SUCCESS){
                 world_stack.update()

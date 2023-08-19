@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import jempasam.hexlink.block.HexlinkBlockClient
 import jempasam.hexlink.config.Config
 import jempasam.hexlink.item.color.HexlinkColorProviders
+import jempasam.hexlink.lens.HexlinkScryingLensDisplay
 import jempasam.hexlink.model.predicate.HexlinkModelPredicates
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.client.MinecraftClient
@@ -36,6 +37,7 @@ object HexlinkModClient : ClientModInitializer {
 		HexlinkColorProviders.registerItemColors()
 		HexlinkModelPredicates.registerItemPredicates()
 		HexlinkBlockClient.registerBlockRender()
+		HexlinkScryingLensDisplay.registerDisplays()
 		//HudRenderCallback.EVENT.register(SpellHUD())
 	}
 

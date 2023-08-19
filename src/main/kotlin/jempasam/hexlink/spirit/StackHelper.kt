@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 
-object SpiritHelper {
+object StackHelper {
 
 
     class WorldStack(val stack: ItemStack, val killer: ()->Unit, val update: ()->Unit)

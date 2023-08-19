@@ -3,6 +3,7 @@ package jempasam.hexlink
 import com.mojang.serialization.Lifecycle
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.extracter.SpiritExtractor
+import jempasam.hexlink.vortex.HexVortexHandler
 import jempasam.hexlink.world.LevelRanks
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.MutableRegistry
@@ -16,6 +17,9 @@ object HexlinkRegistry {
 
     val SPIRIT_EXTRACTER_KEY=registry_id<SpiritExtractor<*>>("spirit_extracter")
     val SPIRIT_EXTRACTER=registry(SPIRIT_EXTRACTER_KEY)
+
+    val HEXVORTEX_HANDLER_KEY= registry_id<HexVortexHandler>("hexvortex_handler")
+    val HEXVORTEX_HANDLER= registry(HEXVORTEX_HANDLER_KEY)
 
     val RANK_KEY=registry_id<LevelRanks.Rank>("mage_rank")
     val RANK= registry(RANK_KEY)
