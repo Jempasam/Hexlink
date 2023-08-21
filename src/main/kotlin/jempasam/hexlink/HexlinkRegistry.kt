@@ -18,6 +18,9 @@ object HexlinkRegistry {
     val SPIRIT_EXTRACTER_KEY=registry_id<SpiritExtractor<*>>("spirit_extracter")
     val SPIRIT_EXTRACTER=registry(SPIRIT_EXTRACTER_KEY)
 
+    val VORTEX_RECIPE_KEY=registry_id<SpiritExtractor<*>>("vortex_recipes")
+    val VORTEX_RECIPE=registry(VORTEX_RECIPE_KEY)
+
     val HEXVORTEX_HANDLER_KEY= registry_id<HexVortexHandler>("hexvortex_handler")
     val HEXVORTEX_HANDLER= registry(HEXVORTEX_HANDLER_KEY)
 

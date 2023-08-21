@@ -17,6 +17,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 
+//TODO Empty vortex summoning
 class OpMixSpirit : SpellAction {
     override val argc: Int
         get() = 2

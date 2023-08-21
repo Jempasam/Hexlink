@@ -8,8 +8,10 @@ import at.petrak.hexcasting.api.spell.getIntBetween
 import at.petrak.hexcasting.api.spell.iota.Iota
 import jempasam.hexlink.mishap.MishapNoEnoughSoul
 import jempasam.hexlink.operators.getSpirit
-import jempasam.hexlink.operators.getSpiritSource
-import jempasam.hexlink.operators.getSpiritTarget
+import jempasam.hexlink.operators.getSpiritSourceAndPos
+import jempasam.hexlink.operators.getSpiritTargetAndPos
+import jempasam.hexlink.spirit.inout.SpiritSource
+import jempasam.hexlink.spirit.inout.SpiritTarget
 
 class OpSpiritTransfer: SpellAction {
     override val argc: Int
@@ -18,21 +20,37 @@ class OpSpiritTransfer: SpellAction {
     override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>>? {
         val spirit=args.getSpirit(0,4)
         val count=args.getIntBetween(1, 1, Int.MAX_VALUE, 4)
-        val source=args.getSpiritSource(ctx,2,4)
-        val target=args.getSpiritTarget(ctx,3,4)
+        val source=args.getSpiritSourceAndPos(ctx,2,4)
+        val target=args.getSpiritTargetAndPos(ctx,3,4)
 
-        val test_output_flux=source.extract(count,spirit)
-        if(test_output_flux!=null){
-            val input_flux=target.fill(test_output_flux.count,spirit)
-            if(input_flux!=null){
-                val output_flux=source.extract(input_flux.count,spirit)
-                if(output_flux!=null){
-                    input_flux.fill()
-                    output_flux.consume()
+        val test_output_flux=source.first.extract(count,spirit)
+        if(test_output_flux.count>0){
+            println("test_output_flux")
+            val input_flux=target.first.fill(test_output_flux.count,spirit)
+            if(input_flux.count>0){
+                println("input_flux")
+                val output_flux=source.first.extract(input_flux.count,spirit)
+                if(output_flux.count>0){
+                    println("output_flux")
+                    return Triple(
+                            Spell(output_flux,input_flux),
+                            1,
+                            listOf(
+                                    ParticleSpray.burst(source.second,0.5, 5),
+                                    ParticleSpray.burst(target.second,0.5, 5)
+                            )
+                    )
                 }
             }
             else throw MishapNoEnoughSoul(spirit,1)
         }
         throw MishapNoEnoughSoul(spirit,-1)
+    }
+
+    class Spell(val output: SpiritSource.SpiritOutputFlux, val input: SpiritTarget.SpiritInputFlux): RenderedSpell{
+        override fun cast(ctx: CastingContext) {
+            output.consume()
+            input.fill()
+        }
     }
 }

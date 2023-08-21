@@ -13,6 +13,7 @@ import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.spirit.inout.SpiritSource
 import jempasam.hexlink.spirit.inout.SpiritTarget
 import net.minecraft.text.Text
+import net.minecraft.util.math.Vec3d
 
 fun List<Iota>.getSpirit(index: Int, max: Int): Spirit{
     val ret=this.get(index)
@@ -31,9 +32,19 @@ fun List<Iota>.getSpiritSource(ctx: CastingContext, index: Int, max: Int): Spiri
             ctx.assertVecInRange(source_iota.vec3)
             SpiritHelper.spiritSource(ctx.caster, ctx.world, source_iota.vec3)
         }
-        else -> throw MishapInvalidIota(get(index), max-index-1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+        else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
     return source ?: throw InvalidSpiritSource(get(index))
+}
+
+fun List<Iota>.getSpiritSourceAndPos(ctx: CastingContext, index: Int, max: Int): Pair<SpiritSource,Vec3d>{
+    val source=getSpiritSource(ctx,index,max)
+    val pos=when(val iota=get(index)){
+        is EntityIota -> iota.entity.pos
+        is Vec3Iota -> iota.vec3
+        else -> Vec3d.ZERO
+    }
+    return source to pos
 }
 
 fun List<Iota>.getSpiritTarget(ctx: CastingContext, index: Int, max: Int): SpiritTarget{
@@ -47,7 +58,17 @@ fun List<Iota>.getSpiritTarget(ctx: CastingContext, index: Int, max: Int): Spiri
             ctx.assertVecInRange(target_iota.vec3)
             SpiritHelper.spiritTarget(ctx.caster, ctx.world, target_iota.vec3)
         }
-        else -> throw MishapInvalidIota(get(index), max-index-1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+        else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
     return target ?: throw InvalidSpiritTarget(get(index))
+}
+
+fun List<Iota>.getSpiritTargetAndPos(ctx: CastingContext, index: Int, max: Int): Pair<SpiritTarget,Vec3d>{
+    val target=getSpiritTarget(ctx,index,max)
+    val pos=when(val iota=get(index)){
+        is EntityIota -> iota.entity.pos
+        is Vec3Iota -> iota.vec3
+        else -> Vec3d.ZERO
+    }
+    return target to pos
 }

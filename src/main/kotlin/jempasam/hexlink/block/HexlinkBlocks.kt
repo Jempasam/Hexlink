@@ -4,6 +4,7 @@ import jempasam.hexlink.HexlinkMod
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Material
+import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
@@ -23,5 +24,5 @@ object HexlinkBlocks {
     }
 
 
-    val VORTEX= create( "vortex", HexVortexBlock(AbstractBlock.Settings.of(Material.AMETHYST).nonOpaque().emissiveLighting{_,_,_->true}.luminance{_->6}) )
+    val VORTEX= create( "vortex", HexVortexBlock(AbstractBlock.Settings.of(Material.AMETHYST).nonOpaque().emissiveLighting{_,_,_->true}.luminance{_->6}.sounds(BlockSoundGroup.AMETHYST_BLOCK)) )
 }

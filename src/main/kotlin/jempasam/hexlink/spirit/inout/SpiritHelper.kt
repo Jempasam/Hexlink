@@ -17,16 +17,16 @@ object SpiritHelper{
     fun spiritTarget(caster: PlayerEntity): SpiritTarget{
         val inventory=caster.inventory
         return object: SpiritTarget{
-            override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux? {
-                for(i in 0 .. inventory.size()){
+            override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
+                for(i in 0 ..< inventory.size()){
                     val stack=inventory.getStack(i)
                     val item=stack.item
                     if(item is ItemSpiritTarget){
                         val spirit_flux=item.getSpiritTarget(stack).fill(count, spirit)
-                        if(spirit_flux!=null)return SpiritTarget.SpiritInputFlux({spirit_flux.fill()},spirit_flux.count)
+                        if(spirit_flux.count>0)return SpiritTarget.SpiritInputFlux({spirit_flux.fill()},spirit_flux.count)
                     }
                 }
-                return null
+                return SpiritTarget.NONE.FLUX
             }
         }
 
@@ -36,7 +36,9 @@ object SpiritHelper{
         val bpos=BlockPos(pos)
         val state=world.getBlockState(bpos)
         val blocktype=state.block
-        if(blocktype is BlockSpiritTarget)return blocktype.getSpiritTarget(world, bpos)
+        if(blocktype is BlockSpiritTarget){
+            return blocktype.getSpiritTarget(world, bpos)
+        }
 
         val world_stack=StackHelper.stack(caster, world, pos)
         if(world_stack!=null){
@@ -68,16 +70,16 @@ object SpiritHelper{
     fun spiritSource(caster: PlayerEntity): SpiritSource{
         val inventory=caster.inventory
         return object: SpiritSource{
-            override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux? {
-                for(i in 0 .. inventory.size()){
+            override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
+                for(i in 0 ..< inventory.size()){
                     val stack=inventory.getStack(i)
                     val item=stack.item
                     if(item is ItemSpiritSource){
                         val spirit_flux=item.getSpiritSource(stack).extract(count, spirit)
-                        if(spirit_flux!=null)return SpiritSource.SpiritOutputFlux({spirit_flux.consume()},spirit_flux.count)
+                        if(spirit_flux.count!=0)return SpiritSource.SpiritOutputFlux({spirit_flux.consume()},spirit_flux.count)
                     }
                 }
-                return null
+                return SpiritSource.NONE.FLUX
             }
         }
 
@@ -98,6 +100,7 @@ object SpiritHelper{
     }
 
     fun spiritSource(caster: PlayerEntity?, entity: Entity): SpiritSource?{
+        println("From "+caster+" to "+entity+" then "+(caster==entity))
         if(entity==caster){
             return spiritSource(caster)
         }
@@ -116,22 +119,22 @@ object SpiritHelper{
 
 
     private class StackUpdateSpiritSource(val stack: StackHelper.WorldStack, val source: SpiritSource): SpiritSource{
-        override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux? {
+        override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
             val source=source.extract(count,spirit)
-            if(source!=null){
+            if(source.count>0){
                 return SpiritSource.SpiritOutputFlux({source.consume(); stack.update()}, source.count)
             }
-            else return null
+            else return SpiritSource.NONE.FLUX
         }
     }
 
     private class StackUpdateSpiritTarget(val stack: StackHelper.WorldStack, val target: SpiritTarget): SpiritTarget{
-        override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux? {
+        override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
             val flux=target.fill(count,spirit)
-            if(flux!=null){
+            if(flux.count>0){
                 return SpiritTarget.SpiritInputFlux({flux.fill(); stack.update()}, flux.count)
             }
-            else return null
+            else return SpiritTarget.NONE.FLUX
         }
     }
 }

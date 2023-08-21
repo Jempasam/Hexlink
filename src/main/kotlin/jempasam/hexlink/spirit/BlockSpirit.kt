@@ -15,6 +15,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
+//TODO Long time block interaction with manifestation
 class BlockSpirit(val block: Block): Spirit{
 
     override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {

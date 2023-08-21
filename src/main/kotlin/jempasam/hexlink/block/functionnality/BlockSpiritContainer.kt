@@ -5,5 +5,6 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 interface BlockSpiritContainer {
-    fun getSpiritContent(world: World, pos: BlockPos): Sequence<Spirit>
+    fun getSpiritContent(slot: Int, world: World, pos: BlockPos): Sequence<Spirit>
+    fun getSlotCount(): Int
 }

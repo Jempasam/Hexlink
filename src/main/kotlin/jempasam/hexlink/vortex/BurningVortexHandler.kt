@@ -6,43 +6,43 @@ import jempasam.hexlink.spirit.Spirit
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.block.Blocks
 import net.minecraft.item.Item
+import net.minecraft.server.world.ServerWorld
 
-class BurningVortexHandler : HexVortexHandler{
-    override fun findRecipe(ingredients: List<Spirit>): HexVortexHandler.Recipe? {
-        if(ingredients.isNotEmpty()){
-            println("not empty")
-            val ingredient=ingredients[0]
-            if(ingredient is ItemSpirit){
-                println("is item")
+class BurningVortexHandler(val catalzer: Spirit, val multiplier: Float) : CatalyzedVortexHandler{
+
+    override fun getCatalyzer(): Spirit = catalzer
+
+    override fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
+        if(ingredients.size>=2){
+            val first=ingredients[0]
+            val ingredient=ingredients[1]
+            if(first==catalzer && ingredient is ItemSpirit){
                 val item=ingredient.item
-                if(FuelRegistry.INSTANCE.get(item)!=null){
-                    println("is fuel")
-                    return Recipe(item)
+                val result=FuelRegistry.INSTANCE.get(item)
+                if(result!=null){
+                    return Recipe(item, result, this)
                 }
             }
         }
         return null
     }
 
-    class Recipe(val burned: Item): HexVortexHandler.Recipe{
+    class Recipe(val burned: Item, val fuel_time: Int, val handler: BurningVortexHandler): HexVortexHandler.Recipe{
         override fun test(ingredients: List<Spirit>): Boolean {
-            val ingredient=ingredients[0]
-            println("test")
-            if(ingredient is ItemSpirit && ingredient.item==burned){
-                println("is burned")
+            val first=ingredients[0]
+            val ingredient=ingredients[1]
+            if(first==handler.catalzer && ingredient is ItemSpirit && ingredient.item==burned){
                 return true
             }
             return false
         }
 
-        override fun ingredientCount(): Int = 1
+        override fun ingredientCount(): Int = 2
 
         override fun mix(ingredients: List<Spirit>): List<Spirit> {
-            val fuel_time=FuelRegistry.INSTANCE.get(burned) ?: 0
-            println("fuel time of "+fuel_time)
             if(fuel_time==0)return listOf()
             else{
-                val maxi=Math.max(1,fuel_time/200)
+                val maxi=Math.max(1,(fuel_time/200*handler.multiplier).toInt())
                 val ret= mutableListOf<Spirit>()
                 for(i in 0..<maxi)ret.add(BlockSpirit(Blocks.FIRE))
                 return ret

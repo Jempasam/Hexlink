@@ -148,28 +148,28 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
 
     override fun getSpiritSource(stack: ItemStack): SpiritSource {
         return object: SpiritSource{
-            override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux? {
+            override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
                 if(canConsumeSpirit(stack,spirit)){
                     return SpiritSource.SpiritOutputFlux({consumeSpirit(stack,spirit)},1)
                 }
-                else return null
+                else return SpiritSource.NONE.FLUX
             }
         }
     }
 
     override fun getSpiritTarget(stack: ItemStack): SpiritTarget {
         return object: SpiritTarget{
-            override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux? {
+            override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
                 if( findEntryNbt(stack,spirit)!=null || ((souls(stack)?.size?:0)<max_box_count) ){
                     val entry=findEntryNbtOrCreate(stack,spirit)
 
                     val new_value=Math.min(entry.getInt("count")+count, max_soul_count)
                     val offset=new_value-entry.getInt("count")
-                    if(offset==0)return null
+                    if(offset==0)return SpiritTarget.NONE.FLUX
 
                     return SpiritTarget.SpiritInputFlux({entry.putInt("count",new_value)}, offset)
                 }
-                return null
+                return SpiritTarget.NONE.FLUX
             }
         }
     }

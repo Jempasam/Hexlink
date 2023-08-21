@@ -4,6 +4,7 @@ import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.entity.Entity
+import net.minecraft.item.BlockItem
 import net.minecraft.tag.TagKey
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
@@ -16,7 +17,7 @@ object ItemExtractor : SpiritExtractor<ItemSpirit> {
 
     override fun canExtract(target: Entity): Boolean {
         val stack= StackHelper.stack(null, target)?.stack
-        return stack!=null && !stack.isIn(NOT_EXTRACTABLE)
+        return stack!=null && stack.item !is BlockItem && !stack.isIn(NOT_EXTRACTABLE)
     }
 
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<ItemSpirit> {
