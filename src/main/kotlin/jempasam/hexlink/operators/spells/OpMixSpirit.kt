@@ -27,8 +27,8 @@ class OpMixSpirit : SpellAction {
         val pos=args.getBlockPos(1,2)
         ctx.assertVecInRange(pos)
         if(HexlinkBlocks.VORTEX.canAddAt(ctx.world,pos)){
-            val soul_source=SoulContainerItem.getSpiritConsumable(ctx.caster.isCreative, ctx.caster.inventory, spirit)
-            if(soul_source==null)throw MishapNoEnoughSoul(spirit,1)
+            val soul_source= SoulContainerItem.getSpiritConsumable(ctx.caster.isCreative, ctx.caster.inventory, spirit)
+                    ?: throw MishapNoEnoughSoul(spirit,1)
             return Triple(
                     Spell(ctx.world, pos, spirit, soul_source, ctx.caster),
                     10,

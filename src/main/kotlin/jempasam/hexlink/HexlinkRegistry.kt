@@ -28,7 +28,7 @@ object HexlinkRegistry {
     val RANK= registry(RANK_KEY)
 
     private fun <T>registry_id(id: String): RegistryKey<Registry<T>>{
-        return RegistryKey.ofRegistry<T>(Identifier(HexlinkMod.MODID,id))
+        return RegistryKey.ofRegistry(Identifier(HexlinkMod.MODID,id))
     }
 
     @SuppressWarnings("unchecked-cast")

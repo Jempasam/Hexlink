@@ -54,7 +54,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         return false
     }
 
-    public fun sendToClient(){
+    fun sendToClient(){
         world?.updateListeners(pos,world?.getBlockState(pos),world?.getBlockState(pos), Block.NOTIFY_LISTENERS)
     }
 

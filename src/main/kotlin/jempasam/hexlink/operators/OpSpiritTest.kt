@@ -3,12 +3,12 @@ package jempasam.hexlink.operators
 import at.petrak.hexcasting.api.spell.ConstMediaAction
 import at.petrak.hexcasting.api.spell.casting.CastingContext
 import at.petrak.hexcasting.api.spell.iota.BooleanIota
+import at.petrak.hexcasting.api.spell.iota.EntityIota
 import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.spell.iota.Vec3Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
 import jempasam.hexlink.iota.SpiritIota
-import net.minecraft.entity.Entity
 import net.minecraft.text.Text
-import net.minecraft.util.math.Vec3d
 
 class OpSpiritTest : ConstMediaAction {
     override val argc: Int
@@ -17,14 +17,15 @@ class OpSpiritTest : ConstMediaAction {
     override fun execute(args: List<Iota>, ctx: CastingContext): List<Iota> {
         val spirit=args[0]
         val target=args[1]
-        if(spirit is SpiritIota){
-            if(target is Vec3d){
-                return listOf(BooleanIota(spirit.getSpirit().lookAt(ctx.caster,ctx.world,target)))
+        return if(spirit is SpiritIota){
+            when (target) {
+                is Vec3Iota ->
+                    listOf(BooleanIota(spirit.getSpirit().lookAt(ctx.caster,ctx.world,target.vec3)))
+                is EntityIota ->
+                    listOf(BooleanIota(spirit.getSpirit().lookIn(ctx.caster,ctx.world,target.entity)))
+                else ->
+                    throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
             }
-            else if(target is Entity){
-                return listOf(BooleanIota(spirit.getSpirit().lookIn(ctx.caster,ctx.world,target)))
-            }
-            else throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
         }
         else throw MishapInvalidIota(spirit,1, Text.translatable("hexlink.spirit_iota"))
     }

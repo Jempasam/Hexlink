@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier
 class SpiritIota(spirit: Spirit) : Iota(Type, spirit) {
     fun getSpirit(): Spirit = payload as Spirit
 
-    override fun toleratesOther(that: Iota): Boolean = that is SpiritIota && getSpirit().equals(that.getSpirit())
+    override fun toleratesOther(that: Iota): Boolean = that is SpiritIota && getSpirit()==that.getSpirit()
 
     override fun isTruthy(): Boolean = true
 
@@ -25,8 +25,7 @@ class SpiritIota(spirit: Spirit) : Iota(Type, spirit) {
 
         override fun deserialize(tag: NbtElement, world: ServerWorld): SpiritIota? {
             if(tag is NbtCompound){
-                val spirit=NbtHelper.readSpirit(tag)
-                if(spirit==null)return null
+                val spirit= NbtHelper.readSpirit(tag) ?: return null
                 return SpiritIota(spirit)
             }
             throw IllegalArgumentException()
@@ -40,8 +39,7 @@ class SpiritIota(spirit: Spirit) : Iota(Type, spirit) {
                 if(spirit_type_id=="")return Text.of("Invalid Block Spirit")
                 if(spirit_value_nbt==null)return Text.of("Invalid Block Spirit")
 
-                val spirit_type=HexlinkRegistry.SPIRIT.get(Identifier(spirit_type_id))
-                if(spirit_type==null)return Text.of("Invalid Block Spirit")
+                val spirit_type= HexlinkRegistry.SPIRIT.get(Identifier(spirit_type_id)) ?: return Text.of("Invalid Block Spirit")
 
                 val spirit=spirit_type.deserialize(spirit_value_nbt)
                 return spirit?.getName()?.copy()?.append(Text.translatable("hexlink.spirit")) ?: throw Error("Should not happen")

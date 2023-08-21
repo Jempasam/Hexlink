@@ -21,7 +21,7 @@ object LootObserver : LootTableEvents.Modify{
             Identifier.of("minecraft","chests/woodland_mansion") to 2
     )
     override fun modifyLootTable(resourceManager: ResourceManager, lootManager: LootManager, id: Identifier, tableBuilder: LootTable.Builder, source: LootTableSource) {
-        val count= magic_loots.get(id)
+        val count= magic_loots[id]
         val focuses=lootManager.getTable(Identifier(HexlinkMod.MODID,"magic_loots"))
         if(count!=null){
             for(i in 0 until count){

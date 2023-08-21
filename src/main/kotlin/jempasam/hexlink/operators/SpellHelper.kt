@@ -16,7 +16,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.math.Vec3d
 
 fun List<Iota>.getSpirit(index: Int, max: Int): Spirit{
-    val ret=this.get(index)
+    val ret= this[index]
     if(ret is SpiritIota)return ret.getSpirit()
     else throw MishapInvalidIota(ret, max-index-1, Text.translatable("hexlink.spirit_iota"))
 }

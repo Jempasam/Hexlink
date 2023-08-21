@@ -36,7 +36,7 @@ class OpManisfestSpirit : SpellAction {
 
             return Triple(
                     VecSpell(ctx.world, target.vec3, power, spirit, source),
-                    cost*(HexlinkConfiguration.spirit_settings.get(spirit.getType())?.media_cost ?: 5),
+                    cost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
                     listOf(ParticleSpray.burst(target.vec3,1.0,5))
             )
         }
@@ -48,7 +48,7 @@ class OpManisfestSpirit : SpellAction {
 
             return Triple(
                     EntitySpell(ctx.world, target.entity, power, spirit, source),
-                    cost*(HexlinkConfiguration.spirit_settings.get(spirit.getType())?.media_cost ?: 5),
+                    cost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
                     listOf(ParticleSpray.burst(target.entity.pos,1.0,5))
             )
 

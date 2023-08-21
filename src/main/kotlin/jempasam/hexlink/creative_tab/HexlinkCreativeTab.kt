@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier
 
 object HexlinkCreativeTab {
     val HEXLINK: ItemGroup = FabricItemGroupBuilder.create(Identifier(HexlinkMod.MODID,"hexlink"))
-            .icon({HexlinkItems.UpgradedBook.defaultStack})
+            .icon { HexlinkItems.UpgradedBook.defaultStack }
             .build()
 
 }

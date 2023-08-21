@@ -16,7 +16,6 @@ object HexVortexHandlers {
         return handler
     }
 
-    //TODO Test smelting
     val SMELTING_VORTEX_HANDLER=register("smelting_furnace", CookingVortexHandler(BlockSpirit(Blocks.FURNACE), RecipeType.SMELTING, 1f))
     val FLINT_VORTEX_HANDLER=register("burning_flint", BurningVortexHandler(ItemSpirit(Items.FLINT_AND_STEEL), 1f))
 

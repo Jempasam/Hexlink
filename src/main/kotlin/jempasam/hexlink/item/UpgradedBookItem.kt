@@ -20,9 +20,7 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings){
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack>{
         val stack = user.getStackInHand(hand)
         if(world is ServerWorld){
-            val iota=readIota(stack, world)
-
-            if(iota==null)return TypedActionResult.fail(stack)
+            val iota= readIota(stack, world) ?: return TypedActionResult.fail(stack)
 
             val harness = IXplatAbstractions.INSTANCE.getHarness(user as ServerPlayerEntity, hand)
             val success = useIota(iota, harness)

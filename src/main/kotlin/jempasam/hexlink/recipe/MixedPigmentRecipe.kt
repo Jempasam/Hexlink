@@ -35,9 +35,9 @@ class MixedPigmentRecipe(val recipe: ShapelessRecipe): CraftingRecipe{
                 val item=stack.item
                 if(item is DyeItem)colors.add(item.color.fireworkColor)
             }
-            if(colors.size>0)ret_item.setColor1(ret,colors.get(0))
-            if(colors.size>1)ret_item.setColor2(ret,colors.get(1))
-            else ret_item.setColor2(ret,colors.get(0))
+            if(colors.size>0)ret_item.setColor1(ret, colors[0])
+            if(colors.size>1)ret_item.setColor2(ret, colors[1])
+            else ret_item.setColor2(ret, colors[0])
         }
         return ret
     }

@@ -8,8 +8,9 @@ import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.recipe.RecipeType
 import net.minecraft.server.world.ServerWorld
+import kotlin.math.min
 
-class CookingVortexHandler<R: Recipe<Inventory>>(val catlzer: Spirit, val recipe_type: RecipeType<R>, val multiplier: Float) : CatalyzedVortexHandler{
+class CookingVortexHandler<R: Recipe<Inventory>>(val catlzer: Spirit, recipe_type: RecipeType<R>, val multiplier: Float) : CatalyzedVortexHandler{
 
     private val recipe_manager=RecipeManager.createCachedMatchGetter(recipe_type)
 
@@ -20,7 +21,7 @@ class CookingVortexHandler<R: Recipe<Inventory>>(val catlzer: Spirit, val recipe
             val first=ingredients[0]
             val ingredient=ingredients[1]
             if(first==catlzer && ingredient is ItemSpirit){
-                val inventory=SimpleInventory()
+                val inventory=SimpleInventory(1)
                 inventory.setStack(0, ingredient.item.defaultStack)
                 val cooking_recipe=recipe_manager.getFirstMatch(inventory,world)
                 if(cooking_recipe.isPresent){
@@ -33,8 +34,8 @@ class CookingVortexHandler<R: Recipe<Inventory>>(val catlzer: Spirit, val recipe
 
     class Recipe(val inv: Inventory, val rec: net.minecraft.recipe.Recipe<Inventory>, val handler: CookingVortexHandler<*>, val world: ServerWorld): HexVortexHandler.Recipe{
         override fun test(ingredients: List<Spirit>): Boolean {
-            if(ingredients.size==2 && ingredients.get(0)==handler.catlzer){
-                val item=ingredients.get(1)
+            if(ingredients.size==2 && ingredients[0] ==handler.catlzer){
+                val item= ingredients[1]
                 if(item is ItemSpirit){
                     inv.setStack(0,item.item.defaultStack)
                     return rec.matches(inv,world)
@@ -45,13 +46,15 @@ class CookingVortexHandler<R: Recipe<Inventory>>(val catlzer: Spirit, val recipe
 
         override fun ingredientCount(): Int = 2
 
+
         override fun mix(ingredients: List<Spirit>): List<Spirit> {
-            val item=(ingredients.get(1) as ItemSpirit).item.defaultStack
+            val item=(ingredients[1] as ItemSpirit).item.defaultStack
             inv.setStack(0,item)
             val stack=rec.craft(inv)
-            val count=Math.min((stack.count*handler.multiplier).toInt(),1)
-            //TODO Use count for spirit count
-            return listOf(ItemSpirit(rec.craft(inv).item))
+            val count= min((stack.count*handler.multiplier).toInt(),1)
+            val ret= mutableListOf<Spirit>()
+            for(i in 0..<count)ret.add(ItemSpirit(stack.item))
+            return ret
         }
     }
 }

@@ -23,14 +23,14 @@ class OpEntityExtractSpirit : SpellAction{
         val extractable_to_entity=args.getEntity(1, 2)
         val target=args.getEntity(0, 2)
         val world_stack= StackHelper.stack(ctx.caster, extractable_to_entity)
-        if(world_stack==null)throw MishapBadEntity(extractable_to_entity,Text.translatable("hexlink.mishap.extractable_to"))
+                ?: throw MishapBadEntity(extractable_to_entity,Text.translatable("hexlink.mishap.extractable_to"))
         val item=world_stack.stack.item
         ctx.assertEntityInRange(target)
         if(item is ExtractorItem){
             if(item.canExtractFrom(world_stack.stack,target)){
                 return Triple(
                         Spell(world_stack, item, extractable_to_entity, target),
-                        HexlinkConfiguration.extractor_settings.get(item.getExtractor(world_stack.stack))?.extraction_media_cost ?: 500,
+                        HexlinkConfiguration.extractor_settings[item.getExtractor(world_stack.stack)]?.extraction_media_cost ?: 500,
                         listOf(
                                 ParticleSpray.burst(target.pos,1.0,10),
                                 ParticleSpray.burst(extractable_to_entity.pos,1.0,10)

@@ -36,7 +36,7 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
     }
 
     fun placeAll(world: ServerWorld, center: BlockPos, positions: List<BlockPos>, feature: ConfiguredFeature<*,*>, rand: Random): Int{
-        if(positions.size==0)return 0
+        if(positions.isEmpty())return 0
 
         var spawn_count=0
         var minx=Int.MAX_VALUE
@@ -87,7 +87,7 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
                     }
                 }
                 positions=newpositions
-                if(positions.size==0)break
+                if(positions.isEmpty())break
             }
         }
 
@@ -127,7 +127,7 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
                 )
                 val final_position=position.add(offset)
                 if(!generateRandomFeature(world,final_position,group,rand))
-                    HexlinkMod.logger.info("Biome Spirit generation structure n$repetition of step"+seq+" fail")
+                    HexlinkMod.logger.info("Biome Spirit generation structure n$repetition of step $seq fail")
                 seq++
             }
         }
@@ -144,7 +144,7 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
         val spawn_entries=biome.value().spawnSettings.getSpawnEntries(SpawnGroup.CREATURE).entries
         if(spawn_entries.size==0)return
         for(i in 0 until number){
-            val spawn_entry=spawn_entries.get(rand.nextInt(spawn_entries.size))
+            val spawn_entry= spawn_entries[rand.nextInt(spawn_entries.size)]
             spawn_entry.type.spawn(world,null,null,null, finalpos, SpawnReason.SPAWNER, false, false)
         }
     }
@@ -188,6 +188,8 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
         = Text.translatable(Util.createTranslationKey("biome", biome.key.get().value))
 
     override fun equals(other: Any?): Boolean = other is BiomeSpirit && other.biome==biome
+
+    override fun hashCode(): Int = biome.hashCode()
 
 
     override fun serialize(): NbtElement {

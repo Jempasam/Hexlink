@@ -38,7 +38,7 @@ object HexlinkCommands{
 
     private fun commandRegistration(dispatcher: CommandDispatcher<ServerCommandSource>, registryAccess: CommandRegistryAccess, environment: RegistrationEnvironment){
         dispatcher.register(literal("magicrank")
-                .requires({it.hasPermissionLevel(3)})
+                .requires { it.hasPermissionLevel(3) }
                 .then(literal("rank")
                         .then(CommandManager.argument("rank", registryKey(HexlinkRegistry.RANK_KEY))
                                 .then(literal("owner")

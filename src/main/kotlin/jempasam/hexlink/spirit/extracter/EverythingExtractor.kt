@@ -6,6 +6,7 @@ import jempasam.hexlink.spirit.extracter.loaders.SpiritExtractorLoader
 import net.minecraft.entity.Entity
 import net.minecraft.text.Text
 import net.minecraft.util.math.ColorHelper
+import kotlin.math.sin
 
 object EverythingExtractor : SpiritExtractor<Spirit> {
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<Spirit> {
@@ -39,9 +40,9 @@ object EverythingExtractor : SpiritExtractor<Spirit> {
 
     override fun getColor(): Int {
         val current_pi_time=(System.currentTimeMillis()%2000)/2000f*Math.PI*2
-        val red=(Math.sin(current_pi_time)*127+127).toInt()
-        val blue=(Math.sin(current_pi_time+Math.PI*2/3)*127+127).toInt()
-        val green=(Math.sin(current_pi_time+Math.PI*4/3)*127+127).toInt()
+        val red=(sin(current_pi_time) *127+127).toInt()
+        val blue=(sin(current_pi_time+Math.PI*2/3) *127+127).toInt()
+        val green=(sin(current_pi_time+Math.PI*4/3) *127+127).toInt()
         return ColorHelper.Argb.getArgb(255, red, green, blue)
     }
 

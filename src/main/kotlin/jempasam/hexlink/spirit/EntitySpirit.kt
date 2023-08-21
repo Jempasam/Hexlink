@@ -69,7 +69,7 @@ class EntitySpirit(val entity_type: EntityType<*>): Spirit {
     override fun getColor(): Int{
         if(entity_type.isFireImmune)return DyeColor.ORANGE.fireworkColor
         else{
-            val color=from_group_to_color.get(entity_type.spawnGroup)
+            val color= from_group_to_color[entity_type.spawnGroup]
             if(color!=null)return color
             else return DyeColor.RED.fireworkColor
         }

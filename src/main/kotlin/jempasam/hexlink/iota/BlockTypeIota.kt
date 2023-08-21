@@ -40,7 +40,7 @@ class BlockTypeIota(val blocktype: Block) : Iota(TYPE, blocktype){
             
             override fun typeName(): Text {
                 val key = HexIotaTypes.REGISTRY.getId(this)
-                return Text.translatable("hexcasting.iota.$key") .styled({ style -> style.withColor(TextColor.fromRgb(color()))})
+                return Text.translatable("hexcasting.iota.$key") .styled { style -> style.withColor(TextColor.fromRgb(color())) }
             }
 
             override fun deserialize(tag: NbtElement, world: ServerWorld): BlockTypeIota {
@@ -54,8 +54,8 @@ class BlockTypeIota(val blocktype: Block) : Iota(TYPE, blocktype){
             override fun display(tag: NbtElement): Text {
                 if(tag is NbtString){
                     val type=Registry.BLOCK.getOrEmpty(Identifier(tag.asString()))
-                    if(!type.isEmpty()){
-                        return type.get().getName()
+                    if(!type.isEmpty){
+                        return type.get().name
                     }
                 }
                 return Text.of("Invalid Type")

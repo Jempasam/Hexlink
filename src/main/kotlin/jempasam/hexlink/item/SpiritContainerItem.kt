@@ -72,7 +72,7 @@ class SpiritContainerItem(settings: Settings) : Item(settings), IotaHolderItem, 
         getExtractor(stack)?.apply {
             if(canExtract(target)){
                 val extracted=extract(target)
-                val success_rate=HexlinkConfiguration.extractor_settings.get(this)?.success_rate ?: 0.01f
+                val success_rate= HexlinkConfiguration.extractor_settings[this]?.success_rate ?: 0.01f
                 if(Math.random()<success_rate*extracted.count){
                     setSpirit(stack, extracted.spirit)
                     consume(target)

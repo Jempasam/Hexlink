@@ -23,7 +23,7 @@ class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(sett
         val patsTag = stack.getOrCreateList(TAG_PROGRAM, NbtElement.LIST_TYPE.toInt())
         if(selectedspell<0 || patsTag.size <= 0)return null
 
-        val actual_spell=patsTag.get(selectedspell % patsTag.size)
+        val actual_spell= patsTag[selectedspell % patsTag.size]
         if(actual_spell.type != NbtElement.LIST_TYPE)return null
         if(actual_spell.asList.heldType != NbtElement.COMPOUND_TYPE)return null
 
@@ -41,8 +41,7 @@ class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(sett
     }
 
     override fun getHex(stack: ItemStack, level: ServerWorld): List<Iota> {
-        val actual_spell= getSelectedSpellNbt(stack)
-        if(actual_spell==null)return emptyList()
+        val actual_spell= getSelectedSpellNbt(stack) ?: return emptyList()
 
         val out = ArrayList<Iota>()
         for (patTag in actual_spell.asList) {
@@ -53,8 +52,7 @@ class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(sett
     }
 
     override fun writeHex(stack: ItemStack, program: List<Iota>, media: Int) {
-        val actual_spell=getSelectedSpellNbt(stack)
-        if(actual_spell==null)return
+        val actual_spell= getSelectedSpellNbt(stack) ?: return
         val selected_num=stack.getInt(TAG_SELECTED, 0)
         val spell_count=getSpellCount(stack)
         if(selected_num==spell_count-1)addSpell(stack)

@@ -10,7 +10,7 @@ object VortexRecipeHelper {
 
     fun generateHandlerMaps(){
         for(handler in HexlinkRegistry.HEXVORTEX_HANDLER){
-            if(handler is CatalyzedVortexHandler)handler_map.put(handler.getCatalyzer(),handler)
+            if(handler is CatalyzedVortexHandler) handler_map[handler.getCatalyzer()] = handler
             else other_handkrs.add(handler)
         }
     }
@@ -18,7 +18,7 @@ object VortexRecipeHelper {
     fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): HexVortexHandler.Recipe?{
         if(ingredients.size>1){
             val first=ingredients.first()
-            val catalyzed_handler=handler_map.get(first)
+            val catalyzed_handler= handler_map[first]
             if(catalyzed_handler!=null){
                 val recipe=catalyzed_handler.findRecipe(ingredients, world)
                 if(recipe!=null)return recipe

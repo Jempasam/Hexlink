@@ -27,10 +27,10 @@ object RecipeHelper {
                 val ingredients=recipe.ingredients
                 var stack_place=0
 
-                for(ingre_place in 0 until input.size){
-                    val ingredient=ingredients.get(ingre_place)
+                for(ingre_place in input.indices){
+                    val ingredient= ingredients[ingre_place]
                     if(ingredient.isEmpty)continue
-                    if(ingredient.test(input.get(stack_place))){
+                    if(ingredient.test(input[stack_place])){
                         stack_place++
                         if(stack_place==input.size){
                             matched_recipes.add(recipe)
@@ -59,12 +59,12 @@ object RecipeHelper {
             val recipe=match.first
             val ingredients=recipe.ingredients
             val dimension = if(recipe is ShapedRecipe) recipe.width to recipe.height else recipe.ingredients.size to 1
-            var craft=CraftingInventory(NONE_HANDLER, dimension.first, dimension.second)
+            val craft=CraftingInventory(NONE_HANDLER, dimension.first, dimension.second)
 
             // Fill inventory
             var listi=0
             for(i in 0 until ingredients.size){
-                val ingredient=ingredients.get(i)
+                val ingredient= ingredients[i]
                 if(listi<input.size && !ingredient.isEmpty){
                     craft.setStack(i,input[listi])
                     listi++

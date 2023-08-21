@@ -23,6 +23,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
+import kotlin.math.min
 
 class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul_count: Int): Item(settings), ExtractorItem, ItemSpiritSource, ItemSpiritTarget {
 
@@ -31,8 +32,7 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
     fun soulsOrCreate(stack: ItemStack): NbtList = stack.orCreateNbt.getOrCreateList("souls", NbtElement.COMPOUND_TYPE)
 
     fun findEntryNbt(stack: ItemStack, spirit: Spirit): NbtCompound?{
-        val souls=souls(stack)
-        if(souls==null)return null
+        val souls= souls(stack) ?: return null
         val key=NbtHelper.writeSpirit(spirit)
         val removed= mutableListOf<NbtElement>()
         for(entry in souls){
@@ -42,7 +42,7 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
                     removed.add(entry)
                 }
                 else{
-                    if(spirit_nbt.equals(key))return entry.asCompound
+                    if(spirit_nbt==key)return entry.asCompound
                 }
 
             }
@@ -76,9 +76,9 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
             val extract_result=extractor.extract(target)
             if( findEntryNbt(stack,extract_result.spirit)!=null || ((souls(stack)?.size?:0)<max_box_count) ){
                 val entry=findEntryNbtOrCreate(stack,extract_result.spirit)
-                val count=(HexlinkConfiguration.extractor_settings.get(extractor)?.soul_count ?: 1)*extract_result.count
+                val count=(HexlinkConfiguration.extractor_settings[extractor]?.soul_count ?: 1)*extract_result.count
 
-                val new_value=Math.min(entry.getInt("count")+count, max_soul_count)
+                val new_value= min(entry.getInt("count")+count, max_soul_count)
                 val offset=new_value-entry.getInt("count")
                 if(offset==0)return ExtractorItem.ExtractionResult.FAIL
                 entry.putInt("count",new_value)
@@ -91,8 +91,7 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
     }
 
     fun consumeSpirit(stack: ItemStack, spirit: Spirit): Boolean{
-        val entry=findEntryNbt(stack,spirit)
-        if(entry==null)return false
+        val entry= findEntryNbt(stack,spirit) ?: return false
         val count=entry.getInt("count")
         if(count<=0){
             souls(stack)?.remove(entry)
@@ -104,8 +103,7 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
     }
 
     fun canConsumeSpirit(stack: ItemStack, spirit: Spirit): Boolean{
-        val entry=findEntryNbt(stack,spirit)
-        if(entry==null)return false
+        val entry= findEntryNbt(stack,spirit) ?: return false
         val count=entry.getInt("count")
         if(count<=0){
             souls(stack)?.remove(entry)
@@ -163,7 +161,7 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
                 if( findEntryNbt(stack,spirit)!=null || ((souls(stack)?.size?:0)<max_box_count) ){
                     val entry=findEntryNbtOrCreate(stack,spirit)
 
-                    val new_value=Math.min(entry.getInt("count")+count, max_soul_count)
+                    val new_value= min(entry.getInt("count")+count, max_soul_count)
                     val offset=new_value-entry.getInt("count")
                     if(offset==0)return SpiritTarget.NONE.FLUX
 

@@ -39,7 +39,7 @@ interface SpiritExtractor<T: Spirit>{
     class ExtractionResult<T: Spirit>(val spirit: T, val count: Int)
 
     fun result(spirit: T, count: Int): ExtractionResult<T>{
-        return ExtractionResult<T>(spirit,count)
+        return ExtractionResult(spirit,count)
     }
 
 

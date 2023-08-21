@@ -7,13 +7,14 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.Vec3d
 import java.util.*
+import kotlin.math.sin
 
 /**
  * Customizable pigment with bugged transition
  */
 class MixedPigmentItem(settings: Settings) : Item(settings), ColorizerItem {
     override fun color(stack: ItemStack, owner: UUID, time: Float, position: Vec3d): Int {
-        val roading=Math.sin(Math.PI*(time/2)%Math.PI)
+        val roading= sin(Math.PI*(time/2)%Math.PI)
         val unroading=1f-roading
         val color1=getColor1(stack)
         val color2=getColor2(stack)

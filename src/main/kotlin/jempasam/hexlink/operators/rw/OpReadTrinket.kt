@@ -17,8 +17,8 @@ class OpReadTrinket : ConstMediaAction{
     override fun execute(args: List<Iota>, ctx: CastingContext): List<Iota> {
         var readed: Iota?=null
         TrinketsApi.getTrinketComponent(ctx.caster).ifPresent{
-            val slot=it.getEquipped(HexlinkItems.FocusCollar).firstOrNull{ it.right.item is IotaHolderItem }
-            if(slot==null)throw MishapNoCollarItem()
+            val slot= it.getEquipped(HexlinkItems.FocusCollar).firstOrNull{ it.right.item is IotaHolderItem }
+                    ?: throw MishapNoCollarItem()
             val holder=slot.right
             val item=holder.item
             if(item is IotaHolderItem)readed=item.readIota(holder,ctx.world)

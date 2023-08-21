@@ -9,6 +9,7 @@ import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
+import kotlin.math.max
 
 object PotionExtractor : SpiritExtractor<PotionSpirit> {
     private val potion_items=setOf(Items.POTION, Items.LINGERING_POTION, Items.SPLASH_POTION)
@@ -24,9 +25,9 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
 
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
         val stack= StackHelper.stackOrThrow(null, target).stack
-        val effect= PotionUtil.getPotionEffects(stack).get(0)
+        val effect= PotionUtil.getPotionEffects(stack)[0]
         println("DURATION:" + effect.duration)
-        return result(PotionSpirit(effect.effectType), Math.max(1,effect.duration/1200)*(effect.amplifier+1))
+        return result(PotionSpirit(effect.effectType), max(1,effect.duration/1200) *(effect.amplifier+1))
     }
 
     override fun consume(target: Entity) {

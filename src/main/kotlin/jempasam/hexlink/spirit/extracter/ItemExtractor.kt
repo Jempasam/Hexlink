@@ -10,6 +10,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import kotlin.math.max
 
 object ItemExtractor : SpiritExtractor<ItemSpirit> {
 
@@ -22,7 +23,7 @@ object ItemExtractor : SpiritExtractor<ItemSpirit> {
 
     override fun extract(target: Entity): SpiritExtractor.ExtractionResult<ItemSpirit> {
         val stack= StackHelper.stackOrThrow(null, target).stack
-        return result(ItemSpirit(stack.item), stack.count*Math.max(stack.maxDamage/2,1))
+        return result(ItemSpirit(stack.item), stack.count* max(stack.maxDamage/2,1))
     }
 
     override fun consume(target: Entity) {

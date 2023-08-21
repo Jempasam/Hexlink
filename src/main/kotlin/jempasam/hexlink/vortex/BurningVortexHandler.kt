@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.block.Blocks
 import net.minecraft.item.Item
 import net.minecraft.server.world.ServerWorld
+import kotlin.math.max
 
 class BurningVortexHandler(val catalzer: Spirit, val multiplier: Float) : CatalyzedVortexHandler{
 
@@ -42,7 +43,7 @@ class BurningVortexHandler(val catalzer: Spirit, val multiplier: Float) : Cataly
         override fun mix(ingredients: List<Spirit>): List<Spirit> {
             if(fuel_time==0)return listOf()
             else{
-                val maxi=Math.max(1,(fuel_time/200*handler.multiplier).toInt())
+                val maxi= max(1,(fuel_time/200*handler.multiplier).toInt())
                 val ret= mutableListOf<Spirit>()
                 for(i in 0..<maxi)ret.add(BlockSpirit(Blocks.FIRE))
                 return ret

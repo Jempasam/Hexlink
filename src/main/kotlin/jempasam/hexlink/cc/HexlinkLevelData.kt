@@ -22,18 +22,18 @@ class HexlinkLevelData(private val level: WorldProperties) : Component, LevelRan
 
     override fun ranks(): Collection<LevelRanks.Rank> = rank_map.values
 
-    override fun getPlayer(rank: LevelRanks.Rank): UUID? = reverse_rank_map.get(rank)
+    override fun getPlayer(rank: LevelRanks.Rank): UUID? = reverse_rank_map[rank]
 
-    override fun getRank(player: UUID): LevelRanks.Rank? = rank_map.get(player)
+    override fun getRank(player: UUID): LevelRanks.Rank? = rank_map[player]
 
     override fun setPlayer(rank: LevelRanks.Rank, player: UUID?) {
-        val old_player=reverse_rank_map.get(rank)
+        val old_player= reverse_rank_map[rank]
         if(old_player==player)return
         if(old_player!=null){
             rank_map.remove(old_player)
         }
         if(player!=null){
-            val old_rank=rank_map.get(player)
+            val old_rank= rank_map[player]
             if(old_rank!=null)reverse_rank_map.remove(rank)
             reverse_rank_map.put(rank,player)
             rank_map.put(player,rank)
@@ -42,13 +42,13 @@ class HexlinkLevelData(private val level: WorldProperties) : Component, LevelRan
     }
 
     override fun setRank(player: UUID, rank: LevelRanks.Rank?) {
-        val old_rank=rank_map.get(player)
+        val old_rank= rank_map[player]
         if(old_rank==rank)return
         if(old_rank!=null){
             rank_map.remove(player)
         }
         if(rank!=null){
-            val old_player=reverse_rank_map.get(rank)
+            val old_player= reverse_rank_map[rank]
             if(old_player!=null)rank_map.remove(old_player)
             rank_map.put(player, rank)
             reverse_rank_map.put(rank, player)

@@ -9,11 +9,9 @@ object NbtHelper {
     fun readSpirit(nbt: NbtCompound): Spirit?{
         val type_id=nbt.getString("type")
         if(type_id.isEmpty())return null
-        val type= HexlinkRegistry.SPIRIT.get(Identifier(type_id))
-        if(type==null)return null
+        val type= HexlinkRegistry.SPIRIT.get(Identifier(type_id)) ?: return null
 
-        val value_nbt=nbt.get("value")
-        if(value_nbt==null)return null
+        val value_nbt= nbt.get("value") ?: return null
         return type.deserialize(value_nbt)
     }
 

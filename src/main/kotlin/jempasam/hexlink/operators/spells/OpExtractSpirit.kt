@@ -29,7 +29,7 @@ class OpExtractSpirit : SpellAction{
             if(item.canExtractFrom(stack,target)){
                 return Triple(
                         Spell(stack, item, target),
-                        HexlinkConfiguration.extractor_settings.get(item.getExtractor(stack))?.extraction_media_cost ?: 500,
+                        HexlinkConfiguration.extractor_settings[item.getExtractor(stack)]?.extraction_media_cost ?: 500,
                         listOf(
                                 ParticleSpray.burst(target.pos,1.0,10),
                                 ParticleSpray.burst(ctx.position,1.0,10)
