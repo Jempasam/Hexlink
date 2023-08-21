@@ -54,6 +54,8 @@ interface Spirit {
 
     override fun equals(other: Any?): Boolean
 
+    override fun hashCode(): Int
+
     /**
      * Get spirit color
      */
