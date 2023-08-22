@@ -4,6 +4,7 @@
   "hexlink.mishap.extractable_to": "空灵体石板和灵魂袋之类的有效提取物品",
   "hexlink.mishap.not_extractable": "%s灵体无法被%s提取",
   "hexlink.mishap.not_enough_soul": "缺少%d个灵魂",
+  "hexlink.mishap.cant_mix_at": "无法在此处混合灵魂，应当向vortex或空气混合",
 
 
   "hexlink.unlucky": "提取失败，再试一遍",
@@ -51,6 +52,8 @@
   "hexcasting.spell.hexlink:spirit_extract_entity": "灵体移位",
   "hexcasting.spell.hexlink:spirit_manifestation": "灵体显形",
   "hexcasting.spell.hexlink:spirit_look": "灵体探察",
+  "hexcasting.spell.hexlink:spirit_mix": "灵体混合",
+  "hexcasting.spell.hexlink:spirit_transfer": "灵体转移",
   "hexcasting.spell.hexlink:read_trinket": "伯默之精思",
   "hexcasting.spell.hexlink:write_trinket": "伯默之策略",
 
@@ -65,6 +68,8 @@
 
   "hexlink.spell.spirit_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过某实体或在某位置令其显形。最后的数 iota 则用于控制显形的强度。需要装有灵魂的$(l:hexlink:items/bag)$(item)灵魂袋/$才可使灵体显形。",
   "hexlink.spell.spirit_look.desc": "此图案可使我感受灵体与某物体的接近程度。",
+  "hexlink.spell.spirit_mix.desc": "此图案可将灵体融合入vortex以获得新灵体。",
+  "hexlink.spell.spirit_transfer.desc": "此图案可将灵体在两灵魂容器间转移。",
 
 
   "hexlink.page.tablets": "灵体石板",
