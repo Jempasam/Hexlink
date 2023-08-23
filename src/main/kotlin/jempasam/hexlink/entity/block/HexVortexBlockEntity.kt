@@ -25,6 +25,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
     companion object{
         const val LOADING_TIME=20
         const val MAX_AGE=20*60
+        const val START_TIME=60
 
         const val CRAFT_SUCCEED_STATUS=260401
     }
@@ -128,7 +129,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
     }
 
     private var loading=0
-    private var age=0
+    private var age=-START_TIME+ LOADING_TIME
     val input= mutableListOf<Spirit>()
     val output= mutableListOf<Spirit>()
 }

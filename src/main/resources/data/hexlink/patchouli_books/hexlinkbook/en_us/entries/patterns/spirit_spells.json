@@ -1,62 +1,70 @@
 {
   "name": "hexlink.spell.spirit_spells",
   "category": "hexcasting:patterns/spells",
-  "icon": "hexlink:tablet{extractor:\"hexlink:everything\"}",
+  "icon": "hexlink:crystal{extractor:\"hexlink:everything\"}",
   "sortnum": 100,
   "advancement": "hexcasting:root",
   "read_by_default": true,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "hexlink.spell.spirit_extraction"
+      "text": "hexlink.spell.spirit_spells.desc"
     },
     {
       "type": "hexcasting:pattern",
-      "op_id": "hexlink:spirit_extract",
-      "anchor": "hexlink:spirit_extract",
-      "input": "entity",
+      "op_id": "hexlink:spirit_extraction",
+      "anchor": "hexlink:spirit_extraction",
+      "input": "entity, ent/vec, ent/vec",
       "output": "",
-      "text": "hexlink.spell.spirit_extract.desc"
-    },
-    {
-      "type": "hexcasting:pattern",
-      "op_id": "hexlink:spirit_extract_entity",
-      "anchor": "hexlink:spirit_extract_entity",
-      "input": "entity, entity",
-      "output": "",
-      "text": "hexlink.spell.spirit_extract_entity.desc"
-    },
-    {
-      "type": "hexcasting:pattern",
-      "op_id": "hexlink:spirit_manifestation",
-      "anchor": "hexlink:spirit_manifestation",
-      "input": "spirit, vec/entity, number",
-      "output": "",
-      "text": "hexlink.spell.spirit_manifestation.desc"
-    },
-    {
-      "type": "hexcasting:pattern",
-      "op_id": "hexlink:spirit_look",
-      "anchor": "hexlink:spirit_look",
-      "input": "spirit, vec/entity",
-      "output": "",
-      "text": "hexlink.spell.spirit_look.desc"
-    },
-    {
-      "type": "hexcasting:pattern",
-      "op_id": "hexlink:spirit_mix",
-      "anchor": "hexlink:spirit_mix",
-      "input": "spirit, vec",
-      "output": "",
-      "text": "hexlink.spell.spirit_mix.desc"
+      "text": "hexlink.spell.spirit_extraction.desc"
     },
     {
       "type": "hexcasting:pattern",
       "op_id": "hexlink:spirit_transfer",
       "anchor": "hexlink:spirit_transfer",
-      "input": "spirit, number, vec/entity, vec/entity",
+      "input": "spirit, int, ent/vec, ent/vec",
       "output": "",
       "text": "hexlink.spell.spirit_transfer.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_transfer_look",
+      "anchor": "hexlink:spirit_transfer_look",
+      "input": "vec/ent",
+      "output": "",
+      "text": "hexlink.spell.spirit_transfer_look.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_vortex",
+      "anchor": "hexlink:spirit_vortex",
+      "input": "vec",
+      "output": "",
+      "text": "hexlink.spell.spirit_vortex.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_manifestation",
+      "anchor": "hexlink:spirit_manifestation",
+      "input": "vec/entity, spirit, number, vec/entity",
+      "output": "",
+      "text": "hexlink.spell.spirit_manifestation.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_self_manifestation",
+      "anchor": "hexlink:spirit_self_manifestation",
+      "input": "spirit, number, vec/ent",
+      "output": "",
+      "text": "hexlink.spell.spirit_self_manifestation.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_look",
+      "anchor": "hexlink:spirit_look",
+      "input": "spirit, vec/ent",
+      "output": "",
+      "text": "hexlink.spell.spirit_look.desc"
     }
   ]
 }

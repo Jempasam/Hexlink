@@ -18,9 +18,8 @@ class HexlinkExtractorDataLoader : JsonDataLoader(Gson(),"hexlink_extractors"), 
             val obj=entry.value
             if(extractor!=null && obj is JsonObject){
                 HexlinkConfiguration.extractor_settings.put(extractor,HexlinkConfiguration.ExtractorSettings(
-                        obj.get("success_rate")?.asFloat ?: 0.01f,
                         obj.get("soul_count")?.asInt ?: 1,
-                        obj.get("extraction_media_cost")?.asInt ?: 500
+                        obj.get("extraction_media_cost")?.asInt ?: 2
                 ))
             }
         }

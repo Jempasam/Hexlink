@@ -14,6 +14,16 @@ import net.minecraft.util.math.Vec3d
 
 object SpiritHelper{
 
+    fun transfer(source: SpiritSource, target: SpiritTarget, spirit: Spirit, max_count: Int): Pair<()->Unit,Int>{
+        val source_flux=source.extract(max_count, spirit)
+        val target_flux=target.fill(source_flux.maxcount, spirit)
+
+        return {
+            source_flux.consume(target_flux.maxcount)
+            target_flux.fill(target_flux.maxcount)
+        } to target_flux.maxcount
+    }
+
     fun spiritTarget(caster: PlayerEntity): SpiritTarget{
         val inventory=caster.inventory
         return object: SpiritTarget{
@@ -23,7 +33,7 @@ object SpiritHelper{
                     val item=stack.item
                     if(item is ItemSpiritTarget){
                         val spirit_flux=item.getSpiritTarget(stack).fill(count, spirit)
-                        if(spirit_flux.count>0)return SpiritTarget.SpiritInputFlux({spirit_flux.fill()},spirit_flux.count)
+                        if(spirit_flux.maxcount>0)return SpiritTarget.SpiritInputFlux({spirit_flux.fill(it)},spirit_flux.maxcount)
                     }
                 }
                 return SpiritTarget.NONE.FLUX
@@ -76,10 +86,19 @@ object SpiritHelper{
                     val item=stack.item
                     if(item is ItemSpiritSource){
                         val spirit_flux=item.getSpiritSource(stack).extract(count, spirit)
-                        if(spirit_flux.count!=0)return SpiritSource.SpiritOutputFlux({spirit_flux.consume()},spirit_flux.count)
+                        if(spirit_flux.maxcount!=0)return SpiritSource.SpiritOutputFlux({spirit_flux.consume(it)},spirit_flux.maxcount)
                     }
                 }
                 return SpiritSource.NONE.FLUX
+            }
+
+            override fun last(): Spirit?{
+                for(i in 0 ..< inventory.size()){
+                    val stack=inventory.getStack(i)
+                    val item=stack.item
+                    if(item is ItemSpiritSource)return item.getSpiritSource(stack).last()
+                }
+                return null
             }
         }
 
@@ -121,18 +140,20 @@ object SpiritHelper{
     private class StackUpdateSpiritSource(val stack: StackHelper.WorldStack, val source: SpiritSource): SpiritSource{
         override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
             val source=source.extract(count,spirit)
-            if(source.count>0){
-                return SpiritSource.SpiritOutputFlux({source.consume(); stack.update()}, source.count)
+            if(source.maxcount>0){
+                return SpiritSource.SpiritOutputFlux({source.consume(it); stack.update()}, source.maxcount)
             }
             else return SpiritSource.NONE.FLUX
         }
+
+        override fun last(): Spirit? = source.last()
     }
 
     private class StackUpdateSpiritTarget(val stack: StackHelper.WorldStack, val target: SpiritTarget): SpiritTarget{
         override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
             val flux=target.fill(count,spirit)
-            if(flux.count>0){
-                return SpiritTarget.SpiritInputFlux({flux.fill(); stack.update()}, flux.count)
+            if(flux.maxcount>0){
+                return SpiritTarget.SpiritInputFlux({flux.fill(it); stack.update()}, flux.maxcount)
             }
             else return SpiritTarget.NONE.FLUX
         }

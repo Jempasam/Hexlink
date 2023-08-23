@@ -65,7 +65,7 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
 
 
 
-    fun addAt(world: ServerWorld, pos: BlockPos, spirit: Spirit): Boolean{
+    fun addAt(world: ServerWorld, pos: BlockPos, spirit: Spirit?=null): Boolean{
         val bstate=world.getBlockState(pos)
         val block=bstate.block
         if(bstate.isAir){
@@ -74,7 +74,7 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
         else if(block!=this)return false
         val vortex_entity=world.getBlockEntity(pos)
         vortex_entity as HexVortexBlockEntity
-        vortex_entity.give(spirit)
+        if(spirit!=null)vortex_entity.give(spirit)
         return true
     }
 
@@ -109,13 +109,26 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
                         }
                     }
                     return SpiritSource.SpiritOutputFlux({
+                        var i=0
+                        for(id in removed_output){
+                            i++
+                            if(i>=it)break
+                            vortexentity.output.removeAt(id)
+                        }
                         for(id in removed_input){
+                            i++
+                            if(i>=it)break
                             vortexentity.input.removeAt(id)
                         }
-                        for(id in removed_output)vortexentity.output.removeAt(id)
                         vortexentity.markDirty()
                         vortexentity.sendToClient()
                     }, current_count)
+                }
+
+                override fun last(): Spirit? {
+                    if(vortexentity.output.isNotEmpty())return vortexentity.output.last()
+                    if(vortexentity.input.isNotEmpty())return vortexentity.input.last()
+                    return null
                 }
             }
         }

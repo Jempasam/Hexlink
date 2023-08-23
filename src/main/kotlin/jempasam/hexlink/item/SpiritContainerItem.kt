@@ -6,13 +6,11 @@ import at.petrak.hexcasting.api.spell.iota.NullIota
 import at.petrak.hexcasting.api.utils.containsTag
 import at.petrak.hexcasting.common.items.ItemFocus
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
-import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.iota.SpiritIota
 import jempasam.hexlink.item.functionnality.ExtractorItem
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.utils.NbtHelper
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.entity.Entity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
@@ -66,35 +64,6 @@ class SpiritContainerItem(settings: Settings) : Item(settings), IotaHolderItem, 
     override fun appendTooltip(pStack: ItemStack, pLevel: World?, pTooltipComponents: MutableList<Text>, pIsAdvanced: TooltipContext) {
         appendExtractorTooltip(pStack, pTooltipComponents)
         getSpiritIota(pStack)?. apply{ pTooltipComponents.add(this.getSpirit().getName()) }
-    }
-
-    override fun extractFrom(stack: ItemStack, target: Entity): ExtractorItem.ExtractionResult{
-        getExtractor(stack)?.apply {
-            if(canExtract(target)){
-                val extracted=extract(target)
-                val success_rate= HexlinkConfiguration.extractor_settings[this]?.success_rate ?: 0.01f
-                if(Math.random()<success_rate*extracted.count){
-                    setSpirit(stack, extracted.spirit)
-                    consume(target)
-                    return ExtractorItem.ExtractionResult.SUCCESS
-                }
-                else{
-                    consume(target)
-                    return ExtractorItem.ExtractionResult.UNLUCKY
-                }
-            }
-        }
-        return ExtractorItem.ExtractionResult.FAIL
-    }
-
-    override fun canExtractFrom(stack: ItemStack, target: Entity): Boolean{
-        return getExtractor(stack)?.canExtract(target) ?: false && !isFilled(stack)
-    }
-
-
-
-    fun isFilled(stack: ItemStack): Boolean{
-        return readIotaTag(stack)!=null
     }
 
     override fun appendStacks(group: ItemGroup?, stacks: DefaultedList<ItemStack>) {

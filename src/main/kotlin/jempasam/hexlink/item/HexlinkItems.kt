@@ -21,12 +21,13 @@ object HexlinkItems {
         for(entry in items )Registry.register(Registry.ITEM, Identifier(HexlinkMod.MODID, entry.key), entry.value)
     }
 
-    val Tablet=make("tablet", SpiritContainerItem(epicProps()))
+    val Crystal= make("crystal", ExtractorCatalyzerItem(epicProps()))
 
     var UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
     var FocusCollar=make("focus_collar", ItemFocus(simpleProps()))
     var MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
 
+    var Tablet=make("tablet",SoulContainerItem(simpleProps(), 1, 10))
     var SmallBag=make("small_bag",SoulContainerItem(simpleProps(), 2, 30))
     var MediumBag=make("medium_bag",SoulContainerItem(simpleProps(), 5, 100))
     var BigBag=make("big_bag",SoulContainerItem(simpleProps(), 10, 300))

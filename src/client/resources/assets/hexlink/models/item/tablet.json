@@ -1,13 +1,12 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hexlink:item/tablet_back",
-    "layer1": "hexlink:item/tablet_front"
+    "layer0": "hexlink:item/tablet_back"
   },
   "overrides": [
     {
       "model": "hexlink:item/filled_tablet",
-      "predicate": { "hexlink:is_filled": 1.0 }
+      "predicate": { "hexlink:source_filled": 1.0 }
     }
   ]
 }
