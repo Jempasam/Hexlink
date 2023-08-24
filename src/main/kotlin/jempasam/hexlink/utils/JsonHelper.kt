@@ -70,6 +70,16 @@ fun JsonObject.addSpirit(name: String, spirit: Spirit){
     this.add(name, NbtHelper.writeSpirit(spirit).asJSON())
 }
 
+fun JsonElement.asSpirit(): Spirit {
+    val obj=this.asJsonObject
+    return NbtHelper.readSpirit(obj.asNBT())
+            ?: throw JsonParseException("Invalid Spirit")
+}
+
+fun Spirit.toJSON(): JsonElement{
+    return NbtHelper.writeSpirit(this).asJSON()
+}
+
 @Suppress("UNCHECKED_CAST")
 fun JsonObject.getCookingRecipeType(name: String): RecipeType<AbstractCookingRecipe>{
     val recipe=Registry.RECIPE_TYPE.get(Identifier(JsonHelper.getString(this,name)))
@@ -93,4 +103,20 @@ class AcceptAllStringReader(reader: String): StringReader(reader){
         }
         return string.substring(start, cursor)
     }
+}
+
+fun <T>jsonArray(list: List<T>, serializer: (T)->JsonElement): JsonArray{
+    val ret=JsonArray()
+    for(element in list){
+        ret.add(serializer(element))
+    }
+    return ret
+}
+
+fun <T>JsonArray.read(deserializer: (JsonElement)->T): List<T>{
+    val ret= mutableListOf<T>()
+    for(element in this){
+        ret.add(deserializer(element))
+    }
+    return ret
 }

@@ -17,6 +17,7 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import kotlin.random.Random
 
 
 class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HexlinkEntities.HEX_VORTEX, pos, state){
@@ -58,19 +59,27 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
 
 
     fun tick(world: World, pos: BlockPos, state: BlockState) {
-        if(world.isClient)return
-        loading++
-        age++
-        if(age> MAX_AGE){
-            world.removeBlock(pos,false)
-        }
-        if(loading> LOADING_TIME){
-            if(craft(world as ServerWorld)){
-                age=0
+        if(world.isClient){
+            if(input.size+output.size>0 && random.nextInt(20)==0){
+                val i=random.nextInt(input.size+output.size)
+                val spirit= if(i>=input.size) output[i-input.size] else input[i]
+                HexVortexBlock.coloredParticle(world,pos,spirit.getColor(),1)
             }
-            loading=0
-            if(input.isEmpty() && output.isEmpty()){
+        }
+        else{
+            loading++
+            age++
+            if(age> MAX_AGE){
                 world.removeBlock(pos,false)
+            }
+            if(loading> LOADING_TIME){
+                if(craft(world as ServerWorld)){
+                    age=0
+                }
+                loading=0
+                if(input.isEmpty() && output.isEmpty()){
+                    world.removeBlock(pos,false)
+                }
             }
         }
     }
@@ -110,7 +119,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         val w=world
         if(w!=null){
             for(i in previous_output_size..<output.size){
-                HexVortexBlock.coloredParticle(w,pos,output[i].getColor())
+                HexVortexBlock.coloredParticle(w,pos,output[i].getColor(),6)
             }
         }
     }
@@ -127,5 +136,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
     var age=-START_TIME+ LOADING_TIME
     val input= mutableListOf<Spirit>()
     val output= mutableListOf<Spirit>()
+
+    val random=Random(System.currentTimeMillis())
 }
 

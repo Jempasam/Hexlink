@@ -1,0 +1,43 @@
+{
+  "name": "hexlink.page.crystals",
+  "icon": "hexlink:crystal",
+  "category": "hexcasting:items",
+  "sortnum": 100,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.page.crystals.desc"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:crystal{extractor:'hexlink:block'}",
+      "text": "hexlink.page.crystals.block",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:crystal{extractor:'hexlink:potion'}",
+      "text": "hexlink.page.crystals.potion",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:crystal{extractor:'hexlink:item'}",
+      "text": "hexlink.page.crystals.item",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:crystal{extractor:'hexlink:entity'}",
+      "text": "hexlink.page.crystals.entity",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:crystal{extractor:'hexlink:everything'}",
+      "text": "hexlink.page.crystals.everything",
+      "link_recipe": true
+    }
+  ]
+}

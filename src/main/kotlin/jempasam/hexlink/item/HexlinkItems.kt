@@ -2,7 +2,9 @@ package jempasam.hexlink.item
 
 import at.petrak.hexcasting.common.items.ItemFocus
 import jempasam.hexlink.HexlinkMod
+import jempasam.hexlink.block.HexlinkBlocks
 import jempasam.hexlink.creative_tab.HexlinkCreativeTab
+import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
@@ -32,6 +34,8 @@ object HexlinkItems {
     var SmallBag=make("small_bag",SoulContainerItem(simpleProps(), 2, 30))
     var MediumBag=make("medium_bag",SoulContainerItem(simpleProps(), 5, 100))
     var BigBag=make("big_bag",SoulContainerItem(simpleProps(), 10, 300))
+
+    var Vortex=make("vortex",BlockItem(HexlinkBlocks.VORTEX, stackableProps()))
 
     fun epicProps(): Item.Settings{
         return Item.Settings()

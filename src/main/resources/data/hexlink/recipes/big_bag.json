@@ -1,5 +1,5 @@
 {
-  "type": "hexlink:shaped_extractor",
+  "type": "minecraft:crafting_shaped",
   "key": {
     "#": { "tag": "minecraft:wool" },
     "I": { "item": "minecraft:chorus_fruit" },

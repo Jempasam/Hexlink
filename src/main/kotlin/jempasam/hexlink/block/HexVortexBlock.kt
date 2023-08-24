@@ -24,15 +24,16 @@ import kotlin.streams.asSequence
 class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiritSource, BlockSpiritTarget, BlockSpiritContainer{
 
     companion object{
-        fun coloredParticle(world: World, pos: BlockPos, color: Int){
-            val center=Vec3d.ofCenter(pos)
-            val r = (color shr 0 and 0xFF).toDouble() / 255.0
+        fun coloredParticle(world: World, pos: BlockPos, color: Int, count: Int){
+            val center=Vec3d.of(pos)
+            val r = (color shr 16 and 0xFF).toDouble() / 255.0
             val g = (color shr 8 and 0xFF).toDouble() / 255.0
-            val b = (color shr 16 and 0xFF).toDouble() / 255.0
-            for (j in 0 until 6) {
+            val b = (color shr 0 and 0xFF).toDouble() / 255.0
+            for (j in 0 until count) {
+                val pos=center.add(Math.random(), Math.random(),Math.random())
                 world.addParticle(
                         ParticleTypes.ENTITY_EFFECT,
-                        center.x, center.x, center.z,
+                        pos.x, pos.y, pos.z,
                         r, g, b
                 )
             }
@@ -53,9 +54,10 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
         if (!state.isOf(newState.block) && world is ServerWorld) {
+            val center=Vec3d.ofCenter(pos)
             world.spawnParticles(
                     ParticleTypes.CLOUD,
-                    pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
+                    center.x, center.y, center.z,
                     10,
                     0.5, 0.5, 0.5,
                     0.1
@@ -115,12 +117,12 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
                         var i=0
                         for(id in removed_output){
                             i++
-                            if(i>=it)break
+                            if(i>it)break
                             vortexentity.output.removeAt(id)
                         }
                         for(id in removed_input){
                             i++
-                            if(i>=it)break
+                            if(i>it)break
                             vortexentity.input.removeAt(id)
                         }
                         vortexentity.markDirty()

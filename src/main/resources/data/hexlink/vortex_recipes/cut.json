@@ -1,0 +1,11 @@
+{
+  "type": "hexlink:pattern",
+  "catalyzer": [
+    {"type": "hexlink:item", "value": "minecraft:iron_sword"}
+  ],
+  "pattern": [
+    { }, { }, { },
+    { }, { }, { },
+    {"input": 0, "mat": 0}, {"input": 1, "mat": 0}, { }
+  ]
+}

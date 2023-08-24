@@ -1,10 +1,9 @@
 {
   "name": "hexlink.spell.spirit_spells",
-  "category": "hexcasting:patterns/spells",
+  "category": "hexcasting:patterns",
   "icon": "hexlink:crystal{extractor:\"hexlink:everything\"}",
   "sortnum": 100,
   "advancement": "hexcasting:root",
-  "read_by_default": true,
   "pages": [
     {
       "type": "patchouli:text",
