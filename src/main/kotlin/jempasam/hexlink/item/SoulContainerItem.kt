@@ -130,10 +130,8 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
     override fun getSpiritSource(stack: ItemStack): SpiritSource {
         return object: SpiritSource{
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                print("Try to find "+spirit.getName()+" in "+souls(stack)?.nbt+" and find "+souls(stack)?.get(spirit)?.nbt)
                 val souls=souls(stack) ?: return SpiritSource.NONE.FLUX
                 val entry=souls.get(spirit) ?: return SpiritSource.NONE.FLUX
-                print("Find:"+entry.nbt)
                 val final_count=min(entry.count, count)
                 return SpiritSource.SpiritOutputFlux(
                         {
@@ -153,23 +151,18 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
         return object: SpiritTarget{
             override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
                 val souls=soulsOrCreate(stack)
-                print("FillFind: "+souls.get(spirit)?.nbt+" size: "+souls.size+" max: "+max_box_count)
                 if( souls.get(spirit)!=null || souls.size<max_box_count ){
                     val opt_entry=souls.get(spirit)
                     val ecount=opt_entry?.count ?: 0
 
-                    println("from: "+ecount+" add "+count+" with max "+max_soul_count)
                     val new_value= min(ecount+count, max_soul_count)
                     val offset=new_value-ecount
-                    println("offset: "+offset)
                     if(offset<=0)return SpiritTarget.NONE.FLUX
 
                     return SpiritTarget.SpiritInputFlux(
                             {
                                 val entry=souls.getOrCreate(spirit)
-                                println(entry)
                                 entry.count+=min(it,offset)
-                                println(entry)
                             },
                             offset
                     )

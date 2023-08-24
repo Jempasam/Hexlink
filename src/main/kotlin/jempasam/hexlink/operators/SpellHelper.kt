@@ -36,7 +36,7 @@ fun List<Iota>.getSpirit(index: Int, max: Int): Spirit{
     else throw MishapInvalidIota(ret, max-index-1, Text.translatable("hexlink.spirit_iota"))
 }
 
-fun List<Iota>.getSpiritSource(ctx: CastingContext, index: Int, max: Int): SpiritSource{
+fun List<Iota>.getSpiritSourceOpt(ctx: CastingContext, index: Int, max: Int): SpiritSource?{
     val source_iota=get(index)
     val source=when(source_iota){
         is EntityIota ->{
@@ -49,8 +49,12 @@ fun List<Iota>.getSpiritSource(ctx: CastingContext, index: Int, max: Int): Spiri
         }
         else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
-    return source ?: throw InvalidSpiritSource(get(index))
+    return source
 }
+
+fun List<Iota>.getSpiritSource(ctx: CastingContext, index: Int, max: Int): SpiritSource
+    = getSpiritSourceOpt(ctx, index, max) ?: throw InvalidSpiritSource(get(index))
+
 
 fun List<Iota>.getSpiritSourceAndPos(ctx: CastingContext, index: Int, max: Int): Pair<SpiritSource,Vec3d>
     = makePosPair(getSpiritSource(ctx,index,max), index)

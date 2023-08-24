@@ -4,10 +4,14 @@ import jempasam.hexlink.block.functionnality.BlockSpiritSource
 import jempasam.hexlink.block.functionnality.BlockSpiritTarget
 import jempasam.hexlink.item.functionnality.ItemSpiritSource
 import jempasam.hexlink.item.functionnality.ItemSpiritTarget
+import jempasam.hexlink.spirit.BlockSpirit
+import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.Item
+import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -119,7 +123,6 @@ object SpiritHelper{
     }
 
     fun spiritSource(caster: PlayerEntity?, entity: Entity): SpiritSource?{
-        println("From "+caster+" to "+entity+" then "+(caster==entity))
         if(entity==caster){
             return spiritSource(caster)
         }
@@ -157,5 +160,11 @@ object SpiritHelper{
             }
             else return SpiritTarget.NONE.FLUX
         }
+    }
+
+    fun asItem(spirit: Spirit): Item?{
+        if(spirit is ItemSpirit)return spirit.item
+        else if(spirit is BlockSpirit && spirit.block.asItem()!= Items.AIR)return spirit.block.asItem()
+        else return null
     }
 }

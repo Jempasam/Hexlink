@@ -54,7 +54,7 @@ interface SpiritExtractor<T: Spirit>{
     fun noResult(): ExtractionResult<T> = noResult<T>()
 
     companion object{
-        fun <T: Spirit>noResult(): ExtractionResult<T> = ExtractionResult<T>({},null, 0)
+        fun <T: Spirit>noResult(): ExtractionResult<T> = ExtractionResult({},null, 0)
     }
 
 }

@@ -9,6 +9,8 @@ object VortexRecipeHelper {
     private val other_handkrs= mutableListOf<HexVortexHandler>()
 
     fun generateHandlerMaps(){
+        handler_map.clear()
+        other_handkrs.clear()
         for(handler in HexlinkRegistry.HEXVORTEX_HANDLER){
             if(handler is CatalyzedVortexHandler) handler_map[handler.getCatalyzer()] = handler
             else other_handkrs.add(handler)

@@ -12,5 +12,7 @@ object HexlinkColorProviders {
         ColorProviderRegistry.ITEM.register(SpiritContainerColor(), HexlinkItems.SmallBag)
         ColorProviderRegistry.ITEM.register(SpiritContainerColor(), HexlinkItems.MediumBag)
         ColorProviderRegistry.ITEM.register(SpiritContainerColor(), HexlinkItems.BigBag)
+
+        ColorProviderRegistry.ITEM.register(SpiritSourceColor(0), HexlinkItems.Spirit)
     }
 }

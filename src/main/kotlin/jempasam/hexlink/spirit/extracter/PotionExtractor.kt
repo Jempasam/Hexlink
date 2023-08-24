@@ -24,7 +24,7 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
         val effects= PotionUtil.getPotionEffects(stack)
         if(effects.isEmpty())return noResult()
 
-        return SpiritExtractor.ExtractionResult<PotionSpirit>(
+        return SpiritExtractor.ExtractionResult(
                 {
                     if (effects.size == 1) worldstack.killer()
                     else {

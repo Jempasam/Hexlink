@@ -27,9 +27,9 @@ class VortexScryingLensDisplay : OverlayBuilder {
 
     fun fillWith(lines: MutableList<Pair<ItemStack, Text>>, spirits: Sequence<Spirit>){
         val addItemToLens={ spirit: Spirit, count: Int ->
-            val icon= HexlinkItems.Tablet.defaultStack
-            HexlinkItems.Tablet.getSpiritTarget(icon).fill(1,spirit)
-            lines.add(Pair.of(icon, Text.of(count.toString()).copy().append(spirit.getName())))
+            val icon= HexlinkItems.Spirit.defaultStack
+            HexlinkItems.Spirit.setSpirit(icon,spirit)
+            lines.add(Pair.of(icon, Text.of(count.toString()+" ").copy().append(spirit.getName())))
         }
 
         var count=0

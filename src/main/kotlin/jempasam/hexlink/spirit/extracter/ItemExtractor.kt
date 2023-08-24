@@ -25,7 +25,7 @@ object ItemExtractor : SpiritExtractor<ItemSpirit> {
             return SpiritExtractor.ExtractionResult(
                     { worldstack.killer() },
                     ItemSpirit(stack.item),
-                    stack.count* max(stack.maxDamage/2,1)
+                    stack.count* max(stack.maxDamage,1)
             )
         }
         else return noResult()

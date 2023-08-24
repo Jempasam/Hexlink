@@ -27,6 +27,7 @@ object HexlinkItems {
     var FocusCollar=make("focus_collar", ItemFocus(simpleProps()))
     var MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
 
+    var Spirit=make("spirit",SingleSpiritContainerItem(stackableProps()))
     var Tablet=make("tablet",SoulContainerItem(simpleProps(), 1, 10))
     var SmallBag=make("small_bag",SoulContainerItem(simpleProps(), 2, 30))
     var MediumBag=make("medium_bag",SoulContainerItem(simpleProps(), 5, 100))

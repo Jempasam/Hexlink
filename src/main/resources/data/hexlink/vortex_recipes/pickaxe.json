@@ -1,0 +1,9 @@
+{
+  "type": "hexlink:pattern",
+  "catalyzer": {"type": "hexlink:item", "value": "minecraft:wooden_pickaxe"},
+  "pattern": [
+    {"input": 0, "mat": 0}, {"input": 1, "mat": 0}, {"input": 2, "mat": 0},
+    {    }, {"id": "minecraft:stick", "Count": "1b"}, {    },
+    {    }, {"id": "minecraft:stick", "Count": "1b"}, {    }
+  ]
+}
