@@ -6,6 +6,7 @@ import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.Item
+import net.minecraft.item.Items
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.recipe.RecipeType
 import net.minecraft.server.world.ServerWorld
@@ -49,7 +50,9 @@ class CookingVortexHandler : AbstractVortexHandler{
         return null
     }
 
-    override fun getRealRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>> = sequenceOf()
+    override fun getRealRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>>{
+        return sequenceOf(listOf(ItemSpirit(Items.BEEF)) to listOf(ItemSpirit(Items.COOKED_BEEF)))
+    }
 
     class Recipe(val item: Item, val count: Int, handler: CookingVortexHandler, val world: ServerWorld): AbstractVortexHandler.Recipe(handler){
         override fun realIngredientCount(): Int = 1

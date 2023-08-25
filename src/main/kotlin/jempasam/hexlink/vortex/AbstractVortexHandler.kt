@@ -28,7 +28,7 @@ abstract class AbstractVortexHandler(private var catalyzer: List<Spirit>, var ou
     abstract fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): Recipe?
 
     final override fun getRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>> {
-        return super.getRecipesExamples().map {
+        return getRealRecipesExamples().map {
             val i=catalyzer.toMutableList()
             val o=it.second.toMutableList()
             i.addAll(it.first)

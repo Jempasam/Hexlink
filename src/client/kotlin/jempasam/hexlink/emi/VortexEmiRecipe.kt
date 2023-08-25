@@ -25,19 +25,19 @@ class VortexEmiRecipe(private val id: Identifier, private val inputs: List<Spiri
 
     override fun getDisplayWidth(): Int = 144
 
-    override fun getDisplayHeight(): Int = 53
+    override fun getDisplayHeight(): Int = 60
 
     override fun supportsRecipeTree(): Boolean = false
 
     override fun addWidgets(widgets: WidgetHolder) {
-        val input_x_start=74-inputs.size*17/2
-        val output_x_start=74-outputs.size*17/2
+        val input_x_start=74-inputs.size*19/2
+        val output_x_start=74-outputs.size*19/2
         for(i in inputs.indices){
-            widgets.addSlot(HexlinkEMIPlugin.stackOfSpirit(inputs[i]), input_x_start+i*17, 1)
+            widgets.addSlot(HexlinkEMIPlugin.stackOfSpirit(inputs[i]), input_x_start+i*19, 1)
         }
-        widgets.addSlot(EmiStack.of(HexlinkItems.Vortex), 64, 19).catalyst(true)
+        widgets.addSlot(EmiStack.of(HexlinkItems.Vortex), 64, 20).catalyst(true)
         for(i in outputs.indices){
-            widgets.addSlot(HexlinkEMIPlugin.stackOfSpirit(outputs[i]), output_x_start+i*17, 36).recipeContext(this)
+            widgets.addSlot(HexlinkEMIPlugin.stackOfSpirit(outputs[i]), output_x_start+i*19, 40).recipeContext(this)
         }
     }
 }

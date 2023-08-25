@@ -1,14 +1,13 @@
 package jempasam.hexlink.vortex
 
 import com.google.gson.JsonObject
-import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.utils.getSpirit
 import net.fabricmc.fabric.api.registry.FuelRegistry
-import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper.getFloat
+import net.minecraft.util.registry.Registry
 import kotlin.math.max
 
 class BurningVortexHandler : AbstractVortexHandler{
@@ -47,7 +46,17 @@ class BurningVortexHandler : AbstractVortexHandler{
     }
 
     override fun getRealRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>> {
-        return sequenceOf( listOf(ItemSpirit(Items.COAL)) to listOf(burning_result) )
+        return Registry.ITEM.entrySet.asSequence().mapNotNull {
+            val item=it.value
+            val cooktime=FuelRegistry.INSTANCE.get(item)
+            if(cooktime!=null){
+                val result= mutableListOf<Spirit>()
+                val count=max(1,(cooktime/200*multiplier).toInt())
+                for(i in 0..<count)result.add(burning_result)
+                listOf(SpiritHelper.asSpirit(item)) to result
+            }
+            else null
+        }
     }
 
     class Recipe(val fuel_time: Int, val handler: BurningVortexHandler): AbstractVortexHandler.Recipe(handler){

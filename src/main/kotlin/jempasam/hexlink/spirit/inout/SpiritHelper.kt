@@ -10,6 +10,7 @@ import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
@@ -167,5 +168,10 @@ object SpiritHelper{
         if(spirit is ItemSpirit)return spirit.item
         else if(spirit is BlockSpirit && spirit.block.asItem()!= Items.AIR)return spirit.block.asItem()
         else return null
+    }
+
+    fun asSpirit(item: Item): Spirit{
+        if(item is BlockItem)return BlockSpirit(item.block)
+        else return ItemSpirit(item)
     }
 }

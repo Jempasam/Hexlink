@@ -45,6 +45,7 @@ class HexlinkEMIPlugin : EmiPlugin{
             var i=0
             for(recipe in handler.value.getRecipesExamples()){
                 val id=Identifier(handler.key.value.namespace, handler.key.value.path+i)
+                HexlinkMod.logger.warn("EMI recipe registered $id with $recipe")
                 registry.addRecipe(VortexEmiRecipe(id, recipe.first, recipe.second))
             }
         }
