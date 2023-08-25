@@ -9,6 +9,8 @@
   "hexlink.mishap.invalid_spirit_target": "The Spirit target is invalid, you need a valid source from where to get spirits",
 
 
+  "emi.category.hexlink.vortex": "Vortex Crafting",
+
 
   "hexcasting.spell.hexlink:spirit_extraction": "Spirit Extraction",
   "hexcasting.spell.hexlink:spirit_transfer": "Spirit Transfer",
@@ -98,7 +100,7 @@
   "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of spirits, and 30 of each.",
   "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of spirits, and 100 of each.",
   "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of spirits, and 300 of each.",
-  "hexlink.page.bag.tablet": "Soul tablets can up to 10 spirits of one type, you can them in dungeon chests.",
+  "hexlink.page.bag.tablet": "Soul tablets can contains up to 10 spirits of one type, you can them in dungeon chests.",
 
   "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",

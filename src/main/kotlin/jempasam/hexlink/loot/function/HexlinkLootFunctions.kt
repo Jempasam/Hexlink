@@ -11,6 +11,7 @@ object HexlinkLootFunctions {
         Registry.register(Registry.LOOT_FUNCTION_TYPE, Identifier(HexlinkMod.MODID, id), loot_function)
     }
     fun registerLootFunctions(){
-        register("spirit_extractor", SpiritExtractorLootFunction.Type)
+        register("spirit", SpiritTargetLootFunction.Type)
+        register("easy_nbt", EasyNBTLootFunction.Type)
     }
 }

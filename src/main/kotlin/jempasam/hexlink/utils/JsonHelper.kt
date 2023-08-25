@@ -32,7 +32,7 @@ fun JsonArray.asNBT(): NbtList{
 fun JsonElement.asNBT(): NbtElement{
     if(this.isJsonObject)return (this as JsonObject).asNBT()
     else if(this.isJsonArray)return (this as JsonArray).asNBT()
-    else return StringNbtReader(AcceptAllStringReader(this.asString)).parseElement()
+    else return PublicStringNbtReader(AcceptAllStringReader(this.asString)).parseElementPrimitive()
 }
 
 
@@ -102,6 +102,12 @@ class AcceptAllStringReader(reader: String): StringReader(reader){
             skip()
         }
         return string.substring(start, cursor)
+    }
+}
+
+class PublicStringNbtReader(reader: StringReader): StringNbtReader(reader){
+    public override fun parseElementPrimitive(): NbtElement {
+        return super.parseElementPrimitive()
     }
 }
 

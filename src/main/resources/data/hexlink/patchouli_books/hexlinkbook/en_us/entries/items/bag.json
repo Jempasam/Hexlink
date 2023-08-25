@@ -25,10 +25,9 @@
       "text": "hexlink.page.bag.big_bag"
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "hexlink:tablet",
-      "text": "hexlink.page.bag.tablet",
-      "link_recipe": true
+      "type": "patchouli:crafting",
+      "recipe": "hexlink:tablet",
+      "text": "hexlink.page.bag.tablet"
     }
   ]
 }
