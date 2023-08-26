@@ -3,5 +3,5 @@ package jempasam.hexlink.vortex
 import jempasam.hexlink.spirit.Spirit
 
 interface CatalyzedVortexHandler: HexVortexHandler {
-    fun getCatalyzer(): Spirit
+    fun getCatalyzer(): List<Spirit>
 }

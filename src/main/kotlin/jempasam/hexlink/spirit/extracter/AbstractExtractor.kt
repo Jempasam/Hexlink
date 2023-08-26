@@ -6,7 +6,7 @@ import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3i
 
 abstract class AbstractExtractor<T: Spirit>(val name: String, val colors: List<Vec3i>) : SpiritExtractor<T> {
-    override fun getExtractedName(): Text {
+    override fun getName(): Text {
         return Text.translatable(name)
     }
 

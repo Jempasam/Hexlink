@@ -6,48 +6,48 @@ import at.petrak.hexcasting.api.spell.SpellAction
 import at.petrak.hexcasting.api.spell.casting.CastingContext
 import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.mishaps.MishapBadOffhandItem
 import jempasam.hexlink.data.HexlinkConfiguration
-import jempasam.hexlink.item.functionnality.ExtractorItem
 import jempasam.hexlink.mishap.MishapNotExtractable
-import net.minecraft.entity.Entity
-import net.minecraft.item.ItemStack
-import net.minecraft.text.Style
-import net.minecraft.text.Text
-import net.minecraft.util.DyeColor
-import net.minecraft.util.Hand
+import jempasam.hexlink.operators.getExtractorItemAndPos
+import jempasam.hexlink.operators.getSpiritTargetAndPos
+import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.spirit.extracter.SpiritExtractor
+import jempasam.hexlink.spirit.inout.SpiritTarget
+import kotlin.math.ceil
+import kotlin.math.min
 
 class OpExtractSpirit : SpellAction{
-    override val argc: Int get() = 1
+    override val argc: Int get() = 3
 
-    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
-        val target=args.getEntity(0, 1)
-        val stack=ctx.caster.offHandStack
-        val item=stack.item
-        ctx.assertEntityInRange(target)
-        if(item is ExtractorItem){
-            if(item.canExtractFrom(stack,target)){
-                return Triple(
-                        Spell(stack, item, target),
-                        HexlinkConfiguration.extractor_settings[item.getExtractor(stack)]?.extraction_media_cost ?: 500,
-                        listOf(
-                                ParticleSpray.burst(target.pos,1.0,10),
-                                ParticleSpray.burst(ctx.position,1.0,10)
-                        )
-                )
-            }
-            else throw MishapNotExtractable(target,stack)
+    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>>{
+        val extracted=args.getEntity(0, 3)
+        val extractor=args.getExtractorItemAndPos(ctx,1,3)
+        val target=args.getSpiritTargetAndPos(ctx,2,3)
+
+        ctx.assertEntityInRange(extracted)
+        val extraction=extractor.first.extract(ctx.caster, extracted)
+        if(extraction.spirit!=null){
+            return Triple(
+                    Spell(extractor.first, extraction, target.first),
+                    HexlinkConfiguration.extractor_settings[extractor.first]?.extraction_media_cost ?: 2,
+                    listOf(
+                            ParticleSpray.burst(extracted.pos,1.0,5),
+                            ParticleSpray.burst(target.second,1.0,5),
+                            ParticleSpray.burst(extractor.second,1.0,5)
+                    )
+            )
         }
-        else throw MishapBadOffhandItem(stack, Hand.OFF_HAND, Text.translatable("hexlink.mishap.extractable_to"))
+        else throw MishapNotExtractable(extracted,extractor.first)
     }
 
-    data class Spell(val stack: ItemStack, val item: ExtractorItem, val target: Entity) : RenderedSpell {
+    data class Spell(val extractor: SpiritExtractor<*>, val extraction: SpiritExtractor.ExtractionResult<*>, val target: SpiritTarget) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
-            if(item.extractFrom(stack,target)==ExtractorItem.ExtractionResult.SUCCESS){
-
-            }
-            else ctx.caster.sendMessage(Text.translatable("hexlink.unlucky").setStyle(Style.EMPTY.withBold(true).withColor(DyeColor.CYAN.signColor)))
-
+            val multiplier=HexlinkConfiguration.extractor_settings[extractor]?.soul_count ?: 1
+            val input=target.fill(multiplier*extraction.max_count, extraction.spirit as Spirit)
+            val count= min(input.maxcount, extraction.max_count*multiplier)
+            val consumed= ceil(count.toFloat()/multiplier).toInt()
+            extraction.consume(consumed)
+            input.fill(count)
         }
     }
 }

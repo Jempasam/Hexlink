@@ -36,9 +36,9 @@ class ItemSpirit(val item: Item): Spirit {
         else if(item is BlockItem)
             color=item.block.defaultMapColor.color
         else if(item.getRarity(item.defaultStack)!=Rarity.COMMON)
-            color=item.getRarity(item.defaultStack).formatting.colorValue ?: DyeColor.BROWN.signColor
+            color=item.getRarity(item.defaultStack).formatting.colorValue ?: DyeColor.ORANGE.signColor
         else
-            color=DyeColor.BROWN.signColor
+            color=DyeColor.ORANGE.signColor
     }
 
 

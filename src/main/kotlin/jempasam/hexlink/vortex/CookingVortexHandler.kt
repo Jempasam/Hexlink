@@ -1,60 +1,71 @@
 package jempasam.hexlink.vortex
 
+import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.Spirit
-import net.minecraft.inventory.Inventory
+import jempasam.hexlink.spirit.inout.SpiritHelper
 import net.minecraft.inventory.SimpleInventory
-import net.minecraft.recipe.Recipe
+import net.minecraft.item.Item
+import net.minecraft.item.Items
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.recipe.RecipeType
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.JsonHelper
 import kotlin.math.min
 
-class CookingVortexHandler<R: Recipe<Inventory>>(val catlzer: Spirit, recipe_type: RecipeType<R>, val multiplier: Float) : CatalyzedVortexHandler{
+class CookingVortexHandler : AbstractVortexHandler{
 
-    private val recipe_manager=RecipeManager.createCachedMatchGetter(recipe_type)
+    val multiplier: Float
+    constructor(catalyzer: List<Spirit>, output: List<Spirit>, multiplier: Float)
+            : super(catalyzer, output)
+    {
+        this.multiplier=multiplier
+    }
 
-    override fun getCatalyzer(): Spirit = catlzer
+    constructor(obj: JsonObject)
+            : super(obj)
+    {
+        this.multiplier=JsonHelper.getFloat(obj, "multiplier", 1.0f)
+    }
 
-    override fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
-        if(ingredients.size>=2){
-            val first=ingredients[0]
+
+    private val recipe_manager=RecipeManager.createCachedMatchGetter(RecipeType.SMELTING)
+
+    override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
+        if(ingredients.size>=1){
             val ingredient=ingredients[1]
-            if(first==catlzer && ingredient is ItemSpirit){
+            val item= SpiritHelper.asItem(ingredient)
+            if(item!=null){
                 val inventory=SimpleInventory(1)
-                inventory.setStack(0, ingredient.item.defaultStack)
+                inventory.setStack(0, item.defaultStack)
                 val cooking_recipe=recipe_manager.getFirstMatch(inventory,world)
                 if(cooking_recipe.isPresent){
-                    return Recipe(inventory,cooking_recipe.get(),this,world)
+                    val result=cooking_recipe.get().craft(inventory)
+                    if(!result.isEmpty){
+                        return Recipe(result.item, min(1,(result.count*multiplier).toInt()), this, world)
+                    }
                 }
             }
         }
         return null
     }
 
-    class Recipe(val inv: Inventory, val rec: net.minecraft.recipe.Recipe<Inventory>, val handler: CookingVortexHandler<*>, val world: ServerWorld): HexVortexHandler.Recipe{
-        override fun test(ingredients: List<Spirit>): Boolean {
-            if(ingredients.size==2 && ingredients[0] ==handler.catlzer){
-                val item= ingredients[1]
-                if(item is ItemSpirit){
-                    inv.setStack(0,item.item.defaultStack)
-                    return rec.matches(inv,world)
-                }
-            }
-            return false
-        }
+    override fun getRealRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>>{
+        return sequenceOf(listOf(ItemSpirit(Items.BEEF)) to listOf(ItemSpirit(Items.COOKED_BEEF)))
+    }
 
-        override fun ingredientCount(): Int = 2
+    class Recipe(val item: Item, val count: Int, handler: CookingVortexHandler, val world: ServerWorld): AbstractVortexHandler.Recipe(handler){
+        override fun realIngredientCount(): Int = 1
 
-
-        override fun mix(ingredients: List<Spirit>): List<Spirit> {
-            val item=(ingredients[1] as ItemSpirit).item.defaultStack
-            inv.setStack(0,item)
-            val stack=rec.craft(inv)
-            val count= min((stack.count*handler.multiplier).toInt(),1)
+        override fun realMix(ingredients: List<Spirit>): List<Spirit> {
             val ret= mutableListOf<Spirit>()
-            for(i in 0..<count)ret.add(ItemSpirit(stack.item))
+            for(i in 0..<count)ret.add(ItemSpirit(item))
             return ret
         }
+
+    }
+
+    object SERIALIZER: HexVortexHandler.Serializer<CookingVortexHandler> {
+        override fun serialize(json: JsonObject): CookingVortexHandler = CookingVortexHandler(json)
     }
 }

@@ -17,6 +17,7 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import kotlin.random.Random
 
 
 class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HexlinkEntities.HEX_VORTEX, pos, state){
@@ -25,6 +26,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
     companion object{
         const val LOADING_TIME=20
         const val MAX_AGE=20*60
+        const val START_TIME=60
 
         const val CRAFT_SUCCEED_STATUS=260401
     }
@@ -36,19 +38,16 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
             val recipe=handler.findRecipe(inputs, world)
             if(recipe!=null){
                 val final_inputs=inputs.subList(0,recipe.ingredientCount())
-                if(recipe.test(final_inputs)){
-                    for(i in 0..<recipe.ingredientCount()){
-                        if(input.size>0)input.removeAt(0)
-                        else if(output.size>0)output.removeAt(0)
-                        else break
-                    }
-                    val result=recipe.mix(final_inputs)
-                    for(r in result)world.addSyncedBlockEvent(pos,cachedState.block, CRAFT_SUCCEED_STATUS, r.getColor())
-                    output.addAll(result)
-                    markDirty()
-                    sendToClient()
-                    return true
+                for(i in 0..<recipe.ingredientCount()){
+                    if(input.size>0)input.removeAt(0)
+                    else if(output.size>0)output.removeAt(0)
+                    else break
                 }
+                val result=recipe.mix(final_inputs)
+                output.addAll(result)
+                markDirty()
+                sendToClient()
+                return true
             }
         }
         return false
@@ -60,31 +59,29 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
 
 
     fun tick(world: World, pos: BlockPos, state: BlockState) {
-        if(world.isClient)return
-        loading++
-        age++
-        if(age> MAX_AGE){
-            world.removeBlock(pos,false)
-        }
-        if(loading> LOADING_TIME){
-            println("trycraft")
-            if(craft(world as ServerWorld)){
-                age=0
+        if(world.isClient){
+            if(input.size+output.size>0 && random.nextInt(20)==0){
+                val i=random.nextInt(input.size+output.size)
+                val spirit= if(i>=input.size) output[i-input.size] else input[i]
+                HexVortexBlock.coloredParticle(world,pos,spirit.getColor(),1)
             }
-            loading=0
-            if(input.isEmpty() && output.isEmpty()){
+        }
+        else{
+            loading++
+            age++
+            if(age> MAX_AGE){
                 world.removeBlock(pos,false)
             }
+            if(loading> LOADING_TIME){
+                if(craft(world as ServerWorld)){
+                    age=0
+                }
+                loading=0
+                if(input.isEmpty() && output.isEmpty()){
+                    world.removeBlock(pos,false)
+                }
+            }
         }
-    }
-
-    override fun onSyncedBlockEvent(type: Int, data: Int): Boolean {
-        val w=world
-        if(type==CRAFT_SUCCEED_STATUS && w!=null){
-            HexVortexBlock.coloredParticle(w,pos,data)
-            return true
-        }
-        return super.onSyncedBlockEvent(type,data)
     }
 
     fun give(spirit: Spirit){
@@ -113,9 +110,17 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         nbt.getList("input",NbtElement.COMPOUND_TYPE.toInt()).forEach{
             if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{input.add(it)}
         }
+        val previous_output_size=output.size
         output.clear()
         nbt.getList("output",NbtElement.COMPOUND_TYPE.toInt()).forEach{
             if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{output.add(it)}
+        }
+
+        val w=world
+        if(w!=null){
+            for(i in previous_output_size..<output.size){
+                HexVortexBlock.coloredParticle(w,pos,output[i].getColor(),6)
+            }
         }
     }
 
@@ -127,9 +132,11 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         return createNbt()
     }
 
-    private var loading=0
-    private var age=0
+    var loading=0
+    var age=-START_TIME+ LOADING_TIME
     val input= mutableListOf<Spirit>()
     val output= mutableListOf<Spirit>()
+
+    val random=Random(System.currentTimeMillis())
 }
 

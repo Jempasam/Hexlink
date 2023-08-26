@@ -1,0 +1,7 @@
+{
+  "type": "hexlink:burning",
+  "catalyzer": [
+    {"type": "hexlink:block", "value": "minecraft:soul_sand"}
+  ],
+  "burning_result": {"type": "hexlink:block", "value": "minecraft:soul_fire"}
+}

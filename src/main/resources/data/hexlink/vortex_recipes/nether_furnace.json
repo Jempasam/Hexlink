@@ -1,0 +1,7 @@
+{
+  "type": "hexlink:burning",
+  "catalyzer": [
+    {"type": "hexlink:block", "value": "minecraft:netherrack"}
+  ],
+  "burning_result": {"type": "hexlink:block", "value": "minecraft:fire"}
+}

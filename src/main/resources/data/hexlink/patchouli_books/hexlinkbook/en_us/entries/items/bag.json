@@ -23,6 +23,11 @@
       "type": "patchouli:crafting",
       "recipe": "hexlink:big_bag",
       "text": "hexlink.page.bag.big_bag"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "hexlink:tablet",
+      "text": "hexlink.page.bag.tablet"
     }
   ]
 }

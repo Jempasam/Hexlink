@@ -17,20 +17,23 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import kotlin.streams.asSequence
 
 class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiritSource, BlockSpiritTarget, BlockSpiritContainer{
 
     companion object{
-        fun coloredParticle(world: World, pos: BlockPos, color: Int){
+        fun coloredParticle(world: World, pos: BlockPos, color: Int, count: Int){
+            val center=Vec3d.of(pos)
             val r = (color shr 16 and 0xFF).toDouble() / 255.0
             val g = (color shr 8 and 0xFF).toDouble() / 255.0
             val b = (color shr 0 and 0xFF).toDouble() / 255.0
-            for (j in 0 until 6) {
+            for (j in 0 until count) {
+                val pos=center.add(Math.random(), Math.random(),Math.random())
                 world.addParticle(
                         ParticleTypes.ENTITY_EFFECT,
-                        pos.x.toDouble(), pos.x.toDouble(), pos.z.toDouble(),
+                        pos.x, pos.y, pos.z,
                         r, g, b
                 )
             }
@@ -51,9 +54,10 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
         if (!state.isOf(newState.block) && world is ServerWorld) {
+            val center=Vec3d.ofCenter(pos)
             world.spawnParticles(
                     ParticleTypes.CLOUD,
-                    pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(),
+                    center.x, center.y, center.z,
                     10,
                     0.5, 0.5, 0.5,
                     0.1
@@ -65,7 +69,7 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
 
 
 
-    fun addAt(world: ServerWorld, pos: BlockPos, spirit: Spirit): Boolean{
+    fun addAt(world: ServerWorld, pos: BlockPos, spirit: Spirit?=null): Boolean{
         val bstate=world.getBlockState(pos)
         val block=bstate.block
         if(bstate.isAir){
@@ -74,7 +78,7 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
         else if(block!=this)return false
         val vortex_entity=world.getBlockEntity(pos)
         vortex_entity as HexVortexBlockEntity
-        vortex_entity.give(spirit)
+        if(spirit!=null)vortex_entity.give(spirit)
         return true
     }
 
@@ -109,13 +113,27 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
                         }
                     }
                     return SpiritSource.SpiritOutputFlux({
+                        vortexentity.age=0
+                        var i=0
+                        for(id in removed_output){
+                            i++
+                            if(i>it)break
+                            vortexentity.output.removeAt(id)
+                        }
                         for(id in removed_input){
+                            i++
+                            if(i>it)break
                             vortexentity.input.removeAt(id)
                         }
-                        for(id in removed_output)vortexentity.output.removeAt(id)
                         vortexentity.markDirty()
                         vortexentity.sendToClient()
                     }, current_count)
+                }
+
+                override fun last(): Spirit? {
+                    if(vortexentity.output.isNotEmpty())return vortexentity.output.last()
+                    if(vortexentity.input.isNotEmpty())return vortexentity.input.last()
+                    return null
                 }
             }
         }
@@ -128,6 +146,8 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
             return object: SpiritTarget{
                 override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
                     return SpiritTarget.SpiritInputFlux({
+                        vortexentity.age=0
+                        vortexentity.loading=0
                         for(i in 0..<count)vortexentity.input.add(spirit)
                         vortexentity.markDirty()
                         vortexentity.sendToClient()

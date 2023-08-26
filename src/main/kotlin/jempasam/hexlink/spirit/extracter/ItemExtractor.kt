@@ -4,6 +4,7 @@ import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.entity.Entity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.tag.TagKey
 import net.minecraft.text.Text
@@ -16,26 +17,22 @@ object ItemExtractor : SpiritExtractor<ItemSpirit> {
 
     val NOT_EXTRACTABLE=TagKey.of(Registry.ITEM_KEY, Identifier(HexlinkMod.MODID, "not_extractable"))
 
-    override fun canExtract(target: Entity): Boolean {
-        val stack= StackHelper.stack(null, target)?.stack
-        return stack!=null && stack.item !is BlockItem && !stack.isIn(NOT_EXTRACTABLE)
+    override fun extract(caster: PlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<ItemSpirit> {
+        val worldstack= StackHelper.stack(caster, target)
+        var stack= worldstack?.stack
+        if(stack!=null && stack.item !is BlockItem && !stack.isIn(NOT_EXTRACTABLE)){
+            worldstack as StackHelper.WorldStack
+            return SpiritExtractor.ExtractionResult(
+                    { worldstack.killer() },
+                    ItemSpirit(stack.item),
+                    stack.count* max(stack.maxDamage,1)
+            )
+        }
+        else return noResult()
     }
 
-    override fun extract(target: Entity): SpiritExtractor.ExtractionResult<ItemSpirit> {
-        val stack= StackHelper.stackOrThrow(null, target).stack
-        return result(ItemSpirit(stack.item), stack.count* max(stack.maxDamage/2,1))
-    }
+    override fun getName(): Text = Text.translatable("hexlink.extractor.item")
 
-    override fun consume(target: Entity) {
-        StackHelper.stackOrThrow(null, target).killer()
-    }
-
-    override fun getExtractedName(): Text {
-        return Text.translatable("hexlink.extractor.item")
-    }
-
-    override fun getColor(): Int {
-        return DyeColor.BROWN.fireworkColor
-    }
+    override fun getColor(): Int = DyeColor.BROWN.fireworkColor
 
 }

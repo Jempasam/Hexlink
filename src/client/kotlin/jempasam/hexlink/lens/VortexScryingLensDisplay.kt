@@ -17,12 +17,6 @@ class VortexScryingLensDisplay : OverlayBuilder {
     override fun addLines(lines: MutableList<Pair<ItemStack, Text>>, state: BlockState, pos: BlockPos, observer: PlayerEntity, world: World, hitFace: Direction){
         val block=state.block
         if(block is BlockSpiritContainer){
-
-
-            var count=0
-            var last: Spirit?=null
-            var actual_count=0
-
             val slot_count=block.getSlotCount()
             for(i in 0..<slot_count){
                 fillWith(lines,block.getSpiritContent(i,world,pos))
@@ -33,9 +27,9 @@ class VortexScryingLensDisplay : OverlayBuilder {
 
     fun fillWith(lines: MutableList<Pair<ItemStack, Text>>, spirits: Sequence<Spirit>){
         val addItemToLens={ spirit: Spirit, count: Int ->
-            val icon= HexlinkItems.Tablet.defaultStack
-            HexlinkItems.Tablet.setSpirit(icon, spirit)
-            lines.add(Pair.of(icon, Text.of(count.toString()).copy().append(spirit.getName())))
+            val icon= HexlinkItems.Spirit.defaultStack
+            HexlinkItems.Spirit.setSpirit(icon,spirit)
+            lines.add(Pair.of(icon, Text.of(count.toString()+" ").copy().append(spirit.getName())))
         }
 
         var count=0

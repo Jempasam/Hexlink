@@ -1,0 +1,11 @@
+{
+  "type": "hexlink:pattern",
+  "catalyzer": [
+    {"type": "hexlink:item", "value": "minecraft:iron_axe"}
+  ],
+  "pattern": [
+    {"input": 0, "mat": 0}, {"input": 1, "mat": 0}, {    },
+    {"input": 2, "mat": 0}, {"input": 3, "mat": 0}, {    },
+    {    },                 {    },                 {    }
+  ]
+}

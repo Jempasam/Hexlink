@@ -7,7 +7,11 @@ import at.petrak.hexcasting.api.spell.math.HexPattern
 import jempasam.hexlink.operators.OpSpiritTest
 import jempasam.hexlink.operators.rw.OpReadTrinket
 import jempasam.hexlink.operators.rw.OpWriteTrinket
-import jempasam.hexlink.operators.spells.*
+import jempasam.hexlink.operators.spells.OpExtractSpirit
+import jempasam.hexlink.operators.spells.OpManisfestSpirit
+import jempasam.hexlink.operators.spells.OpSpiritTransfer
+import jempasam.hexlink.operators.spells.OpVortexSpirit
+import jempasam.hexlink.operators.spiritinfo.OpGetSpiritIota
 import net.minecraft.util.Identifier
 
 object HexlinkPatterns {
@@ -17,35 +21,43 @@ object HexlinkPatterns {
     }
 
     fun registerAll(){
-        register("spirit_extract",
+
+        register("spirit_extraction",
                 HexPattern.fromAngles("aawddaweddwaa",HexDir.NORTH_EAST),
                 OpExtractSpirit()
         )
 
-        register("spirit_extract_entity",
-                HexPattern.fromAngles("aawddaweddwwawaw",HexDir.NORTH_EAST),
-                OpEntityExtractSpirit()
+        register("spirit_transfer",
+                HexPattern.fromAngles("aawddawdaqqqa",HexDir.NORTH_EAST),
+                OpSpiritTransfer()
+        )
+
+        register("spirit_transfer_look",
+                HexPattern.fromAngles("aawddaeqqqqq",HexDir.NORTH_EAST),
+                OpGetSpiritIota()
+        )
+
+        register("spirit_vortex",
+                HexPattern.fromAngles("aawddaweaqa",HexDir.NORTH_EAST),
+                OpVortexSpirit()
         )
 
         register("spirit_manifestation",
-                HexPattern.fromAngles("aawddawedd",HexDir.NORTH_EAST),
-                OpManisfestSpirit()
+                HexPattern.fromAngles("aawddaweqaeaq",HexDir.NORTH_EAST),
+                OpManisfestSpirit(false)
+        )
+
+        register("spirit_self_manifestation",
+                HexPattern.fromAngles("aawddaweqaeaqa",HexDir.NORTH_EAST),
+                OpManisfestSpirit(true)
         )
 
         register("spirit_look",
-                HexPattern.fromAngles("aawddawqaa",HexDir.NORTH_EAST),
+                HexPattern.fromAngles("aawddaweqqqqq",HexDir.NORTH_EAST),
                 OpSpiritTest()
         )
 
-        register("spirit_mix",
-                HexPattern.fromAngles("aawddawqdd",HexDir.NORTH_EAST),
-                OpMixSpirit()
-        )
 
-        register("spirit_transfer",
-                HexPattern.fromAngles("aawddaweaqa",HexDir.NORTH_EAST),
-                OpSpiritTransfer()
-        )
 
         register("read_trinket",
                 HexPattern.fromAngles("aqwqqqwq",HexDir.EAST),
@@ -56,5 +68,6 @@ object HexlinkPatterns {
                 HexPattern.fromAngles("deweeewe",HexDir.EAST),
                 OpWriteTrinket()
         )
+
     }
 }

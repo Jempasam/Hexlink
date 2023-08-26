@@ -1,7 +1,12 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hexlink:item/bag/small_bag",
-    "layer1": "hexlink:item/bag/small_bag_overlay"
-  }
+    "layer0": "hexlink:item/bag/small_bag"
+  },
+  "overrides": [
+    {
+      "model": "hexlink:item/filled_small_bag",
+      "predicate": { "hexlink:source_filled": 1.0 }
+    }
+  ]
 }

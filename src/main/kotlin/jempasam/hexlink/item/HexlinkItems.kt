@@ -2,7 +2,9 @@ package jempasam.hexlink.item
 
 import at.petrak.hexcasting.common.items.ItemFocus
 import jempasam.hexlink.HexlinkMod
+import jempasam.hexlink.block.HexlinkBlocks
 import jempasam.hexlink.creative_tab.HexlinkCreativeTab
+import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
@@ -21,15 +23,19 @@ object HexlinkItems {
         for(entry in items )Registry.register(Registry.ITEM, Identifier(HexlinkMod.MODID, entry.key), entry.value)
     }
 
-    val Tablet=make("tablet", SpiritContainerItem(epicProps()))
+    val Crystal= make("crystal", ExtractorCatalyzerItem(epicProps()))
 
     var UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
     var FocusCollar=make("focus_collar", ItemFocus(simpleProps()))
     var MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
 
+    var Spirit=make("spirit",SingleSpiritContainerItem(stackableProps()))
+    var Tablet=make("tablet",SoulContainerItem(simpleProps(), 1, 10))
     var SmallBag=make("small_bag",SoulContainerItem(simpleProps(), 2, 30))
     var MediumBag=make("medium_bag",SoulContainerItem(simpleProps(), 5, 100))
     var BigBag=make("big_bag",SoulContainerItem(simpleProps(), 10, 300))
+
+    var Vortex=make("vortex",BlockItem(HexlinkBlocks.VORTEX, stackableProps()))
 
     fun epicProps(): Item.Settings{
         return Item.Settings()

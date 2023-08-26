@@ -1,0 +1,72 @@
+package jempasam.hexlink.vortex
+
+import com.google.gson.JsonObject
+import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.spirit.inout.SpiritHelper
+import jempasam.hexlink.utils.getSpirit
+import net.minecraft.block.ComposterBlock
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.JsonHelper.getFloat
+
+class CompostingVortexHandler : AbstractVortexHandler{
+
+    val multiplier: Float
+    val composting_result: Spirit
+
+
+    constructor(catalyzer: List<Spirit>, output: List<Spirit>, composting_result: Spirit, multiplier: Float)
+            : super(catalyzer, output)
+    {
+        this.multiplier=multiplier
+        this.composting_result=composting_result
+    }
+
+    constructor(obj: JsonObject)
+            : super(obj)
+    {
+        this.composting_result=obj.getSpirit("composting_result")
+        this.multiplier=getFloat(obj,"multiplier",1.0f)
+    }
+
+
+    override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
+        if(ingredients.size>=1){
+            val ingredient=ingredients[0]
+            val item=SpiritHelper.asItem(ingredient)
+            if(item!=null){
+                val count=ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getOrElse(item,{-1.0f})
+                if(count!=-1.0f){
+                    return Recipe(Math.max(1, (count.toFloat()*multiplier).toInt()), this)
+                }
+            }
+        }
+        return null
+    }
+
+    override fun getRealRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>> {
+        return ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.asSequence().map {
+            val result= mutableListOf<Spirit>()
+            val count=Math.max(1, (it.value*multiplier).toInt())
+            for(i in 0..<count)result.add(composting_result)
+            listOf(SpiritHelper.asSpirit(it.key.asItem())) to result
+        }
+    }
+
+    class Recipe(val count: Int, val handler: CompostingVortexHandler): AbstractVortexHandler.Recipe(handler){
+        override fun realIngredientCount(): Int = 1
+
+        override fun realMix(ingredients: List<Spirit>): List<Spirit> {
+            if(count==0)return listOf()
+            else{
+                val ret= mutableListOf<Spirit>()
+                for(i in 0..<count)ret.add(handler.composting_result)
+                return ret
+            }
+        }
+    }
+
+    object SERIALIZER: HexVortexHandler.Serializer<CompostingVortexHandler> {
+        override fun serialize(json: JsonObject): CompostingVortexHandler = CompostingVortexHandler(json)
+    }
+
+}

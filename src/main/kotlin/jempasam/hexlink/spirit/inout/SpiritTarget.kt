@@ -6,12 +6,22 @@ import jempasam.hexlink.spirit.Spirit
 interface SpiritTarget {
     fun fill(count: Int, spirit: Spirit): SpiritInputFlux
 
-    class SpiritInputFlux(private val filler: ()->Unit, val count: Int){
+    class SpiritInputFlux(private val filler: (Int)->Unit, val maxcount: Int){
         private var filled=false
-        fun fill(){
-            if(!filled)filler()
-            HexlinkMod.logger.warn("Double filling, should not happen")
-            filled=true
+        fun fill(count: Int){
+            var final_count=count
+            if(final_count>maxcount){
+                final_count=maxcount
+                HexlinkMod.logger.warn("Try to fill more than max, should not happen")
+            }
+
+            if(!filled) {
+                if (final_count > 0) {
+                    filler(final_count)
+                    filled=true
+                }
+            }
+            else HexlinkMod.logger.warn("Double filling, should not happen")
         }
     }
 

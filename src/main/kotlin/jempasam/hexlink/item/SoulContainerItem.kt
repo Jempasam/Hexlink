@@ -2,8 +2,7 @@ package jempasam.hexlink.item
 
 import at.petrak.hexcasting.api.utils.asCompound
 import at.petrak.hexcasting.api.utils.getOrCreateList
-import jempasam.hexlink.data.HexlinkConfiguration
-import jempasam.hexlink.item.functionnality.ExtractorItem
+import at.petrak.hexcasting.api.utils.putCompound
 import jempasam.hexlink.item.functionnality.ItemSpiritSource
 import jempasam.hexlink.item.functionnality.ItemSpiritTarget
 import jempasam.hexlink.spirit.Spirit
@@ -11,108 +10,93 @@ import jempasam.hexlink.spirit.inout.SpiritSource
 import jempasam.hexlink.spirit.inout.SpiritTarget
 import jempasam.hexlink.utils.NbtHelper
 import net.minecraft.client.item.TooltipContext
-import net.minecraft.entity.Entity
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
-import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
 import kotlin.math.min
 
-class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul_count: Int): Item(settings), ExtractorItem, ItemSpiritSource, ItemSpiritTarget {
+class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul_count: Int): Item(settings), ItemSpiritSource, ItemSpiritTarget {
 
-    fun souls(stack: ItemStack): NbtList? = stack.nbt?.getList("souls", NbtElement.COMPOUND_TYPE.toInt())
+    fun souls(stack: ItemStack): Souls?
+        = stack.nbt?.getList("souls", NbtElement.COMPOUND_TYPE.toInt())?.let { Souls(it) }
 
-    fun soulsOrCreate(stack: ItemStack): NbtList = stack.orCreateNbt.getOrCreateList("souls", NbtElement.COMPOUND_TYPE)
+    fun soulsOrCreate(stack: ItemStack): Souls
+        = stack.orCreateNbt.getOrCreateList("souls", NbtElement.COMPOUND_TYPE).let { Souls(it) }
 
-    fun findEntryNbt(stack: ItemStack, spirit: Spirit): NbtCompound?{
-        val souls= souls(stack) ?: return null
-        val key=NbtHelper.writeSpirit(spirit)
-        val removed= mutableListOf<NbtElement>()
-        for(entry in souls){
-            val spirit_nbt=entry.asCompound.get("spirit")
-            if(spirit_nbt!=null){
-                if(entry.asCompound.getInt("count")==0){
-                    removed.add(entry)
+    class Souls(val nbt: NbtList): Sequence<SoulStack>{
+
+        fun remove(stack: SoulStack) = nbt.remove(stack.nbt)
+        fun remove(index: Int) = nbt.removeAt(index)
+
+        val size: Int get()=nbt.size
+
+        fun get(index: Int): SoulStack = SoulStack(nbt.getCompound(index))
+
+        fun get(tofind: Spirit): SoulStack?{
+            val key=NbtHelper.writeSpirit(tofind)
+            val removed= mutableListOf<SoulStack>()
+            for(entry in this){
+                val spirit_nbt=entry.spirit_nbt
+                if(!spirit_nbt.isEmpty){
+                    if(entry.count==0) removed.add(entry)
+                    else if(entry.spirit_nbt==key) return entry
                 }
-                else{
-                    if(spirit_nbt==key)return entry.asCompound
-                }
-
+                else removed.add(entry)
             }
-            else removed.add(entry)
+            removed.forEach{ remove(it) }
+            return null
         }
-        removed.forEach { souls.remove(it) }
-        return null
-    }
 
-    fun findEntryNbtOrCreate(stack: ItemStack, spirit: Spirit): NbtCompound{
-        val entry=findEntryNbt(stack,spirit)
-        if(entry==null){
-            val souls=soulsOrCreate(stack)
-            val new_entry=NbtCompound()
-            new_entry.put("spirit",NbtHelper.writeSpirit(spirit))
-            new_entry.putInt("count",0)
-            souls.add(new_entry)
-            return new_entry
-        }
-        else return entry
-    }
-
-    override fun canExtractFrom(stack: ItemStack, target: Entity): Boolean {
-        val extractor=getExtractor(stack)
-        return extractor!=null && extractor.canExtract(target)
-    }
-
-    override fun extractFrom(stack: ItemStack, target: Entity): ExtractorItem.ExtractionResult {
-        val extractor=getExtractor(stack)
-        if(extractor!=null){
-            val extract_result=extractor.extract(target)
-            if( findEntryNbt(stack,extract_result.spirit)!=null || ((souls(stack)?.size?:0)<max_box_count) ){
-                val entry=findEntryNbtOrCreate(stack,extract_result.spirit)
-                val count=(HexlinkConfiguration.extractor_settings[extractor]?.soul_count ?: 1)*extract_result.count
-
-                val new_value= min(entry.getInt("count")+count, max_soul_count)
-                val offset=new_value-entry.getInt("count")
-                if(offset==0)return ExtractorItem.ExtractionResult.FAIL
-                entry.putInt("count",new_value)
-
-                extractor.consume(target)
-                return ExtractorItem.ExtractionResult.SUCCESS
+        fun getOrCreate(spirit: Spirit): SoulStack{
+            val entry=get(spirit)
+            if(entry==null){
+                val newEntry=NbtCompound()
+                newEntry.put("spirit",NbtHelper.writeSpirit(spirit))
+                newEntry.putInt("count",0)
+                nbt.add(newEntry)
+                return SoulStack(newEntry)
             }
+            else return entry
         }
-        return ExtractorItem.ExtractionResult.FAIL
+
+        fun add(spirit: Spirit, count: Int){
+            val compound=NbtCompound()
+            compound.putInt("count", count)
+            compound.putCompound("spirit", NbtHelper.writeSpirit(spirit))
+            nbt.add(compound)
+        }
+
+        override fun iterator(): Iterator<SoulStack> {
+            return nbt.asSequence().map{ SoulStack(it.asCompound) }.iterator()
+        }
+
     }
 
-    fun consumeSpirit(stack: ItemStack, spirit: Spirit): Boolean{
-        val entry= findEntryNbt(stack,spirit) ?: return false
-        val count=entry.getInt("count")
-        if(count<=0){
-            souls(stack)?.remove(entry)
-            return false
-        }
-        entry.putInt("count", count-1)
-        if(count<=1)souls(stack)?.remove(entry)
-        return true
+    class SoulStack(val nbt: NbtCompound){
+        var count: Int
+            get()= nbt.getInt("count")
+            set(value)= nbt.putInt("count", value)
+
+        var spirit: Spirit?
+            get()= NbtHelper.readSpirit(nbt.getCompound("spirit"))
+            set(value){
+                if(value==null)nbt.remove("spirit")
+                else nbt.putCompound("spirit", NbtHelper.writeSpirit(value))
+            }
+
+        val spirit_nbt: NbtCompound get() =  nbt.getCompound("spirit")
     }
 
-    fun canConsumeSpirit(stack: ItemStack, spirit: Spirit): Boolean{
-        val entry= findEntryNbt(stack,spirit) ?: return false
-        val count=entry.getInt("count")
-        if(count<=0){
-            souls(stack)?.remove(entry)
-            return false
-        }
-        return true
-    }
+    fun last(stack: ItemStack): Spirit?
+        = souls(stack)?.let { if(it.size>0) it.get(it.size-1) else null }?.spirit
 
-    override fun isItemBarVisible(stack: ItemStack): Boolean = souls(stack)?.isNotEmpty() ?: false
+    override fun isItemBarVisible(stack: ItemStack): Boolean
+        = souls(stack)?.size?.let { it!=max_box_count && it!=0 } ?: false
 
     override fun getItemBarStep(stack: ItemStack): Int {
         val souls=souls(stack)
@@ -120,26 +104,25 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
     }
 
     override fun getItemBarColor(stack: ItemStack): Int {
-        return getExtractor(stack)?.getColor() ?: DyeColor.LIME.fireworkColor
+        return last(stack)?.getColor() ?: DyeColor.MAGENTA.fireworkColor
     }
 
-    override fun getName(stack: ItemStack): Text = getExtractorName(stack)
+    override fun getName(stack: ItemStack): Text
+        = last(stack) ?.getName() ?.let{Text.translatable(getTranslationKey(stack), it)}
+            ?: Text.translatable(getTranslationKey(stack)+".none")
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        appendExtractorTooltip(stack, tooltip)
-        for(entry in souls(stack) ?: NbtList()){
-            val compound=entry.asCompound
-            val spirit=NbtHelper.readSpirit(compound.getCompound("spirit"))
-            if(spirit!=null){
-                val count=compound.getInt("count")
-                if(count>0){
-                    tooltip.add(
-                            spirit.getName().copy()
-                                    .append(Text.of(" ("))
-                                    .append(Text.of(count.toString()))
-                                    .append(Text.of(")"))
-                    )
-                }
+        val souls=souls(stack) ?: return
+        for(i in 0..<souls.size){
+            val spiritstack=souls.get(i)
+            val spirit=spiritstack.spirit ?: continue
+            if(spiritstack.count>0){
+                tooltip.add(
+                        spirit.getName().copy()
+                                .append(Text.of(" ("))
+                                .append(Text.of(spiritstack.count.toString()))
+                                .append(Text.of(")"))
+                )
             }
         }
     }
@@ -147,49 +130,45 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
     override fun getSpiritSource(stack: ItemStack): SpiritSource {
         return object: SpiritSource{
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                if(canConsumeSpirit(stack,spirit)){
-                    return SpiritSource.SpiritOutputFlux({consumeSpirit(stack,spirit)},1)
-                }
-                else return SpiritSource.NONE.FLUX
+                val souls=souls(stack) ?: return SpiritSource.NONE.FLUX
+                val entry=souls.get(spirit) ?: return SpiritSource.NONE.FLUX
+                val final_count=min(entry.count, count)
+                return SpiritSource.SpiritOutputFlux(
+                        {
+                            val newcount=entry.count-it
+                            if(newcount<=0)souls.remove(entry)
+                            else entry.count=newcount
+                        },
+                        final_count
+                )
             }
+
+            override fun last(): Spirit? = last(stack)
         }
     }
 
     override fun getSpiritTarget(stack: ItemStack): SpiritTarget {
         return object: SpiritTarget{
             override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
-                if( findEntryNbt(stack,spirit)!=null || ((souls(stack)?.size?:0)<max_box_count) ){
-                    val entry=findEntryNbtOrCreate(stack,spirit)
+                val souls=soulsOrCreate(stack)
+                if( souls.get(spirit)!=null || souls.size<max_box_count ){
+                    val opt_entry=souls.get(spirit)
+                    val ecount=opt_entry?.count ?: 0
 
-                    val new_value= min(entry.getInt("count")+count, max_soul_count)
-                    val offset=new_value-entry.getInt("count")
-                    if(offset==0)return SpiritTarget.NONE.FLUX
+                    val new_value= min(ecount+count, max_soul_count)
+                    val offset=new_value-ecount
+                    if(offset<=0)return SpiritTarget.NONE.FLUX
 
-                    return SpiritTarget.SpiritInputFlux({entry.putInt("count",new_value)}, offset)
+                    return SpiritTarget.SpiritInputFlux(
+                            {
+                                val entry=souls.getOrCreate(spirit)
+                                entry.count+=min(it,offset)
+                            },
+                            offset
+                    )
                 }
                 return SpiritTarget.NONE.FLUX
             }
         }
-    }
-
-    override fun appendStacks(group: ItemGroup?, stacks: DefaultedList<ItemStack>) {
-        if (isIn(group)) appendStacks(this,stacks)
-    }
-
-     companion object{
-         fun getSpiritConsumable(infinite: Boolean, inventory: Inventory, spirit: Spirit): SoulSource?{
-             if(infinite)return SoulSource({}, null, null)
-             for(i in 0 until inventory.size()){
-                 val stack=inventory.getStack(i)
-                 val item=stack.item
-                 if(item is SoulContainerItem && item.canConsumeSpirit(stack, spirit))
-                     return SoulSource({item.consumeSpirit(stack, spirit)}, stack, item)
-             }
-             return null
-         }
-     }
-
-    class SoulSource(private val consumer: ()->Unit, val stack: ItemStack?, val item: SoulContainerItem?){
-        fun consume()=consumer()
     }
 }

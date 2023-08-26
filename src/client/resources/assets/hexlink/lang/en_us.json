@@ -1,16 +1,28 @@
 {
   "hexlink.mishap.empty_collar": "Your focus collar is empty",
   "hexlink.mishap.no_collar_item": "You don't have any focus collar",
-  "hexlink.mishap.extractable_to": "suitable extractor item like empty Tablet or Soul Bag",
+  "hexlink.mishap.extractor_item": "suitable extraction catalyzer item like a Extraction Crystal",
   "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
-  "hexlink.mishap.not_enough_soul": "Missing %d souls",
-  "hexlink.mishap.cant_mix_at": "You cannot mix souls at this location, you can mix a soul into a vortex or an empty place",
+  "hexlink.mishap.not_enough_soul": "Missing %d spirits",
+  "hexlink.mishap.cant_mix_at": "You cannot summon a vortex at this location, you can summon a vortex at an empty place",
+  "hexlink.mishap.invalid_spirit_source": "The Spirit source is invalid, you need a valid target where to put spirits",
+  "hexlink.mishap.invalid_spirit_target": "The Spirit target is invalid, you need a valid source from where to get spirits",
 
 
-  "hexlink.unlucky": "Extraction has fail, try again",
+  "emi.category.hexlink.vortex": "Vortex Crafting",
 
 
-  "gamerule.spiritExtractionSuccessProb": "Spirit Extraction Success Probability",
+  "hexcasting.spell.hexlink:spirit_extraction": "Spirit Extraction",
+  "hexcasting.spell.hexlink:spirit_transfer": "Spirit Transfer",
+  "hexcasting.spell.hexlink:spirit_transfer_look": "Spirit Transfer Look",
+  "hexcasting.spell.hexlink:spirit_vortex": "Vortex Formation",
+  "hexcasting.spell.hexlink:spirit_manifestation": "Spirit Manifestation",
+  "hexcasting.spell.hexlink:spirit_self_manifestation": "Spirit Self Manifestation",
+  "hexcasting.spell.hexlink:spirit_look": "Spirit Look",
+
+  "hexcasting.spell.hexlink:read_trinket": "Boehmer's Reflection",
+  "hexcasting.spell.hexlink:write_trinket": "Boehmer's Gambit",
+
 
 
   "hexlink.spirit": " Spirit",
@@ -23,6 +35,7 @@
   "hexlink.spirit.entity": "Entity Spirit",
   "hexlink.spirit.potion": "Potion Spirit",
   "hexlink.spirit.item": "Item Spirit",
+  "hexlink.spirit.biome": "Biome Spirit",
 
 
   "hexlink.extractor.item": "Item",
@@ -30,61 +43,64 @@
   "hexlink.extractor.block": "Block",
   "hexlink.extractor.potion": "Potion",
   "hexlink.extractor.everything": "Anything",
+  "hexlink.extractor.biome": "Biome",
 
 
   "item.hexlink.upgraded_book": "Upgraded Spellbook",
   "item.hexlink.mixed_pigment": "Mixed Pigment",
   "item.hexlink.focus_collar": "Focus Collar",
+  "item.hexlink.spirit": "%s Spirit",
+  "item.hexlink.spirit.none": "Spirit",
   "item.hexlink.tablet": "Tablet of %s",
-  "item.hexlink.tablet.none": "Spiritual Tablet",
-  "item.hexlink.small_bag": "Soul Pocket of %s",
+  "item.hexlink.tablet.none": "Empty Tablet",
+  "item.hexlink.small_bag": "Soul Pocket of %s...",
   "item.hexlink.small_bag.none": "Soul Pocket",
-  "item.hexlink.medium_bag": "Soul Bag of %s",
+  "item.hexlink.medium_bag": "Soul Bag of %s...",
   "item.hexlink.medium_bag.none": "Soul Bag",
-  "item.hexlink.big_bag": "Large Soul Bag of %s",
+  "item.hexlink.big_bag": "Large Soul Bag of %s...",
   "item.hexlink.big_bag.none": "Large Soul Bag",
+  "item.hexlink.crystal": "Crystal of %s",
+  "item.hexlink.crystal.none": "Empty Crysal",
+
+
+  "block.hexlink.vortex": "Media Vortex",
 
 
   "itemGroup.hexlink.hexlink": "Hexlink",
 
-
-  "hexcasting.spell.hexlink:spirit_extract": "Spirit Extraction",
-  "hexcasting.spell.hexlink:spirit_extract_entity": "Spirit Translocation",
-  "hexcasting.spell.hexlink:spirit_manifestation": "Spirit Manifestation",
-  "hexcasting.spell.hexlink:spirit_look": "Spirit Look",
-  "hexcasting.spell.hexlink:spirit_mix": "Spirit Mix",
-  "hexcasting.spell.hexlink:spirit_transfer": "Spirit Transfer",
-  "hexcasting.spell.hexlink:read_trinket": "Boehmer's Reflection",
-  "hexcasting.spell.hexlink:write_trinket": "Boehmer's Gambit",
 
   "hexlink.entry.readwrite_trinkets": "Trinket Read and Write",
   "hexlink.page.write_trinket": "This pattern can write a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
   "hexlink.page.read_trinket": "This pattern can read a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
 
   "hexlink.spell.spirit_spells": "Manipulation of spirits",
-  "hexlink.spell.spirit_extraction": "This powerful pattern should extract the essences of any physical object or properties into the physical realm and allow me to control them. The physical object is destroyed in the process. If I try to extract a Spirit Iota with a Tablet, I have a high chance of failing so I should get a lot of material. It seem I also need to lower living entities life to a very low value before being able to extract their spirits. I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit.",
-  "hexlink.spell.spirit_extract.desc": "With this pattern I can extract a spirit into an item in my offhand.",
-  "hexlink.spell.spirit_extract_entity.desc": "This pattern can extract spirits into an item on ground or in an item frame.",
-
-  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. With the last number iota I can choose how powerfully the spirit have to manifest. I need a $(l:hexlink:items/bag)$(item)Soul Bag/$ filled with souls to manifest a spirit.",
+  "hexlink.spell.spirit_spells.desc": "This powerful patterns should extract the essences of any physical object or properties from the physical realm as media and allow me to control them. The physical object is destroyed in the process. If need a Extraction Crystal to extract a Spirit from an entity. It seem I also need to lower living entities life to a very low value before being able to extract their spirits. I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit. In this spells, a Spirit container is targeted as a dropped item, a item in a frame, in a container or from my inventory if I target myself, or as a block.",
+  "hexlink.spell.spirit_extraction.desc": "This spell can extract a spirit from an entity. The first parameter is entity to extract from, the second parameter is an extractor catalyzer like a Extraction Crystal, the third parameter is a Spirit container. ",
+  "hexlink.spell.spirit_vortex.desc": "With this pattern I can summon a media vortex. I can then transfer spirit into it, to store them. Spirits in a vortex can merge into new Spirits.",
+  "hexlink.spell.spirit_transfer.desc": "With this pattern I can transfer spirits from a spirit container to another spirit container. Soul containers can be dropped items, items in frames, the caster holding a spirit container item, media vortexes), container block positions containing spirit container items.",
+  "hexlink.spell.spirit_transfer_look.desc": "With this pattern I can get the last Spirit of a spirit container.",
+  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. The first parameter is a container to extract from, the second is the type of spirit to manifest, the third is the strength of the manifestation, and the last is the entity or location to manifest at.",
+  "hexlink.spell.spirit_self_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. The spirits are taken from an container in my inventory. The first parameter is the type of spirit to manifest, the second is the strength of the manifestation, and the third is the entity or location to manifest at.",
   "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
-  "hexlink.spell.spirit_mix.desc": "With this pattern I can merge Spirits into a vortex to obtain new spirits.",
-  "hexlink.spell.spirit_transfer.desc": "With this pattern I can transfer souls from a soul container to another soul container.",
 
 
-  "hexlink.page.tablets": "Spirit Tablets",
-  "hexlink.page.tablets.desc": "Spirit Tablets contains spirits of a physical object. I can read Spirit Iota from them to use $(l:hexlink:patterns/spirit_spells)these patterns/$. I can find these in dungeon chests but most of them are not empty. If I find an empty, I'll try to use $(l:hexlink:patterns/spirit_spells)Spirit Extraction/$ to fill it with any Spirit from a physical object.",
-  "hexlink.page.tablets.block": "This type of tablet can contain the spirit of a block. With a Block Spirit, I can summon blocks and simulate interaction with one.",
-  "hexlink.page.tablets.item": "This type of tablet can contain the spirit of an item. With an Item Spirit, I can simulate the use of an item.",
-  "hexlink.page.tablets.entity": "This type of tablet can contain the spirit of an entity. With an Entity Spirit, I can summon an entity.",
-  "hexlink.page.tablets.potion": "This type of tablet can contain the spirit of a potion effect. With a Potion Spirit, I can give an effect to an entity or summon an effect cloud.",
-  "hexlink.page.tablets.everything": "This type of tablet can contain the spirit of anything.",
+  "hexlink.page.crystals": "Extraction Crystals",
+  "hexlink.page.crystals.desc": "Extraction Crystals help me to extract spirits. I can extract spirit using them with $(l:hexlink:patterns/spirit_spells)Spirit Extraction/$. I can find these in dungeon chests.",
+  "hexlink.page.crystals.block": "This type of crystal can extract the spirit of a block. With a Block Spirit, I can summon blocks and simulate interaction with one.",
+  "hexlink.page.crystals.item": "This type of crystal can extract the spirit of an item. With an Item Spirit, I can simulate the use of an item.",
+  "hexlink.page.crystals.entity": "This type of crystal can extract the spirit of an entity. With an Entity Spirit, I can summon an entity.",
+  "hexlink.page.crystals.potion": "This type of crystal can extract the spirit of a potion effect. With a Potion Spirit, I can give an effect to an entity or summon an effect cloud.",
+  "hexlink.page.crystals.everything": "This type of crystal can extract the spirit of anything.",
+
+  "hexlink.page.vortex": "Media Vortex",
+  "hexlink.page.vortex.desc": "Media vortexes can contains spirits, and mix them to create new spirits. You can create a Media Vortex using $(l:hexlink:patterns/spirit_spells)Vortex Formation/$, and then put spirits in and take spirits out using $(l:hexlink:patterns/spirit_spells)Spirit Transfer/$.",
 
   "hexlink.page.bag": "Soul Bags",
-  "hexlink.page.bag.desc": "Souls bags contains souls that are used for $(l:hexlink:patterns/spirit_spells)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirit_spells)Spirit Extraction/$.",
-  "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of souls, and 30 of each.",
-  "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of souls, and 100 of each.",
-  "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of souls, and 300 of each.",
+  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirit_spells)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirit_spells)Spirit Transfer/$.",
+  "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of spirits, and 30 of each.",
+  "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of spirits, and 100 of each.",
+  "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of spirits, and 300 of each.",
+  "hexlink.page.bag.tablet": "Soul tablets can contains up to 10 spirits of one type, you can them in dungeon chests.",
 
   "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
