@@ -5,6 +5,7 @@ import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.utils.getSpirit
 import net.fabricmc.fabric.api.registry.FuelRegistry
+import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper.getFloat
 import net.minecraft.util.registry.Registry
@@ -45,7 +46,7 @@ class BurningVortexHandler : AbstractVortexHandler{
         return null
     }
 
-    override fun getRealRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>> {
+    override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>> {
         return Registry.ITEM.entrySet.asSequence().mapNotNull {
             val item=it.value
             val cooktime=FuelRegistry.INSTANCE.get(item)
@@ -53,7 +54,7 @@ class BurningVortexHandler : AbstractVortexHandler{
                 val result= mutableListOf<Spirit>()
                 val count=max(1,(cooktime/200*multiplier).toInt())
                 for(i in 0..<count)result.add(burning_result)
-                listOf(SpiritHelper.asSpirit(item)) to result
+                listOf(HexVortexHandler.Ingredient(SpiritHelper.asSpirit(item))) to result
             }
             else null
         }

@@ -1,0 +1,31 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:entity", "value": "minecraft:evoker"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"},
+    {"type": "hexlink:entity", "value": "minecraft:evoker_fangs"}
+  ]
+}

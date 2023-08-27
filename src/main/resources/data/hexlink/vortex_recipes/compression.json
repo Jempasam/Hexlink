@@ -4,8 +4,8 @@
     {"type": "hexlink:item", "value": "minecraft:iron_shovel"}
   ],
   "pattern": [
-    {"input": 0, "mat": 0}, {"input": 1, "mat": 0}, {"input": 2, "mat": 0},
-    {"input": 3, "mat": 0}, {"input": 4, "mat": 0}, {"input": 5, "mat": 0},
-    {"input": 6, "mat": 0}, {"input": 7, "mat": 0}, {"input": 8, "mat": 0}
+    [{"input": 0, "mat": 0}, {"input": 1, "mat": 0}, {"input": 2, "mat": 0}],
+    [{"input": 3, "mat": 0}, {"input": 4, "mat": 0}, {"input": 5, "mat": 0}],
+    [{"input": 6, "mat": 0}, {"input": 7, "mat": 0}, {"input": 8, "mat": 0}]
   ]
 }

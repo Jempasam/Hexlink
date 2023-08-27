@@ -1,0 +1,11 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:block", "value": "minecraft:snow_block"},
+    {"type": "hexlink:block", "value": "minecraft:snow_block"},
+    {"type": "hexlink:block", "value": "minecraft:pumpkin"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:snow_golem"}
+  ]
+}

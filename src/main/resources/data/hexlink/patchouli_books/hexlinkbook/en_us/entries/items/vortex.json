@@ -13,6 +13,6 @@
     }
   ],
   "extra_recipe_mappings": {
-    "minecraft:vortex": 0
+    "hexlink:vortex": 0
   }
 }

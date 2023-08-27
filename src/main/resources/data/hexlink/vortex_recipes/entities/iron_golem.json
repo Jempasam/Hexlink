@@ -1,0 +1,13 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:block", "value": "minecraft:iron_block"},
+    {"type": "hexlink:block", "value": "minecraft:iron_block"},
+    {"type": "hexlink:block", "value": "minecraft:iron_block"},
+    {"type": "hexlink:block", "value": "minecraft:iron_block"},
+    {"type": "hexlink:block", "value": "minecraft:pumpkin"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:iron_golem"}
+  ]
+}

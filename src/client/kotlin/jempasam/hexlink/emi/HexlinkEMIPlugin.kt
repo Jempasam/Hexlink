@@ -40,10 +40,12 @@ class HexlinkEMIPlugin : EmiPlugin{
     }
 
     override fun register(registry: EmiRegistry) {
+        registry.addWorkstation(VORTEX,EmiStack.of(HexlinkItems.Vortex))
         registry.addCategory(VORTEX)
+
         for(handler in HexlinkRegistry.HEXVORTEX_HANDLER.entrySet){
             var i=0
-            for(recipe in handler.value.getRecipesExamples()){
+            for(recipe in handler.value.getRecipesExamples(registry.recipeManager)){
                 val id=Identifier(handler.key.value.namespace, handler.key.value.path+i)
                 registry.addRecipe(VortexEmiRecipe(id, recipe.first, recipe.second))
                 i++

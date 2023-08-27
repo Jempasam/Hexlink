@@ -41,9 +41,13 @@ class SpiritBag {
         }
     }
 
+    operator fun get(index: Int) = content[index]
+
     fun last(): Spirit?= if(content.size>0) content.last().spirit else null
 
     fun lastStack(): Stack?= if(content.size>0) content.last() else null
+
+    val stackCount get()=content.size
 
 
 

@@ -6,14 +6,13 @@ import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.Item
-import net.minecraft.item.Items
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.recipe.RecipeType
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper
 import kotlin.math.min
 
-class CookingVortexHandler : AbstractVortexHandler{
+class SmeltingVortexHandler : AbstractVortexHandler{
 
     val multiplier: Float
     constructor(catalyzer: List<Spirit>, output: List<Spirit>, multiplier: Float)
@@ -33,7 +32,7 @@ class CookingVortexHandler : AbstractVortexHandler{
 
     override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
         if(ingredients.size>=1){
-            val ingredient=ingredients[1]
+            val ingredient=ingredients[0]
             val item= SpiritHelper.asItem(ingredient)
             if(item!=null){
                 val inventory=SimpleInventory(1)
@@ -50,11 +49,16 @@ class CookingVortexHandler : AbstractVortexHandler{
         return null
     }
 
-    override fun getRealRecipesExamples(): Sequence<Pair<List<Spirit>, List<Spirit>>>{
-        return sequenceOf(listOf(ItemSpirit(Items.BEEF)) to listOf(ItemSpirit(Items.COOKED_BEEF)))
+    override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>>{
+        return sequence {
+            for (recipe in manager.listAllOfType(RecipeType.SMELTING))yield(
+                listOf(HexVortexHandler.Ingredient(recipe.ingredients[0])) to
+                        List(Math.max(1,(multiplier*recipe.output.count).toInt())){ SpiritHelper.asSpirit(recipe.output.item)}
+            )
+        }
     }
 
-    class Recipe(val item: Item, val count: Int, handler: CookingVortexHandler, val world: ServerWorld): AbstractVortexHandler.Recipe(handler){
+    class Recipe(val item: Item, val count: Int, handler: SmeltingVortexHandler, val world: ServerWorld): AbstractVortexHandler.Recipe(handler){
         override fun realIngredientCount(): Int = 1
 
         override fun realMix(ingredients: List<Spirit>): List<Spirit> {
@@ -65,7 +69,7 @@ class CookingVortexHandler : AbstractVortexHandler{
 
     }
 
-    object SERIALIZER: HexVortexHandler.Serializer<CookingVortexHandler> {
-        override fun serialize(json: JsonObject): CookingVortexHandler = CookingVortexHandler(json)
+    object SERIALIZER: HexVortexHandler.Serializer<SmeltingVortexHandler> {
+        override fun serialize(json: JsonObject): SmeltingVortexHandler = SmeltingVortexHandler(json)
     }
 }

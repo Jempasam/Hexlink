@@ -1,0 +1,10 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:entity", "value": "minecraft:skeleton"},
+    {"type": "hexlink:block", "value": "minecraft:blue_ice"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:stray"}
+  ]
+}

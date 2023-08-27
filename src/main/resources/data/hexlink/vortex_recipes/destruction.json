@@ -4,8 +4,6 @@
     {"type": "hexlink:item", "value": "minecraft:iron_pickaxe"}
   ],
   "pattern": [
-    {"input": 0, "mat": 0}, {    },                 {    },
-    {    },                 {    },                 {    },
-    {    },                 {    },                 {    }
+    [{"input": 0, "mat": 0}]
   ]
 }

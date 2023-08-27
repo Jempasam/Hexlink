@@ -24,8 +24,8 @@ class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
 
     override fun execute(source: SpiritSource, args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
         val spirit=args.getSpirit(pos(0),argc)
-        val target=args[pos(1)]
-        val power=args.getIntBetween(pos(2),1,100, argc)
+        val power=args.getIntBetween(pos(1), 1, 100, argc)
+        val target=args[pos(2)]
 
         val input=source.extract(1,spirit)
         if(input.maxcount==0)throw MishapNoEnoughSoul(spirit,1)
