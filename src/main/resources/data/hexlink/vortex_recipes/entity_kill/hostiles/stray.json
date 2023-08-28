@@ -1,0 +1,13 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:stray"}
+  ],
+  "result": [
+    {"type": "hexlink:special", "value": "hexlink:ice_element"},
+    {"type": "hexlink:special", "value": "hexlink:ice_element"},
+    {"type": "hexlink:special", "value": "hexlink:ice_element"},
+    {"type": "hexlink:special", "value": "hexlink:ice_element"}
+  ]
+}

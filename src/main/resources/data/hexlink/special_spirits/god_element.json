@@ -1,0 +1,13 @@
+{
+  "all": {
+    "type": "hexlink:function",
+    "value": {
+      "manifestIn": "hexlink:creative_switch",
+      "manifestInCost": 1000,
+      "manifestAt": "hexlink:bedrock",
+      "manifestAtCost": 1000
+    }
+  },
+  "name": {"text": "God Element"},
+  "color": 16777215
+}

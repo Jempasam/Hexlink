@@ -1,0 +1,11 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:spider"}
+  ],
+  "result": [
+    {"type": "hexlink:block", "value": "minecraft:cobweb"},
+    {"type": "hexlink:block", "value": "minecraft:cobweb"}
+  ]
+}

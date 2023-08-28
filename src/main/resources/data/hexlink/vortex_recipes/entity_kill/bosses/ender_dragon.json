@@ -1,0 +1,80 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:ender_dragon"}
+  ],
+  "result": [
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+    {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+
+    {"type": "hexlink:entity", "value": "minecraft:enderman"},
+    {"type": "hexlink:entity", "value": "minecraft:enderman"},
+    {"type": "hexlink:entity", "value": "minecraft:enderman"},
+    {"type": "hexlink:entity", "value": "minecraft:enderman"},
+    {"type": "hexlink:entity", "value": "minecraft:enderman"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"}
+  ]
+}

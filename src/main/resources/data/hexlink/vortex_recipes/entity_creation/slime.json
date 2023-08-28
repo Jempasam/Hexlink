@@ -1,0 +1,10 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:slime_ball"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:slime"}
+  ]
+}

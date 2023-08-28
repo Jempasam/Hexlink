@@ -2,5 +2,5 @@
   "at": {"type": "hexlink:block", "value": "minecraft:oak_leaves"},
   "in": {"type": "hexlink:potion", "value": "minecraft:regeneration"},
   "name": {"text": "Life Element"},
-  "color": 45056
+  "color": 11010000
 }

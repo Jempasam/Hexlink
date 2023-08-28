@@ -1,0 +1,32 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:blaze"}
+  ],
+  "result": [
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"}
+  ]
+}

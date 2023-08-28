@@ -1,0 +1,6 @@
+{
+  "at": {"type": "hexlink:block", "value": "minecraft:water"},
+  "in": {"type": "hexlink:potion", "value": "minecraft:dolphins_grace"},
+  "name": {"text": "Water Element"},
+  "color": 3094527
+}

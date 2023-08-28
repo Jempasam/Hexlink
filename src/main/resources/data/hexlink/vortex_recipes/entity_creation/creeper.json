@@ -1,0 +1,10 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:block", "value": "minecraft:tnt"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:creeper"}
+  ]
+}

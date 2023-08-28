@@ -1,0 +1,12 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:entity", "value": "minecraft:skeleton"},
+    {"type": "hexlink:special", "value": "hexlink:ice_element"},
+    {"type": "hexlink:special", "value": "hexlink:ice_element"},
+    {"type": "hexlink:special", "value": "hexlink:ice_element"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:stray"}
+  ]
+}

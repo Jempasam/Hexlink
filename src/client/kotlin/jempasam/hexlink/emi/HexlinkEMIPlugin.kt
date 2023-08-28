@@ -4,6 +4,7 @@ package jempasam.hexlink.emi
 import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.recipe.EmiRecipeCategory
+import dev.emi.emi.api.stack.Comparison
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import jempasam.hexlink.HexlinkMod
@@ -51,12 +52,18 @@ class HexlinkEMIPlugin : EmiPlugin{
                         .flatMap { it.getRecipesExamples(registry.recipeManager) }
                         .flatMap { it.second }
                         .filter {it !is ItemSpirit && it !is BlockSpirit }
-                        .toSet()
                         .asSequence(),
                 HexlinkRegistry.SPECIAL_SPIRIT
                         .asSequence()
                         .map { SpecialSpirit(it) }
-        ).flatMap { it }
+        ).flatMap { it }.toSet().asSequence()
+
+
+        // Comparaison
+        registry.setDefaultComparison(
+                EmiStack.of(HexlinkItems.Spirit),
+                Comparison.compareData { HexlinkItems.Spirit.getSpirit(it.itemStack) }
+        )
 
 
         for(spirit in spirits_stacks){

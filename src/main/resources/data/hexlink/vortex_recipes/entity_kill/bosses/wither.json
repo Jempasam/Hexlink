@@ -1,0 +1,58 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:wither"}
+  ],
+  "result": [
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"},
+
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+
+    {"type": "hexlink:entity", "value": "minecraft:wither_skeleton"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"}
+  ]
+}

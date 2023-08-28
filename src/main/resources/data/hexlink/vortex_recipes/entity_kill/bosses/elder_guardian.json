@@ -1,0 +1,38 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:elder_guardian"}
+  ],
+  "result": [
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"},
+    {"type": "hexlink:special", "value": "hexlink:life_element"}
+  ]
+}

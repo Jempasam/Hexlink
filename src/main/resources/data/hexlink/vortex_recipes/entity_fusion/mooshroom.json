@@ -1,0 +1,10 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:entity", "value": "minecraft:cow"},
+    {"type": "hexlink:block", "value": "minecraft:red_mushroom"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:mooshroom"}
+  ]
+}

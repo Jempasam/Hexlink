@@ -1,0 +1,13 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:cave_spider"}
+  ],
+  "result": [
+    {"type": "hexlink:potion", "value": "minecraft:poison"},
+    {"type": "hexlink:potion", "value": "minecraft:poison"},
+    {"type": "hexlink:potion", "value": "minecraft:poison"},
+    {"type": "hexlink:block", "value": "minecraft:cobweb"}
+  ]
+}

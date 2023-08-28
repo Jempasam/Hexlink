@@ -2,6 +2,7 @@
   "type": "hexlink:simple",
   "input": [
     {"type": "hexlink:entity", "value": "minecraft:spider"},
+    {"type": "hexlink:potion", "value": "minecraft:poison"},
     {"type": "hexlink:potion", "value": "minecraft:poison"}
   ],
   "result": [

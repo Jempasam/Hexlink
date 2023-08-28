@@ -1,0 +1,10 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:entity", "value": "minecraft:villager"},
+    {"type": "hexlink:entity", "value": "minecraft:zombie"}
+  ],
+  "result": [
+    {"type": "hexlink:entity", "value": "minecraft:zombie_villager"}
+  ]
+}
