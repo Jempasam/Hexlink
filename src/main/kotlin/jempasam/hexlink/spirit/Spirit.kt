@@ -1,5 +1,9 @@
 package jempasam.hexlink.spirit
 
+import com.google.gson.JsonObject
+import com.google.gson.JsonSyntaxException
+import jempasam.hexlink.HexlinkMod
+import jempasam.hexlink.utils.asNBT
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
@@ -13,42 +17,45 @@ import net.minecraft.util.math.Vec3d
 interface Spirit {
 
     /**
-     * Get media cost of infusing at a location
-     * @param position Infusion location
-     * @param power Infusion strength
-     * @return CANNOT_USE Infusion is not possible
-     * @return Infusion media cost
+     * Manifest the spirit at a location.
+     * @param caster The caster of the spell
+     * @param world The world where the spell is cast
+     * @param position The location
+     * @param count Spirit count used in the infusion
      */
-    fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int
+    fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Manifestation
 
     /**
-     * Infuse the spirit at a location
+     * Manifest the spirit in an entity.
+     * @param caster The caster of the spell
+     * @param world The world where the spell is cast
+     * @param entity The entity
+     * @param count Spirit count used in the infusion
      */
-    fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int)
+    fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Manifestation
+
+    class Manifestation(val perSpiritCost: Int, val spiritCount: Int, private val action: (Int)->Unit){
+        fun execute(count: Int){
+            if(count>spiritCount){
+                HexlinkMod.logger.warn("Try to manifest more spirit than the Manifestation maximum")
+                action(spiritCount)
+            }
+            else action(count)
+        }
+
+        fun mediaCost(count: Int) = count*perSpiritCost
+
+        val maxMediaCost: Int get()=perSpiritCost*spiritCount
+    }
 
 
     /**
-     * Get media cost of infusing in an entity
-     * @param entity Infusion location
-     * @param power Infusion strength
-     * @return CANNOT_USE Infusion is not possible
-     * @return Infusion media cost
-     */
-    fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int
-
-    /**
-     * Infuse the spirit in an entity
-     */
-    fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int)
-
-
-    /**
-     * Make the entity look at a location
+     * Make the spirit look at a location
      */
     fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean
 
     /**
-     * Make the entity look at an entity
+     * Make the spirit look at an entity
      */
     fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean
 
@@ -76,10 +83,19 @@ interface Spirit {
 
         fun getName(): Text
 
+        fun deserialize(obj: JsonObject): T{
+            val element=obj.get("value")
+            if(element==null)throw JsonSyntaxException("Expected \"value\"")
+            val ret=deserialize(element.asNBT())
+            if(ret==null)throw JsonSyntaxException("Invalid json")
+            return ret
+        }
+
     }
 
 
     companion object{
         const val CANNOT_USE=-1
+        val NONE_MANIFESTATION=Manifestation(0,0){}
     }
 }

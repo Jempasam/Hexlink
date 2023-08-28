@@ -18,28 +18,35 @@ import net.minecraft.util.registry.Registry
 //TODO Long time block interaction with manifestation
 class BlockSpirit(val block: Block): Spirit{
 
-    override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return if(world.getBlockState(BlockPos(position)).isAir)  5 else Spirit.CANNOT_USE
+    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Spirit.Manifestation {
+        val startpos=BlockPos(position)
+        var testpos=startpos
+        var final_power=0
+        while(final_power<power){
+            if(!world.getBlockState(testpos).isAir) break
+            testpos=testpos.up()
+            final_power++
+        }
+        if(final_power==0)return Spirit.NONE_MANIFESTATION
+
+        return Spirit.Manifestation(3, final_power){
+            var blockpos=startpos
+            for(i in 0..<it){
+                world.setBlockState(blockpos, block.defaultState)
+                blockpos=blockpos.up()
+            }
+        }
     }
 
-    override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
-        val blockpos=BlockPos(position)
-        world.setBlockState(blockpos, block.defaultState)
-    }
-
-
-
-    override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-       return 1
-    }
-
-    override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {
-        val pos=BlockPos(entity.pos)
-        val state=block.defaultState
-        block.onEntityCollision(state, world, pos, entity)
-        block.onSteppedOn(world, pos, state, entity)
-        if(entity is PlayerEntity){
-            block.onUse(state, world, pos, entity, Hand.MAIN_HAND, BlockHitResult(entity.pos, Direction.UP, BlockPos(entity.pos), true))
+    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+        return Spirit.Manifestation(1,1){
+            val pos=BlockPos(entity.pos)
+            val state=block.defaultState
+            block.onEntityCollision(state, world, pos, entity)
+            block.onSteppedOn(world, pos, state, entity)
+            if(entity is PlayerEntity){
+                block.onUse(state, world, pos, entity, Hand.MAIN_HAND, BlockHitResult(entity.pos, Direction.UP, BlockPos(entity.pos), true))
+            }
         }
     }
 

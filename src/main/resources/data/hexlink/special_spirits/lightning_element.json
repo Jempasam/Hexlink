@@ -1,0 +1,5 @@
+{
+  "spirit": {"type": "hexlink:entity", "value": "minecraft:lightning_bolt"},
+  "name": {"text": "Lightning Element"},
+  "color": 16776999
+}

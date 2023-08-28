@@ -16,33 +16,31 @@ import net.minecraft.util.registry.Registry
 
 class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
 
-    override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return power*power
-    }
-
-    override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
-        val effect=StatusEffectInstance(potion_effect, power*100, power/4)
-        val cloud=EntityType.AREA_EFFECT_CLOUD.create(world)
-        if(cloud!=null){
-            cloud.addEffect(effect)
-            cloud.color=potion_effect.color
-            cloud.radius=power.toFloat()
-            cloud.duration=power*100
-            cloud.setPosition(position)
-            world.spawnEntity(cloud)
+    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+        return Spirit.Manifestation(1,count){
+            val effect=StatusEffectInstance(potion_effect, it*100, it/4)
+            val cloud=EntityType.AREA_EFFECT_CLOUD.create(world)
+            if(cloud!=null){
+                cloud.addEffect(effect)
+                cloud.color=potion_effect.color
+                cloud.radius=it.toFloat()
+                cloud.duration=it*100
+                cloud.setPosition(position)
+                world.spawnEntity(cloud)
+            }
         }
     }
 
 
 
-    override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-        if(entity is LivingEntity)return power*power
-        else return Spirit.CANNOT_USE
-    }
-
-    override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {
-        val effect=StatusEffectInstance(potion_effect, power*200, power/3)
-        if(entity is LivingEntity)entity.addStatusEffect(effect)
+    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+        if(entity !is LivingEntity)
+            return Spirit.NONE_MANIFESTATION
+        else
+            return Spirit.Manifestation(1,count){
+                val effect=StatusEffectInstance(potion_effect, it*200, it/3)
+                entity.addStatusEffect(effect)
+            }
     }
 
 

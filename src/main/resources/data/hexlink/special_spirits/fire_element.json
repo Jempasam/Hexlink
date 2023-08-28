@@ -1,0 +1,5 @@
+{
+  "all": {"type": "hexlink:block", "value": "minecraft:fire"},
+  "name": {"text": "Fire Element"},
+  "color": 16749568
+}

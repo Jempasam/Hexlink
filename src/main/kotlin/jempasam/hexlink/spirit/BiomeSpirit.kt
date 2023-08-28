@@ -158,21 +158,20 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
 
 
 
-    override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return if(world.getBlockState(BlockPos(position).up()).isAir) 1 else Spirit.CANNOT_USE
+    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+        if(!world.getBlockState(BlockPos(position).up()).isAir)
+            return Spirit.NONE_MANIFESTATION
+        else
+            return Spirit.Manifestation(1,count){
+                generateAll(world, BlockPos(position), it)
+            }
     }
 
-    override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
-        generateAll(world, BlockPos(position), power)
+    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+        return manifestAt(caster,world,entity.pos.add(0.0,-0.5,0.0),count)
     }
 
-    override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-        return infuseAtCost(caster, world, entity.pos, power)
-    }
 
-    override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {
-        infuseAt(caster, world, entity.pos, power)
-    }
 
     override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
         return world.getBiome(BlockPos(position)).value()==biome.value()

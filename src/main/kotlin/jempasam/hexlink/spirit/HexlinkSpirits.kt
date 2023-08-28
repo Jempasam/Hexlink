@@ -19,11 +19,13 @@ object HexlinkSpirits {
         return spirit
     }
 
-    val ITEM_SPIRIT=create("item", ItemSpirit.Type)
-    val ENTITY_SPIRIT=create("entity", EntitySpirit.Type)
-    val POTION_SPIRIT=create("potion", PotionSpirit.Type)
-    val BLOCK_SPIRIT=create("block", BlockSpirit.Type)
-    val BIOME_SPIRIT=create("biome", BiomeSpirit.Type)
+    val ITEM_SPIRIT= create("item", ItemSpirit.Type)
+    val ENTITY_SPIRIT= create("entity", EntitySpirit.Type)
+    val POTION_SPIRIT= create("potion", PotionSpirit.Type)
+    val BLOCK_SPIRIT= create("block", BlockSpirit.Type)
+    val BIOME_SPIRIT= create("biome", BiomeSpirit.Type)
+    val FUNCTION_SPIRIT= create("function", FunctionSpirit.Type)
+    val SPECIAL_SPIRIT= create("special", SpecialSpirit.Type)
 
     val ITEM_SPIRIT_EXTRACTER= create("item", ItemExtractor)
     val BLOCK_SPIRIT_EXTRACTER= create("block", BlockExtractor)

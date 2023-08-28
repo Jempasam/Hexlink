@@ -1,6 +1,5 @@
 package jempasam.hexlink.spirit
 
-import at.petrak.hexcasting.api.spell.iota.EntityIota
 import com.google.common.base.Predicates
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
@@ -18,33 +17,38 @@ import net.minecraft.util.registry.Registry
 
 class EntitySpirit(val entity_type: EntityType<*>): Spirit {
 
-    override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return if(entity_type.isSummonable) 1 else Spirit.CANNOT_USE
+    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+        if(!entity_type.isSummonable)
+            return Spirit.NONE_MANIFESTATION
+        else
+            return Spirit.Manifestation(1,count){
+                val summoned=entity_type.create(world)
+                if(summoned!=null){
+                    for(i in 0..<it){
+                        summoned.setPosition(position)
+                        world.spawnEntity(summoned)
+                    }
+                }
+            }
     }
 
-    override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
-        val summoned=entity_type.create(world)
-        if(summoned!=null){
-            summoned.setPosition(position)
-            world.spawnEntity(summoned)
-            EntityIota(summoned)
-        }
-    }
-
-
-
-    override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-        return infuseAtCost(caster, world, entity.pos, power)
-    }
-
-    override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {
-        val summoned=entity_type.create(world)
-        if(summoned!=null){
-            summoned.setPosition(entity.pos)
-            summoned.velocity=entity.velocity
-            world.spawnEntity(summoned)
-            entity.startRiding(summoned)
-        }
+    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+        if(!entity_type.isSummonable)
+            return Spirit.NONE_MANIFESTATION
+        else
+            return Spirit.Manifestation(1,count){
+                val summoned=entity_type.create(world)
+                if(summoned!=null){
+                    var riding=entity
+                    for(i in 0..<it){
+                        summoned.setPosition(riding.pos)
+                        summoned.velocity=riding.velocity
+                        world.spawnEntity(summoned)
+                        riding.startRiding(summoned)
+                        riding=summoned
+                    }
+                }
+            }
     }
 
 

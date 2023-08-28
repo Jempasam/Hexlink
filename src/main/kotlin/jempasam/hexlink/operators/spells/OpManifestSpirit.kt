@@ -13,10 +13,8 @@ import jempasam.hexlink.mishap.MishapNoEnoughSoul
 import jempasam.hexlink.operators.getSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritSource
-import net.minecraft.entity.Entity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
-import net.minecraft.util.math.Vec3d
 
 class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
 
@@ -27,46 +25,32 @@ class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
         val power=args.getIntBetween(pos(1), 1, 100, argc)
         val target=args[pos(2)]
 
-        val input=source.extract(1,spirit)
+        val input=source.extract(power,spirit)
         if(input.maxcount==0)throw MishapNoEnoughSoul(spirit,1)
 
-        if(target is Vec3Iota){
-            ctx.assertVecInRange(target.vec3)
-            val cost=spirit.infuseAtCost(ctx.caster,ctx.world, target.vec3, power)
-            if(cost==Spirit.CANNOT_USE)throw MishapInvalidIota(args[0],2, Text.translatable("hexlink.spirit_iota.good"))
-
-            return Triple(
-                    VecSpell(ctx.world, target.vec3, power, spirit, input),
-                    cost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
-                    listOf(ParticleSpray.burst(target.vec3,1.0,5))
-            )
+        val (manifestation,targetPos)=when(target){
+            is Vec3Iota ->{
+                ctx.assertVecInRange(target.vec3)
+                spirit.manifestAt(ctx.caster,ctx.world, target.vec3, input.maxcount) to target.vec3
+            }
+            is EntityIota ->{
+                ctx.assertEntityInRange(target.entity)
+                spirit.manifestIn(ctx.caster,ctx.world, target.entity, input.maxcount) to target.entity.pos
+            }
+            else -> throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
         }
-        else if(target is EntityIota){
-            ctx.assertEntityInRange(target.entity)
-            val cost=spirit.infuseInCost(ctx.caster,ctx.world,target.entity,power)
-            if(cost==Spirit.CANNOT_USE)throw MishapInvalidIota(args[0],2, Text.translatable("hexlink.spirit_iota.good"))
 
-            return Triple(
-                    EntitySpell(ctx.world, target.entity, power, spirit, input),
-                    cost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
-                    listOf(ParticleSpray.burst(target.entity.pos,1.0,5))
-            )
-
-        }
-        else throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+        return Triple(
+            ManifestSpell(ctx.world, manifestation, input),
+            manifestation.maxMediaCost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
+            listOf(ParticleSpray.burst(targetPos,1.0,5))
+        )
     }
 
-    class VecSpell(val world: ServerWorld, val target: Vec3d, val power: Int, val spirit: Spirit, val source: SpiritSource.SpiritOutputFlux) : RenderedSpell{
+    class ManifestSpell(val world: ServerWorld, val manifestation: Spirit.Manifestation, val source: SpiritSource.SpiritOutputFlux) : RenderedSpell{
         override fun cast(ctx: CastingContext) {
             source.consume(1)
-            spirit.infuseAt(ctx.caster,world, target, power)
-        }
-    }
-
-    class EntitySpell(val world: ServerWorld, val target: Entity, val power: Int, val spirit: Spirit, val source: SpiritSource.SpiritOutputFlux) : RenderedSpell{
-        override fun cast(ctx: CastingContext) {
-            source.consume(1)
-            spirit.infuseIn(ctx.caster,world, target, power)
+            manifestation.execute(manifestation.spiritCount)
         }
     }
 }

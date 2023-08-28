@@ -42,51 +42,51 @@ class ItemSpirit(val item: Item): Spirit {
     }
 
 
-    override fun infuseAtCost(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Int {
-        return 1
-    }
-
-    override fun infuseAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int) {
-        val stack=item.defaultStack
-        stack.count=1
-        val old_hand_item=caster.mainHandStack
-        caster.setStackInHand(Hand.MAIN_HAND,stack)
-        item.useOnBlock(
-                ItemUsageContext(
-                        caster,
-                        Hand.MAIN_HAND,
-                        BlockHitResult(position, Direction.UP, BlockPos(position), true)
+    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+        return Spirit.Manifestation(1,count){
+            val stack=item.defaultStack
+            stack.count=it
+            val old_hand_item=caster.mainHandStack
+            caster.setStackInHand(Hand.MAIN_HAND,stack)
+            for(i in 0..<it){
+                item.useOnBlock(
+                        ItemUsageContext(
+                                caster,
+                                Hand.MAIN_HAND,
+                                BlockHitResult(position, Direction.UP, BlockPos(position), true)
+                        )
                 )
-        )
-        caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
+            }
+            caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
+        }
     }
 
-
-
-    override fun infuseInCost(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int): Int {
-        return 1
-    }
-
-    override fun infuseIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, power: Int) {
-        val stack=item.defaultStack
-        stack.count=1
-        val old_hand_item=caster.mainHandStack
-        caster.setStackInHand(Hand.MAIN_HAND,stack)
-        if(entity==caster){
-            val action=item.getUseAction(stack)
-            val success=item.use(world, caster, Hand.MAIN_HAND)
-            if(action!=UseAction.NONE && action!=UseAction.BLOCK && success.result.isAccepted){
-                item.onStoppedUsing(stack, world, caster, 0)
-                item.finishUsing(stack,world,caster)
+    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+        return Spirit.Manifestation(1,count){
+            val stack=item.defaultStack
+            stack.count=it
+            val old_hand_item=caster.mainHandStack
+            caster.setStackInHand(Hand.MAIN_HAND,stack)
+            if(entity==caster){
+                for(i in 0..<it){
+                    val action=item.getUseAction(stack)
+                    val success=item.use(world, caster, Hand.MAIN_HAND)
+                    if(action!=UseAction.NONE && action!=UseAction.BLOCK && success.result.isAccepted){
+                        item.onStoppedUsing(stack, world, caster, 0)
+                        item.finishUsing(stack,world,caster)
+                    }
+                }
             }
-        }
-        else{
-            if(entity is LivingEntity){
-                item.useOnEntity(stack, caster, entity, Hand.MAIN_HAND)
+            else{
+                for(i in 0..<it) {
+                    if (entity is LivingEntity) {
+                        item.useOnEntity(stack, caster, entity, Hand.MAIN_HAND)
+                    }
+                    entity.interact(caster, Hand.MAIN_HAND)
+                }
             }
-            entity.interact(caster,Hand.MAIN_HAND)
+            caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
         }
-        caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
     }
 
 
