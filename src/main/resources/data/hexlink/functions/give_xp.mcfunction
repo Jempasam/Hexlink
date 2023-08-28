@@ -1,0 +1,1 @@
+experience add @s 6 points

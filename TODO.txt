@@ -1,0 +1,16 @@
+//TODO
+New Spirits Types:
+ - Color Spirit
+ - Enchantement Spirit
+
+New Vortex Recipes:
+ - Color Mix
+
+New infusion:
+ - Colored Particle in Air
+ - Color block in not Air
+ - Color Item
+
+ - Fill Potion
+
+ - Enchant item

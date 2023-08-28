@@ -1,0 +1,13 @@
+{
+  "all": {
+    "type": "hexlink:function",
+    "value": {
+      "manifestIn": "hexlink:give_xp",
+      "manifestInCost": 10,
+      "manifestAt": "hexlink:spawn_xp",
+      "manifestAtCost": 10
+    }
+  },
+  "name": {"text": "Experience"},
+  "color": 13631232
+}

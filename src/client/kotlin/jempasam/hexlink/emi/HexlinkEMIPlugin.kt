@@ -47,16 +47,13 @@ class HexlinkEMIPlugin : EmiPlugin{
         registry.addCategory(VORTEX)
 
         // Stacks
-        val spirits_stacks= sequenceOf(
-                HexlinkRegistry.HEXVORTEX_HANDLER.asSequence()
-                        .flatMap { it.getRecipesExamples(registry.recipeManager) }
-                        .flatMap { it.second }
-                        .filter {it !is ItemSpirit && it !is BlockSpirit }
-                        .asSequence(),
-                HexlinkRegistry.SPECIAL_SPIRIT
-                        .asSequence()
-                        .map { SpecialSpirit(it) }
-        ).flatMap { it }.toSet().asSequence()
+        val spirits_stacks= HexlinkRegistry.HEXVORTEX_HANDLER.asSequence()
+                .flatMap { it.getRecipesExamples(registry.recipeManager) }
+                .flatMap { it.second }
+                .filter {it !is ItemSpirit && it !is BlockSpirit }
+                .toMutableSet()
+                .also { it.removeAll(HexlinkRegistry.SPECIAL_SPIRIT .asSequence().map { SpecialSpirit(it) }) }
+                .asSequence()
 
 
         // Comparaison
