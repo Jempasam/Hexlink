@@ -37,13 +37,13 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         for(handler in HexlinkRegistry.HEXVORTEX_HANDLER){
             val recipe=handler.findRecipe(inputs, world)
             if(recipe!=null){
-                val final_inputs=inputs.subList(0,recipe.ingredientCount())
+                val finalInputs=inputs.subList(0,recipe.ingredientCount())
                 for(i in 0..<recipe.ingredientCount()){
                     if(input.size>0)input.removeAt(0)
                     else if(output.size>0)output.removeAt(0)
                     else break
                 }
-                val result=recipe.mix(final_inputs)
+                val result=recipe.mix(finalInputs)
                 output.addAll(result)
                 markDirty()
                 sendToClient()
@@ -95,12 +95,12 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
     override fun writeNbt(nbt: NbtCompound) {
         nbt.putInt("loading", loading)
         nbt.putInt("age", age)
-        val input_nbt=NbtList()
-        val output_nbt=NbtList()
-        for(spirit in input)input_nbt.add(NbtHelper.writeSpirit(spirit))
-        for(spirit in output)output_nbt.add(NbtHelper.writeSpirit(spirit))
-        nbt.put("input",input_nbt)
-        nbt.put("output",output_nbt)
+        val inputNbt=NbtList()
+        val outputNbt=NbtList()
+        for(spirit in input)inputNbt.add(NbtHelper.writeSpirit(spirit))
+        for(spirit in output)outputNbt.add(NbtHelper.writeSpirit(spirit))
+        nbt.put("input",inputNbt)
+        nbt.put("output",outputNbt)
     }
 
     override fun readNbt(nbt: NbtCompound) {
@@ -110,7 +110,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         nbt.getList("input",NbtElement.COMPOUND_TYPE.toInt()).forEach{
             if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{input.add(it)}
         }
-        val previous_output_size=output.size
+        val previousOutputSize=output.size
         output.clear()
         nbt.getList("output",NbtElement.COMPOUND_TYPE.toInt()).forEach{
             if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{output.add(it)}
@@ -118,7 +118,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
 
         val w=world
         if(w!=null){
-            for(i in previous_output_size..<output.size){
+            for(i in previousOutputSize..<output.size){
                 HexVortexBlock.coloredParticle(w,pos,output[i].getColor(),6)
             }
         }

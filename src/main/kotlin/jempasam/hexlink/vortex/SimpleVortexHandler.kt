@@ -18,7 +18,7 @@ open class SimpleVortexHandler(private var catalyzer: List<Spirit>, var output: 
 
     override fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
         if(ingredients.size>=catalyzer.size){
-            for(i in 0..<catalyzer.size){
+            for(i in catalyzer.indices){
                 if(ingredients[i]!=catalyzer[i])return null
             }
             return Recipe(this)

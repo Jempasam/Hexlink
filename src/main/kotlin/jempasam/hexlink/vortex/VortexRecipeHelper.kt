@@ -12,9 +12,8 @@ object VortexRecipeHelper {
         val map= mutableMapOf<Spirit,NodeMap>()
         val remaining= mutableListOf<HexVortexHandler>()
         fun find(ingredients: List<Spirit>, start: Int, world: ServerWorld): HexVortexHandler.Recipe?{
-            if(start<ingredients.size){
-                val finded=map.get(ingredients.get(start))
-                if(finded!=null)finded.find(ingredients, start+1, world)
+            if(start<ingredients.size) {
+                map.get(ingredients.get(start))?.find(ingredients, start + 1, world)
             }
 
             for(h in remaining){
@@ -26,12 +25,12 @@ object VortexRecipeHelper {
 
         fun add(catalyzer: List<Spirit>, start: Int, handler: HexVortexHandler){
             if(start<catalyzer.size){
-                var next_node=map.get(catalyzer[start])
-                if(next_node==null){
-                    next_node= NodeMap()
-                    map.put(catalyzer[start],next_node)
+                var nextNode=map.get(catalyzer[start])
+                if(nextNode==null){
+                    nextNode= NodeMap()
+                    map.put(catalyzer[start],nextNode)
                 }
-                next_node.add(catalyzer, start+1, handler)
+                nextNode.add(catalyzer, start+1, handler)
             }
             else remaining.add(handler)
         }

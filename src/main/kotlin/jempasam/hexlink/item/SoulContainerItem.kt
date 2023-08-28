@@ -20,7 +20,7 @@ import net.minecraft.util.DyeColor
 import net.minecraft.world.World
 import kotlin.math.min
 
-class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul_count: Int): Item(settings), ItemSpiritSource, ItemSpiritTarget {
+class SoulContainerItem(settings: Settings, val maxBoxCount: Int, val max_soul_count: Int): Item(settings), ItemSpiritSource, ItemSpiritTarget {
 
     fun souls(stack: ItemStack): Souls?
         = stack.nbt?.getList("souls", NbtElement.COMPOUND_TYPE.toInt())?.let { Souls(it) }
@@ -41,8 +41,8 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
             val key=NbtHelper.writeSpirit(tofind)
             val removed= mutableListOf<SoulStack>()
             for(entry in this){
-                val spirit_nbt=entry.spirit_nbt
-                if(!spirit_nbt.isEmpty){
+                val spiritNbt=entry.spirit_nbt
+                if(!spiritNbt.isEmpty){
                     if(entry.count==0) removed.add(entry)
                     else if(entry.spirit_nbt==key) return entry
                 }
@@ -96,11 +96,11 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
         = souls(stack)?.let { if(it.size>0) it.get(it.size-1) else null }?.spirit
 
     override fun isItemBarVisible(stack: ItemStack): Boolean
-        = souls(stack)?.size?.let { it!=max_box_count && it!=0 } ?: false
+        = souls(stack)?.size?.let { it!=maxBoxCount && it!=0 } ?: false
 
     override fun getItemBarStep(stack: ItemStack): Int {
         val souls=souls(stack)
-        return (13.0f*(souls?.size ?: 0)/max_box_count).toInt()
+        return (13.0f*(souls?.size ?: 0)/maxBoxCount).toInt()
     }
 
     override fun getItemBarColor(stack: ItemStack): Int {
@@ -151,12 +151,12 @@ class SoulContainerItem(settings: Settings, val max_box_count: Int, val max_soul
         return object: SpiritTarget{
             override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
                 val souls=soulsOrCreate(stack)
-                if( souls.get(spirit)!=null || souls.size<max_box_count ){
-                    val opt_entry=souls.get(spirit)
-                    val ecount=opt_entry?.count ?: 0
+                if( souls.get(spirit)!=null || souls.size<maxBoxCount ){
+                    val optEntry=souls.get(spirit)
+                    val ecount=optEntry?.count ?: 0
 
-                    val new_value= min(ecount+count, max_soul_count)
-                    val offset=new_value-ecount
+                    val newValue= min(ecount+count, max_soul_count)
+                    val offset=newValue-ecount
                     if(offset<=0)return SpiritTarget.NONE.FLUX
 
                     return SpiritTarget.SpiritInputFlux(

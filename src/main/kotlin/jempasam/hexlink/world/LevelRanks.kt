@@ -22,7 +22,7 @@ interface LevelRanks {
 
     fun ranks(): Collection<Rank>
 
-    class Rank(val mana_cost: Float, val artifact_battery: Float, val color: Int){
+    class Rank(val manaCost: Float, val artifactBattery: Float, val color: Int){
 
         fun getName(): Text
             = HexlinkRegistry.RANK.getId(this)

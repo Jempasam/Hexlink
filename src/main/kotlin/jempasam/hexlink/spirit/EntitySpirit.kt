@@ -15,14 +15,14 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
-class EntitySpirit(val entity_type: EntityType<*>): Spirit {
+class EntitySpirit(val entityType: EntityType<*>): Spirit {
 
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
-        if(!entity_type.isSummonable)
+        if(!entityType.isSummonable)
             return Spirit.NONE_MANIFESTATION
         else
             return Spirit.Manifestation(1,count){
-                val summoned=entity_type.create(world)
+                val summoned=entityType.create(world)
                 if(summoned!=null){
                     for(i in 0..<it){
                         summoned.setPosition(position)
@@ -33,11 +33,11 @@ class EntitySpirit(val entity_type: EntityType<*>): Spirit {
     }
 
     override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
-        if(!entity_type.isSummonable)
+        if(!entityType.isSummonable)
             return Spirit.NONE_MANIFESTATION
         else
             return Spirit.Manifestation(1,count){
-                val summoned=entity_type.create(world)
+                val summoned=entityType.create(world)
                 if(summoned!=null){
                     var riding=entity
                     for(i in 0..<it){
@@ -54,35 +54,35 @@ class EntitySpirit(val entity_type: EntityType<*>): Spirit {
 
 
     override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
-        return entity.type==entity_type
+        return entity.type==entityType
     }
 
     override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
-        val entities=world.getEntitiesByType( entity_type, Box.of(position, 0.7, 0.7, 0.7), Predicates.alwaysTrue())
+        val entities=world.getEntitiesByType( entityType, Box.of(position, 0.7, 0.7, 0.7), Predicates.alwaysTrue())
         return entities.isNotEmpty()
     }
 
 
 
-    override fun equals(other: Any?): Boolean = other is EntitySpirit && entity_type===other.entity_type
+    override fun equals(other: Any?): Boolean = other is EntitySpirit && entityType===other.entityType
 
-    override fun hashCode(): Int = entity_type.hashCode()*36
+    override fun hashCode(): Int = entityType.hashCode()*36
 
 
 
     override fun getColor(): Int{
-        if(entity_type.isFireImmune)return DyeColor.ORANGE.fireworkColor
+        if(entityType.isFireImmune)return DyeColor.ORANGE.fireworkColor
         else{
-            val color= from_group_to_color[entity_type.spawnGroup]
+            val color= from_group_to_color[entityType.spawnGroup]
             if(color!=null)return color
             else return DyeColor.RED.fireworkColor
         }
     }
 
-    override fun getName(): Text = entity_type.name
+    override fun getName(): Text = entityType.name
 
     override fun serialize(): NbtElement {
-        return NbtString.of(Registry.ENTITY_TYPE.getId(entity_type).toString())
+        return NbtString.of(Registry.ENTITY_TYPE.getId(entityType).toString())
     }
 
 

@@ -9,15 +9,15 @@ interface SpiritTarget {
     class SpiritInputFlux(private val filler: (Int)->Unit, val maxcount: Int){
         private var filled=false
         fun fill(count: Int){
-            var final_count=count
-            if(final_count>maxcount){
-                final_count=maxcount
+            var finalCount=count
+            if(finalCount>maxcount){
+                finalCount=maxcount
                 HexlinkMod.logger.warn("Try to fill more than max, should not happen")
             }
 
             if(!filled) {
-                if (final_count > 0) {
-                    filler(final_count)
+                if (finalCount > 0) {
+                    filler(finalCount)
                     filled=true
                 }
             }

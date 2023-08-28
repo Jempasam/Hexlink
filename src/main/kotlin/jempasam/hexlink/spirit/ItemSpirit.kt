@@ -46,7 +46,7 @@ class ItemSpirit(val item: Item): Spirit {
         return Spirit.Manifestation(1,count){
             val stack=item.defaultStack
             stack.count=it
-            val old_hand_item=caster.mainHandStack
+            val oldHandItem=caster.mainHandStack
             caster.setStackInHand(Hand.MAIN_HAND,stack)
             for(i in 0..<it){
                 item.useOnBlock(
@@ -57,7 +57,7 @@ class ItemSpirit(val item: Item): Spirit {
                         )
                 )
             }
-            caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
+            caster.setStackInHand(Hand.MAIN_HAND, oldHandItem)
         }
     }
 
@@ -65,7 +65,7 @@ class ItemSpirit(val item: Item): Spirit {
         return Spirit.Manifestation(1,count){
             val stack=item.defaultStack
             stack.count=it
-            val old_hand_item=caster.mainHandStack
+            val oldHandItem=caster.mainHandStack
             caster.setStackInHand(Hand.MAIN_HAND,stack)
             if(entity==caster){
                 for(i in 0..<it){
@@ -85,7 +85,7 @@ class ItemSpirit(val item: Item): Spirit {
                     entity.interact(caster, Hand.MAIN_HAND)
                 }
             }
-            caster.setStackInHand(Hand.MAIN_HAND, old_hand_item)
+            caster.setStackInHand(Hand.MAIN_HAND, oldHandItem)
         }
     }
 

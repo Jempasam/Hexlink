@@ -27,17 +27,17 @@ class MixedPigmentRecipe(val recipe: ShapelessRecipe): CraftingRecipe{
 
     override fun craft(craftingInventory: CraftingInventory): ItemStack {
         val ret=recipe.craft(craftingInventory)
-        val ret_item=ret.item
-        if(ret_item is MixedPigmentItem){
+        val retItem=ret.item
+        if(retItem is MixedPigmentItem){
             val colors= mutableListOf<Int>()
             for(i in 0 until craftingInventory.size()){
                 val stack=craftingInventory.getStack(i)
                 val item=stack.item
                 if(item is DyeItem)colors.add(item.color.fireworkColor)
             }
-            if(colors.size>0)ret_item.setColor1(ret, colors[0])
-            if(colors.size>1)ret_item.setColor2(ret, colors[1])
-            else ret_item.setColor2(ret, colors[0])
+            if(colors.size>0)retItem.setColor1(ret, colors[0])
+            if(colors.size>1)retItem.setColor2(ret, colors[1])
+            else retItem.setColor2(ret, colors[0])
         }
         return ret
     }

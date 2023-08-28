@@ -15,11 +15,11 @@ class SpiritBag {
     }
 
     fun popFront(count: Int){
-        var cur_count=count
-        while(content.size>0 && cur_count>0){
+        var curCount=count
+        while(content.size>0 && curCount>0){
             val last=content.first()
-            cur_count-=last.count
-            last.count-=cur_count
+            curCount-=last.count
+            last.count-=curCount
             if(last.count<=0)content.removeAt(0)
         }
     }
@@ -32,11 +32,11 @@ class SpiritBag {
     }
 
     fun popBack(count: Int){
-        var cur_count=count
-        while(content.size>0 && cur_count>0){
+        var curCount=count
+        while(content.size>0 && curCount>0){
             val last=content.last()
-            cur_count-=last.count
-            last.count-=cur_count
+            curCount-=last.count
+            last.count-=curCount
             if(last.count<=0)content.removeAt(content.size-1)
         }
     }

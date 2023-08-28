@@ -14,15 +14,15 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 
-class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
+class PotionSpirit(val potionEffect: StatusEffect): Spirit  {
 
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
         return Spirit.Manifestation(1,count){
-            val effect=StatusEffectInstance(potion_effect, it*100, it/4)
+            val effect=StatusEffectInstance(potionEffect, it*100, it/4)
             val cloud=EntityType.AREA_EFFECT_CLOUD.create(world)
             if(cloud!=null){
                 cloud.addEffect(effect)
-                cloud.color=potion_effect.color
+                cloud.color=potionEffect.color
                 cloud.radius=it.toFloat()
                 cloud.duration=it*100
                 cloud.setPosition(position)
@@ -38,7 +38,7 @@ class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
             return Spirit.NONE_MANIFESTATION
         else
             return Spirit.Manifestation(1,count){
-                val effect=StatusEffectInstance(potion_effect, it*200, it/3)
+                val effect=StatusEffectInstance(potionEffect, it*200, it/3)
                 entity.addStatusEffect(effect)
             }
     }
@@ -46,7 +46,7 @@ class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
 
 
     override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
-        return (entity is LivingEntity && entity.statusEffects.any { effect -> effect.effectType==potion_effect })
+        return (entity is LivingEntity && entity.statusEffects.any { effect -> effect.effectType==potionEffect })
     }
 
     override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
@@ -55,17 +55,17 @@ class PotionSpirit(val potion_effect: StatusEffect): Spirit  {
 
 
 
-    override fun equals(other: Any?): Boolean = other is PotionSpirit && potion_effect===other.potion_effect
+    override fun equals(other: Any?): Boolean = other is PotionSpirit && potionEffect===other.potionEffect
 
-    override fun hashCode(): Int = potion_effect.hashCode()*36
+    override fun hashCode(): Int = potionEffect.hashCode()*36
 
 
-    override fun getColor(): Int = potion_effect.color
+    override fun getColor(): Int = potionEffect.color
 
-    override fun getName(): Text = potion_effect.name
+    override fun getName(): Text = potionEffect.name
 
     override fun serialize(): NbtElement {
-        return NbtString.of(Registry.STATUS_EFFECT.getId(potion_effect).toString())
+        return NbtString.of(Registry.STATUS_EFFECT.getId(potionEffect).toString())
     }
 
 

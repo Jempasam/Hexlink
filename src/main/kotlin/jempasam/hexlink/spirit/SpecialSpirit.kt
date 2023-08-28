@@ -11,29 +11,29 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import kotlin.jvm.optionals.getOrNull
 
-class SpecialSpirit(val special_type: SpecialType) : Spirit {
-    override fun getColor(): Int = special_type.color
+class SpecialSpirit(val specialType: SpecialType) : Spirit {
+    override fun getColor(): Int = specialType.color
 
-    override fun getName(): Text = special_type.text
+    override fun getName(): Text = specialType.text
 
-    override fun equals(other: Any?): Boolean = other is SpecialSpirit && special_type===other.special_type
+    override fun equals(other: Any?): Boolean = other is SpecialSpirit && specialType===other.specialType
 
-    override fun hashCode(): Int = special_type.hashCode()
+    override fun hashCode(): Int = specialType.hashCode()
 
     override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean
-        = special_type.lookAt.lookAt(caster, world, position)
+        = specialType.lookAt.lookAt(caster, world, position)
 
     override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean
-        = special_type.lookIn.lookIn(caster, world, entity)
+        = specialType.lookIn.lookIn(caster, world, entity)
 
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation
-        = special_type.manifestAt.manifestAt(caster, world, position, count)
+        = specialType.manifestAt.manifestAt(caster, world, position, count)
 
     override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation
-        = special_type.manifestIn.manifestIn(caster, world, entity, count)
+        = specialType.manifestIn.manifestIn(caster, world, entity, count)
 
     override fun serialize(): NbtElement {
-        return NbtString.of(HexlinkRegistry.SPECIAL_SPIRIT.getKey(special_type).getOrNull()?.value?.toString() ?: "")
+        return NbtString.of(HexlinkRegistry.SPECIAL_SPIRIT.getKey(specialType).getOrNull()?.value?.toString() ?: "")
     }
 
     override fun getType(): Spirit.SpiritType<*> = Type

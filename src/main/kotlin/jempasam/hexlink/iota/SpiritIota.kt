@@ -35,13 +35,13 @@ class SpiritIota(spirit: Spirit) : Iota(Type, spirit) {
 
             if(tag is NbtCompound){
                 val spirit_type_id=tag.getString("type")
-                val spirit_value_nbt=tag.get("value")
+                val spiritValueNbt=tag.get("value")
                 if(spirit_type_id=="")return Text.of("Invalid Block Spirit")
-                if(spirit_value_nbt==null)return Text.of("Invalid Block Spirit")
+                if(spiritValueNbt==null)return Text.of("Invalid Block Spirit")
 
-                val spirit_type= HexlinkRegistry.SPIRIT.get(Identifier(spirit_type_id)) ?: return Text.of("Invalid Block Spirit")
+                val spiritType= HexlinkRegistry.SPIRIT.get(Identifier(spirit_type_id)) ?: return Text.of("Invalid Block Spirit")
 
-                val spirit=spirit_type.deserialize(spirit_value_nbt)
+                val spirit=spiritType.deserialize(spiritValueNbt)
                 return spirit?.getName()?.copy()?.append(Text.translatable("hexlink.spirit")) ?: throw Error("Should not happen")
             }
             return Text.of("Invalid Block Spirit")

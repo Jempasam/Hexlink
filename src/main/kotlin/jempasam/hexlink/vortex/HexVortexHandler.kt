@@ -3,7 +3,6 @@ package jempasam.hexlink.vortex
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
-import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
 
@@ -25,7 +24,7 @@ interface HexVortexHandler {
                 else sequence {
                     for(e in ingredient.entries){
                         for(s in e.stacks){
-                            yield(SpiritHelper.asSpirit(s.item));
+                            yield(SpiritHelper.asSpirit(s.item))
                         }
                     }
                 },
@@ -35,7 +34,7 @@ interface HexVortexHandler {
         constructor(spirit: Spirit): this(sequenceOf(spirit), spirit.hashCode())
         override fun iterator(): Iterator<Spirit> = content.iterator()
 
-        override fun hashCode(): Int = hashcode;
+        override fun hashCode(): Int = hashcode
 
         override fun equals(other: Any?): Boolean = other is Ingredient && other.hashcode==hashcode
     }

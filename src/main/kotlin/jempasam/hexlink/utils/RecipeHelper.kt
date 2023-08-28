@@ -21,25 +21,25 @@ object RecipeHelper {
         val recipe_manager=world.server?.recipeManager
         if(recipe_manager!=null){
             val recipes=recipe_manager.listAllOfType(type)
-            val matched_recipes= mutableListOf<T>()
+            val matchedRecipes= mutableListOf<T>()
             for(recipe in recipes){
                 // Check Shapeless Matches
                 val ingredients=recipe.ingredients
-                var stack_place=0
+                var stackPlace=0
 
                 for(ingre_place in input.indices){
                     val ingredient= ingredients[ingre_place]
                     if(ingredient.isEmpty)continue
-                    if(ingredient.test(input[stack_place])){
-                        stack_place++
-                        if(stack_place==input.size){
-                            matched_recipes.add(recipe)
+                    if(ingredient.test(input[stackPlace])){
+                        stackPlace++
+                        if(stackPlace==input.size){
+                            matchedRecipes.add(recipe)
                         }
                     }
                     else break
                 }
             }
-            return matched_recipes
+            return matchedRecipes
         }
         else return listOf()
     }
@@ -48,9 +48,9 @@ object RecipeHelper {
     fun <T: Recipe<CraftingInventory>>craft(world: World, type: RecipeType<T>, input: List<ItemStack>): Pair<ItemStack,Int>?{
         // Sort matches, test with most items first
         var matches= findAllSimpleMatches(world, type, input).map{
-            var ingredient_count=0
-            for(ing in it.ingredients)if(!ing.isEmpty)ingredient_count++
-            it to ingredient_count
+            var ingredientCount=0
+            for(ing in it.ingredients)if(!ing.isEmpty)ingredientCount++
+            it to ingredientCount
         }
         matches=matches.sortedByDescending { it.second }
 

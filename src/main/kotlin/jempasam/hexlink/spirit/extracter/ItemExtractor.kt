@@ -19,7 +19,7 @@ object ItemExtractor : SpiritExtractor<ItemSpirit> {
 
     override fun extract(caster: PlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<ItemSpirit> {
         val worldstack= StackHelper.stack(caster, target)
-        var stack= worldstack?.stack
+        val stack= worldstack?.stack
         if(stack!=null && stack.item !is BlockItem && !stack.isIn(NOT_EXTRACTABLE)){
             worldstack as StackHelper.WorldStack
             return SpiritExtractor.ExtractionResult(

@@ -18,7 +18,7 @@ abstract class AbstractVortexHandler(private var catalyzer: List<Spirit>, var ou
 
     final override fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
         if(ingredients.size>=catalyzer.size){
-            for(i in 0..<catalyzer.size){
+            for(i in catalyzer.indices){
                 if(ingredients[i]!=catalyzer[i])return null
             }
             return findRealRecipe(ingredients.subList(catalyzer.size,ingredients.size), world)

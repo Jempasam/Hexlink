@@ -20,14 +20,14 @@ import net.minecraft.util.math.Vec3d
 
 object SpiritHelper{
 
-    fun transfer(source: SpiritSource, target: SpiritTarget, spirit: Spirit, max_count: Int): Pair<()->Unit,Int>{
-        val source_flux=source.extract(max_count, spirit)
-        val target_flux=target.fill(source_flux.maxcount, spirit)
+    fun transfer(source: SpiritSource, target: SpiritTarget, spirit: Spirit, maxCount: Int): Pair<()->Unit,Int>{
+        val sourceFlux=source.extract(maxCount, spirit)
+        val targetFlux=target.fill(sourceFlux.maxcount, spirit)
 
         return {
-            source_flux.consume(target_flux.maxcount)
-            target_flux.fill(target_flux.maxcount)
-        } to target_flux.maxcount
+            sourceFlux.consume(targetFlux.maxcount)
+            targetFlux.fill(targetFlux.maxcount)
+        } to targetFlux.maxcount
     }
 
     fun spiritTarget(caster: PlayerEntity?, stack: ItemStack): SpiritTarget{
@@ -42,11 +42,11 @@ object SpiritHelper{
         val inventory=caster.inventory
         return object: SpiritTarget{
             override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
-                val main_flux= spiritTarget(caster,caster.mainHandStack).fill(count, spirit)
-                if(main_flux.maxcount>0)return main_flux
+                val mainFlux= spiritTarget(caster,caster.mainHandStack).fill(count, spirit)
+                if(mainFlux.maxcount>0)return mainFlux
 
-                val offh_flux= spiritTarget(caster,caster.offHandStack).fill(count, spirit)
-                if(offh_flux.maxcount>0)return offh_flux
+                val offhFlux= spiritTarget(caster,caster.offHandStack).fill(count, spirit)
+                if(offhFlux.maxcount>0)return offhFlux
 
                 for(i in 0 ..< inventory.size()){
                     val stack= inventory.getStack(i)
@@ -66,10 +66,10 @@ object SpiritHelper{
             return blocktype.getSpiritTarget(world, bpos)
         }
 
-        val world_stack=StackHelper.stack(caster, world, pos)
-        if(world_stack!=null){
-            val item=world_stack.stack.item
-            if(item is ItemSpiritTarget)return StackUpdateSpiritTarget(world_stack, item.getSpiritTarget(world_stack.stack))
+        val worldStack=StackHelper.stack(caster, world, pos)
+        if(worldStack!=null){
+            val item=worldStack.stack.item
+            if(item is ItemSpiritTarget)return StackUpdateSpiritTarget(worldStack, item.getSpiritTarget(worldStack.stack))
         }
 
         return null
@@ -82,10 +82,10 @@ object SpiritHelper{
 
         if(entity is SpiritTarget)return entity
 
-        val world_stack=StackHelper.stack(caster, entity)
-        if(world_stack!=null){
-            val item=world_stack.stack.item
-            if(item is ItemSpiritTarget)return StackUpdateSpiritTarget(world_stack, item.getSpiritTarget(world_stack.stack))
+        val worldStack=StackHelper.stack(caster, entity)
+        if(worldStack!=null){
+            val item=worldStack.stack.item
+            if(item is ItemSpiritTarget)return StackUpdateSpiritTarget(worldStack, item.getSpiritTarget(worldStack.stack))
         }
 
         return null
@@ -103,11 +103,11 @@ object SpiritHelper{
         val inventory=caster.inventory
         return object: SpiritSource{
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                val main_flux= spiritSource(caster,caster.mainHandStack).extract(count,spirit)
-                if(main_flux.maxcount>0)return main_flux
+                val mainFlux= spiritSource(caster,caster.mainHandStack).extract(count,spirit)
+                if(mainFlux.maxcount>0)return mainFlux
 
-                val off_flux= spiritSource(caster,caster.offHandStack).extract(count,spirit)
-                if(off_flux.maxcount>0)return off_flux
+                val offFlux= spiritSource(caster,caster.offHandStack).extract(count,spirit)
+                if(offFlux.maxcount>0)return offFlux
 
                 if(caster.isCreative)return SpiritSource.SpiritOutputFlux({},count)
                 for(i in 0 ..< inventory.size()){
@@ -119,11 +119,11 @@ object SpiritHelper{
             }
 
             override fun last(): Spirit?{
-                val main_flux= spiritSource(caster,caster.mainHandStack).last()
-                if(main_flux!=null)return main_flux
+                val mainFlux= spiritSource(caster,caster.mainHandStack).last()
+                if(mainFlux!=null)return mainFlux
 
-                val off_flux= spiritSource(caster,caster.offHandStack).last()
-                if(off_flux!=null)return off_flux
+                val offFlux= spiritSource(caster,caster.offHandStack).last()
+                if(offFlux!=null)return offFlux
 
                 for(i in 0 ..< inventory.size()){
                     val stack=inventory.getStack(i)
@@ -142,10 +142,10 @@ object SpiritHelper{
         val blocktype=state.block
         if(blocktype is BlockSpiritSource)return blocktype.getSpiritSource(world, bpos)
 
-        val world_stack=StackHelper.stack(caster, world, pos)
-        if(world_stack!=null){
-            val item=world_stack.stack.item
-            if(item is ItemSpiritSource)return StackUpdateSpiritSource(world_stack, item.getSpiritSource(world_stack.stack))
+        val worldStack=StackHelper.stack(caster, world, pos)
+        if(worldStack!=null){
+            val item=worldStack.stack.item
+            if(item is ItemSpiritSource)return StackUpdateSpiritSource(worldStack, item.getSpiritSource(worldStack.stack))
         }
         return null
     }
@@ -157,10 +157,10 @@ object SpiritHelper{
 
         if(entity is SpiritSource)return entity
 
-        val world_stack=StackHelper.stack(caster, entity)
-        if(world_stack!=null){
-            val item=world_stack.stack.item
-            if(item is ItemSpiritSource)return StackUpdateSpiritSource(world_stack, item.getSpiritSource(world_stack.stack))
+        val worldStack=StackHelper.stack(caster, entity)
+        if(worldStack!=null){
+            val item=worldStack.stack.item
+            if(item is ItemSpiritSource)return StackUpdateSpiritSource(worldStack, item.getSpiritSource(worldStack.stack))
         }
 
         return null

@@ -23,10 +23,10 @@ object EverythingExtractor : SpiritExtractor<Spirit> {
     override fun getName(): Text = Text.translatable("hexlink.extractor.everything")
 
     override fun getColor(): Int {
-        val current_pi_time=(System.currentTimeMillis()%2000)/2000f*Math.PI*2
-        val red=(sin(current_pi_time) *127+127).toInt()
-        val blue=(sin(current_pi_time+Math.PI*2/3) *127+127).toInt()
-        val green=(sin(current_pi_time+Math.PI*4/3) *127+127).toInt()
+        val currentPiTime=(System.currentTimeMillis()%2000)/2000f*Math.PI*2
+        val red=(sin(currentPiTime) *127+127).toInt()
+        val blue=(sin(currentPiTime+Math.PI*2/3) *127+127).toInt()
+        val green=(sin(currentPiTime+Math.PI*4/3) *127+127).toInt()
         return ColorHelper.Argb.getArgb(255, red, green, blue)
     }
 

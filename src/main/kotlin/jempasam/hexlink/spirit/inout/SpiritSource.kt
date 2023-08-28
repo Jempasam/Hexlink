@@ -11,14 +11,14 @@ interface SpiritSource {
     class SpiritOutputFlux(private val consumer: (Int)->Unit, val maxcount: Int){
         private var consumed=false
         fun consume(count: Int){
-            var final_count=count
-            if(final_count>maxcount){
-                final_count=maxcount
+            var finalCount=count
+            if(finalCount>maxcount){
+                finalCount=maxcount
                 HexlinkMod.logger.warn("Try to consume more than max, should not happen")
             }
             if(!consumed){
-                if(final_count>0){
-                    consumer(final_count)
+                if(finalCount>0){
+                    consumer(finalCount)
                     consumed=true
                 }
             }

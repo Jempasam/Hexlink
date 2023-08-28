@@ -33,22 +33,22 @@ interface SpiritExtractor<T: Spirit>{
     /**
      * The result of an extraction
      * @param spirit The spirit extracted
-     * @param max_count The number of spirit extracted
+     * @param maxCount The number of spirit extracted
      * @param consumer The method used to change or kill the entity after the spirit are extracted
      */
-    class ExtractionResult<T: Spirit>(private val consumer: (Int)->Unit, val spirit: T?, val max_count: Int){
+    class ExtractionResult<T: Spirit>(private val consumer: (Int)->Unit, val spirit: T?, val maxCount: Int){
         /**
          * Consume the entity after extraction
          */
         fun consume(count: Int){
-            if(count>max_count){
+            if(count>maxCount){
                 HexlinkMod.logger.warn("Try to extract more than max")
-                return consumer(max_count)
+                return consumer(maxCount)
             }
             else return consumer(count)
         }
 
-        fun downCast() = ExtractionResult<Spirit>(consumer,spirit,max_count)
+        fun downCast() = ExtractionResult<Spirit>(consumer,spirit,maxCount)
     }
 
     fun noResult(): ExtractionResult<T> = noResult<T>()

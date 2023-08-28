@@ -37,15 +37,15 @@ fun List<Iota>.getSpirit(index: Int, max: Int): Spirit{
 }
 
 fun List<Iota>.getSpiritSourceOpt(ctx: CastingContext, index: Int, max: Int): SpiritSource?{
-    val source_iota=get(index)
-    val source=when(source_iota){
+    val sourceIota=get(index)
+    val source=when(sourceIota){
         is EntityIota ->{
-            ctx.assertEntityInRange(source_iota.entity)
-            SpiritHelper.spiritSource(ctx.caster,source_iota.entity)
+            ctx.assertEntityInRange(sourceIota.entity)
+            SpiritHelper.spiritSource(ctx.caster,sourceIota.entity)
         }
         is Vec3Iota ->{
-            ctx.assertVecInRange(source_iota.vec3)
-            SpiritHelper.spiritSource(ctx.caster, ctx.world, source_iota.vec3)
+            ctx.assertVecInRange(sourceIota.vec3)
+            SpiritHelper.spiritSource(ctx.caster, ctx.world, sourceIota.vec3)
         }
         else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
@@ -61,15 +61,15 @@ fun List<Iota>.getSpiritSourceAndPos(ctx: CastingContext, index: Int, max: Int):
 
 
 fun List<Iota>.getSpiritTarget(ctx: CastingContext, index: Int, max: Int): SpiritTarget{
-    val target_iota=get(index)
-    val target=when(target_iota){
+    val targetIota=get(index)
+    val target=when(targetIota){
         is EntityIota ->{
-            ctx.assertEntityInRange(target_iota.entity)
-            SpiritHelper.spiritTarget(ctx.caster,target_iota.entity)
+            ctx.assertEntityInRange(targetIota.entity)
+            SpiritHelper.spiritTarget(ctx.caster,targetIota.entity)
         }
         is Vec3Iota ->{
-            ctx.assertVecInRange(target_iota.vec3)
-            SpiritHelper.spiritTarget(ctx.caster, ctx.world, target_iota.vec3)
+            ctx.assertVecInRange(targetIota.vec3)
+            SpiritHelper.spiritTarget(ctx.caster, ctx.world, targetIota.vec3)
         }
         else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }

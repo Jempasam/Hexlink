@@ -18,8 +18,8 @@ class ExtractorShapedRecipe(val recipe: ShapedRecipe) : CraftingRecipe {
 
     override fun craft(craftingInventory: CraftingInventory): ItemStack {
         val result=recipe.craft(craftingInventory)
-        val result_item=result.item
-        if(result_item is ExtractorItem){
+        val resultItem=result.item
+        if(resultItem is ExtractorItem){
             var extractor: SpiritExtractor<*>?=null
             for(i in 0 until craftingInventory.size()){
                 val stack=craftingInventory.getStack(i)
@@ -29,7 +29,7 @@ class ExtractorShapedRecipe(val recipe: ShapedRecipe) : CraftingRecipe {
                     if(ext!=null && extractor==null)extractor=ext
                 }
             }
-            if(extractor!=null)result_item.setExtractor(result, extractor)
+            if(extractor!=null)resultItem.setExtractor(result, extractor)
         }
         return result
     }

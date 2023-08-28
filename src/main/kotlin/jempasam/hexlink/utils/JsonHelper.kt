@@ -87,8 +87,8 @@ fun JsonObject.getCookingRecipeType(name: String): RecipeType<AbstractCookingRec
     return recipe as RecipeType<AbstractCookingRecipe>
 }
 
-fun JsonObject.addCookingRecipeType(name: String, recipe_type: RecipeType<AbstractCookingRecipe>){
-    val id=Registry.RECIPE_TYPE.getKey(recipe_type)
+fun JsonObject.addCookingRecipeType(name: String, recipeType: RecipeType<AbstractCookingRecipe>){
+    val id=Registry.RECIPE_TYPE.getKey(recipeType)
     if(id!=null){
         this.addProperty(name,id.toString())
     }

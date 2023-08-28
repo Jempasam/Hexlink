@@ -14,26 +14,26 @@ import kotlin.math.max
 class BurningVortexHandler : AbstractVortexHandler{
 
     val multiplier: Float
-    val burning_result: Spirit
+    val burningResult: Spirit
 
 
-    constructor(catalyzer: List<Spirit>, output: List<Spirit>, burning_result: Spirit, multiplier: Float)
+    constructor(catalyzer: List<Spirit>, output: List<Spirit>, burningResult1: Spirit, multiplier: Float)
             : super(catalyzer, output)
     {
         this.multiplier=multiplier
-        this.burning_result=burning_result
+        this.burningResult=burningResult1
     }
 
     constructor(obj: JsonObject)
             : super(obj)
     {
-        this.burning_result=obj.getSpirit("burning_result")
+        this.burningResult=obj.getSpirit("burning_result")
         this.multiplier=getFloat(obj,"multiplier",1.0f)
     }
 
 
     override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
-        if(ingredients.size>=1){
+        if(ingredients.isNotEmpty()){
             val ingredient=ingredients[0]
             val item=SpiritHelper.asItem(ingredient)
             if(item!=null){
@@ -53,7 +53,7 @@ class BurningVortexHandler : AbstractVortexHandler{
             if(cooktime!=null){
                 val result= mutableListOf<Spirit>()
                 val count=max(1,(cooktime/200*multiplier).toInt())
-                for(i in 0..<count)result.add(burning_result)
+                for(i in 0..<count)result.add(burningResult)
                 listOf(HexVortexHandler.Ingredient(SpiritHelper.asSpirit(item))) to result
             }
             else null
@@ -68,7 +68,7 @@ class BurningVortexHandler : AbstractVortexHandler{
             else{
                 val maxi= max(1,(fuel_time/200*handler.multiplier).toInt())
                 val ret= mutableListOf<Spirit>()
-                for(i in 0..<maxi)ret.add(handler.burning_result)
+                for(i in 0..<maxi)ret.add(handler.burningResult)
                 return ret
             }
         }

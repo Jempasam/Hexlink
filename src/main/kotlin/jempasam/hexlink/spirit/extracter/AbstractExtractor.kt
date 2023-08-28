@@ -14,9 +14,9 @@ abstract class AbstractExtractor<T: Spirit>(val name: String, val colors: List<V
         if(colors.size==1)return colors[0].run { ColorHelper.Argb.getArgb(255,x,y,z)  }
         val time=System.currentTimeMillis()%(1000*colors.size)/1000f
         val index=time.toInt()
-        val local_time=((time-index)*1000).toInt()
-        val next_index=(index+1)%2
-        val color=(colors[index].multiply(local_time)).add(colors[next_index].multiply(1000-local_time))
+        val localTime=((time-index)*1000).toInt()
+        val nextIndex=(index+1)%2
+        val color=(colors[index].multiply(localTime)).add(colors[nextIndex].multiply(1000-localTime))
         return ColorHelper.Argb.getArgb(255, color.x/1000, color.y/1000, color.z/1000)
     }
 }

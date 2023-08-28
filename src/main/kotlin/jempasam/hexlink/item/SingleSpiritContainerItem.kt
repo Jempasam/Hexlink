@@ -56,9 +56,9 @@ class SingleSpiritContainerItem(settings: Settings): Item(settings), ItemSpiritS
 
     override fun appendStacks(group: ItemGroup, stacks: DefaultedList<ItemStack>) {
         if(isIn(group)){
-            for(special_type in HexlinkRegistry.SPECIAL_SPIRIT){
+            for(specialType in HexlinkRegistry.SPECIAL_SPIRIT){
                 val stack=defaultStack
-                setSpirit(stack,SpecialSpirit(special_type))
+                setSpirit(stack,SpecialSpirit(specialType))
                 stacks.add(stack)
             }
         }

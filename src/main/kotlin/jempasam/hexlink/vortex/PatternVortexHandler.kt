@@ -24,8 +24,8 @@ class PatternVortexHandler : AbstractVortexHandler{
     private val recipe_manager=RecipeManager.createCachedMatchGetter(RecipeType.CRAFTING)
 
     private val pattern: List<Slot>
-    private val ingredient_count: Int
-    private val material_count: Int
+    private val ingredientCount: Int
+    private val materialCount: Int
     private val multiplier: Float
     private val useDurability: Boolean
     private val width: Int
@@ -36,9 +36,9 @@ class PatternVortexHandler : AbstractVortexHandler{
         : super(catalyzer,output)
     {
         assert(pattern.size==3*3)
-        this.pattern=pattern;
-        this.ingredient_count=pattern.maxOf { it.id }+1
-        this.material_count=pattern.maxOf { it.mat }+1
+        this.pattern=pattern
+        this.ingredientCount=pattern.maxOf { it.id }+1
+        this.materialCount=pattern.maxOf { it.mat }+1
         this.useDurability=useDurability
         this.multiplier=multiplier
         this.width=width
@@ -48,9 +48,9 @@ class PatternVortexHandler : AbstractVortexHandler{
     constructor(obj: JsonObject) : super(obj)
     {
         var width=-1
-        this.pattern=mutableListOf<Slot>()
-        val pattern_lines=JsonHelper.getArray(obj,"pattern")
-        for(line in pattern_lines){
+        this.pattern=mutableListOf()
+        val patternLines=JsonHelper.getArray(obj,"pattern")
+        for(line in patternLines){
             val line=line.asJsonArray
             if(width==-1)width=line.size()
             else if(width!=line.size())throw JsonParseException("Invalid pattern shape")
@@ -70,9 +70,9 @@ class PatternVortexHandler : AbstractVortexHandler{
             }
         }
         this.width=width
-        this.height=pattern_lines.size()
-        this.ingredient_count=pattern.maxOf { it.id }+1
-        this.material_count=pattern.maxOf { it.mat }+1
+        this.height=patternLines.size()
+        this.ingredientCount=pattern.maxOf { it.id }+1
+        this.materialCount=pattern.maxOf { it.mat }+1
         this.useDurability=JsonHelper.getBoolean(obj,"use_durability", false)
         this.multiplier=JsonHelper.getFloat(obj, "multiplier", 1.0f)
 
@@ -109,15 +109,15 @@ class PatternVortexHandler : AbstractVortexHandler{
     }
 
     override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
-        if(ingredients.size >= ingredient_count){
-            val items_ingredients=ingredients.map { SpiritHelper.asItem(it) }
-            if(items_ingredients.all { it!=null }){
-                val nonnull_items_ingredients=items_ingredients.map { it as Item }
+        if(ingredients.size >= ingredientCount){
+            val itemsIngredients=ingredients.map { SpiritHelper.asItem(it) }
+            if(itemsIngredients.all { it!=null }){
+                val nonnullItemsIngredients=itemsIngredients.map { it as Item }
 
-                val materials= MutableList<Item?>(material_count,{null})
+                val materials= MutableList<Item?>(materialCount) { null }
                 val inventory=CraftingInventory(NONEHANDLE,width,height)
                 for(i in 0..<width*height){
-                    val stack=pattern[i].stack(nonnull_items_ingredients, materials)
+                    val stack=pattern[i].stack(nonnullItemsIngredients, materials)
                     stack ?: return null
                     inventory.setStack(i,stack)
                 }
@@ -136,12 +136,12 @@ class PatternVortexHandler : AbstractVortexHandler{
     override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>>{
         return sequence {
             recipe_loop@ for (recipe in manager.listAllOfType(RecipeType.CRAFTING)) {
-                val materials = MutableList<Ingredient?>(material_count, {null})
-                val input = MutableList<Ingredient?>(ingredient_count, {null})
+                val materials = MutableList<Ingredient?>(materialCount) { null }
+                val input = MutableList<Ingredient?>(ingredientCount) { null }
                 val ingredients = recipe.ingredients
 
                 if(recipe is ShapedRecipe && recipe.width==width && recipe.height==height){
-                    for (i in 0..<pattern.size) {
+                    for (i in pattern.indices) {
                         val ingredient = ingredients[i]
                         val slot = pattern.get(i)
                         if(!slot.test(ingredient, input, materials))continue@recipe_loop
@@ -163,7 +163,7 @@ class PatternVortexHandler : AbstractVortexHandler{
                 val count=Math.max(1,(recipe.output.count*multiplier).toInt())
                 yield(
                         input.map { HexVortexHandler.Ingredient(it) }
-                                to List(count, {SpiritHelper.asSpirit(recipe.output.item)})
+                                to List(count) { SpiritHelper.asSpirit(recipe.output.item) }
                 )
             }
         }
@@ -171,7 +171,7 @@ class PatternVortexHandler : AbstractVortexHandler{
 
     class Recipe(val item: Item, val count: Int, val handler: PatternVortexHandler, val world: ServerWorld): AbstractVortexHandler.Recipe(handler){
 
-        override fun realIngredientCount(): Int = handler.ingredient_count
+        override fun realIngredientCount(): Int = handler.ingredientCount
 
          override fun realMix(ingredients: List<Spirit>): List<Spirit> {
             return mutableListOf<Spirit>()
@@ -191,7 +191,7 @@ class PatternVortexHandler : AbstractVortexHandler{
         override val mat: Int=-1
         override fun stack(items: List<Item>, mats: MutableList<Item?>): ItemStack? = stack.copy()
         override fun test(stack: Ingredient, inputs: MutableList<Ingredient?>, mats: MutableList<Ingredient?>): Boolean{
-            return stack.test(this.stack);
+            return stack.test(this.stack)
         }
     }
 
@@ -219,8 +219,8 @@ class PatternVortexHandler : AbstractVortexHandler{
     class NoneSlot: Slot{
         override val id: Int=-1
         override val mat: Int=-1
-        override fun stack(items: List<Item>, mats: MutableList<Item?>): ItemStack? = ItemStack.EMPTY;
-        override fun test(stack: Ingredient, inputs: MutableList<Ingredient?>, mats: MutableList<Ingredient?>): Boolean = stack.isEmpty;
+        override fun stack(items: List<Item>, mats: MutableList<Item?>): ItemStack? = ItemStack.EMPTY
+        override fun test(stack: Ingredient, inputs: MutableList<Ingredient?>, mats: MutableList<Ingredient?>): Boolean = stack.isEmpty
     }
 
     object NONEHANDLE: ScreenHandler(null,-1){

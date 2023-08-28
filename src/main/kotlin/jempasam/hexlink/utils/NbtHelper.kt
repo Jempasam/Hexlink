@@ -7,9 +7,9 @@ import net.minecraft.util.Identifier
 
 object NbtHelper {
     fun readSpirit(nbt: NbtCompound): Spirit?{
-        val type_id=nbt.getString("type")
-        if(type_id.isEmpty())return null
-        val type= HexlinkRegistry.SPIRIT.get(Identifier(type_id)) ?: return null
+        val typeId=nbt.getString("type")
+        if(typeId.isEmpty())return null
+        val type= HexlinkRegistry.SPIRIT.get(Identifier(typeId)) ?: return null
 
         val value_nbt= nbt.get("value") ?: return null
         return type.deserialize(value_nbt)

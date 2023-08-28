@@ -17,47 +17,47 @@ class HexlinkLevelData(private val level: WorldProperties) : Component, LevelRan
 
 
     // Ranks
-    private val rank_map= mutableMapOf<UUID,LevelRanks.Rank>()
+    private val rankMap= mutableMapOf<UUID,LevelRanks.Rank>()
     private val reverse_rank_map= mutableMapOf<LevelRanks.Rank,UUID>()
 
-    override fun ranks(): Collection<LevelRanks.Rank> = rank_map.values
+    override fun ranks(): Collection<LevelRanks.Rank> = rankMap.values
 
     override fun getPlayer(rank: LevelRanks.Rank): UUID? = reverse_rank_map[rank]
 
-    override fun getRank(player: UUID): LevelRanks.Rank? = rank_map[player]
+    override fun getRank(player: UUID): LevelRanks.Rank? = rankMap[player]
 
     override fun setPlayer(rank: LevelRanks.Rank, player: UUID?) {
-        val old_player= reverse_rank_map[rank]
-        if(old_player==player)return
-        if(old_player!=null){
-            rank_map.remove(old_player)
+        val oldPlayer= reverse_rank_map[rank]
+        if(oldPlayer==player)return
+        if(oldPlayer!=null){
+            rankMap.remove(oldPlayer)
         }
         if(player!=null){
-            val old_rank= rank_map[player]
-            if(old_rank!=null)reverse_rank_map.remove(rank)
+            val oldRank= rankMap[player]
+            if(oldRank!=null)reverse_rank_map.remove(rank)
             reverse_rank_map.put(rank,player)
-            rank_map.put(player,rank)
+            rankMap.put(player,rank)
         }
         else reverse_rank_map.remove(rank)
     }
 
     override fun setRank(player: UUID, rank: LevelRanks.Rank?) {
-        val old_rank= rank_map[player]
-        if(old_rank==rank)return
-        if(old_rank!=null){
-            rank_map.remove(player)
+        val oldRank= rankMap[player]
+        if(oldRank==rank)return
+        if(oldRank!=null){
+            rankMap.remove(player)
         }
         if(rank!=null){
-            val old_player= reverse_rank_map[rank]
-            if(old_player!=null)rank_map.remove(old_player)
-            rank_map.put(player, rank)
+            val oldPlayer= reverse_rank_map[rank]
+            if(oldPlayer!=null)rankMap.remove(oldPlayer)
+            rankMap.put(player, rank)
             reverse_rank_map.put(rank, player)
         }
-        else rank_map.remove(player)
+        else rankMap.remove(player)
     }
 
     override fun clearRanks() {
-        rank_map.clear()
+        rankMap.clear()
         reverse_rank_map.clear()
     }
 

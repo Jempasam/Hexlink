@@ -42,9 +42,9 @@ class OpExtractSpirit : SpellAction{
 
     data class Spell(val extractor: SpiritExtractor<*>, val extraction: SpiritExtractor.ExtractionResult<*>, val target: SpiritTarget) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
-            val multiplier=HexlinkConfiguration.extractor_settings[extractor]?.soul_count ?: 1
-            val input=target.fill(multiplier*extraction.max_count, extraction.spirit as Spirit)
-            val count= min(input.maxcount, extraction.max_count*multiplier)
+            val multiplier=HexlinkConfiguration.extractor_settings[extractor]?.soulCount ?: 1
+            val input=target.fill(multiplier*extraction.maxCount, extraction.spirit as Spirit)
+            val count= min(input.maxcount, extraction.maxCount*multiplier)
             val consumed= ceil(count.toFloat()/multiplier).toInt()
             extraction.consume(consumed)
             input.fill(count)

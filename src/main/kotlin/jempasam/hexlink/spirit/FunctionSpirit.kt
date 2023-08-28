@@ -26,7 +26,7 @@ class FunctionSpirit(val manifestAt: Identifier, val manifestIn: Identifier, val
             return Spirit.Manifestation(manifestAtCost, count){
                 for(i in 0..<it){
                     val source=caster.commandSource.withPosition(position).withLevel(3)
-                    world.server.commandFunctionManager.execute(function.get(),source);
+                    world.server.commandFunctionManager.execute(function.get(),source)
                 }
             }
     }
@@ -39,7 +39,7 @@ class FunctionSpirit(val manifestAt: Identifier, val manifestIn: Identifier, val
             return Spirit.Manifestation(manifestInCost, count){
                 for(i in 0..<it){
                     val source=caster.commandSource.withEntity(entity).withPosition(entity.pos).withLevel(3)
-                    world.server.commandFunctionManager.execute(function.get(),source);
+                    world.server.commandFunctionManager.execute(function.get(),source)
                 }
             }
     }

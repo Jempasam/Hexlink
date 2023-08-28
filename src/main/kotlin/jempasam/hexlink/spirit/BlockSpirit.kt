@@ -21,15 +21,15 @@ class BlockSpirit(val block: Block): Spirit{
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Spirit.Manifestation {
         val startpos=BlockPos(position)
         var testpos=startpos
-        var final_power=0
-        while(final_power<power){
+        var finalPower=0
+        while(finalPower<power){
             if(!world.getBlockState(testpos).isAir) break
             testpos=testpos.up()
-            final_power++
+            finalPower++
         }
-        if(final_power==0)return Spirit.NONE_MANIFESTATION
+        if(finalPower==0)return Spirit.NONE_MANIFESTATION
 
-        return Spirit.Manifestation(3, final_power){
+        return Spirit.Manifestation(3, finalPower){
             var blockpos=startpos
             for(i in 0..<it){
                 world.setBlockState(blockpos, block.defaultState)

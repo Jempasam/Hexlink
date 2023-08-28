@@ -41,12 +41,12 @@ object StackHelper {
     // Stack from block pos
     fun stack(caster: PlayerEntity?, world: ServerWorld, pos: Vec3d): WorldStack?{
         val bpos=BlockPos(pos)
-        val block_inv=HopperBlockEntity.getInventoryAt(world,bpos)
-        if(block_inv!=null){
-            for (i in 0 until block_inv.size()) {
-                if (block_inv.getStack(i).isEmpty()) continue
-                val stack = block_inv.getStack(i).copy()
-                if (stack != null) return WorldStack(stack, {block_inv.setStack(i, ItemStack.EMPTY)}, {block_inv.setStack(i, block_inv.getStack(i))})
+        val blockInv=HopperBlockEntity.getInventoryAt(world,bpos)
+        if(blockInv!=null){
+            for (i in 0 until blockInv.size()) {
+                if (blockInv.getStack(i).isEmpty()) continue
+                val stack = blockInv.getStack(i).copy()
+                if (stack != null) return WorldStack(stack, {blockInv.setStack(i, ItemStack.EMPTY)}, {blockInv.setStack(i, blockInv.getStack(i))})
             }
         }
         else{

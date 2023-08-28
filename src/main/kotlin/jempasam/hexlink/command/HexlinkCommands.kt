@@ -31,8 +31,8 @@ object HexlinkCommands{
 
     fun getRank(context: CommandContext<ServerCommandSource>, registry: Registry<LevelRanks.Rank>, name: String): LevelRanks.Rank {
         val key = context.getArgument(name, RegistryKey::class.java)
-        val casted_key=key.tryCast(registry.key).orElseThrow {throw CommandException(Text.translatable("argument.id.invalid"))}
-        val obj=registry.get(casted_key)
+        val castedKey=key.tryCast(registry.key).orElseThrow {throw CommandException(Text.translatable("argument.id.invalid"))}
+        val obj=registry.get(castedKey)
         return obj ?: throw CommandException(Text.translatable("argument.id.invalid"))
     }
 

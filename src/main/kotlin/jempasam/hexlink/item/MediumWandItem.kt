@@ -12,7 +12,7 @@ import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import net.minecraft.server.world.ServerWorld
 
-class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(settings){
+class MediumWandItem(settings: Settings, maximumSpell: Int) : ItemArtifact(settings){
     
     companion object{
         const val TAG_SELECTED: String="selectedPattern"
@@ -23,11 +23,11 @@ class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(sett
         val patsTag = stack.getOrCreateList(TAG_PROGRAM, NbtElement.LIST_TYPE.toInt())
         if(selectedspell<0 || patsTag.size <= 0)return null
 
-        val actual_spell= patsTag[selectedspell % patsTag.size]
-        if(actual_spell.type != NbtElement.LIST_TYPE)return null
-        if(actual_spell.asList.heldType != NbtElement.COMPOUND_TYPE)return null
+        val actualSpell= patsTag[selectedspell % patsTag.size]
+        if(actualSpell.type != NbtElement.LIST_TYPE)return null
+        if(actualSpell.asList.heldType != NbtElement.COMPOUND_TYPE)return null
 
-        return actual_spell.asList
+        return actualSpell.asList
     }
 
     fun getSpellCount(stack: ItemStack): Int{
@@ -41,10 +41,10 @@ class MediumWandItem(settings: Settings, maximum_spell: Int) : ItemArtifact(sett
     }
 
     override fun getHex(stack: ItemStack, level: ServerWorld): List<Iota> {
-        val actual_spell= getSelectedSpellNbt(stack) ?: return emptyList()
+        val actualSpell= getSelectedSpellNbt(stack) ?: return emptyList()
 
         val out = ArrayList<Iota>()
-        for (patTag in actual_spell.asList) {
+        for (patTag in actualSpell.asList) {
             val tag=patTag.asCompound
             out.add(HexIotaTypes.deserialize(tag, level))
         }

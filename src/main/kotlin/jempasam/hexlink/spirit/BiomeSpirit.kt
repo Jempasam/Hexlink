@@ -38,7 +38,7 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
     fun placeAll(world: ServerWorld, center: BlockPos, positions: List<BlockPos>, feature: ConfiguredFeature<*,*>, rand: Random): Int{
         if(positions.isEmpty())return 0
 
-        var spawn_count=0
+        var spawnCount=0
         var minx=Int.MAX_VALUE
         var miny=Int.MAX_VALUE
         var minz=Int.MAX_VALUE
@@ -60,23 +60,23 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
                 center.z-(minz+(maxz-minz)/2)
         )
 
-        for(spawn_pos in positions){
-            val square_distance=spawn_pos.getSquaredDistance(center)
-            if(square_distance< VALIDATION_SQUARE_DISTANCE){
-                if(feature.generate(world, world.chunkManager.chunkGenerator, rand, spawn_pos.add(offset)))
-                    spawn_count++
+        for(spawnPos in positions){
+            val squareDistance=spawnPos.getSquaredDistance(center)
+            if(squareDistance< VALIDATION_SQUARE_DISTANCE){
+                if(feature.generate(world, world.chunkManager.chunkGenerator, rand, spawnPos.add(offset)))
+                    spawnCount++
             }
         }
 
-        return spawn_count
+        return spawnCount
     }
 
-    fun generateFeature(world: ServerWorld, start_pos: BlockPos, feature: PlacedFeature, rand: Random): Boolean{
+    fun generateFeature(world: ServerWorld, startPos: BlockPos, feature: PlacedFeature, rand: Random): Boolean{
         val placements=feature.placementModifiers
         val configured=feature.feature.value()
 
         // Get structure positions
-        var positions= listOf(start_pos)
+        var positions= listOf(startPos)
         val context=FeaturePlacementContext(world, world.chunkManager.chunkGenerator, Optional.of(feature))
         for(placement in placements){
             val newpositions=mutableListOf<BlockPos>()
@@ -92,14 +92,14 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
         }
 
         // Try Spawning Features
-        val spawn_count=placeAll(world, start_pos, positions, configured, rand)
-        return spawn_count>1
+        val spawnCount=placeAll(world, startPos, positions, configured, rand)
+        return spawnCount>1
     }
 
     fun generateRandomFeature(world: ServerWorld, pos: BlockPos, features: RegistryEntryList<PlacedFeature>, rand: Random): Boolean{
-        var try_count=0
+        var tryCount=0
         var selected=rand.nextInt(features.size())
-        while(try_count< MAX_TRY_COUNT){
+        while(tryCount< MAX_TRY_COUNT){
             val feature=features.get(selected%features.size())
             HexlinkMod.logger.info("Try "+feature.key.get())
             if(generateFeature(world, pos, feature.value(), rand)){
@@ -107,7 +107,7 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
                 return true
             }
             selected++
-            try_count++
+            tryCount++
         }
         return false
     }
@@ -119,14 +119,14 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
         for(group in groups){
             if(group.size()==0)continue
             for(repetition in 0 until number){
-                val offset_space=number-1
+                val offsetSpace=number-1
                 val offset=Vec3i(
-                        rand.nextBetween(-offset_space,offset_space+1),
+                        rand.nextBetween(-offsetSpace,offsetSpace+1),
                         0,
-                        rand.nextBetween(-offset_space,offset_space+1)
+                        rand.nextBetween(-offsetSpace,offsetSpace+1)
                 )
-                val final_position=position.add(offset)
-                if(!generateRandomFeature(world,final_position,group,rand))
+                val finalPosition=position.add(offset)
+                if(!generateRandomFeature(world,finalPosition,group,rand))
                     HexlinkMod.logger.info("Biome Spirit generation structure n$repetition of step $seq fail")
                 seq++
             }
@@ -141,11 +141,11 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
 
     fun generateMob(world: ServerWorld, position: BlockPos, number: Int, rand: Random){
         val finalpos=position.up()
-        val spawn_entries=biome.value().spawnSettings.getSpawnEntries(SpawnGroup.CREATURE).entries
-        if(spawn_entries.size==0)return
+        val spawnEntries=biome.value().spawnSettings.getSpawnEntries(SpawnGroup.CREATURE).entries
+        if(spawnEntries.size==0)return
         for(i in 0 until number){
-            val spawn_entry= spawn_entries[rand.nextInt(spawn_entries.size)]
-            spawn_entry.type.spawn(world,null,null,null, finalpos, SpawnReason.SPAWNER, false, false)
+            val spawnEntry= spawnEntries[rand.nextInt(spawnEntries.size)]
+            spawnEntry.type.spawn(world,null,null,null, finalpos, SpawnReason.SPAWNER, false, false)
         }
     }
 

@@ -76,9 +76,9 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
             world.setBlockState(pos,defaultState)
         }
         else if(block!=this)return false
-        val vortex_entity=world.getBlockEntity(pos)
-        vortex_entity as HexVortexBlockEntity
-        if(spirit!=null)vortex_entity.give(spirit)
+        val vortexEntity=world.getBlockEntity(pos)
+        vortexEntity as HexVortexBlockEntity
+        if(spirit!=null)vortexEntity.give(spirit)
         return true
     }
 
@@ -93,41 +93,41 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
         if(vortexentity is HexVortexBlockEntity){
             return object: SpiritSource{
                 override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                    var current_count=0
-                    val removed_output= mutableListOf<Int>()
-                    val removed_input= mutableListOf<Int>()
+                    var currentCount=0
+                    val removedOutput= mutableListOf<Int>()
+                    val removedInput= mutableListOf<Int>()
                     for(i in (vortexentity.output.size-1) downTo 0){
                         val spi=vortexentity.output[i]
                         if(spi==spirit){
-                            current_count++
-                            removed_output.add(i)
-                            if(current_count>=count)break
+                            currentCount++
+                            removedOutput.add(i)
+                            if(currentCount>=count)break
                         }
                     }
-                    if(current_count<count)for(i in (vortexentity.input.size-1)downTo 0){
+                    if(currentCount<count)for(i in (vortexentity.input.size-1)downTo 0){
                         val spi=vortexentity.input[i]
                         if(spi==spirit){
-                            current_count++
-                            removed_input.add(i)
-                            if(current_count>=count)break
+                            currentCount++
+                            removedInput.add(i)
+                            if(currentCount>=count)break
                         }
                     }
                     return SpiritSource.SpiritOutputFlux({
                         vortexentity.age=0
                         var i=0
-                        for(id in removed_output){
+                        for(id in removedOutput){
                             i++
                             if(i>it)break
                             vortexentity.output.removeAt(id)
                         }
-                        for(id in removed_input){
+                        for(id in removedInput){
                             i++
                             if(i>it)break
                             vortexentity.input.removeAt(id)
                         }
                         vortexentity.markDirty()
                         vortexentity.sendToClient()
-                    }, current_count)
+                    }, currentCount)
                 }
 
                 override fun last(): Spirit? {

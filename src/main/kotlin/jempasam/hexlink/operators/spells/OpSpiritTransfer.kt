@@ -23,12 +23,12 @@ class OpSpiritTransfer: SpellAction {
         val source=args.getSpiritSourceAndPos(ctx,2,4)
         val target=args.getSpiritTargetAndPos(ctx,3,4)
 
-        val source_flux=source.first.extract(count, spirit)
-        if(source_flux.maxcount>0){
-            val target_flux=target.first.fill(source_flux.maxcount, spirit)
-            if(target_flux.maxcount>0){
+        val sourceFlux=source.first.extract(count, spirit)
+        if(sourceFlux.maxcount>0){
+            val targetFlux=target.first.fill(sourceFlux.maxcount, spirit)
+            if(targetFlux.maxcount>0){
                 return Triple(
-                        Spell(source_flux, target_flux, target_flux.maxcount),
+                        Spell(sourceFlux, targetFlux, targetFlux.maxcount),
                         1,
                         listOf(
                                 ParticleSpray.burst(source.second,0.5, 5),
