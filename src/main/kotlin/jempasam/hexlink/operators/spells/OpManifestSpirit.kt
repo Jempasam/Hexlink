@@ -43,7 +43,7 @@ class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
         return Triple(
             ManifestSpell(ctx.world, manifestation, input),
             manifestation.maxMediaCost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
-            listOf(ParticleSpray.burst(targetPos,1.0,5))
+            listOf(ParticleSpray.burst(targetPos,1.0,input.maxcount))
         )
     }
 
