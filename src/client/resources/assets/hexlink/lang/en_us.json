@@ -35,12 +35,16 @@
   "hexlink.spirit.entity": "Entity Spirit",
   "hexlink.spirit.potion": "Potion Spirit",
   "hexlink.spirit.item": "Item Spirit",
+  "hexlink.spirit.enchantment": "Enchantment Spirit",
+  "hexlink.spirit.function": "Command Spirit",
+  "hexlink.spirit.special": "Special Spirit",
   "hexlink.spirit.biome": "Biome Spirit",
 
 
   "hexlink.extractor.item": "Item",
   "hexlink.extractor.entity": "Entity",
   "hexlink.extractor.block": "Block",
+  "hexlink.extractor.enchantment": "Enchantment",
   "hexlink.extractor.potion": "Potion",
   "hexlink.extractor.everything": "Anything",
   "hexlink.extractor.biome": "Biome",

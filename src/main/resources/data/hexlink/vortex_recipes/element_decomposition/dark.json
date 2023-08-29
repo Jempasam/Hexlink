@@ -1,0 +1,20 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:flint_and_steel"},
+    {"type": "hexlink:special", "value": "hexlink:dark_element"}
+  ],
+  "result": [
+    {"type": "hexlink:potion", "value": "minecraft:blindness"},
+    {"type": "hexlink:potion", "value": "minecraft:blindness"},
+    {"type": "hexlink:potion", "value": "minecraft:blindness"},
+    {"type": "hexlink:potion", "value": "minecraft:blindness"},
+    {"type": "hexlink:potion", "value": "minecraft:blindness"},
+
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"},
+    {"type": "hexlink:potion", "value": "minecraft:wither"}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:flint_and_steel"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"}
+  ],
+  "result": [
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"},
+
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"},
+    {"type": "hexlink:block", "value": "minecraft:water"}
+  ]
+}

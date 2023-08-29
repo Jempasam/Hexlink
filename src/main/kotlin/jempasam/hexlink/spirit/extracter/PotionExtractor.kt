@@ -25,22 +25,21 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
         if(effects.isEmpty())return noResult()
 
         return SpiritExtractor.ExtractionResult(
-                {
-                    if (effects.size == 1) worldstack.killer()
-                    else {
-                        if (PotionUtil.getPotion(stack) != Potions.EMPTY) {
-                            stack.setCustomName(stack.name)
-                            stack.orCreateNbt.put(PotionUtil.CUSTOM_POTION_COLOR_KEY, NbtInt.of(PotionUtil.getColor(stack)))
-                            PotionUtil.setPotion(stack, Potions.EMPTY)
-                        }
-                        effects.removeAt(0)
-                        PotionUtil.setCustomPotionEffects(stack, effects)
-                        worldstack.update()
-                    }
-                },
                 PotionSpirit(effects[0].effectType),
                 max(1,effects[0].duration/1200) *(effects[0].amplifier+1)
-        )
+        ) {
+            if (effects.size == 1) worldstack.killer()
+            else {
+                if (PotionUtil.getPotion(stack) != Potions.EMPTY) {
+                    stack.setCustomName(stack.name)
+                    stack.orCreateNbt.put(PotionUtil.CUSTOM_POTION_COLOR_KEY, NbtInt.of(PotionUtil.getColor(stack)))
+                    PotionUtil.setPotion(stack, Potions.EMPTY)
+                }
+                effects.removeAt(0)
+                PotionUtil.setCustomPotionEffects(stack, effects)
+                worldstack.update()
+            }
+        }
     }
 
     override fun getName(): Text = Text.translatable("hexlink.extractor.potion")

@@ -1,0 +1,14 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:book"},
+    {"type": "hexlink:special", "value": "hexlink:air_element"},
+    {"type": "hexlink:special", "value": "hexlink:air_element"},
+    {"type": "hexlink:special", "value": "hexlink:air_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"},
+    {"type": "hexlink:special", "value": "hexlink:water_element"}
+  ],
+  "result": [
+    {"type": "hexlink:enchantment", "value": "minecraft:respiration"}
+  ]
+}

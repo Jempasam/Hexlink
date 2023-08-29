@@ -72,7 +72,7 @@ class FunctionSpirit(val manifestAt: Identifier, val manifestIn: Identifier, val
 
 
     object Type : Spirit.SpiritType<FunctionSpirit>{
-        override fun getName(): Text = Text.of("hexlink.spirit.function")
+        override fun getName(): Text = Text.translatable("hexlink.spirit.function")
 
         override fun deserialize(nbt: NbtElement): FunctionSpirit? {
             if(nbt is NbtCompound){

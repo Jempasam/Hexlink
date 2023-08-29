@@ -96,7 +96,7 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
 
         override fun deserialize(nbt: NbtElement): EntitySpirit {
             if(nbt is NbtString){
-                val type=Registry.ENTITY_TYPE.getOrEmpty(Identifier(nbt.asString())).orElseThrow(::IllegalArgumentException)
+                val type=Registry.ENTITY_TYPE.getOrEmpty(Identifier.tryParse(nbt.asString())).orElseThrow(::IllegalArgumentException)
                 return EntitySpirit(type)
             }
             else throw IllegalArgumentException()

@@ -23,10 +23,9 @@ object ItemExtractor : SpiritExtractor<ItemSpirit> {
         if(stack!=null && stack.item !is BlockItem && !stack.isIn(NOT_EXTRACTABLE)){
             worldstack as StackHelper.WorldStack
             return SpiritExtractor.ExtractionResult(
-                    { worldstack.killer() },
                     ItemSpirit(stack.item),
                     stack.count* max(stack.maxDamage,1)
-            )
+            ) { worldstack.killer() }
         }
         else return noResult()
     }

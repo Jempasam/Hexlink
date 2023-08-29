@@ -20,10 +20,9 @@ object BiomeExtractor : SpiritExtractor<BiomeSpirit> {
         if(stack.item==Items.DIAMOND){
             val biome=target.world.getBiome(BlockPos(target.pos))
             return SpiritExtractor.ExtractionResult(
-                    { worldStack.killer() },
                     BiomeSpirit(biome),
                     stack.count
-            )
+            ) { worldStack.killer() }
         }
         else return noResult()
     }

@@ -79,7 +79,7 @@ class PotionSpirit(val potionEffect: StatusEffect): Spirit  {
 
         override fun deserialize(nbt: NbtElement): PotionSpirit {
             if(nbt is NbtString){
-                val type=Registry.STATUS_EFFECT.getOrEmpty(Identifier(nbt.asString())).orElseThrow(::IllegalArgumentException)
+                val type=Registry.STATUS_EFFECT.getOrEmpty(Identifier.tryParse(nbt.asString())).orElseThrow(::IllegalArgumentException)
                 return PotionSpirit(type)
             }
             else throw IllegalArgumentException()

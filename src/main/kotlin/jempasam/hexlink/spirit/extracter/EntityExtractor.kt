@@ -23,12 +23,11 @@ object EntityExtractor : SpiritExtractor<EntitySpirit> {
                 && !target.isRemoved && !target.type.isIn(NOT_EXTRACTABLE) )
         {
             return SpiritExtractor.ExtractionResult(
-                    {
-                        target.kill()
-                    },
                     EntitySpirit(target.type),
                     1
-            )
+            ) {
+                target.kill()
+            }
         }
         return noResult()
     }

@@ -17,10 +17,9 @@ object BlockExtractor : SpiritExtractor<BlockSpirit> {
         val stack= worldstack?.stack
         if(stack!=null && stack.item is BlockItem && !stack.isIn(ItemExtractor.NOT_EXTRACTABLE)){
             return SpiritExtractor.ExtractionResult(
-                    { worldstack.killer() },
                     BlockSpirit((stack.item as BlockItem).block),
                     stack.count
-            )
+            ) { worldstack.killer() }
         }
         else return noResult()
     }

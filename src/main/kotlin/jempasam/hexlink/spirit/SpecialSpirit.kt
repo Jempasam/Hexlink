@@ -43,7 +43,7 @@ class SpecialSpirit(val specialType: SpecialType) : Spirit {
             = Text.of("hexlink.spirit.special")
 
         override fun deserialize(nbt: NbtElement): SpecialSpirit?
-            = HexlinkRegistry.SPECIAL_SPIRIT.get(Identifier(nbt.asString()))?.let { SpecialSpirit(it) }
+            = HexlinkRegistry.SPECIAL_SPIRIT.get(Identifier.tryParse(nbt.asString()))?.let { SpecialSpirit(it) }
     }
 
     class SpecialType(val manifestAt: Spirit, val manifestIn: Spirit, val lookAt: Spirit, val lookIn: Spirit, val text: Text, val color: Int)

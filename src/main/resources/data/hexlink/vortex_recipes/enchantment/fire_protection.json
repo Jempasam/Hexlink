@@ -1,0 +1,14 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:book"},
+    {"type": "hexlink:special", "value": "hexlink:earth_element"},
+    {"type": "hexlink:special", "value": "hexlink:earth_element"},
+    {"type": "hexlink:special", "value": "hexlink:earth_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"}
+  ],
+  "result": [
+    {"type": "hexlink:enchantment", "value": "minecraft:fire_protection"}
+  ]
+}

@@ -36,7 +36,7 @@ interface SpiritExtractor<T: Spirit>{
      * @param maxCount The number of spirit extracted
      * @param consumer The method used to change or kill the entity after the spirit are extracted
      */
-    class ExtractionResult<T: Spirit>(private val consumer: (Int)->Unit, val spirit: T?, val maxCount: Int){
+    class ExtractionResult<T: Spirit>(val spirit: T?, val maxCount: Int, private val consumer: (Int) -> Unit){
         /**
          * Consume the entity after extraction
          */
@@ -48,13 +48,13 @@ interface SpiritExtractor<T: Spirit>{
             else return consumer(count)
         }
 
-        fun downCast() = ExtractionResult<Spirit>(consumer,spirit,maxCount)
+        fun downCast() = ExtractionResult<Spirit>(spirit, maxCount, consumer)
     }
 
     fun noResult(): ExtractionResult<T> = noResult<T>()
 
     companion object{
-        fun <T: Spirit>noResult(): ExtractionResult<T> = ExtractionResult({},null, 0)
+        fun <T: Spirit>noResult(): ExtractionResult<T> = ExtractionResult(null, 0) {}
     }
 
 }

@@ -1,7 +1,6 @@
 {
   "at": {"type": "hexlink:block", "value": "minecraft:ice"},
   "in": {"type": "hexlink:potion", "value": "minecraft:slowness"},
-  "spirit": {"type": "hexlink:block", "value": "minecraft:ice"},
   "name": {"text": "Ice Element"},
   "color": 36607
 }

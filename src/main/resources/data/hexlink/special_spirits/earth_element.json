@@ -1,0 +1,6 @@
+{
+  "at": {"type": "hexlink:block", "value": "minecraft:dirt"},
+  "in": {"type": "hexlink:potion", "value": "minecraft:haste"},
+  "name": {"text": "Earth Element"},
+  "color": 11436116
+}
