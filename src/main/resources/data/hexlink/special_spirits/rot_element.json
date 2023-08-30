@@ -1,0 +1,5 @@
+{
+  "all": {"type": "hexlink:potion", "value": "minecraft:hunger"},
+  "name": {"text": "Rot"},
+  "color": 8087808
+}

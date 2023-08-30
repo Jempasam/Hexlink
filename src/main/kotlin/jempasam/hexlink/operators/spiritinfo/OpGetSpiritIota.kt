@@ -1,17 +1,16 @@
 package jempasam.hexlink.operators.spiritinfo
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction
 import at.petrak.hexcasting.api.spell.casting.CastingContext
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.iota.NullIota
 import jempasam.hexlink.iota.SpiritIota
-import jempasam.hexlink.operators.getSpiritSourceOpt
+import jempasam.hexlink.spirit.inout.SpiritSource
 
-class OpGetSpiritIota : ConstMediaAction {
+class OpGetSpiritIota(onCaster: Boolean) : SpiritConstMediaAction(onCaster) {
 
-    override val argc: Int get() = 1
-    override fun execute(args: List<Iota>, ctx: CastingContext): List<Iota> {
-        val source=args.getSpiritSourceOpt(ctx,0,1)
+    override val argCount: Int get() = 0
+
+    override fun execute(source: SpiritSource?, args: List<Iota>, ctx: CastingContext): List<Iota> {
         return listOf(source?.last()?.let { SpiritIota(it) } ?: NullIota())
     }
 }

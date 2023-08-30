@@ -5,6 +5,6 @@
     {"type": "hexlink:entity", "value": "minecraft:small_fireball"}
   ],
   "result": [
-    {"type": "hexlink:special", "value": "hexlink:fire_element"}
+    {"type": "hexlink:block", "value": "minecraft:fire"}
   ]
 }

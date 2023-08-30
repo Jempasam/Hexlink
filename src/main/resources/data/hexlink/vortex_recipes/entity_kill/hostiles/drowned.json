@@ -1,0 +1,16 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:drowned"}
+  ],
+  "result": [
+    {"type": "hexlink:item", "value": "minecraft:rotten_flesh"},
+    {"type": "hexlink:item", "value": "minecraft:rotten_flesh"},
+
+    {"type": "hexlink:special", "value": "hexlink:rot_element"},
+    {"type": "hexlink:special", "value": "hexlink:rot_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:water_element"}
+  ]
+}

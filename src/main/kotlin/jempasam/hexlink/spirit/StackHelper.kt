@@ -15,18 +15,18 @@ import net.minecraft.util.math.Vec3d
 object StackHelper {
 
 
-    class WorldStack(val stack: ItemStack, val killer: ()->Unit, val update: ()->Unit)
+    class WorldStack(val stack: ItemStack, val killer: ()->Unit, val update: ()->Unit, val replace: (ItemStack)->Unit)
 
     // Stack from entity
     fun stack(caster: PlayerEntity?, target: Entity): WorldStack?{
         return when(target){
             is ItemEntity
-                -> WorldStack(target.stack, {target.kill()}, {target.stack=target.stack})
+                -> WorldStack(target.stack, {target.kill()}, {target.stack=target.stack}, {target.stack=it})
             is ItemFrameEntity
-                -> WorldStack(target.heldItemStack, {target.heldItemStack=ItemStack.EMPTY}, {target.heldItemStack=target.heldItemStack})
+                -> WorldStack(target.heldItemStack, {target.heldItemStack=ItemStack.EMPTY}, {target.heldItemStack=target.heldItemStack}, {target.heldItemStack=it})
             is PlayerEntity
                 -> {
-                if(target===caster) WorldStack(target.offHandStack, {target.setStackInHand(Hand.OFF_HAND,ItemStack.EMPTY)}, {target.setStackInHand(Hand.OFF_HAND,target.offHandStack)})
+                if(target===caster) WorldStack(target.offHandStack, {target.setStackInHand(Hand.OFF_HAND,ItemStack.EMPTY)}, {target.setStackInHand(Hand.OFF_HAND,target.offHandStack)}, {target.setStackInHand(Hand.OFF_HAND,it)})
                 else null
             }
             else -> null
@@ -46,7 +46,7 @@ object StackHelper {
             for (i in 0 until blockInv.size()) {
                 if (blockInv.getStack(i).isEmpty()) continue
                 val stack = blockInv.getStack(i).copy()
-                if (stack != null) return WorldStack(stack, {blockInv.setStack(i, ItemStack.EMPTY)}, {blockInv.setStack(i, blockInv.getStack(i))})
+                if (stack != null) return WorldStack(stack, {blockInv.setStack(i, ItemStack.EMPTY)}, {blockInv.setStack(i, blockInv.getStack(i))}, {blockInv.setStack(i,it)})
             }
         }
         else{

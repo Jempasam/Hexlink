@@ -1,0 +1,22 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:ghast"}
+  ],
+  "result": [
+    {"type": "hexlink:special", "value": "hexlink:air_element"},
+    {"type": "hexlink:special", "value": "hexlink:air_element"},
+    {"type": "hexlink:special", "value": "hexlink:air_element"},
+
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+    {"type": "hexlink:special", "value": "hexlink:fire_element"},
+
+    {"type": "hexlink:entity", "value": "minecraft:fireball"},
+    {"type": "hexlink:entity", "value": "minecraft:fireball"},
+    {"type": "hexlink:entity", "value": "minecraft:fireball"},
+    {"type": "hexlink:entity", "value": "minecraft:fireball"},
+    {"type": "hexlink:entity", "value": "minecraft:fireball"}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:item", "value": "minecraft:stone_sword"},
+    {"type": "hexlink:entity", "value": "minecraft:husk"}
+  ],
+  "result": [
+    {"type": "hexlink:item", "value": "minecraft:rotten_flesh"},
+    {"type": "hexlink:item", "value": "minecraft:rotten_flesh"},
+    {"type": "hexlink:item", "value": "minecraft:rotten_flesh"},
+
+    {"type": "hexlink:block", "value": "minecraft:sand"},
+    {"type": "hexlink:block", "value": "minecraft:sand"},
+    {"type": "hexlink:block", "value": "minecraft:sand"},
+    {"type": "hexlink:block", "value": "minecraft:sand"},
+    {"type": "hexlink:block", "value": "minecraft:sand"},
+    {"type": "hexlink:block", "value": "minecraft:sand"},
+
+    {"type": "hexlink:special", "value": "hexlink:rot_element"},
+    {"type": "hexlink:special", "value": "hexlink:rot_element"},
+    {"type": "hexlink:special", "value": "hexlink:rot_element"},
+    {"type": "hexlink:special", "value": "hexlink:rot_element"},
+    {"type": "hexlink:special", "value": "hexlink:rot_element"}
+  ]
+}

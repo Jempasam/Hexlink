@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.SpawnEggItem
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
 import net.minecraft.server.world.ServerWorld
@@ -12,8 +13,10 @@ import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
+import kotlin.math.sin
 
 class EntitySpirit(val entityType: EntityType<*>): Spirit {
 
@@ -71,7 +74,20 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
 
 
     override fun getColor(): Int{
-        if(entityType.isFireImmune)return DyeColor.ORANGE.fireworkColor
+        val egg=SpawnEggItem.forEntity(entityType)
+        if(egg!=null){
+            val forward=sin((System.currentTimeMillis()%2000)/2000f*Math.PI)
+            val revert=1f-forward
+            val tint1=egg.getColor(0)
+            val tint2=egg.getColor(1)
+            return ColorHelper.Argb.getArgb(
+                    255,
+                    (ColorHelper.Argb.getRed(tint1)*forward+ColorHelper.Argb.getRed(tint2)*revert).toInt(),
+                    (ColorHelper.Argb.getGreen(tint1)*forward+ColorHelper.Argb.getGreen(tint2)*revert).toInt(),
+                    (ColorHelper.Argb.getBlue(tint1)*forward+ColorHelper.Argb.getBlue(tint2)*revert).toInt()
+            )
+        }
+        else if(entityType.isFireImmune)return DyeColor.ORANGE.fireworkColor
         else{
             val color= from_group_to_color[entityType.spawnGroup]
             if(color!=null)return color

@@ -1,5 +1,6 @@
 package jempasam.hexlink.spirit
 
+import jempasam.hexlink.utils.EnchantHelper
 import jempasam.hexlink.utils.NbtHelper
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
@@ -34,9 +35,10 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
         if(worldStack.stack.isEnchantable && enchantment.isAcceptableItem(worldStack.stack)){
             val level= minOf(maxOf(sqrt(count.toFloat()).toInt(), 1), enchantment.maxLevel)
             val cost=level*level
+            val new_stack=EnchantHelper.enchant(worldStack.stack, enchantment, level)
+            if(new_stack==null)return Spirit.NONE_MANIFESTATION
             return Spirit.Manifestation(1, cost){
-                worldStack.stack.addEnchantment(enchantment,level)
-                worldStack.update()
+                worldStack.replace(new_stack)
             }
         }
         return Spirit.NONE_MANIFESTATION

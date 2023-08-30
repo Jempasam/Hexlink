@@ -16,6 +16,7 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
+import kotlin.math.min
 
 class SingleSpiritContainerItem(settings: Settings): Item(settings), ItemSpiritSource, ItemSpiritTarget {
     fun setSpirit(stack: ItemStack, spirit: Spirit?){
@@ -31,7 +32,7 @@ class SingleSpiritContainerItem(settings: Settings): Item(settings), ItemSpiritS
         return object:SpiritSource{
             override fun last(): Spirit? = getSpirit(stack)
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                return SpiritSource.SpiritOutputFlux({stack.count-=it},1)
+                return SpiritSource.SpiritOutputFlux({stack.count-=it}, min(count,stack.count))
             }
         }
     }
