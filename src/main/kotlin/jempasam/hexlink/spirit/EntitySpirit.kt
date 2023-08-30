@@ -3,6 +3,7 @@ package jempasam.hexlink.spirit
 import com.google.common.base.Predicates
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.SpawnEggItem
@@ -16,34 +17,58 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
 import kotlin.math.sin
 
 class EntitySpirit(val entityType: EntityType<*>): Spirit {
 
-    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+    // Spawn At
+    fun spawn(world: World, position: Vec3d, count: Int, modifier: (Int, Entity)->Unit): Spirit.Manifestation{
         if(!entityType.isSummonable)
             return Spirit.NONE_MANIFESTATION
         else
             return Spirit.Manifestation(1,count){
-                val summoned=entityType.create(world)
-                if(summoned!=null){
-                    for(i in 0..<it){
+                for(i in 0..<it){
+                    val summoned = entityType.create(world)
+                    if(summoned!=null) {
                         summoned.setPosition(position)
+                        modifier(i, summoned)
                         world.spawnEntity(summoned)
                     }
                 }
             }
     }
 
-    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+        return spawn(world, position, count){i,e->}
+    }
+
+    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {
+        var direction=to.subtract(from)
+        if(direction.length()>5)direction=direction.normalize().multiply(5.0)
+        return spawn(world, from, count){ i,e->
+            e.setVelocity(direction.x, direction.y+i*0.5, direction.z)
+        }
+    }
+
+    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Spirit.Manifestation {
+        return spawn(world, to, count){ i, e ->
+            if(from is LivingEntity && e is LivingEntity)from.attacker=e
+        }
+    }
+
+
+
+    // Spawn Riding
+    fun spawn(world: World, rided: Entity, count: Int, modifier: (Entity)->Unit): Spirit.Manifestation{
         if(!entityType.isSummonable)
             return Spirit.NONE_MANIFESTATION
         else
             return Spirit.Manifestation(1,count){
-                val summoned=entityType.create(world)
-                if(summoned!=null){
-                    var riding=entity
-                    for(i in 0..<it){
+                var riding=rided
+                for(i in 0..<it){
+                    val summoned = entityType.create(world)
+                    if(summoned!=null) {
                         summoned.setPosition(riding.pos)
                         summoned.velocity=riding.velocity
                         world.spawnEntity(summoned)
@@ -51,8 +76,23 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
                         riding=summoned
                     }
                 }
+                modifier(riding)
             }
     }
+
+    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+        return spawn(world, entity, count){}
+    }
+
+    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Entity, count: Int): Spirit.Manifestation {
+        return spawn(world, from, count){
+            if(it is LivingEntity && to is LivingEntity)it.attacker=to
+        }
+    }
+
+
+
+
 
 
 

@@ -10,6 +10,7 @@ import at.petrak.hexcasting.api.spell.iota.Vec3Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
 import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.mishap.MishapNoEnoughSoul
+import jempasam.hexlink.mishap.MishapNotManifestable
 import jempasam.hexlink.operators.getSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritSource
@@ -39,6 +40,8 @@ class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
             }
             else -> throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
         }
+
+        if(manifestation.spiritCount==0)throw MishapNotManifestable(spirit, target)
 
         return Triple(
             ManifestSpell(ctx.world, manifestation, input),

@@ -18,6 +18,34 @@ object StackHelper {
     class WorldStack(val stack: ItemStack, val killer: ()->Unit, val update: ()->Unit, val replace: (ItemStack)->Unit)
 
     // Stack from entity
+    fun stack(caster: PlayerEntity, predicate: (ItemStack)->Boolean): WorldStack?{
+        val inventory=caster.inventory
+        if(predicate(caster.mainHandStack)) return WorldStack(
+                caster.mainHandStack,
+                {caster.setStackInHand(Hand.MAIN_HAND, ItemStack.EMPTY)},
+                {caster.setStackInHand(Hand.MAIN_HAND,caster.mainHandStack)},
+                {caster.setStackInHand(Hand.MAIN_HAND,it)}
+        )
+
+        if(predicate(caster.offHandStack)) return WorldStack(
+                caster.offHandStack,
+                {caster.setStackInHand(Hand.OFF_HAND, ItemStack.EMPTY)},
+                {caster.setStackInHand(Hand.OFF_HAND,caster.offHandStack)},
+                {caster.setStackInHand(Hand.OFF_HAND,it)}
+        )
+
+        for(i in 0 ..< inventory.size()){
+            val stack= inventory.getStack(i)
+            if(predicate(stack))return WorldStack(
+                    stack,
+                    {inventory.setStack(i, ItemStack.EMPTY)},
+                    {inventory.setStack(i, inventory.getStack(i))},
+                    {inventory.setStack(i, it)}
+            )
+        }
+        return null
+    }
+
     fun stack(caster: PlayerEntity?, target: Entity): WorldStack?{
         return when(target){
             is ItemEntity
@@ -25,10 +53,7 @@ object StackHelper {
             is ItemFrameEntity
                 -> WorldStack(target.heldItemStack, {target.heldItemStack=ItemStack.EMPTY}, {target.heldItemStack=target.heldItemStack}, {target.heldItemStack=it})
             is PlayerEntity
-                -> {
-                if(target===caster) WorldStack(target.offHandStack, {target.setStackInHand(Hand.OFF_HAND,ItemStack.EMPTY)}, {target.setStackInHand(Hand.OFF_HAND,target.offHandStack)}, {target.setStackInHand(Hand.OFF_HAND,it)})
-                else null
-            }
+                -> WorldStack(target.offHandStack, {target.setStackInHand(Hand.OFF_HAND, ItemStack.EMPTY)}, {target.setStackInHand(Hand.OFF_HAND,target.offHandStack)}, {target.setStackInHand(Hand.OFF_HAND, it)})
             else -> null
         }
     }

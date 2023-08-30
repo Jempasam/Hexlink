@@ -16,7 +16,7 @@ object EnchantHelper {
         }
         else if(enchantment.isAcceptableItem(target)){
             return target.copy().apply {
-                target.addEnchantment(enchantment, level)
+                addEnchantment(enchantment, level)
             }
         }
         else return null

@@ -34,6 +34,42 @@ interface Spirit {
      */
     fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Manifestation
 
+    /**
+     * Manifest the spirit as a link between two location.
+     * @param caster The caster of the spell
+     * @param world The world where the spell is cast
+     * @param from First location
+     * @param to Second location
+     * @param count Spirit count used in the infusion
+     */
+    fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Manifestation{
+        return manifestAt(caster,world,from,count)
+    }
+
+    /**
+     * Manifest the spirit as a link between two entities.
+     * @param caster The caster of the spell
+     * @param world The world where the spell is cast
+     * @param from First entity
+     * @param to Second entity
+     * @param count Spirit count used in the infusion
+     */
+    fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Entity, count: Int): Manifestation{
+        return manifestIn(caster,world,from,count)
+    }
+
+    /**
+     * Manifest the spirit as a link between a location and an entity.
+     * @param caster The caster of the spell
+     * @param world The world where the spell is cast
+     * @param from An entity
+     * @param to A location
+     * @param count Spirit count used in the infusion
+     */
+    fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Manifestation{
+        return manifestIn(caster,world,from,count)
+    }
+
     class Manifestation(val perSpiritCost: Int, val spiritCount: Int, private val action: (Int)->Unit){
         fun execute(count: Int){
             if(count>spiritCount){

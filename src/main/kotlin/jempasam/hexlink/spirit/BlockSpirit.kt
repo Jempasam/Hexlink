@@ -2,6 +2,7 @@ package jempasam.hexlink.spirit
 
 import net.minecraft.block.Block
 import net.minecraft.entity.Entity
+import net.minecraft.entity.FallingBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
@@ -50,6 +51,26 @@ class BlockSpirit(val block: Block): Spirit{
         }
     }
 
+    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {
+        val blockpos=BlockPos(from)
+        if(!world.getBlockState(blockpos).isAir)return Spirit.NONE_MANIFESTATION
+        return Spirit.Manifestation(1,count){
+            var direction=to.subtract(from)
+            if(direction.length()>5)direction=direction.normalize().multiply(5.0)
+            for(i in 0..<it){
+                val falling=FallingBlockEntity.spawnFromBlock(world, blockpos, block.defaultState)
+                falling.setVelocity(direction.x, direction.y+i*0.5, direction.z)
+            }
+        }
+    }
+
+    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Spirit.Manifestation {
+        return super.manifestBetween(caster, world, from.pos, to, count)
+    }
+
+    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Entity, count: Int): Spirit.Manifestation {
+        return super.manifestBetween(caster, world, from.pos, to.pos, count)
+    }
 
 
     override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {

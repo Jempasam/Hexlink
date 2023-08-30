@@ -5,9 +5,9 @@
   "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
   "hexlink.mishap.not_enough_soul": "Missing %d spirits",
   "hexlink.mishap.cant_mix_at": "You cannot summon a vortex at this location, you can summon a vortex at an empty place",
-  "hexlink.mishap.invalid_spirit_source": "The Spirit source is invalid, you need a valid target where to put spirits",
-  "hexlink.mishap.invalid_spirit_target": "The Spirit target is invalid, you need a valid source from where to get spirits",
-
+  "hexlink.mishap.invalid_spirit_source": "The Spirit source is invalid, you need a valid target from where to get spirits",
+  "hexlink.mishap.invalid_spirit_target": "The Spirit target is invalid, you need a valid target where to put spirits",
+  "hexlink.mishap.not_manifestable": "You cannot manifeset %s on %s",
 
   "emi.category.hexlink.vortex": "Vortex Crafting",
 
