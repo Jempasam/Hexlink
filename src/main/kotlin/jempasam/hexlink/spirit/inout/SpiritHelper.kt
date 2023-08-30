@@ -103,13 +103,14 @@ object SpiritHelper{
         val inventory=caster.inventory
         return object: SpiritSource{
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
+                if(caster.isCreative)return SpiritSource.SpiritOutputFlux({},count)
+
                 val mainFlux= spiritSource(caster,caster.mainHandStack).extract(count,spirit)
                 if(mainFlux.maxcount>0)return mainFlux
 
                 val offFlux= spiritSource(caster,caster.offHandStack).extract(count,spirit)
                 if(offFlux.maxcount>0)return offFlux
 
-                if(caster.isCreative)return SpiritSource.SpiritOutputFlux({},count)
                 for(i in 0 ..< inventory.size()){
                     val stack=inventory.getStack(i)
                     val flux= spiritSource(caster,stack).extract(count,spirit)

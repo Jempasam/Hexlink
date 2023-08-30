@@ -8,6 +8,7 @@ import jempasam.hexlink.config.Config
 import jempasam.hexlink.item.color.HexlinkColorProviders
 import jempasam.hexlink.lens.HexlinkScryingLensDisplay
 import jempasam.hexlink.model.predicate.HexlinkModelPredicates
+import jempasam.hexlink.particle.HexlinkClientParticles
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.client.MinecraftClient
 
@@ -38,6 +39,7 @@ object HexlinkModClient : ClientModInitializer {
 		HexlinkModelPredicates.registerItemPredicates()
 		HexlinkBlockClient.registerBlockRender()
 		HexlinkScryingLensDisplay.registerDisplays()
+		HexlinkClientParticles
 		//HudRenderCallback.EVENT.register(SpellHUD())
 	}
 

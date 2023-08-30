@@ -9,6 +9,7 @@ import jempasam.hexlink.gamerule.HexlinkGamerules
 import jempasam.hexlink.item.HexlinkItems
 import jempasam.hexlink.loot.LootObserver
 import jempasam.hexlink.loot.function.HexlinkLootFunctions
+import jempasam.hexlink.particle.HexlinkParticles
 import jempasam.hexlink.recipe.HexlinkRecipes
 import jempasam.hexlink.spirit.HexlinkSpirits
 import jempasam.hexlink.trinkets.HexlinkTrinkets
@@ -26,6 +27,8 @@ object HexlinkMod : ModInitializer {
 
 	override fun onInitialize() {
 		logger.info("Hexlink started!")
+		HexlinkParticles
+
 		HexlinkIotas.registerAll()
 		HexlinkPatterns.registerAll()
 		HexlinkItems.registerAll()

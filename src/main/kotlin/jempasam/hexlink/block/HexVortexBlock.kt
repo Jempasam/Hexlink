@@ -5,6 +5,7 @@ import jempasam.hexlink.block.functionnality.BlockSpiritSource
 import jempasam.hexlink.block.functionnality.BlockSpiritTarget
 import jempasam.hexlink.entity.HexlinkEntities
 import jempasam.hexlink.entity.block.HexVortexBlockEntity
+import jempasam.hexlink.particle.HexlinkParticles
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritSource
 import jempasam.hexlink.spirit.inout.SpiritTarget
@@ -32,7 +33,7 @@ class HexVortexBlock(settings: Settings) : BlockWithEntity(settings), BlockSpiri
             for (j in 0 until count) {
                 val pos=center.add(Math.random(), Math.random(),Math.random())
                 world.addParticle(
-                        ParticleTypes.ENTITY_EFFECT,
+                        HexlinkParticles.SPIRIT,
                         pos.x, pos.y, pos.z,
                         r, g, b
                 )
