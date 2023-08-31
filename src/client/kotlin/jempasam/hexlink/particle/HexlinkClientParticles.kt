@@ -16,6 +16,7 @@ object HexlinkClientParticles {
     init{
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(this::registerSprites)
         create(HexlinkParticles.SPIRIT, SpellParticle::EntityFactory)
+        create(HexlinkParticles.SPIRIT_FLUX, MovingSpiritParticle::Factory)
     }
 
     fun registerSprites(atlas: SpriteAtlasTexture, registry: ClientSpriteRegistryCallback.Registry){

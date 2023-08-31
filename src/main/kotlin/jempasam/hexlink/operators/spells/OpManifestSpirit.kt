@@ -12,16 +12,18 @@ import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.mishap.MishapNoEnoughSoul
 import jempasam.hexlink.mishap.MishapNotManifestable
 import jempasam.hexlink.operators.getSpirit
+import jempasam.hexlink.particle.HexlinkParticles
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritSource
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
+import net.minecraft.util.math.Vec3d
 
 class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
 
     override val argCount: Int get() = 3
 
-    override fun execute(source: SpiritSource, args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
+    override fun execute(source: SpiritSource, sourcePos: Vec3d, args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
         val spirit=args.getSpirit(pos(0),argc)
         val power=args.getIntBetween(pos(1), 1, 100, argc)
         val target=args[pos(2)]
@@ -44,16 +46,17 @@ class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
         if(manifestation.spiritCount==0)throw MishapNotManifestable(spirit, target.display())
 
         return Triple(
-            ManifestSpell(ctx.world, manifestation, input),
+            ManifestSpell(ctx.world, manifestation, input, sourcePos, targetPos, spirit),
             manifestation.maxMediaCost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
-            listOf(ParticleSpray.burst(targetPos,1.0,input.maxcount))
+            listOf(ParticleSpray.burst(targetPos,1.0,2))
         )
     }
 
-    class ManifestSpell(val world: ServerWorld, val manifestation: Spirit.Manifestation, val source: SpiritSource.SpiritOutputFlux) : RenderedSpell{
+    class ManifestSpell(val world: ServerWorld, val manifestation: Spirit.Manifestation, val source: SpiritSource.SpiritOutputFlux, val from: Vec3d, val to: Vec3d, val spirit: Spirit) : RenderedSpell{
         override fun cast(ctx: CastingContext) {
             source.consume(1)
             manifestation.execute(manifestation.spiritCount)
+            HexlinkParticles.sendLink(world, from, to, spirit.getColor(), manifestation.spiritCount)
         }
     }
 }

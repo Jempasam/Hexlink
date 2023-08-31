@@ -2,22 +2,30 @@ package jempasam.hexlink.particle
 
 
 import jempasam.hexlink.HexlinkMod
+import jempasam.hexlink.particle.effect.MovingSpiritParticleEffect
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes
 import net.minecraft.particle.DefaultParticleType
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleType
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
-import kotlin.math.min
 
 object HexlinkParticles {
     fun create(name: String): DefaultParticleType{
         val ret=FabricParticleTypes.simple()
-        Registry.register(Registry.PARTICLE_TYPE, Identifier(HexlinkMod.MODID,name), ret)
-        return ret
+        return create(name,ret)
+    }
+
+    fun <P: ParticleEffect, T: ParticleType<P>>create(name: String, type: T): T{
+        Registry.register(Registry.PARTICLE_TYPE, Identifier(HexlinkMod.MODID,name), type)
+        return type
     }
 
     val SPIRIT= create("spirit")
+    val SPIRIT_FLUX= create("spirit_flux",MovingSpiritParticleEffect.Type)
 
     fun burst(world: World, pos: Vec3d, color: Int, count: Int){
         val r = (color shr 16 and 0xFF).toDouble() / 255.0
@@ -33,20 +41,17 @@ object HexlinkParticles {
         }
     }
 
-    fun line(world: World, from: Vec3d, to: Vec3d, color: Int){
-        val r = (color shr 16 and 0xFF).toDouble() / 255.0
-        val g = (color shr 8 and 0xFF).toDouble() / 255.0
-        val b = (color shr 0 and 0xFF).toDouble() / 255.0
-        val count= min(to.distanceTo(from)*2,20.0)
-        val vec=to.subtract(from).multiply(1.0/count)
-        var pt=from
-        for (j in 0..<count.toInt()) {
-            pt=pt.add(vec)
-            world.addParticle(
-                    SPIRIT,
-                    pt.x, pt.y, pt.z,
-                    r, g, b
-            )
-        }
+    fun sendLink(world: ServerWorld, from: Vec3d, to: Vec3d, color: Int, count: Int){
+        val offset=to.subtract(from).multiply(0.06)
+        val r = (color shr 16 and 0xFF).toFloat() / 255.0f
+        val g = (color shr 8 and 0xFF).toFloat() / 255.0f
+        val b = (color shr 0 and 0xFF).toFloat() / 255.0f
+        world.spawnParticles(
+                MovingSpiritParticleEffect(r,g,b,count, offset),
+                from.x, from.y, from.z,
+                count/5,
+                0.1,0.1,0.1,
+                0.0
+        )
     }
 }

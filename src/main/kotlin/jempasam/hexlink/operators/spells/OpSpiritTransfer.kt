@@ -10,8 +10,12 @@ import jempasam.hexlink.mishap.MishapNoEnoughSoul
 import jempasam.hexlink.operators.getSpirit
 import jempasam.hexlink.operators.getSpiritSourceAndPos
 import jempasam.hexlink.operators.getSpiritTargetAndPos
+import jempasam.hexlink.particle.HexlinkParticles
+import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritSource
 import jempasam.hexlink.spirit.inout.SpiritTarget
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.math.Vec3d
 
 class OpSpiritTransfer: SpellAction {
     override val argc: Int
@@ -28,7 +32,7 @@ class OpSpiritTransfer: SpellAction {
             val targetFlux=target.first.fill(sourceFlux.maxcount, spirit)
             if(targetFlux.maxcount>0){
                 return Triple(
-                        Spell(sourceFlux, targetFlux, targetFlux.maxcount),
+                        Spell(ctx.world, sourceFlux, targetFlux, targetFlux.maxcount, spirit, source.second, target.second),
                         1,
                         listOf(
                                 ParticleSpray.burst(source.second,0.5, 5),
@@ -39,35 +43,13 @@ class OpSpiritTransfer: SpellAction {
             else throw MishapNoEnoughSoul(spirit, -1)
         }
         else throw MishapNoEnoughSoul(spirit, 1)
-
-        /*val test_output_flux=source.first.extract(count,spirit)
-        if(test_output_flux.count>0){
-            println("test_output_flux")
-            val input_flux=target.first.fill(test_output_flux.count,spirit)
-            if(input_flux.count>0){
-                println("input_flux")
-                val output_flux=source.first.extract(input_flux.count,spirit)
-                if(output_flux.count>0){
-                    println("output_flux")
-                    return Triple(
-                            Spell(output_flux,input_flux),
-                            1,
-                            listOf(
-                                    ParticleSpray.burst(source.second,0.5, 5),
-                                    ParticleSpray.burst(target.second,0.5, 5)
-                            )
-                    )
-                }
-            }
-            else throw MishapNoEnoughSoul(spirit,1)
-        }
-        throw MishapNoEnoughSoul(spirit,-1)*/
     }
 
-    class Spell(val output: SpiritSource.SpiritOutputFlux, val input: SpiritTarget.SpiritInputFlux, val count: Int): RenderedSpell{
+    class Spell(val world: ServerWorld, val output: SpiritSource.SpiritOutputFlux, val input: SpiritTarget.SpiritInputFlux, val count: Int, val spirit: Spirit, val from: Vec3d, val to: Vec3d): RenderedSpell{
         override fun cast(ctx: CastingContext) {
             output.consume(count)
             input.fill(count)
+            HexlinkParticles.sendLink(world, from, to, spirit.getColor(), count)
         }
     }
 }
