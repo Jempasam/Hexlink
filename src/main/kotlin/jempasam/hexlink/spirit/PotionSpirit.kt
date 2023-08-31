@@ -13,6 +13,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
+import kotlin.jvm.optionals.getOrNull
 
 class PotionSpirit(val potionEffect: StatusEffect): Spirit  {
 
@@ -77,9 +78,9 @@ class PotionSpirit(val potionEffect: StatusEffect): Spirit  {
             return Text.translatable("hexlink.spirit.potion")
         }
 
-        override fun deserialize(nbt: NbtElement): PotionSpirit {
+        override fun deserialize(nbt: NbtElement): PotionSpirit? {
             if(nbt is NbtString){
-                val type=Registry.STATUS_EFFECT.getOrEmpty(Identifier.tryParse(nbt.asString())).orElseThrow(::IllegalArgumentException)
+                val type=Registry.STATUS_EFFECT.getOrEmpty(Identifier.tryParse(nbt.asString())).getOrNull() ?: return null
                 return PotionSpirit(type)
             }
             else throw IllegalArgumentException()

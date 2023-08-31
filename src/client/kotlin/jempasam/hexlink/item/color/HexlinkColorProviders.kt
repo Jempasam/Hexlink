@@ -13,6 +13,9 @@ object HexlinkColorProviders {
         ColorProviderRegistry.ITEM.register(SpiritContainerColor(), HexlinkItems.MediumBag)
         ColorProviderRegistry.ITEM.register(SpiritContainerColor(), HexlinkItems.BigBag)
 
+        //ColorProviderRegistry.ITEM.register(SpiritualStaffColor(), HexlinkItems.SpirtualStaff)
+
         ColorProviderRegistry.ITEM.register(SpiritSourceColor(0), HexlinkItems.Spirit)
+        ColorProviderRegistry.ITEM.register(SpiritSourceColor(0), HexlinkItems.PhilosophicalCrystal)
     }
 }

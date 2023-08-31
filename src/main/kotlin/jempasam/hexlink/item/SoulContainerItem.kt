@@ -3,6 +3,7 @@ package jempasam.hexlink.item
 import at.petrak.hexcasting.api.utils.asCompound
 import at.petrak.hexcasting.api.utils.getOrCreateList
 import at.petrak.hexcasting.api.utils.putCompound
+import jempasam.hexlink.item.functionnality.ItemScrollable
 import jempasam.hexlink.item.functionnality.ItemSpiritSource
 import jempasam.hexlink.item.functionnality.ItemSpiritTarget
 import jempasam.hexlink.spirit.Spirit
@@ -15,12 +16,14 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
+import net.minecraft.util.Hand
 import net.minecraft.world.World
 import kotlin.math.min
 
-class SoulContainerItem(settings: Settings, val maxBoxCount: Int, val max_soul_count: Int): Item(settings), ItemSpiritSource, ItemSpiritTarget {
+class SoulContainerItem(settings: Settings, val maxBoxCount: Int, val max_soul_count: Int): Item(settings), ItemSpiritSource, ItemSpiritTarget, ItemScrollable {
 
     fun souls(stack: ItemStack): Souls?
         = stack.nbt?.getList("souls", NbtElement.COMPOUND_TYPE.toInt())?.let { Souls(it) }
@@ -69,6 +72,13 @@ class SoulContainerItem(settings: Settings, val maxBoxCount: Int, val max_soul_c
             compound.putInt("count", count)
             compound.putCompound("spirit", NbtHelper.writeSpirit(spirit))
             nbt.add(compound)
+        }
+
+        fun add(index: Int, spirit: Spirit, count: Int){
+            val compound=NbtCompound()
+            compound.putInt("count", count)
+            compound.putCompound("spirit", NbtHelper.writeSpirit(spirit))
+            nbt.add(index,compound)
         }
 
         override fun iterator(): Iterator<SoulStack> {
@@ -168,6 +178,24 @@ class SoulContainerItem(settings: Settings, val maxBoxCount: Int, val max_soul_c
                     )
                 }
                 return SpiritTarget.NONE.FLUX
+            }
+        }
+    }
+
+    override fun roll(stack: ItemStack, player: ServerPlayerEntity, hand: Hand, delta: Double) {
+        val souls=souls(stack)
+        if(souls!=null && souls.size>1){
+            if(delta>0){
+                val top=souls.get(0)
+                val spirit=top.spirit
+                if(spirit!=null)souls.add(spirit,top.count)
+                souls.remove(0)
+            }
+            else{
+                val top=souls.get(souls.size-1)
+                val spirit=top.spirit
+                if(spirit!=null)souls.add(0,spirit,top.count)
+                souls.remove(souls.size-1)
             }
         }
     }

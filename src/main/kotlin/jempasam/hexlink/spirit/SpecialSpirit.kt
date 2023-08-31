@@ -40,7 +40,7 @@ class SpecialSpirit(val specialType: SpecialType) : Spirit {
 
     object Type: Spirit.SpiritType<SpecialSpirit>{
         override fun getName(): Text
-            = Text.of("hexlink.spirit.special")
+            = Text.translatable("hexlink.spirit.special")
 
         override fun deserialize(nbt: NbtElement): SpecialSpirit?
             = HexlinkRegistry.SPECIAL_SPIRIT.get(Identifier.tryParse(nbt.asString()))?.let { SpecialSpirit(it) }

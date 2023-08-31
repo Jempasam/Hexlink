@@ -35,8 +35,8 @@ class OpSpiritTransfer: SpellAction {
                         Spell(ctx.world, sourceFlux, targetFlux, targetFlux.maxcount, spirit, source.second, target.second),
                         1,
                         listOf(
-                                ParticleSpray.burst(source.second,0.5, 5),
-                                ParticleSpray.burst(target.second,0.5, 5)
+                                ParticleSpray.burst(source.second,0.5, 1),
+                                ParticleSpray.burst(target.second,0.5, 1)
                         )
                 )
             }

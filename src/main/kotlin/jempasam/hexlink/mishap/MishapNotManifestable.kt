@@ -9,11 +9,11 @@ import jempasam.hexlink.spirit.Spirit
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 
-class MishapNotManifestable(val spirit: Spirit, val target: Any) : Mishap() {
+class MishapNotManifestable(val spirit: Spirit, val target: Iota) : Mishap() {
     override fun accentColor(ctx: CastingContext, errorCtx: Context): FrozenColorizer = dyeColor(DyeColor.BLUE)
 
     override fun errorMessage(ctx: CastingContext, errorCtx: Context): Text
-        = Text.translatable("hexlink.mishap.not_manifestable", spirit.getName(), target.toString())
+        = Text.translatable("hexlink.mishap.not_manifestable", spirit.getName(), target.type.display(target.serialize()))
 
     override fun execute(ctx: CastingContext, errorCtx: Context, stack: MutableList<Iota>) {
         stack[stack.size-1]=GarbageIota()

@@ -43,12 +43,12 @@ class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
             else -> throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
         }
 
-        if(manifestation.spiritCount==0)throw MishapNotManifestable(spirit, target.display())
+        if(manifestation.spiritCount==0)throw MishapNotManifestable(spirit, target)
 
         return Triple(
             ManifestSpell(ctx.world, manifestation, input, sourcePos, targetPos, spirit),
             manifestation.maxMediaCost*(HexlinkConfiguration.spirit_settings[spirit.getType()]?.media_cost ?: 5),
-            listOf(ParticleSpray.burst(targetPos,1.0,2))
+            listOf(ParticleSpray.burst(targetPos,1.0,1))
         )
     }
 

@@ -60,6 +60,8 @@
   "item.hexlink.focus_collar": "Focus Collar",
   "item.hexlink.spirit": "%s Spirit",
   "item.hexlink.spirit.none": "Spirit",
+  "item.hexlink.philosophical_crystal": "Philosophical Crystal of %s",
+  "item.hexlink.philosophical_crystal.none": "Weird Crystal",
   "item.hexlink.tablet": "Tablet of %s",
   "item.hexlink.tablet.none": "Empty Tablet",
   "item.hexlink.small_bag": "Soul Pocket of %s...",
@@ -118,7 +120,7 @@
   "hexlink.page.vortex.desc": "Media vortexes can contains spirits, and mix them to create new spirits. You can create a Media Vortex using $(l:hexlink:patterns/spirits/other)Vortex Formation/$, and then put spirits in and take spirits out using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
 
   "hexlink.page.bag": "Soul Bags",
-  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirits/manifestation)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
+  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirits/manifestation)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$. You can sort a spirit container by shift scrolling while holding one like a spell book.",
   "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of spirits, and 30 of each.",
   "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of spirits, and 100 of each.",
   "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of spirits, and 300 of each.",

@@ -34,8 +34,8 @@ class OpExtractSpirit : SpellAction{
                     Spell(ctx.world, extractor.first, extraction, target.first, extracted.pos, target.second),
                     HexlinkConfiguration.extractor_settings[extractor.first]?.extraction_media_cost ?: 2,
                     listOf(
-                            ParticleSpray.burst(extracted.pos,1.0,2),
-                            ParticleSpray.burst(target.second,1.0,2),
+                            ParticleSpray.burst(extracted.pos,1.0,1),
+                            ParticleSpray.burst(target.second,1.0,1),
                             ParticleSpray.burst(extractor.second,1.0,1)
                     )
             )

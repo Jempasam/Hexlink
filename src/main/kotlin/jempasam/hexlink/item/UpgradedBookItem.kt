@@ -6,16 +6,19 @@ import at.petrak.hexcasting.api.spell.iota.ListIota
 import at.petrak.hexcasting.api.spell.iota.PatternIota
 import at.petrak.hexcasting.common.items.ItemSpellbook
 import at.petrak.hexcasting.xplat.IXplatAbstractions
+import jempasam.hexlink.item.functionnality.ItemScrollable
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
 
-class UpgradedBookItem(settings: Settings): ItemSpellbook(settings){
+class UpgradedBookItem(settings: Settings): ItemSpellbook(settings), ItemScrollable{
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack>{
         val stack = user.getStackInHand(hand)
@@ -45,5 +48,41 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings){
             harness.stack.add(iota)
         }
         return true
+    }
+
+    override fun roll(stack: ItemStack, player: ServerPlayerEntity, hand: Hand, delta: Double) {
+        val newIdx = rotatePageIdx(stack, delta < 0.0)
+        val len = highestPage(stack)
+        val sealed = isSealed(stack)
+
+        val component= if (hand == Hand.OFF_HAND && stack.hasCustomName()) {
+            if (sealed) {
+                Text.translatable("hexcasting.tooltip.spellbook.page_with_name.sealed",
+                        Text.literal(newIdx.toString()).formatted(Formatting.WHITE),
+                        Text.literal(len.toString()).formatted(Formatting.WHITE),
+                        Text.literal("").formatted(stack.rarity.formatting, Formatting.ITALIC)
+                                .append(stack.getName()),
+                        Text.translatable("hexcasting.tooltip.spellbook.sealed").formatted(Formatting.GOLD))
+            } else {
+                Text.translatable("hexcasting.tooltip.spellbook.page_with_name",
+                        Text.literal(newIdx.toString()).formatted(Formatting.WHITE),
+                        Text.literal(len.toString()).formatted(Formatting.WHITE),
+                        Text.literal("").formatted(stack.rarity.formatting, Formatting.ITALIC)
+                                .append(stack.getName()))
+            }
+        } else {
+            if (sealed) {
+                Text.translatable("hexcasting.tooltip.spellbook.page.sealed",
+                        Text.literal(newIdx.toString()).formatted(Formatting.WHITE),
+                        Text.literal(len.toString()).formatted(Formatting.WHITE),
+                        Text.translatable("hexcasting.tooltip.spellbook.sealed").formatted(Formatting.GOLD))
+            } else {
+                Text.translatable("hexcasting.tooltip.spellbook.page",
+                        Text.literal(newIdx.toString()).formatted(Formatting.WHITE),
+                        Text.literal(len.toString()).formatted(Formatting.WHITE))
+            }
+        }
+
+        player.sendMessage(component.formatted(Formatting.GRAY), true)
     }
 }

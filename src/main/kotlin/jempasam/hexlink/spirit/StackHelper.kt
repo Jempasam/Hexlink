@@ -49,7 +49,7 @@ object StackHelper {
     fun stack(caster: PlayerEntity?, target: Entity): WorldStack?{
         return when(target){
             is ItemEntity
-                -> WorldStack(target.stack, {target.kill()}, {target.stack=target.stack}, {target.stack=it})
+                -> WorldStack(target.stack, {target.kill()}, {target.stack=target.stack.copy()}, {target.stack=it})
             is ItemFrameEntity
                 -> WorldStack(target.heldItemStack, {target.heldItemStack=ItemStack.EMPTY}, {target.heldItemStack=target.heldItemStack}, {target.heldItemStack=it})
             is PlayerEntity

@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
+import kotlin.jvm.optionals.getOrNull
 
 //TODO Long time block interaction with manifestation
 class BlockSpirit(val block: Block): Spirit{
@@ -106,9 +107,9 @@ class BlockSpirit(val block: Block): Spirit{
             return Text.translatable("hexlink.spirit.block")
         }
 
-        override fun deserialize(nbt: NbtElement): BlockSpirit {
+        override fun deserialize(nbt: NbtElement): BlockSpirit? {
             if(nbt is NbtString){
-                val type=Registry.BLOCK.getOrEmpty(Identifier(nbt.asString())).orElseThrow(::IllegalArgumentException)
+                val type=Registry.BLOCK.getOrEmpty(Identifier(nbt.asString())).getOrNull() ?: return null
                 return BlockSpirit(type)
             }
             else throw IllegalArgumentException()
