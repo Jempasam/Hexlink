@@ -1,0 +1,21 @@
+{
+  "name": "hexcasting.spell.hexlink:spirit_extraction",
+  "category": "hexlink:patterns/spirits",
+  "icon": "hexlink:crystal{extractor:\"hexlink:everything\"}",
+  "sortnum": 1,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.page.spirit_extraction.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_extraction",
+      "anchor": "hexlink:spirit_extraction",
+      "input": "entity, ent/vec, ent/vec",
+      "output": "",
+      "text": "hexlink.page.spirit_extraction.target.desc"
+    }
+  ]
+}

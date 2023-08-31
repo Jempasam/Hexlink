@@ -35,6 +35,12 @@
     },
     {
       "type": "patchouli:spotlight",
+      "item": "hexlink:crystal{extractor:'hexlink:enchantment'}",
+      "text": "hexlink.page.crystals.enchantment",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
       "item": "hexlink:crystal{extractor:'hexlink:everything'}",
       "text": "hexlink.page.crystals.everything",
       "link_recipe": true

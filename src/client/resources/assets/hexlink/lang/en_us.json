@@ -78,35 +78,47 @@
   "itemGroup.hexlink.hexlink": "Hexlink",
 
 
+
+  "hexlink.category.spirits": "Spirit Spells",
+  "hexlink.category.spirits.desc": "Turn anything into media spirits, then mix them and finally manifest them.",
+
+
+
   "hexlink.entry.readwrite_trinkets": "Trinket Read and Write",
   "hexlink.page.write_trinket": "This pattern can write a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
   "hexlink.page.read_trinket": "This pattern can read a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
 
-  "hexlink.spell.spirit_spells": "Manipulation of spirits",
-  "hexlink.spell.spirit_spells.desc": "This powerful patterns should extract the essences of any physical object or properties from the physical realm as media and allow me to control them. The physical object is destroyed in the process. If need a Extraction Crystal to extract a Spirit from an entity. It seem I also need to lower living entities life to a very low value before being able to extract their spirits. I need a Potion Spirits Tablet to extract potion effect spirit, Block Spirits Tablet to extract block spirit. I read there is a special Tablet able to extract any spirit. In this spells, a Spirit container is targeted as a dropped item, a item in a frame, in a container or from my inventory if I target myself, or as a block.",
-  "hexlink.spell.spirit_extraction.desc": "This spell can extract a spirit from an entity. The first parameter is entity to extract from, the second parameter is an extractor catalyzer like a Extraction Crystal, the third parameter is a Spirit container. ",
-  "hexlink.spell.spirit_vortex.desc": "With this pattern I can summon a media vortex. I can then transfer spirit into it, to store them. Spirits in a vortex can merge into new Spirits.",
-  "hexlink.spell.spirit_transfer.desc": "With this pattern I can transfer spirits from a spirit container to another spirit container. Soul containers can be dropped items, items in frames, the caster holding a spirit container item, media vortexes), container block positions containing spirit container items.",
-  "hexlink.spell.spirit_transfer_look.desc": "With this pattern I can get the last Spirit of a spirit container.",
-  "hexlink.spell.spirit_transfer_count.desc": "With this pattern I can count how many spirits of a type a spirit container contains.",
-  "hexlink.spell.spirit_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. The first parameter is a container to extract from, the second is the type of spirit to manifest, the third is the strength of the manifestation, and the last is the entity or location to manifest at.",
-  "hexlink.spell.spirit_self_manifestation.desc": "With this powerful spell, I can manifest a spirit in the physical world. I can manifest it through a entity catalyst or at a position. The spirits are taken from an container in my inventory. The first parameter is the type of spirit to manifest, the second is the strength of the manifestation, and the third is the entity or location to manifest at.",
-  "hexlink.spell.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
+  "hexlink.page.spirit_extraction.desc": "This spell can extract a spirit from an entity using a extraction catalyzer like an $(l:hexlink:items/crystals)Extraction Crystal/$ into a $(l:hexlink:items/bag)Spirit Container/$. The quantity of spirit extracted depends of the target. The items used in this spells can be dropped, in item frame, in the first slot of a container, or the offhand of the caster.",
+  "hexlink.page.spirit_extraction.target.desc": "The first parameter is the entity to extract from, the second parameter is an extractor catalyzer, the third parameter is a spirit container. ",
+
+  "hexlink.page.spirit_transfer.desc": "These patterns are useful for manipulating and moving spirits. Spirits are stored in spirit containers. Spirit containers can be dropped items, items in frames, the caster holding a spirit container item, media vortexes, block positions of a container containing spirit container items.",
+  "hexlink.page.spirit_transfer.transfer.desc": "With this pattern I can transfer spirits from a spirit container to another spirit container. The first parameter is the container to extract from, the second parameter is the container to fill into.",
+  "hexlink.page.spirit_transfer.look.desc": "With this pattern I can get the type of the last Spirit of a spirit container or Null if it is empty or if the entity or block is not a spirit source.",
+  "hexlink.page.spirit_transfer.count.desc": "With this pattern I can count how many spirits, of a type of spirit, a container contains.",
+
+  "hexlink.page.spirit_manifestation.desc": "With these powerful spells, I can manifest spirits in the physical world. I can manifest it through a entity catalyst or at a position.",
+  "hexlink.page.spirit_manifestation.target.desc": "The first parameter is a container to extract from, the second, the type of spirit to manifest, the third, the number of spirit to manifest, and the last, the entity or location to manifest at.",
+  "hexlink.page.spirit_self_manifestation.self.desc": "This shortcut variant take the spirits from an container in the caster inventory. The first parameter is the type of spirit to manifest, the second, the number of spirit to manifest, and the third, the entity or location to manifest at.",
+
+  "hexlink.page.spirit_other": "Other Spells",
+  "hexlink.page.spirit_vortex.desc": "With this pattern, I can summon a $(l:hexlink:items/vortex)Media Vortex/$. I can then transfer spirit into it, to store them. Spirits in a vortex can merge into new Spirits.",
+  "hexlink.page.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
 
 
   "hexlink.page.crystals": "Extraction Crystals",
-  "hexlink.page.crystals.desc": "Extraction Crystals help me to extract spirits. I can extract spirit using them with $(l:hexlink:patterns/spirit_spells)Spirit Extraction/$. I can find these in dungeon chests.",
+  "hexlink.page.crystals.desc": "Extraction Crystals help me to extract spirits. I can extract spirit using them with $(l:hexlink:patterns/spirits/extraction)Spirit Extraction/$. I can find these in dungeon chests.",
   "hexlink.page.crystals.block": "This type of crystal can extract the spirit of a block. With a Block Spirit, I can summon blocks and simulate interaction with one.",
   "hexlink.page.crystals.item": "This type of crystal can extract the spirit of an item. With an Item Spirit, I can simulate the use of an item.",
   "hexlink.page.crystals.entity": "This type of crystal can extract the spirit of an entity. With an Entity Spirit, I can summon an entity.",
   "hexlink.page.crystals.potion": "This type of crystal can extract the spirit of a potion effect. With a Potion Spirit, I can give an effect to an entity or summon an effect cloud.",
+  "hexlink.page.crystals.enchantment": "This type of crystal can extract the spirit of a enchanted item or enchanted book. With a Enchantment Spirit, I can enchant a item or create an enchanted book. The target can be the first item of a container, a dropped item, an item in a frame or item of the caster offhand.",
   "hexlink.page.crystals.everything": "This type of crystal can extract the spirit of anything.",
 
   "hexlink.page.vortex": "Media Vortex",
-  "hexlink.page.vortex.desc": "Media vortexes can contains spirits, and mix them to create new spirits. You can create a Media Vortex using $(l:hexlink:patterns/spirit_spells)Vortex Formation/$, and then put spirits in and take spirits out using $(l:hexlink:patterns/spirit_spells)Spirit Transfer/$.",
+  "hexlink.page.vortex.desc": "Media vortexes can contains spirits, and mix them to create new spirits. You can create a Media Vortex using $(l:hexlink:patterns/spirits/other)Vortex Formation/$, and then put spirits in and take spirits out using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
 
   "hexlink.page.bag": "Soul Bags",
-  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirit_spells)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirit_spells)Spirit Transfer/$.",
+  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirits/manifestation)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
   "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of spirits, and 30 of each.",
   "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of spirits, and 100 of each.",
   "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of spirits, and 300 of each.",

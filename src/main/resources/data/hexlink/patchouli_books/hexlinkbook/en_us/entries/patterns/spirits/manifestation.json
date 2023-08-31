@@ -1,0 +1,29 @@
+{
+  "name": "hexcasting.spell.hexlink:spirit_manifestation",
+  "category": "hexlink:patterns/spirits",
+  "icon": "hexlink:spirit{spirit:{type:\"hexlink:entity\",value:\"minecraft:magma_cube\"}}",
+  "sortnum": 3,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.page.spirit_manifestation.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_manifestation",
+      "anchor": "hexlink:spirit_manifestation",
+      "input": "vec/entity, spirit, number, vec/entity",
+      "output": "",
+      "text": "hexlink.page.spirit_manifestation.target.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_self_manifestation",
+      "anchor": "hexlink:spirit_self_manifestation",
+      "input": "spirit, number, vec/ent",
+      "output": "",
+      "text": "hexlink.page.spirit_self_manifestation.self.desc"
+    }
+  ]
+}

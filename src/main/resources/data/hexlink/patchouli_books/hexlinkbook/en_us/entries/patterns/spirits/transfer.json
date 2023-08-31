@@ -1,0 +1,37 @@
+{
+  "name": "hexcasting.spell.hexlink:spirit_transfer",
+  "category": "hexlink:patterns/spirits",
+  "icon": "hexlink:small_bag{spirit:{type:\"hexlink:entity\",value:\"minecraft:magma_cube\"}}",
+  "sortnum": 2,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.page.spirit_transfer.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_transfer",
+      "anchor": "hexlink:spirit_transfer",
+      "input": "spirit, int, ent/vec, ent/vec",
+      "output": "",
+      "text": "hexlink.page.spirit_transfer.transfer.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_transfer_look",
+      "anchor": "hexlink:spirit_transfer_look",
+      "input": "ent/vec",
+      "output": "spirit",
+      "text": "hexlink.page.spirit_transfer.look.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:spirit_transfer_count",
+      "anchor": "hexlink:spirit_transfer_count",
+      "input": "ent/vec, spirit",
+      "output": "number",
+      "text": "hexlink.page.spirit_transfer.count.desc"
+    }
+  ]
+}

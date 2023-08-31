@@ -1,0 +1,7 @@
+{
+  "name": "hexlink.category.spirits",
+  "icon": "hexlink:textures/icon/spirit.png",
+  "description": "hexlink.category.spirits.desc",
+  "parent": "hexcasting:patterns",
+  "sortnum": 100
+}
