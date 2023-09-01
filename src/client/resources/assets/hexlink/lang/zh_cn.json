@@ -5,20 +5,25 @@
   "hexlink.mishap.not_extractable": "%s灵体无法被%s提取",
   "hexlink.mishap.not_enough_soul": "缺少%d个灵体",
   "hexlink.mishap.cant_mix_at": "无法在此处召唤涡旋，应当在空气处召唤",
-  "hexlink.mishap.invalid_spirit_source": "无效灵体来源，需要有效的灵体存放目标",
-  "hexlink.mishap.invalid_spirit_target": "无效灵体目标，需要有效的灵体获取来源",
-
+  "hexlink.mishap.invalid_spirit_source": "无效灵体来源，需要有效的灵体获取来源",
+  "hexlink.mishap.invalid_spirit_target": "无效灵体目标，需要有效的灵体存放目标",
+  "hexlink.mishap.not_manifestable": "无法在%2$s上使%1$s显形",
 
   "emi.category.hexlink.vortex": "涡旋合成",
 
  
   "hexcasting.spell.hexlink:spirit_extraction": "灵体提取",
   "hexcasting.spell.hexlink:spirit_transfer": "灵体转移",
-  "hexcasting.spell.hexlink:spirit_transfer_look": "灵体转移探察",
+  "hexcasting.spell.hexlink:spirit_transfer_look": "灵体容器探察",
+  "hexcasting.spell.hexlink:spirit_self_transfer_look": "自身灵体容器探察",
+  "hexcasting.spell.hexlink:spirit_transfer_count": "灵体容器计数",
+  "hexcasting.spell.hexlink:spirit_self_transfer_count": "自身灵体容器计数",
+
   "hexcasting.spell.hexlink:spirit_vortex": "涡旋成型",
   "hexcasting.spell.hexlink:spirit_manifestation": "灵体显形",
   "hexcasting.spell.hexlink:spirit_self_manifestation": "自身灵体显形",
   "hexcasting.spell.hexlink:spirit_look": "灵体探察",
+
 
   "hexcasting.spell.hexlink:read_trinket": "伯默之精思",
   "hexcasting.spell.hexlink:write_trinket": "伯默之策略",
@@ -35,12 +40,16 @@
   "hexlink.spirit.entity": "实体灵体",
   "hexlink.spirit.potion": "药水灵体",
   "hexlink.spirit.item": "物品灵体",
+  "hexlink.spirit.enchantment": "魔咒灵体",
+  "hexlink.spirit.function": "命令灵体",
+  "hexlink.spirit.special": "特殊灵体",
   "hexlink.spirit.biome": "生物群系灵体",
 
 
   "hexlink.extractor.item": "物品",
   "hexlink.extractor.entity": "实体",
   "hexlink.extractor.block": "方块",
+  "hexlink.extractor.enchantment": "魔咒",
   "hexlink.extractor.potion": "药水",
   "hexlink.extractor.everything": "任意",
   "hexlink.extractor.biome": "生物群系",
@@ -51,6 +60,8 @@
   "item.hexlink.focus_collar": "核心项圈",
   "item.hexlink.spirit": "%s灵体",
   "item.hexlink.spirit.none": "灵体",
+  "item.hexlink.philosophical_crystal": "%s之贤者水晶",
+  "item.hexlink.philosophical_crystal.none": "奇怪的水晶",
   "item.hexlink.tablet": "%s之石板",
   "item.hexlink.tablet.none": "空灵魂石板",
   "item.hexlink.small_bag": "%s之灵魂口袋",
@@ -69,34 +80,47 @@
   "itemGroup.hexlink.hexlink": "Hexlink",
 
 
+
+  "hexlink.category.spirits": "灵体法术",
+  "hexlink.category.spirits.desc": "将事物变为媒质灵体，混合交融再令其显形。",
+
+
+
   "hexlink.entry.readwrite_trinkets": "读取与写入饰品",
   "hexlink.page.write_trinket": "此图案可从我所佩戴的$(l:hexlink:items/focus_collar)$(item)核心项圈/$中读取 iota。",
   "hexlink.page.read_trinket": "此图案可将 iota 写入我所佩戴的$(l:hexlink:items/focus_collar)$(item)核心项圈/$。",
 
-  "hexlink.spell.spirit_spells": "操纵灵体",
-  "hexlink.spell.spirit_spells.desc": "这个强力图案应该能将任何物体和物理属性的本质提取成媒质，并允许我控制它们。此过程中物体本身会被摧毁。提取灵体需要提取水晶。就提取实体灵体而言，似乎需要将它们的生命值降到很低才行。提取药水效果灵体需要药水水晶，方块灵体需要方块水晶。我还曾读到有能提取任意灵体的特殊水晶。相关法术中的灵体容器可以是物品实体、物品展示框中的物品、容器中的物品、我自己的物品栏（以自身为目标），或者方块。",
-  "hexlink.spell.spirit_extraction.desc": "此法术可从实体中提取灵体。第一参数为被提取对象；第二参数为提取催化物，如提取水晶；第三参数则为灵体容器。",
-  "hexlink.spell.spirit_vortex.desc": "此图案可召唤媒质涡旋。可向其中放入灵体以存储。涡旋中的灵体也有可能融合出新灵体。",
-  "hexlink.spell.spirit_transfer.desc": "此图案可将灵体在两灵体容器间转移。灵体容器可以是物品实体、物品展示框中的物品、施法者手持的灵体容器、媒质涡旋，以及装有灵体容器物品的容器位置向量。",
-  "hexlink.spell.spirit_transfer_look.desc": "此图案可查看灵体容器中的上一灵体。",
-  "hexlink.spell.spirit_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过某实体或在某位置令其显形。第一参数为被提取的容器，第二参数为需显形灵体的类型，第三参数为显形的强度，最末参数则是显形实体或显形位置。",
-  "hexlink.spell.spirit_self_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过某实体或在某位置令其显形。灵体需由我自己的物品栏供给。第一参数为需显形灵体的类型，第二参数为显形的强度，第三参数则是显形实体或显形位置。",
-  "hexlink.spell.spirit_look.desc": "此图案可使我感受灵体与某物体的接近程度。",
+  "hexlink.page.spirit_extraction.desc": "此法术可通过$(l:hexlink:items/crystals)提取水晶/$等提取催化物从实体中提取灵体，并将其存入$(l:hexlink:items/bag)灵体容器/$。被提取目标决定提出灵体的数量。此法术中的物品可以是物品实体、容器首格中的物品，或者施法者副手中的物品。",
+  "hexlink.page.spirit_extraction.target.desc": "第一参数为被提取对象；第二参数为提取催化物，如提取水晶；第三参数则为灵体容器。",
+
+  "hexlink.page.spirit_transfer.desc": "这些图案是操纵和移动灵体的好帮手。灵体存储于灵体容器。物品实体、物品展示框中的物品、施法者手持物品、媒质涡旋，装有灵体容器的容器位置向量等均可视为灵体容器。",
+  "hexlink.page.spirit_transfer.transfer.desc": "此图案可将灵体在两灵体容器间转移。第一参数为转移起点，第二参数为转移终点。",
+  "hexlink.page.spirit_transfer.look.desc": "此图案可查看灵体容器中的上一灵体。若容器为空，或者所给实体或位置向量不是灵体来源，则返回 Null。",
+  "hexlink.page.spirit_transfer.count.desc": "此图案可统计灵体容器中某种灵体的存储数量。",
+
+  "hexlink.page.spirit_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过某实体或在某位置令其显形。",
+  "hexlink.page.spirit_manifestation.target.desc": "第一参数为被提取的容器，第二参数为需显形灵体的类型，第三参数为显形的强度，最末参数则是显形实体或显形位置。",
+  "hexlink.page.spirit_self_manifestation.self.desc": "此快捷变种会从施法者物品栏中的灵体容器抽取灵体。第一参数为需显形灵体的类型，第二参数为显形的强度，第三参数则是显形实体或显形位置。",
+
+  "hexlink.page.spirit_other": "其他法术",
+  "hexlink.page.spirit_vortex.desc": "此图案可召唤$(l:hexlink:items/vortex)媒质涡旋/$。可向其中放入灵体以存储。涡旋中的灵体也有可能融合出新灵体。",
+  "hexlink.page.spirit_look.desc": "此图案可使我感受灵体与某物体的接近程度。",
 
 
   "hexlink.page.crystals": "提取水晶",
-  "hexlink.page.crystals.desc": "提取水晶有助于提取灵体的过程。将其与$(l:hexlink:patterns/spirit_spells)灵体提取/$配合使用就能提出灵体。能在地牢箱子中发现这类水晶。",
+  "hexlink.page.crystals.desc": "提取水晶有助于提取灵体的过程。将其与$(l:hexlink:patterns/spirits/extraction)灵体提取/$配合使用就能提出灵体。能在地牢箱子中发现这类水晶。",
   "hexlink.page.crystals.block": "此类水晶可以装入方块灵体。可通过此类灵体召唤方块，或是模拟与其的交互。",
   "hexlink.page.crystals.item": "此类水晶可以装入物品灵体。可通过此类灵体模拟使用物品。",
   "hexlink.page.crystals.entity": "此类水晶可以装入实体灵体。可通过此类灵体召唤实体。",
   "hexlink.page.crystals.potion": "此类水晶可以装入药水效果灵体。可通过此类灵体给予实体效果，或是召唤效果云。",
+  "hexlink.page.crystals.enchantment": "此类水晶可以装入附魔物品和附魔书的灵体。可通过此类灵体附魔物品或制作附魔书。容器中的首个物品、物品实体、物品展示框中的物品，施法者副手中物品等均可视为提取目标。",
   "hexlink.page.crystals.everything": "此类水晶可以装入任意灵体。",
 
   "hexlink.page.vortex": "媒质涡旋",
-  "hexlink.page.vortex.desc": "媒质涡旋可装有灵体，也能将其混合以制造新灵体。$(l:hexlink:patterns/spirit_spells)涡旋成型/$可产生媒质涡旋，$(l:hexlink:patterns/spirit_spells)灵体转移/$则能放入或取出灵体。",
+  "hexlink.page.vortex.desc": "媒质涡旋可装有灵体，也能将其混合以制造新灵体。$(l:hexlink:patterns/spirits/other)涡旋成型/$可产生媒质涡旋，$(l:hexlink:patterns/spirits/transfer)灵体转移/$则能放入或取出灵体。",
 
   "hexlink.page.bag": "灵魂袋",
-  "hexlink.page.bag.desc": "灵魂袋可装下用于$(l:hexlink:patterns/spirit_spells)灵体显形/$的灵体。可用$(l:hexlink:patterns/spirit_spells)灵体转移/$填充它们。",
+  "hexlink.page.bag.desc": "灵魂袋可装下用于$(l:hexlink:patterns/spirits/manifestation)灵体显形/$的灵体。可用$(l:hexlink:patterns/spirits/transfer)灵体转移/$填充它们。还可在手持时潜行滚动滚轮以整理灵魂容器，就和法术书一样。",
   "hexlink.page.bag.small_bag": "灵魂口袋可装下最多 2 种灵体，每种最多 30 个。",
   "hexlink.page.bag.medium_bag": "灵魂袋可装下最多 5 种灵体，每种最多 100 个。",
   "hexlink.page.bag.big_bag": "大灵魂袋可装下最多 10 种灵体，每种最多 300 个。",
