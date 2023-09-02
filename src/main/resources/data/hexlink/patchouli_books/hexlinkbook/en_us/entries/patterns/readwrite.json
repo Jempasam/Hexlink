@@ -1,27 +1,11 @@
 {
   "name": "hexlink.entry.readwrite",
   "category": "hexcasting:patterns",
-  "icon": "hexlink:focus_collar",
+  "icon": "hexlink:tablet",
   "sortnum": 9,
   "advancement": "hexcasting:root",
   "read_by_default": true,
   "pages": [
-    {
-      "type": "hexcasting:pattern",
-      "op_id": "hexlink:read_trinket",
-      "anchor": "hexlink:read_trinket",
-      "input": "",
-      "output": "any",
-      "text": "hexlink.page.read_trinket"
-    },
-    {
-      "type": "hexcasting:pattern",
-      "op_id": "hexlink:write_trinket",
-      "anchor": "hexlink:write_trinket",
-      "input": "any",
-      "output": "",
-      "text": "hexlink.page.write_trinket"
-    },
     {
       "type": "hexcasting:pattern",
       "op_id": "hexlink:write_spell",
