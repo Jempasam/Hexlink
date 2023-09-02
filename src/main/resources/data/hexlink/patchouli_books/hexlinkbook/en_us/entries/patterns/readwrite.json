@@ -1,5 +1,5 @@
 {
-  "name": "hexlink.entry.readwrite_trinkets",
+  "name": "hexlink.entry.readwrite",
   "category": "hexcasting:patterns",
   "icon": "hexlink:focus_collar",
   "sortnum": 9,
@@ -21,6 +21,14 @@
       "input": "any",
       "output": "",
       "text": "hexlink.page.write_trinket"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:write_spell",
+      "anchor": "hexlink:write_spell",
+      "input": "entity, list of patterns",
+      "output": "",
+      "text": "hexlink.page.write_spell"
     }
   ]
 }

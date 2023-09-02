@@ -1,13 +1,13 @@
-package jempasam.hexlink.spirit.extracter
+package jempasam.hexlink.spirit.extractor
 
 import jempasam.hexlink.spirit.PotionSpirit
 import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.entity.Entity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtInt
 import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import kotlin.math.max
@@ -16,7 +16,7 @@ object PotionExtractor : SpiritExtractor<PotionSpirit> {
 
     private val potion_items=setOf(Items.POTION, Items.LINGERING_POTION, Items.SPLASH_POTION)
 
-    override fun extract(caster: PlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
+    override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<PotionSpirit> {
         val worldstack= StackHelper.stack(caster, target)
         val stack= worldstack?.stack
         if(stack==null || !potion_items.contains(stack.item))return noResult()

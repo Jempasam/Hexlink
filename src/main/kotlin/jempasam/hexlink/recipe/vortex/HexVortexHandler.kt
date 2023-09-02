@@ -1,4 +1,4 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.Spirit
@@ -39,7 +39,7 @@ interface HexVortexHandler {
         override fun equals(other: Any?): Boolean = other is Ingredient && other.hashcode==hashcode
     }
 
-    interface Serializer<T: HexVortexHandler>{
+    interface Parser<T: HexVortexHandler>{
         fun serialize(json: JsonObject): T
     }
 }

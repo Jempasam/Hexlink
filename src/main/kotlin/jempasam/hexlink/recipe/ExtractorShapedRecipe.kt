@@ -2,7 +2,7 @@ package jempasam.hexlink.recipe
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.item.functionnality.ExtractorItem
-import jempasam.hexlink.spirit.extracter.SpiritExtractor
+import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import net.minecraft.inventory.CraftingInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf

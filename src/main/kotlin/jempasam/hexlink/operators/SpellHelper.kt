@@ -13,7 +13,7 @@ import jempasam.hexlink.mishap.InvalidSpiritSource
 import jempasam.hexlink.mishap.InvalidSpiritTarget
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.StackHelper
-import jempasam.hexlink.spirit.extracter.SpiritExtractor
+import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.spirit.inout.SpiritSource
 import jempasam.hexlink.spirit.inout.SpiritTarget

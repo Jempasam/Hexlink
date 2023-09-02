@@ -1,4 +1,4 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.ItemSpirit
@@ -12,7 +12,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper
 import kotlin.math.min
 
-class SmeltingVortexHandler : AbstractVortexHandler{
+class SmeltingVortexHandler : AbstractVortexHandler {
 
     val multiplier: Float
     constructor(catalyzer: List<Spirit>, output: List<Spirit>, multiplier: Float)
@@ -69,7 +69,7 @@ class SmeltingVortexHandler : AbstractVortexHandler{
 
     }
 
-    object SERIALIZER: HexVortexHandler.Serializer<SmeltingVortexHandler> {
+    object PARSER: HexVortexHandler.Parser<SmeltingVortexHandler> {
         override fun serialize(json: JsonObject): SmeltingVortexHandler = SmeltingVortexHandler(json)
     }
 }

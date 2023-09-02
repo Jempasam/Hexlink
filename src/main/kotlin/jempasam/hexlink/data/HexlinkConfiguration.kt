@@ -1,7 +1,7 @@
 package jempasam.hexlink.data
 
 import jempasam.hexlink.spirit.Spirit
-import jempasam.hexlink.spirit.extracter.SpiritExtractor
+import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import me.shedaniel.autoconfig.ConfigData
 
 object HexlinkConfiguration : ConfigData {

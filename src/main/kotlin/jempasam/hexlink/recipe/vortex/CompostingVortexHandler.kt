@@ -1,4 +1,4 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.Spirit
@@ -9,7 +9,7 @@ import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper.getFloat
 
-class CompostingVortexHandler : AbstractVortexHandler{
+class CompostingVortexHandler : AbstractVortexHandler {
 
     val multiplier: Float
     val compostingResult: Spirit
@@ -66,7 +66,7 @@ class CompostingVortexHandler : AbstractVortexHandler{
         }
     }
 
-    object SERIALIZER: HexVortexHandler.Serializer<CompostingVortexHandler> {
+    object PARSER: HexVortexHandler.Parser<CompostingVortexHandler> {
         override fun serialize(json: JsonObject): CompostingVortexHandler = CompostingVortexHandler(json)
     }
 

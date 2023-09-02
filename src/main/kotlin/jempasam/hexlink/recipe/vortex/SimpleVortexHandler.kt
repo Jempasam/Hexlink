@@ -1,4 +1,4 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.Spirit
@@ -29,13 +29,13 @@ open class SimpleVortexHandler(private var catalyzer: List<Spirit>, var output: 
     override fun getRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>>
         = sequenceOf( catalyzer.asSequence().map { HexVortexHandler.Ingredient(it) }.toMutableList() to output)
 
-    open class Recipe(private val handler: SimpleVortexHandler): HexVortexHandler.Recipe{
+    open class Recipe(private val handler: SimpleVortexHandler): HexVortexHandler.Recipe {
         final override fun ingredientCount(): Int = handler.catalyzer.size
 
         final override fun mix(ingredients: List<Spirit>): List<Spirit> = handler.output
     }
 
-    object SERIALIZER: HexVortexHandler.Serializer<SimpleVortexHandler> {
+    object PARSER: HexVortexHandler.Parser<SimpleVortexHandler> {
         override fun serialize(json: JsonObject): SimpleVortexHandler = SimpleVortexHandler(json)
     }
 

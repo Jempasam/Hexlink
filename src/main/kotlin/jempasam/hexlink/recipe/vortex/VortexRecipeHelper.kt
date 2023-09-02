@@ -1,15 +1,15 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.server.world.ServerWorld
 
 object VortexRecipeHelper {
-    private val root=NodeMap()
+    private val root= NodeMap()
 
     private class NodeMap{
 
-        val map= mutableMapOf<Spirit,NodeMap>()
+        val map= mutableMapOf<Spirit, NodeMap>()
         val remaining= mutableListOf<HexVortexHandler>()
         fun find(ingredients: List<Spirit>, start: Int, world: ServerWorld): HexVortexHandler.Recipe?{
             if(start<ingredients.size) {

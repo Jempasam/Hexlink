@@ -1,4 +1,4 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.Spirit
@@ -11,7 +11,7 @@ import net.minecraft.util.JsonHelper.getFloat
 import net.minecraft.util.registry.Registry
 import kotlin.math.max
 
-class BurningVortexHandler : AbstractVortexHandler{
+class BurningVortexHandler : AbstractVortexHandler {
 
     val multiplier: Float
     val burningResult: Spirit
@@ -74,7 +74,7 @@ class BurningVortexHandler : AbstractVortexHandler{
         }
     }
 
-    object SERIALIZER: HexVortexHandler.Serializer<BurningVortexHandler> {
+    object PARSER: HexVortexHandler.Parser<BurningVortexHandler> {
         override fun serialize(json: JsonObject): BurningVortexHandler = BurningVortexHandler(json)
     }
 

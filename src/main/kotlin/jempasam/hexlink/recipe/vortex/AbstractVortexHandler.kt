@@ -1,4 +1,4 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.Spirit
@@ -40,7 +40,7 @@ abstract class AbstractVortexHandler(private var catalyzer: List<Spirit>, var ou
 
     abstract fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>>
 
-    abstract class Recipe(private val handler: AbstractVortexHandler): HexVortexHandler.Recipe{
+    abstract class Recipe(private val handler: AbstractVortexHandler): HexVortexHandler.Recipe {
         final override fun ingredientCount(): Int = handler.catalyzer.size + realIngredientCount()
 
         final override fun mix(ingredients: List<Spirit>): List<Spirit> {

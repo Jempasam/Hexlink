@@ -27,6 +27,7 @@ object HexlinkItems {
 
     var UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
     var FocusCollar=make("focus_collar", ItemFocus(simpleProps()))
+    var SpecialStaff=make("special_staff", SpecialWandItem(simpleProps()))
     //var SpirtualStaff=make("spiritual_staff",SpiritualStaffItem(simpleProps()))
     var MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
 

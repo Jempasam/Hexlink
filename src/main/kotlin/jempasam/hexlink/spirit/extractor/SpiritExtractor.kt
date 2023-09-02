@@ -1,9 +1,9 @@
-package jempasam.hexlink.spirit.extracter
+package jempasam.hexlink.spirit.extractor
 
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.entity.Entity
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 
 /**
@@ -16,7 +16,7 @@ interface SpiritExtractor<T: Spirit>{
      * Try to extract spirits from an entity
      * @return The result containing the spirits extracted and that can consume the entity
      */
-    fun extract(caster: PlayerEntity?, target: Entity): ExtractionResult<T>
+    fun extract(caster: ServerPlayerEntity?, target: Entity): ExtractionResult<T>
 
     /**
      * Get a name describing extracted spirits

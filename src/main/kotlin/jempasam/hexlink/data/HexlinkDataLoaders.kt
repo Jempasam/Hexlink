@@ -10,5 +10,6 @@ object HexlinkDataLoaders {
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(HexlinkExtractorDataLoader())
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpecialSpiritDataLoader)
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(VortexRecipeDataLoader)
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpecialExtractorDataLoader)
     }
 }

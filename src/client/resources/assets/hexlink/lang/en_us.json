@@ -2,6 +2,7 @@
   "hexlink.mishap.empty_collar": "Your focus collar is empty",
   "hexlink.mishap.no_collar_item": "You don't have any focus collar",
   "hexlink.mishap.extractor_item": "suitable extraction catalyzer item like a Extraction Crystal",
+  "hexlink.mishap.spell_holder": "spell holder item",
   "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
   "hexlink.mishap.not_enough_soul": "Missing %d spirits",
   "hexlink.mishap.cant_mix_at": "You cannot summon a vortex at this location, you can summon a vortex at an empty place",
@@ -27,6 +28,7 @@
 
   "hexcasting.spell.hexlink:read_trinket": "Boehmer's Reflection",
   "hexcasting.spell.hexlink:write_trinket": "Boehmer's Gambit",
+  "hexcasting.spell.hexlink:write_spell": "Flem's Gambit",
 
 
 
@@ -56,6 +58,7 @@
 
 
   "item.hexlink.upgraded_book": "Upgraded Spellbook",
+  "item.hexlink.special_staff": "Special Staff",
   "item.hexlink.mixed_pigment": "Mixed Pigment",
   "item.hexlink.focus_collar": "Focus Collar",
   "item.hexlink.spirit": "%s Spirit",
@@ -86,9 +89,10 @@
 
 
 
-  "hexlink.entry.readwrite_trinkets": "Trinket Read and Write",
+  "hexlink.entry.readwrite": "Hexlink Read and Write",
   "hexlink.page.write_trinket": "This pattern can write a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
   "hexlink.page.read_trinket": "This pattern can read a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
+  "hexlink.page.write_spell": "This pattern can write a spell into a Special Wand, I am holding.",
 
   "hexlink.page.spirit_extraction.desc": "This spell can extract a spirit from an entity using a extraction catalyzer like an $(l:hexlink:items/crystals)Extraction Crystal/$ into a $(l:hexlink:items/bag)Spirit Container/$. The quantity of spirit extracted depends of the target. The items used in this spells can be dropped, in item frame, in the first slot of a container, or the offhand of the caster.",
   "hexlink.page.spirit_extraction.target.desc": "The first parameter is the entity to extract from, the second parameter is an extractor catalyzer, the third parameter is a spirit container. ",

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hexlink:item/wand/crystal1",
+    "layer1": "hexlink:item/wand/handle3"
+  }
+}

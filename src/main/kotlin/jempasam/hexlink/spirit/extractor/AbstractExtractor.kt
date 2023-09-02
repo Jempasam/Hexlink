@@ -1,4 +1,4 @@
-package jempasam.hexlink.spirit.extracter
+package jempasam.hexlink.spirit.extractor
 
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.text.Text

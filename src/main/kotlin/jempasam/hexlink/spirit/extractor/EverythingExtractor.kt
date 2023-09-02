@@ -1,10 +1,10 @@
-package jempasam.hexlink.spirit.extracter
+package jempasam.hexlink.spirit.extractor
 
 import com.google.gson.JsonElement
 import jempasam.hexlink.spirit.Spirit
-import jempasam.hexlink.spirit.extracter.loaders.SpiritExtractorLoader
+import jempasam.hexlink.spirit.extractor.loaders.SpiritExtractorLoader
 import net.minecraft.entity.Entity
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.math.ColorHelper
 import kotlin.math.sin
@@ -12,7 +12,7 @@ import kotlin.math.sin
 object EverythingExtractor : SpiritExtractor<Spirit> {
 
     val EXTRACTORS= listOf(PotionExtractor, BlockExtractor, ItemExtractor, EntityExtractor)
-    override fun extract(caster: PlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<Spirit> {
+    override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<Spirit> {
         for(e in EXTRACTORS){
             val ret=e.extract(caster,target)
             if(ret.spirit!=null)return ret.downCast()

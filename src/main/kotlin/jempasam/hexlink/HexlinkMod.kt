@@ -13,7 +13,7 @@ import jempasam.hexlink.particle.HexlinkParticles
 import jempasam.hexlink.recipe.HexlinkRecipes
 import jempasam.hexlink.spirit.HexlinkSpirits
 import jempasam.hexlink.trinkets.HexlinkTrinkets
-import jempasam.hexlink.vortex.HexVortexHandlers
+import jempasam.hexlink.recipe.vortex.HexVortexHandlers
 import jempasam.hexlink.world.LevelRanks
 import net.fabricmc.api.ModInitializer
 import net.minecraft.util.DyeColor

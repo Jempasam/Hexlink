@@ -12,7 +12,7 @@ import jempasam.hexlink.operators.getExtractorItemAndPos
 import jempasam.hexlink.operators.getSpiritTargetAndPos
 import jempasam.hexlink.particle.HexlinkParticles
 import jempasam.hexlink.spirit.Spirit
-import jempasam.hexlink.spirit.extracter.SpiritExtractor
+import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import jempasam.hexlink.spirit.inout.SpiritTarget
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.Vec3d

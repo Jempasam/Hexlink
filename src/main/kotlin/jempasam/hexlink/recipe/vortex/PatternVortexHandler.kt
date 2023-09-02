@@ -1,4 +1,4 @@
-package jempasam.hexlink.vortex
+package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
@@ -18,7 +18,7 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper
 
-class PatternVortexHandler : AbstractVortexHandler{
+class PatternVortexHandler : AbstractVortexHandler {
 
 
     private val recipe_manager=RecipeManager.createCachedMatchGetter(RecipeType.CRAFTING)
@@ -186,7 +186,7 @@ class PatternVortexHandler : AbstractVortexHandler{
         fun test(stack: Ingredient, inputs: MutableList<Ingredient?>, mats: MutableList<Ingredient?>): Boolean
     }
 
-    class ItemStackSlot(val stack: ItemStack): Slot{
+    class ItemStackSlot(val stack: ItemStack): Slot {
         override val id: Int=-1
         override val mat: Int=-1
         override fun stack(items: List<Item>, mats: MutableList<Item?>): ItemStack? = stack.copy()
@@ -195,7 +195,7 @@ class PatternVortexHandler : AbstractVortexHandler{
         }
     }
 
-    class InputSlot(override val id: Int, override  val mat: Int): Slot{
+    class InputSlot(override val id: Int, override  val mat: Int): Slot {
         override fun stack(items: List<Item>, mats: MutableList<Item?>): ItemStack?{
             assert(id>=0 && id<items.size)
             if(mats[mat]==null){
@@ -216,7 +216,7 @@ class PatternVortexHandler : AbstractVortexHandler{
         }
     }
 
-    class NoneSlot: Slot{
+    class NoneSlot: Slot {
         override val id: Int=-1
         override val mat: Int=-1
         override fun stack(items: List<Item>, mats: MutableList<Item?>): ItemStack? = ItemStack.EMPTY
@@ -234,7 +234,7 @@ class PatternVortexHandler : AbstractVortexHandler{
 
 
 
-    object SERIALIZER: HexVortexHandler.Serializer<PatternVortexHandler>{
+    object PARSER: HexVortexHandler.Parser<PatternVortexHandler> {
         override fun serialize(json: JsonObject): PatternVortexHandler = PatternVortexHandler(json)
     }
 }

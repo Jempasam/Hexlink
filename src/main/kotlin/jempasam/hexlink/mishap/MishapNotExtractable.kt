@@ -4,7 +4,7 @@ import at.petrak.hexcasting.api.misc.FrozenColorizer
 import at.petrak.hexcasting.api.spell.casting.CastingContext
 import at.petrak.hexcasting.api.spell.iota.Iota
 import at.petrak.hexcasting.api.spell.mishaps.Mishap
-import jempasam.hexlink.spirit.extracter.SpiritExtractor
+import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import net.minecraft.entity.Entity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects

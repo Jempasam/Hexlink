@@ -1,11 +1,11 @@
-package jempasam.hexlink.spirit.extracter
+package jempasam.hexlink.spirit.extractor
 
 import jempasam.hexlink.spirit.EnchantmentSpirit
 import jempasam.hexlink.spirit.StackHelper
 import jempasam.hexlink.utils.EnchantHelper
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.math.ColorHelper
 import kotlin.math.sin
@@ -19,7 +19,7 @@ object EnchantmentExtractor : SpiritExtractor<EnchantmentSpirit> {
         return ColorHelper.Argb.getArgb(255, 255, (sin(currentPiTime)*127+127).toInt(), 255)
     }
 
-    override fun extract(caster: PlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<EnchantmentSpirit> {
+    override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<EnchantmentSpirit> {
         val worldStack=StackHelper.stack(caster,target)
         if(worldStack==null)return SpiritExtractor.noResult()
         val enchantments=EnchantmentHelper.get(worldStack.stack)

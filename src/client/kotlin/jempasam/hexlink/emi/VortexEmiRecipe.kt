@@ -7,7 +7,7 @@ import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
 import jempasam.hexlink.item.HexlinkItems
 import jempasam.hexlink.spirit.Spirit
-import jempasam.hexlink.vortex.HexVortexHandler
+import jempasam.hexlink.recipe.vortex.HexVortexHandler
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
@@ -43,7 +43,7 @@ class VortexEmiRecipe(private val id: Identifier, private val inputs: List<HexVo
 
         val output_bag= mutableListOf<IngPair>()
         for(spirit in outputs){
-            val ing=HexVortexHandler.Ingredient(spirit);
+            val ing= HexVortexHandler.Ingredient(spirit);
             if(output_bag.isEmpty() || output_bag.last().ingredient!=ing){
                 output_bag.add(IngPair(ing,1))
             }
