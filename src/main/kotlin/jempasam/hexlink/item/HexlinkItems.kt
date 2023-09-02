@@ -26,7 +26,7 @@ object HexlinkItems {
     val Crystal= make("crystal", ExtractorCatalyzerItem(epicProps()))
 
     var UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
-    var FocusCollar=make("focus_collar", ItemFocus(simpleProps()))
+    var FocusCollar=make("focus_collar", ItemFocus(forbiddenProps()))
     var SpecialStaff=make("special_staff", SpecialWandItem(simpleProps()))
     //var SpirtualStaff=make("spiritual_staff",SpiritualStaffItem(simpleProps()))
     var MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
@@ -42,21 +42,28 @@ object HexlinkItems {
 
     fun epicProps(): Item.Settings{
         return Item.Settings()
-                .group(HexlinkCreativeTab.HEXLINK)
+                .group(HexlinkCreativeTab.MAIN_TAB)
                 .maxCount(1)
                 .rarity(Rarity.EPIC)
     }
 
     fun simpleProps(): Item.Settings{
         return Item.Settings()
-                .group(HexlinkCreativeTab.HEXLINK)
+                .group(HexlinkCreativeTab.MAIN_TAB)
                 .maxCount(1)
                 .rarity(Rarity.COMMON)
     }
 
+    fun forbiddenProps(): Item.Settings{
+        return Item.Settings()
+                .fireproof()
+                .maxCount(1)
+                .rarity(Rarity.RARE)
+    }
+
     fun stackableProps(): Item.Settings{
         return Item.Settings()
-                .group(HexlinkCreativeTab.HEXLINK)
+                .group(HexlinkCreativeTab.MAIN_TAB)
                 .maxCount(64)
                 .rarity(Rarity.COMMON)
     }
