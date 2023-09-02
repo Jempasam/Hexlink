@@ -8,10 +8,13 @@
 		"jempasam"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/Jempasam/Hexlink"
 	},
-	"license": "CC0-1.0",
+	"contributors": [
+		"jempasam",
+		"ChuijkYahus"
+	],
+	"license": "MIT",
 	"icon": "assets/hexlink/icon.png",
 	"environment": "*",
 	"entrypoints": {
