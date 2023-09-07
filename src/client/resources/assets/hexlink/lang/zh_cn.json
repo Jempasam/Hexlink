@@ -2,6 +2,7 @@
   "hexlink.mishap.empty_collar": "核心项圈为空",
   "hexlink.mishap.no_collar_item": "未佩戴核心项圈",
   "hexlink.mishap.extractable_to": "提取水晶之类的有效提取催化物",
+  "hexlink.mishap.spell_holder": "可存有咒术的物品",
   "hexlink.mishap.not_extractable": "%s灵体无法被%s提取",
   "hexlink.mishap.not_enough_soul": "缺少%d个灵体",
   "hexlink.mishap.cant_mix_at": "无法在此处召唤涡旋，应当在空气处召唤",
@@ -27,6 +28,7 @@
 
   "hexcasting.spell.hexlink:read_trinket": "伯默之精思",
   "hexcasting.spell.hexlink:write_trinket": "伯默之策略",
+  "hexcasting.spell.hexlink:write_spell": "弗莱姆之策略",
 
 
 
@@ -56,8 +58,9 @@
 
 
   "item.hexlink.upgraded_book": "升级法术书",
+  "item.hexlink.special_staff": "特殊法杖",
   "item.hexlink.mixed_pigment": "混合染色剂",
-  "item.hexlink.focus_collar": "核心项圈",
+  "item.hexlink.focus_collar": "禁忌的核心项圈",
   "item.hexlink.spirit": "%s灵体",
   "item.hexlink.spirit.none": "灵体",
   "item.hexlink.philosophical_crystal": "%s之贤者水晶",
@@ -86,9 +89,10 @@
 
 
 
-  "hexlink.entry.readwrite_trinkets": "读取与写入饰品",
+  "hexlink.entry.readwrite": "Hexlink 读取与写入",
   "hexlink.page.write_trinket": "此图案可从我所佩戴的$(l:hexlink:items/focus_collar)$(item)核心项圈/$中读取 iota。",
   "hexlink.page.read_trinket": "此图案可将 iota 写入我所佩戴的$(l:hexlink:items/focus_collar)$(item)核心项圈/$。",
+  "hexlink.page.write_spell": "此图案可将咒术写入我手持的特殊法杖。",
 
   "hexlink.page.spirit_extraction.desc": "此法术可通过$(l:hexlink:items/crystals)提取水晶/$等提取催化物从实体中提取灵体，并将其存入$(l:hexlink:items/bag)灵体容器/$。被提取目标决定提出灵体的数量。此法术中的物品可以是物品实体、容器首格中的物品，或者施法者副手中的物品。",
   "hexlink.page.spirit_extraction.target.desc": "第一参数为被提取对象；第二参数为提取催化物，如提取水晶；第三参数则为灵体容器。",
