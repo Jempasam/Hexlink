@@ -5,7 +5,7 @@ import jempasam.hexlink.recipe.vortex.HexVortexHandler
 import jempasam.hexlink.spirit.SpecialSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.extractor.SpiritExtractor
-import jempasam.hexlink.spirit.extractor.special.node.ExtractionNode
+import jempasam.hexlink.spirit.extractor.node.ExtractionNode
 import jempasam.hexlink.world.LevelRanks
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.MutableRegistry

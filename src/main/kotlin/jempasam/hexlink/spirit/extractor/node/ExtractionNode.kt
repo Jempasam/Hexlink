@@ -1,4 +1,4 @@
-package jempasam.hexlink.spirit.extractor.special.node
+package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.HexlinkMod
@@ -20,7 +20,7 @@ interface ExtractionNode {
 
         fun copy(): Source = Source(count,caster,entity,spirit,consumer)
 
-        inline fun with(definition: Source.()->Unit): Source{
+        inline fun with(definition: Source.()->Unit): Source {
             val ret=copy()
             definition(ret)
             return ret

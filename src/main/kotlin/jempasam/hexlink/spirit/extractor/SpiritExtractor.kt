@@ -30,9 +30,15 @@ interface SpiritExtractor<T: Spirit>{
     fun getColor(): Int
 
 
+    /**
+     * Media cost
+     */
+    fun getCost(): Int
+
+
 
     /**
-     * The result of an extraction
+    * The result of an extraction
      * @param spirit The spirit extracted
      * @param maxCount The number of spirit extracted
      * @param consumer The method used to change or kill the entity after the spirit are extracted

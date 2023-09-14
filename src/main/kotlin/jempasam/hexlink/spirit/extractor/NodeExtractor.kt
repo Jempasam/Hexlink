@@ -6,8 +6,8 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.spirit.Spirit
-import jempasam.hexlink.spirit.extractor.special.node.ExtractionNode
-import jempasam.hexlink.spirit.extractor.special.node.ExtractionNode.Source
+import jempasam.hexlink.spirit.extractor.node.ExtractionNode
+import jempasam.hexlink.spirit.extractor.node.ExtractionNode.Source
 import jempasam.hexlink.utils.read
 import net.minecraft.entity.Entity
 import net.minecraft.server.network.ServerPlayerEntity
@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
 import net.minecraft.util.math.ColorHelper.Argb.*
 
-class ComposedExtractor(private val name: Text, private val colors: List<Int>, private val duration: Int, private val root: PlacedNode): SpiritExtractor<Spirit> {
+class NodeExtractor(private val name: Text, private val colors: List<Int>, private val cost: Int, private val duration: Int, private val root: PlacedNode): SpiritExtractor<Spirit> {
 
     override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<Spirit> {
         val ret=root.filter(Source(1, caster, target, null) {})
@@ -43,6 +43,8 @@ class ComposedExtractor(private val name: Text, private val colors: List<Int>, p
             )
         }
     }
+
+    override fun getCost(): Int = cost
 
     override fun getName(): Text = name
 
@@ -75,12 +77,13 @@ class ComposedExtractor(private val name: Text, private val colors: List<Int>, p
     }
 
     companion object{
-        fun parse(obj: JsonObject): ComposedExtractor {
-            return ComposedExtractor(
+        fun parse(obj: JsonObject): NodeExtractor {
+            return NodeExtractor(
                 obj.get("name")?.let { Text.Serializer.fromJson(it) } ?: Text.of("INVALIDNAME"),
                 obj.get("color")?.asJsonArray?.read { it.asInt } ?: listOf(0x000000),
+                JsonHelper.getInt(obj, "media_cost", 2),
                 JsonHelper.getInt(obj,"color_duration",1000),
-                parseAny(JsonHelper.getArray(obj, "nodes"))
+                obj.get("nodes")?.let{parseAny(it)} ?: ListPlacedNode(listOf())
             )
         }
 

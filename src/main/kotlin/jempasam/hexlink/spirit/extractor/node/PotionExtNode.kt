@@ -1,4 +1,4 @@
-package jempasam.hexlink.spirit.extractor.special.node
+package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.PotionSpirit
@@ -9,7 +9,7 @@ import net.minecraft.potion.PotionUtil
 import net.minecraft.potion.Potions
 import kotlin.math.max
 
-object PotionExtNode : ExtractionNode{
+object PotionExtNode : ExtractionNode {
 
     private val POTION_ITEMS=setOf(Items.POTION, Items.LINGERING_POTION, Items.SPLASH_POTION)
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
@@ -23,7 +23,7 @@ object PotionExtNode : ExtractionNode{
         if(effects.isEmpty())return source
 
         return source.with {
-            count=stack.count* max(stack.maxDamage,1)
+            count *= stack.count * max(1,effects[0].duration/1200) * (effects[0].amplifier+1)
             val prev=consumer
             consumer={
                 prev(it)
@@ -43,7 +43,7 @@ object PotionExtNode : ExtractionNode{
         }
     }
 
-    object Parser: ExtractionNode.Parser<PotionExtNode>{
+    object Parser: ExtractionNode.Parser<PotionExtNode> {
         override fun parse(obj: JsonObject): PotionExtNode = PotionExtNode
     }
 }

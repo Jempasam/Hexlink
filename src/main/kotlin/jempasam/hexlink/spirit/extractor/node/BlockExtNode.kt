@@ -1,4 +1,4 @@
-package jempasam.hexlink.spirit.extractor.special.node
+package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.BlockSpirit
@@ -7,7 +7,7 @@ import net.minecraft.item.BlockItem
 import kotlin.math.ceil
 import kotlin.math.max
 
-object BlockExtNode : ExtractionNode{
+object BlockExtNode : ExtractionNode {
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
         val worldStack=StackHelper.stack(source.caster,source.entity)
         worldStack ?: return source
@@ -32,7 +32,7 @@ object BlockExtNode : ExtractionNode{
         }
     }
 
-    object Parser: ExtractionNode.Parser<BlockExtNode>{
+    object Parser: ExtractionNode.Parser<BlockExtNode> {
         override fun parse(obj: JsonObject): BlockExtNode = BlockExtNode
     }
 }

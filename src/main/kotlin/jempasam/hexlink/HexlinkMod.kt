@@ -13,7 +13,7 @@ import jempasam.hexlink.particle.HexlinkParticles
 import jempasam.hexlink.recipe.HexlinkRecipes
 import jempasam.hexlink.recipe.vortex.HexVortexHandlers
 import jempasam.hexlink.spirit.HexlinkSpirits
-import jempasam.hexlink.spirit.extractor.special.node.ExtNodeParsers
+import jempasam.hexlink.spirit.extractor.node.ExtNodeParsers
 import jempasam.hexlink.trinkets.HexlinkTrinkets
 import jempasam.hexlink.world.LevelRanks
 import net.fabricmc.api.ModInitializer

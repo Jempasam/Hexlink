@@ -1,10 +1,10 @@
-package jempasam.hexlink.spirit.extractor.special.node
+package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.BiomeSpirit
 import net.minecraft.util.math.BlockPos
 
-object BiomeExtNode : ExtractionNode{
+object BiomeExtNode : ExtractionNode {
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
         val biome=source.entity.world.getBiome(BlockPos(source.entity.pos))
         return source.with {
@@ -12,7 +12,7 @@ object BiomeExtNode : ExtractionNode{
         }
     }
 
-    object Parser: ExtractionNode.Parser<BiomeExtNode>{
+    object Parser: ExtractionNode.Parser<BiomeExtNode> {
         override fun parse(obj: JsonObject): BiomeExtNode = BiomeExtNode
     }
 }

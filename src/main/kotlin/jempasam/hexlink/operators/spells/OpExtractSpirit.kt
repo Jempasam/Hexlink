@@ -6,7 +6,6 @@ import at.petrak.hexcasting.api.spell.SpellAction
 import at.petrak.hexcasting.api.spell.casting.CastingContext
 import at.petrak.hexcasting.api.spell.getEntity
 import at.petrak.hexcasting.api.spell.iota.Iota
-import jempasam.hexlink.data.HexlinkConfiguration
 import jempasam.hexlink.mishap.MishapNotExtractable
 import jempasam.hexlink.operators.getExtractorItemAndPos
 import jempasam.hexlink.operators.getSpiritTargetAndPos
@@ -16,7 +15,6 @@ import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import jempasam.hexlink.spirit.inout.SpiritTarget
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.Vec3d
-import kotlin.math.ceil
 import kotlin.math.min
 
 class OpExtractSpirit : SpellAction{
@@ -32,7 +30,7 @@ class OpExtractSpirit : SpellAction{
         if(extraction.spirit!=null){
             return Triple(
                     Spell(ctx.world, extractor.first, extraction, target.first, extracted.pos, target.second),
-                    HexlinkConfiguration.extractor_settings[extractor.first]?.extraction_media_cost ?: 2,
+                    extractor.first.getCost(),
                     listOf(
                             ParticleSpray.burst(extracted.pos,1.0,1),
                             ParticleSpray.burst(target.second,1.0,1),
@@ -45,10 +43,9 @@ class OpExtractSpirit : SpellAction{
 
     data class Spell(val world: ServerWorld, val extractor: SpiritExtractor<*>, val extraction: SpiritExtractor.ExtractionResult<*>, val target: SpiritTarget, val from: Vec3d, val to: Vec3d) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
-            val multiplier=HexlinkConfiguration.extractor_settings[extractor]?.soulCount ?: 1
-            val input=target.fill(multiplier*extraction.maxCount, extraction.spirit as Spirit)
-            val count= min(input.maxcount, extraction.maxCount*multiplier)
-            val consumed= ceil(count.toFloat()/multiplier).toInt()
+            val input=target.fill(extraction.maxCount, extraction.spirit as Spirit)
+            val count= min(input.maxcount, extraction.maxCount)
+            val consumed=count
             extraction.consume(consumed)
             input.fill(count)
             HexlinkParticles.sendLink(world, from, to, extraction.spirit.getColor(), consumed)

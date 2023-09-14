@@ -1,14 +1,12 @@
-package jempasam.hexlink.spirit.extractor.special.node
+package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.EnchantmentSpirit
 import jempasam.hexlink.spirit.StackHelper
 import jempasam.hexlink.utils.EnchantHelper
 import net.minecraft.enchantment.EnchantmentHelper
-import kotlin.math.ceil
-import kotlin.math.sqrt
 
-object EnchantmentExtNode : ExtractionNode{
+object EnchantmentExtNode : ExtractionNode {
 
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
         val worldStack= StackHelper.stack(source.caster,source.entity) ?: return source
@@ -16,12 +14,12 @@ object EnchantmentExtNode : ExtractionNode{
         if(enchantments.isEmpty())return source
         val extracted=enchantments.entries.first()
         return source.with {
-            count*=extracted.value*extracted.value
+            count *= 1 shl (extracted.value-1)
             spirit=EnchantmentSpirit(extracted.key)
             val prev=consumer
             consumer={
                 prev(it)
-                val nlevel=extracted.value-ceil(sqrt(it.toDouble())).toInt()
+                val nlevel=extracted.value-it.countTrailingZeroBits()-1
                 worldStack.replace(
                     if(nlevel==0){
                         EnchantHelper.removeEnchantment(worldStack.stack, extracted.key)
@@ -35,7 +33,7 @@ object EnchantmentExtNode : ExtractionNode{
         }
     }
 
-    object Parser: ExtractionNode.Parser<EnchantmentExtNode>{
+    object Parser: ExtractionNode.Parser<EnchantmentExtNode> {
         override fun parse(obj: JsonObject): EnchantmentExtNode = EnchantmentExtNode
     }
 }
