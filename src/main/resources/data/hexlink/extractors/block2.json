@@ -1,5 +1,5 @@
 {
   "name": "Block",
   "color": [9267278, 9269849, 9267536, 9263680, 9267536, 9269849],
-  "nodes": [ "hexlink:block" ]
+  "nodes": "hexlink:block"
 }

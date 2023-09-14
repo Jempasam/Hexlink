@@ -11,7 +11,8 @@ class ResultExtNode(val multiplier: Float, val newSpirit: Spirit?) : ExtractionN
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
         return source.with {
             count= (multiplier*count).toInt()
-            consumer={consumer(ceil(it/ multiplier).toInt())}
+            val prev=consumer
+            consumer={prev(ceil(it/ multiplier).toInt())}
             spirit= newSpirit ?: spirit
         }
     }

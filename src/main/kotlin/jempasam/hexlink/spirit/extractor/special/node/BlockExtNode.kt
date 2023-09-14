@@ -18,8 +18,9 @@ object BlockExtNode : ExtractionNode{
 
         return source.with {
             count *= stack.count*max(worldStack.stack.maxDamage,1)
+            val prev=consumer
             consumer={
-                consumer(it)
+                prev(it)
                 val consumed=ceil(it.toFloat()/max(stack.maxDamage,1)).toInt()
                 if(it>=stack.count) worldStack.killer()
                 else{

@@ -19,8 +19,9 @@ object ItemExtNode : ExtractionNode{
 
         return source.with {
             count *= stack.count*max(stack.maxDamage,1)
+            val prev=consumer
             consumer={
-                consumer(it)
+                prev(it)
                 val consumed=ceil(it as Float/max(stack.maxDamage,1)) as Int
                 if(it>=worldStack.stack.count) worldStack.killer()
                 else{

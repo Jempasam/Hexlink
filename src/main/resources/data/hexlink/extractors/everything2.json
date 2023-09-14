@@ -3,11 +3,11 @@
   "color": [16711935, 255, 65535, 65280, 16776960, 16711680],
   "color_duration": 500,
   "nodes": [
-    [
-      ["hexlink:potion"],
-      ["hexlink:block"],
-      ["hexlink:item"],
-      ["hexlink:entity"]
-    ]
+    "ANY",
+    "hexlink:potion",
+    "hexlink:enchantment",
+    "hexlink:block",
+    "hexlink:item",
+    "hexlink:entity"
   ]
 }

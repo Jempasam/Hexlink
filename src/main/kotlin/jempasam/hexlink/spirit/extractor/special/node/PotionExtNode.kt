@@ -24,8 +24,9 @@ object PotionExtNode : ExtractionNode{
 
         return source.with {
             count=stack.count* max(stack.maxDamage,1)
+            val prev=consumer
             consumer={
-                consumer(it)
+                prev(it)
                 if (effects.size == 1) worldStack.killer()
                 else {
                     if (PotionUtil.getPotion(stack) != Potions.EMPTY) {

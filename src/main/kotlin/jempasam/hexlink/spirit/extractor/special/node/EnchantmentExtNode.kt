@@ -18,8 +18,9 @@ object EnchantmentExtNode : ExtractionNode{
         return source.with {
             count*=extracted.value*extracted.value
             spirit=EnchantmentSpirit(extracted.key)
+            val prev=consumer
             consumer={
-                consumer(it)
+                prev(it)
                 val nlevel=extracted.value-ceil(sqrt(it.toDouble())).toInt()
                 worldStack.replace(
                     if(nlevel==0){

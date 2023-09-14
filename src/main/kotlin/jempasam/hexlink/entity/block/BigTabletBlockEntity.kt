@@ -24,7 +24,7 @@ import kotlin.random.Random
 class BigTabletBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HexlinkEntities.BIG_TABLET, pos, state), SpiritTarget, SpiritSource, BlockSpiritContainer{
 
     fun sendToClient(){
-        world?.updateListeners(pos,world?.getBlockState(pos),world?.getBlockState(pos), Block.NOTIFY_LISTENERS)
+        world?.updateListeners(pos,world?.getBlockState(pos) ,world?.getBlockState(pos), Block.NOTIFY_LISTENERS)
     }
 
 
@@ -87,9 +87,11 @@ class BigTabletBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
     }
 
     override fun readNbt(nbt: NbtCompound) {
+        content.clear()
         nbt.getList("content",NbtElement.COMPOUND_TYPE.toInt()).forEach{
             if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{content.add(it)}
         }
+        world?.updateListeners(pos,world?.getBlockState(pos) ,world?.getBlockState(pos), Block.NOTIFY_LISTENERS)
     }
 
     override fun toUpdatePacket(): Packet<ClientPlayPacketListener> {

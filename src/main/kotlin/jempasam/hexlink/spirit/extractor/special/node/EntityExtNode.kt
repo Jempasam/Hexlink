@@ -14,7 +14,7 @@ object EntityExtNode : ExtractionNode{
         {
             return source.with {
                 spirit=EntitySpirit(target.type)
-                consumer={ consumer(it); target.kill() }
+                consumer={ target.kill() }
             }
         }
         return source

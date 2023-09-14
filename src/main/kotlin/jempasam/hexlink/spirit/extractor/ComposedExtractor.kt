@@ -49,14 +49,19 @@ class ComposedExtractor(private val name: Text, private val colors: List<Int>, p
     interface PlacedNode{
         fun filter(source: Source): Source
     }
-    private object StubPlacedNode: PlacedNode{
-        override fun filter(source: Source): Source = source
+    private class ListPlacedNode(val nodes: List<PlacedNode>): PlacedNode{
+        override fun filter(source: Source): Source{
+            var ret=source
+            for(n in nodes){
+                if(ret.count<=0)break
+                ret=n.filter(ret)
+            }
+            return ret
+        }
     }
 
-    private class UniquePlacedNode(val node: ExtractionNode, var next: PlacedNode?): PlacedNode{
-        override fun filter(source: Source): Source{
-            return if(source.count==0) source else (next as PlacedNode).filter(node.filter(source))
-        }
+    private class UniquePlacedNode(val node: ExtractionNode): PlacedNode{
+        override fun filter(source: Source): Source = node.filter(source)
     }
 
     private class MultiPlacedNode(val content: List<PlacedNode>): PlacedNode{
@@ -75,8 +80,30 @@ class ComposedExtractor(private val name: Text, private val colors: List<Int>, p
                 obj.get("name")?.let { Text.Serializer.fromJson(it) } ?: Text.of("INVALIDNAME"),
                 obj.get("color")?.asJsonArray?.read { it.asInt } ?: listOf(0x000000),
                 JsonHelper.getInt(obj,"color_duration",1000),
-                parseLine(JsonHelper.getArray(obj, "nodes"))
+                parseAny(JsonHelper.getArray(obj, "nodes"))
             )
+        }
+
+        private fun parseAny(element: JsonElement): PlacedNode{
+            return if(element.isJsonArray){
+                val array=element.asJsonArray
+                if(array.size()>0 && array[0].isJsonPrimitive && array[0].asString=="ANY"){
+                    parseMulti(element.asJsonArray)
+                }
+                else parseList(array)
+            }
+            else parseUnique(element)
+        }
+
+        private fun parseList(list: JsonArray): PlacedNode{
+            val nodes= list.read(::parseAny)
+            return ListPlacedNode(nodes)
+        }
+
+        private fun parseMulti(element: JsonArray): PlacedNode{
+            element.remove(0)
+            val ret= element.read(::parseAny)
+            return MultiPlacedNode(ret)
         }
 
         private fun parseUnique(element: JsonElement): UniquePlacedNode{
@@ -84,43 +111,13 @@ class ComposedExtractor(private val name: Text, private val colors: List<Int>, p
                 element.isJsonPrimitive && element.asJsonPrimitive.isString
                     -> element.asString to JsonObject()
                 element.isJsonObject
-                    -> JsonHelper.getString(element.asJsonObject,"type") to element.asJsonObject
-                else -> throw JsonParseException("Middle node should be an object of a string")
+                    -> JsonHelper.getString(element.asJsonObject,"node") to element.asJsonObject
+                else
+                    -> throw JsonParseException("Middle node should be an object of a string")
             }
             val parser=HexlinkRegistry.EXTRACTOR_NODE_PARSER.get(Identifier(id))
                 ?: throw JsonParseException("\"${element.asString}\" is not a valid extraction node type")
-            return UniquePlacedNode(parser.parse(obj),null)
-        }
-
-        private fun parseFinal(element: JsonElement): PlacedNode{
-            if(element.isJsonArray){
-                val ret= mutableListOf<PlacedNode>()
-                for(e in element.asJsonArray){
-                    if(!e.isJsonArray)throw JsonParseException("List node should contains lists of nodes")
-                    ret.add(parseLine(e.asJsonArray))
-                }
-                return MultiPlacedNode(ret)
-            }
-            else return parseUnique(element).apply { next=StubPlacedNode }
-        }
-
-        private fun parseLine(list: JsonArray): PlacedNode{
-            var first: PlacedNode?=null
-            var lastnode: UniquePlacedNode?=null
-            for(a in 0..<list.size()-1){
-                val middle= parseUnique(list[a])
-                if(lastnode!=null)lastnode.next=middle
-                else first=middle
-                lastnode=middle
-            }
-            val last=if(list.size()>0){
-                val final= parseFinal(list[list.size()-1])
-                if(lastnode!=null)lastnode.next=final
-                final
-            }
-            else null
-
-            return first ?: last ?: StubPlacedNode
+            return UniquePlacedNode(parser.parse(obj))
         }
 
     }
