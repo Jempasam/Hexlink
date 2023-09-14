@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
 import net.minecraft.util.math.ColorHelper.Argb.*
 
-class ComposedExtractor(private val name: Text, private val colors: List<Int>, private val root: PlacedNode): SpiritExtractor<Spirit> {
+class ComposedExtractor(private val name: Text, private val colors: List<Int>, private val duration: Int, private val root: PlacedNode): SpiritExtractor<Spirit> {
 
     override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<Spirit> {
         val ret=root.filter(Source(1, caster, target, null) {})
@@ -27,10 +27,10 @@ class ComposedExtractor(private val name: Text, private val colors: List<Int>, p
         if(colors.isEmpty())return 0x000000
         else if(colors.size==1)return colors[0]
         else{
-            val time=(System.currentTimeMillis()%(colors.size*1000-1)).toInt()
-            val actual=time/1000
+            val time=(System.currentTimeMillis()%(colors.size*duration-1)).toInt()
+            val actual=time/duration
             val previous= if(actual==0) colors.size-1 else actual-1
-            val transition=time%1000/1000f
+            val transition=time%duration/duration.toFloat()
             val rtransition=1f-transition
 
             val pcolor=colors[previous]
@@ -74,6 +74,7 @@ class ComposedExtractor(private val name: Text, private val colors: List<Int>, p
             return ComposedExtractor(
                 obj.get("name")?.let { Text.Serializer.fromJson(it) } ?: Text.of("INVALIDNAME"),
                 obj.get("color")?.asJsonArray?.read { it.asInt } ?: listOf(0x000000),
+                JsonHelper.getInt(obj,"color_duration",1000),
                 parseLine(JsonHelper.getArray(obj, "nodes"))
             )
         }

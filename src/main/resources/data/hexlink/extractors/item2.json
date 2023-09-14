@@ -1,0 +1,5 @@
+{
+  "name": "Item",
+  "color": [10190986, 8552596],
+  "nodes": [ "hexlink:item" ]
+}

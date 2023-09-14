@@ -1,0 +1,9 @@
+{
+  "name": "Flowers",
+  "color": [16742338, 16751810],
+  "color_duration": 500,
+  "nodes": [
+    {"type": "hexlink:item_predicate", "tag": "minecraft:small_flowers"},
+    "hexlink:block"
+  ]
+}

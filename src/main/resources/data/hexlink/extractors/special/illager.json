@@ -1,0 +1,9 @@
+{
+  "name": "Illager",
+  "color": [8226202, 11371899],
+  "color_duration": 1000,
+  "nodes": [
+    {"type": "hexlink:entity_predicate", "tag": "minecraft:raiders"},
+    "hexlink:entity"
+  ]
+}

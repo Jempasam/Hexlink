@@ -7,7 +7,7 @@ import jempasam.hexlink.utils.asNBT
 import net.minecraft.util.JsonHelper
 import kotlin.math.ceil
 
-class ResultNode(val multiplier: Float, val newSpirit: Spirit?) : ExtractionNode{
+class ResultExtNode(val multiplier: Float, val newSpirit: Spirit?) : ExtractionNode{
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
         return source.with {
             count= (multiplier*count).toInt()
@@ -16,9 +16,9 @@ class ResultNode(val multiplier: Float, val newSpirit: Spirit?) : ExtractionNode
         }
     }
 
-    object Parser: ExtractionNode.Parser<ResultNode>{
-        override fun parse(obj: JsonObject): ResultNode{
-            return ResultNode(
+    object Parser: ExtractionNode.Parser<ResultExtNode>{
+        override fun parse(obj: JsonObject): ResultExtNode{
+            return ResultExtNode(
                 JsonHelper.getFloat(obj,"multiplier", 1.0f),
                 obj.get("spirit") ?.asJsonObject ?.let { NbtHelper.readSpirit(it.asNBT()) }
             )

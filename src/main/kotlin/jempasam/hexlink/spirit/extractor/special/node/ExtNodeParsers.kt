@@ -22,5 +22,5 @@ object ExtNodeParsers {
     val FILTER_ITEM=register("item_predicate",FilterItemExtNode.Parser)
     val ELSE=register("else",ElseExtNode.Parser)
 
-    val RESULT=register("result",ResultNode.Parser)
+    val RESULT=register("result",ResultExtNode.Parser)
 }

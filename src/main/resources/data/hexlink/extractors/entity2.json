@@ -1,0 +1,5 @@
+{
+  "name": "Entity",
+  "color": [16711680, 16711795],
+  "nodes": [ "hexlink:entity" ]
+}
