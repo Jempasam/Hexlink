@@ -20,10 +20,9 @@ object EnchantmentExtractor : SpiritExtractor<EnchantmentSpirit> {
     }
 
     override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<EnchantmentSpirit> {
-        val worldStack=StackHelper.stack(caster,target)
-        if(worldStack==null)return SpiritExtractor.noResult()
+        val worldStack= StackHelper.stack(caster,target) ?: return SpiritExtractor.noResult()
         val enchantments=EnchantmentHelper.get(worldStack.stack)
-        if(enchantments.size==0)return SpiritExtractor.noResult()
+        if(enchantments.isEmpty())return SpiritExtractor.noResult()
         val extracted=enchantments.entries.first()
         return SpiritExtractor.ExtractionResult(EnchantmentSpirit(extracted.key), extracted.value*extracted.value) {
             worldStack.replace(EnchantHelper.removeEnchantment(worldStack.stack, extracted.key))

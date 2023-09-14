@@ -1,5 +1,6 @@
 package jempasam.hexlink.spirit.extractor
 
+import com.google.gson.JsonObject
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.entity.Entity
@@ -55,6 +56,10 @@ interface SpiritExtractor<T: Spirit>{
 
     companion object{
         fun <T: Spirit>noResult(): ExtractionResult<T> = ExtractionResult(null, 0) {}
+    }
+
+    interface Serializer<T: Spirit>{
+        fun deserialize(obj: JsonObject)
     }
 
 }

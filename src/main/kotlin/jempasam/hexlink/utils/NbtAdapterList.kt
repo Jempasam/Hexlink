@@ -24,7 +24,7 @@ abstract class NbtAdapterList<T>(val nbt: NbtList): Collection<T>{
         return obj
     }
 
-    val first: T? get()=if(size>0) get(0) else null
+    val first: T? get()=if(isNotEmpty()) get(0) else null
     override fun isEmpty(): Boolean = nbt.isEmpty()
     override val size: Int get()= nbt.size
     override operator fun contains(element: T): Boolean = nbt.contains(to(element))

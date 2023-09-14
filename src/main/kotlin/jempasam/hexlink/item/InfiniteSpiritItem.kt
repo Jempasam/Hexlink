@@ -63,7 +63,7 @@ class InfiniteSpiritItem(settings: Settings): Item(settings), ItemSpiritSource, 
 
 
 
-    public class SpiritList(nbt: NbtList): NbtAdapterList<Spirit>(nbt){
+    class SpiritList(nbt: NbtList): NbtAdapterList<Spirit>(nbt){
         override fun from(e: NbtElement): Spirit? = if(e is NbtCompound) NbtHelper.readSpirit(e) else null
         override fun to(e: Spirit): NbtElement = NbtHelper.writeSpirit(e)
     }

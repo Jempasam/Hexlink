@@ -15,7 +15,7 @@ object BlockExtractor : SpiritExtractor<BlockSpirit> {
     override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<BlockSpirit> {
         val worldstack= StackHelper.stack(caster, target)
         val stack= worldstack?.stack
-        if(stack!=null && stack.item is BlockItem && !stack.isIn(ItemExtractor.NOT_EXTRACTABLE)){
+        if(stack!=null && stack.item is BlockItem){
             return SpiritExtractor.ExtractionResult(
                     BlockSpirit((stack.item as BlockItem).block),
                     stack.count

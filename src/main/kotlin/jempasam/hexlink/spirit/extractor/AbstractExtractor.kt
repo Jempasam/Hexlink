@@ -1,3 +1,5 @@
+@file:Suppress("unused", "unused")
+
 package jempasam.hexlink.spirit.extractor
 
 import jempasam.hexlink.spirit.Spirit
@@ -5,6 +7,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3i
 
+@Suppress("unused", "unused", "unused", "unused")
 abstract class AbstractExtractor<T: Spirit>(val name: String, val colors: List<Vec3i>) : SpiritExtractor<T> {
     override fun getName(): Text {
         return Text.translatable(name)

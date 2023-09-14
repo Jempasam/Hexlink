@@ -15,7 +15,7 @@ object HexlinkSpirits {
     }
 
     private fun <T: Spirit>create(id: String, spirit: SpiritExtractor<T>): SpiritExtractor<T>{
-        Registry.register(HexlinkRegistry.SPIRIT_EXTRACTOR, Identifier(HexlinkMod.MODID, id), spirit)
+        Registry.register(HexlinkRegistry.EXTRACTOR, Identifier(HexlinkMod.MODID, id), spirit)
         return spirit
     }
 

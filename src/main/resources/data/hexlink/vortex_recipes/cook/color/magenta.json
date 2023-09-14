@@ -1,0 +1,12 @@
+{
+  "type": "hexlink:simple",
+  "input": [
+    {"type": "hexlink:block", "value": "minecraft:fire"},
+    {"type": "hexlink:block", "value": "minecraft:cauldron"},
+    {"type": "hexlink:item", "value": "minecraft:magenta_dye"}
+  ],
+  "result": [
+    {"type": "hexlink:color", "value": 16711935},
+    {"type": "hexlink:block", "value": "minecraft:cauldron"}
+  ]
+}

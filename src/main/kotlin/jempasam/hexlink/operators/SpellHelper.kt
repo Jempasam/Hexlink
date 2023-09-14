@@ -37,8 +37,7 @@ fun List<Iota>.getSpirit(index: Int, max: Int): Spirit{
 }
 
 fun List<Iota>.getSpiritSourceOpt(ctx: CastingContext, index: Int, max: Int): SpiritSource?{
-    val sourceIota=get(index)
-    val source=when(sourceIota){
+    val source=when(val sourceIota=get(index)){
         is EntityIota ->{
             ctx.assertEntityInRange(sourceIota.entity)
             SpiritHelper.spiritSource(ctx.caster,sourceIota.entity)
@@ -61,8 +60,7 @@ fun List<Iota>.getSpiritSourceAndPos(ctx: CastingContext, index: Int, max: Int):
 
 
 fun List<Iota>.getSpiritTarget(ctx: CastingContext, index: Int, max: Int): SpiritTarget{
-    val targetIota=get(index)
-    val target=when(targetIota){
+    val target=when(val targetIota=get(index)){
         is EntityIota ->{
             ctx.assertEntityInRange(targetIota.entity)
             SpiritHelper.spiritTarget(ctx.caster,targetIota.entity)
@@ -80,8 +78,7 @@ fun List<Iota>.getSpiritTargetAndPos(ctx: CastingContext, index: Int, max: Int):
         = makePosPair(getSpiritTarget(ctx,index,max), index)
 
 fun List<Iota>.getExtractorItem(ctx: CastingContext, index: Int, max: Int): SpiritExtractor<*>{
-    val iota=get(index)
-    val source=when(iota){
+    val source=when(val iota=get(index)){
         is EntityIota ->{
             ctx.assertEntityInRange(iota.entity)
             val stack=StackHelper.stack(ctx.caster, iota.entity)?.stack

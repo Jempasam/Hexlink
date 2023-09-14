@@ -35,8 +35,7 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
         if(worldStack.stack.isEnchantable && enchantment.isAcceptableItem(worldStack.stack)){
             val level= minOf(maxOf(sqrt(count.toFloat()).toInt(), 1), enchantment.maxLevel)
             val cost=level*level
-            val new_stack=EnchantHelper.enchant(worldStack.stack, enchantment, level)
-            if(new_stack==null)return Spirit.NONE_MANIFESTATION
+            val new_stack= EnchantHelper.enchant(worldStack.stack, enchantment, level) ?: return Spirit.NONE_MANIFESTATION
             return Spirit.Manifestation(1, cost){
                 worldStack.replace(new_stack)
             }

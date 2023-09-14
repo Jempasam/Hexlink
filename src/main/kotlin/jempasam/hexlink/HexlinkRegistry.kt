@@ -5,7 +5,7 @@ import jempasam.hexlink.recipe.vortex.HexVortexHandler
 import jempasam.hexlink.spirit.SpecialSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.extractor.SpiritExtractor
-import jempasam.hexlink.spirit.extractor.ExtractionRecipe
+import jempasam.hexlink.spirit.extractor.special.node.ExtractionNode
 import jempasam.hexlink.world.LevelRanks
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.MutableRegistry
@@ -15,11 +15,18 @@ import net.minecraft.util.registry.SimpleRegistry
 import java.util.*
 
 object HexlinkRegistry {
+    // Spirit and extractors
     val SPIRIT_KEY=registryId<Spirit.SpiritType<*>>("spirit")
     val SPIRIT=registry(SPIRIT_KEY)
 
-    val SPIRIT_EXTRACTOR_KEY=registryId<SpiritExtractor<*>>("spirit_extractor")
-    val SPIRIT_EXTRACTOR=dynamicRegistry(SPIRIT_EXTRACTOR_KEY)
+    val EXTRACTOR_KEY=registryId<SpiritExtractor<*>>("spirit_extractor")
+    val EXTRACTOR=dynamicRegistry(EXTRACTOR_KEY)
+
+    val EXTRACTOR_SERIALIZER_KEY=registryId<SpiritExtractor.Serializer<*>>("extractor_serializer")
+    val EXTRACTOR_SERIALIZER=registry(EXTRACTOR_KEY)
+
+    val EXTRACTOR_NODE_PARSER_KEY=registryId<ExtractionNode.Parser<*>>("extractor_parser")
+    val EXTRACTOR_NODE_PARSER=registry(EXTRACTOR_NODE_PARSER_KEY)
 
 
     val HEXVORTEX_HANDLER_PARSER_KEY= registryId<HexVortexHandler.Parser<*>>("hexvortex_handler_parser")
@@ -27,10 +34,6 @@ object HexlinkRegistry {
 
     val HEXVORTEX_HANDLER_KEY= registryId<HexVortexHandler>("hexvortex_handler")
     val HEXVORTEX_HANDLER= dynamicRegistry(HEXVORTEX_HANDLER_KEY)
-
-
-    val EXTRACTION_RECIPE_PARSER_KEY= registryId<ExtractionRecipe.Parser>("extraction_recipe_parse")
-    val EXTRACTION_RECIPE_SERIALIZER= registry(EXTRACTION_RECIPE_PARSER_KEY)
 
 
     val SPECIAL_SPIRIT_KEY= registryId<SpecialSpirit.SpecialType>("special_spirit")

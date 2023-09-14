@@ -14,7 +14,7 @@ import net.minecraft.util.profiler.Profiler
 class HexlinkExtractorDataLoader : JsonDataLoader(Gson(),"hexlink_extractors"), IdentifiableResourceReloadListener {
     override fun apply(prepared: MutableMap<Identifier, JsonElement>, manager: ResourceManager, profiler: Profiler) {
         for(entry in prepared){
-            val extractor=HexlinkRegistry.SPIRIT_EXTRACTOR.get(entry.key)
+            val extractor=HexlinkRegistry.EXTRACTOR.get(entry.key)
             val obj=entry.value
             if(extractor!=null && obj is JsonObject){
                 HexlinkConfiguration.extractor_settings.put(extractor,HexlinkConfiguration.ExtractorSettings(

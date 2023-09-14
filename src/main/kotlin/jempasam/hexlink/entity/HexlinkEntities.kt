@@ -2,6 +2,7 @@ package jempasam.hexlink.entity
 
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.block.HexlinkBlocks
+import jempasam.hexlink.entity.block.BigTabletBlockEntity
 import jempasam.hexlink.entity.block.HexVortexBlockEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.entity.BlockEntity
@@ -18,5 +19,8 @@ object HexlinkEntities {
 
     val HEX_VORTEX = register("hex_vortex",
             FabricBlockEntityTypeBuilder .create(::HexVortexBlockEntity, HexlinkBlocks.VORTEX) .build()
+    )
+    val BIG_TABLET = register("big_tablet",
+            FabricBlockEntityTypeBuilder .create(::BigTabletBlockEntity, HexlinkBlocks.BIG_TABLET) .build()
     )
 }

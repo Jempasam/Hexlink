@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hexlink:block/big_tablet"
+      }
+    ]
+  }
+}
