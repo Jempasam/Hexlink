@@ -1,0 +1,13 @@
+{
+  "name": "Everything",
+  "color": [16711935, 255, 65535, 65280, 16776960, 16711680],
+  "color_duration": 300,
+  "nodes": [
+    "ANY",
+    "hexlink:potion",
+    "hexlink:enchantment",
+    "hexlink:block",
+    "hexlink:item",
+    "hexlink:entity"
+  ]
+}

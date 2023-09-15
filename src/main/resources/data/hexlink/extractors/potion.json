@@ -1,0 +1,6 @@
+{
+  "name": "Potion",
+  "color": [11469005, 5610116, 5156165, 5610116],
+  "color_duration": 500,
+  "nodes": "hexlink:potion"
+}

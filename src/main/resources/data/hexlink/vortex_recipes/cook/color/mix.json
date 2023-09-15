@@ -1,0 +1,10 @@
+{
+  "type": "hexlink:color",
+  "catalyzer": [
+    {"type": "hexlink:block", "value": "minecraft:fire"},
+    {"type": "hexlink:block", "value": "minecraft:cauldron"}
+  ],
+  "result": [
+    {"type": "hexlink:block", "value": "minecraft:cauldron"}
+  ]
+}

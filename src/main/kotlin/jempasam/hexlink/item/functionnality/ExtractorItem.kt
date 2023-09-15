@@ -20,18 +20,18 @@ interface ExtractorItem {
         = getExtractor(stack)?.extract(caster, target) ?: SpiritExtractor.noResult<Spirit>()
 
     fun setExtractor(stack: ItemStack, extractor: SpiritExtractor<*>){
-        val id= HexlinkRegistry.SPIRIT_EXTRACTOR.getId(extractor)
+        val id= HexlinkRegistry.EXTRACTOR.getId(extractor)
         stack.orCreateNbt.put("extractor", NbtString.of(id?.toString() ?: "none"))
     }
 
     fun getExtractor(stack: ItemStack): SpiritExtractor<*>?{
         val extractor=stack.nbt?.getString("extractor") ?: ""
         if(extractor.isEmpty())return null
-        else return HexlinkRegistry.SPIRIT_EXTRACTOR.get(Identifier(extractor))
+        else return HexlinkRegistry.EXTRACTOR.get(Identifier(extractor))
     }
 
     fun appendStacks(item :Item, stacks: DefaultedList<ItemStack>) {
-        for(extractor in HexlinkRegistry.SPIRIT_EXTRACTOR.entrySet){
+        for(extractor in HexlinkRegistry.EXTRACTOR.entrySet){
             val stack=item.defaultStack
             setExtractor(stack, extractor.value)
             stacks.add(stack)

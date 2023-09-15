@@ -1,0 +1,9 @@
+{
+  "name": "Super Everything",
+  "color": [255, 16777215, 65280, 16777215, 16711680, 16777215],
+  "color_duration": 300,
+  "nodes":[
+    ["ANY", "hexlink:potion", "hexlink:enchantment", "hexlink:block", "hexlink:item", "hexlink:entity"],
+    {"node": "hexlink:result", "multiplier": 100}
+  ]
+}

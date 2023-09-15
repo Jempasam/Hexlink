@@ -1,5 +1,6 @@
 package jempasam.hexlink.spirit.extractor
 
+import com.google.gson.JsonObject
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.entity.Entity
@@ -29,9 +30,15 @@ interface SpiritExtractor<T: Spirit>{
     fun getColor(): Int
 
 
+    /**
+     * Media cost
+     */
+    fun getCost(): Int
+
+
 
     /**
-     * The result of an extraction
+    * The result of an extraction
      * @param spirit The spirit extracted
      * @param maxCount The number of spirit extracted
      * @param consumer The method used to change or kill the entity after the spirit are extracted
@@ -55,6 +62,10 @@ interface SpiritExtractor<T: Spirit>{
 
     companion object{
         fun <T: Spirit>noResult(): ExtractionResult<T> = ExtractionResult(null, 0) {}
+    }
+
+    interface Serializer<T: Spirit>{
+        fun deserialize(obj: JsonObject)
     }
 
 }

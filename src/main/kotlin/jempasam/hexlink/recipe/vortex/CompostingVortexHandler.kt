@@ -8,6 +8,7 @@ import net.minecraft.block.ComposterBlock
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper.getFloat
+import kotlin.math.max
 
 class CompostingVortexHandler : AbstractVortexHandler {
 
@@ -37,7 +38,7 @@ class CompostingVortexHandler : AbstractVortexHandler {
             if(item!=null){
                 val count=ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getOrElse(item) { -1.0f }
                 if(count!=-1.0f){
-                    return Recipe(Math.max(1, (count.toFloat()*multiplier).toInt()), this)
+                    return Recipe(max(1, (count.toFloat()*multiplier).toInt()), this)
                 }
             }
         }
@@ -47,7 +48,7 @@ class CompostingVortexHandler : AbstractVortexHandler {
     override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>> {
         return ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.asSequence().map {
             val result= mutableListOf<Spirit>()
-            val count=Math.max(1, (it.value*multiplier).toInt())
+            val count= max(1, (it.value*multiplier).toInt())
             for(i in 0..<count)result.add(compostingResult)
             listOf(HexVortexHandler.Ingredient(SpiritHelper.asSpirit(it.key.asItem()))) to result
         }

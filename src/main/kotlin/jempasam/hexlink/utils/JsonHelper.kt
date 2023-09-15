@@ -3,15 +3,13 @@ package jempasam.hexlink.utils
 import com.google.gson.*
 import com.mojang.brigadier.StringReader
 import jempasam.hexlink.spirit.Spirit
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtElement
-import net.minecraft.nbt.NbtList
-import net.minecraft.nbt.StringNbtReader
+import net.minecraft.nbt.*
 import net.minecraft.recipe.AbstractCookingRecipe
 import net.minecraft.recipe.RecipeType
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
 import net.minecraft.util.registry.Registry
+import java.math.BigInteger
 
 fun JsonObject.asNBT(): NbtCompound{
     val ret=NbtCompound()
@@ -32,9 +30,26 @@ fun JsonArray.asNBT(): NbtList{
 fun JsonElement.asNBT(): NbtElement{
     if(this.isJsonObject)return (this as JsonObject).asNBT()
     else if(this.isJsonArray)return (this as JsonArray).asNBT()
-    else return PublicStringNbtReader(AcceptAllStringReader(this.asString)).parseElementPrimitive()
+    else{
+        val prim=this.asJsonPrimitive
+        if(prim.isNumber){
+            when(val number=prim.asNumber){
+                is Byte, is Short, is Int, is Long, is BigInteger -> return NbtInt.of(number.toInt())
+                is Float, is Double -> return NbtDouble.of(number.toDouble())
+            }
+        }
+        return PublicStringNbtReader(AcceptAllStringReader(this.asString)).parseElementPrimitive()
+    }
 }
 
+fun main() {
+    val json="""{ "name":"Jean", "n":"56", "a":"56", "b":"56f", "c":"56d", "d":56, "e":5.6, "f":5.6, "g":6 }"""
+    val obj=JsonParser.parseString(json)
+    println(json)
+    println(obj)
+    println(obj.asNBT())
+    println(obj.asNBT().asJSON())
+}
 
 
 fun NbtCompound.asJSON(): JsonObject{
@@ -57,6 +72,8 @@ fun NbtElement.asJSON(): JsonElement{
     return when (this) {
         is NbtCompound -> this.asJSON()
         is NbtList -> this.asJSON()
+        is NbtInt -> JsonPrimitive(this.intValue())
+        is NbtDouble -> JsonPrimitive(this.doubleValue())
         else -> JsonPrimitive(this.asString())
     }
 }

@@ -34,7 +34,7 @@ object HexlinkParticles {
         for (j in 0 until count) {
             val pos=pos.add(Math.random(), Math.random(),Math.random())
             world.addParticle(
-                    HexlinkParticles.SPIRIT,
+                    SPIRIT,
                     pos.x, pos.y, pos.z,
                     r, g, b
             )

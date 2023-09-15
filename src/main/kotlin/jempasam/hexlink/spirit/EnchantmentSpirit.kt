@@ -12,7 +12,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
-import kotlin.math.sqrt
+import kotlin.math.min
 
 class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
 
@@ -33,10 +33,9 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
     private fun manifestStack(worldStack: StackHelper.WorldStack?, count: Int): Spirit.Manifestation{
         if(worldStack==null)return Spirit.NONE_MANIFESTATION
         if(worldStack.stack.isEnchantable && enchantment.isAcceptableItem(worldStack.stack)){
-            val level= minOf(maxOf(sqrt(count.toFloat()).toInt(), 1), enchantment.maxLevel)
-            val cost=level*level
-            val new_stack=EnchantHelper.enchant(worldStack.stack, enchantment, level)
-            if(new_stack==null)return Spirit.NONE_MANIFESTATION
+            val level= min((count.countTrailingZeroBits()+1), enchantment.maxLevel)
+            val cost=1 shl (level-1)
+            val new_stack= EnchantHelper.enchant(worldStack.stack, enchantment, level) ?: return Spirit.NONE_MANIFESTATION
             return Spirit.Manifestation(1, cost){
                 worldStack.replace(new_stack)
             }

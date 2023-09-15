@@ -36,6 +36,7 @@ object HexlinkModClient : ClientModInitializer {
 		config(HexlinkClientConfig, "hexlink-client")
 
 		HexlinkColorProviders.registerItemColors()
+		HexlinkBlockClient.registerBlockColors()
 		HexlinkModelPredicates.registerItemPredicates()
 		HexlinkBlockClient.registerBlockRender()
 		HexlinkScryingLensDisplay.registerDisplays()

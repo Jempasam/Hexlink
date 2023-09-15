@@ -40,7 +40,7 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
     }
 
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
-        return spawn(world, position, count){i,e->}
+        return spawn(world, position, count){_,_->}
     }
 
     override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {

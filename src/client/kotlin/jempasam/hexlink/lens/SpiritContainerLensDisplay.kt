@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-class VortexScryingLensDisplay : OverlayBuilder {
+class SpiritContainerLensDisplay : OverlayBuilder {
     override fun addLines(lines: MutableList<Pair<ItemStack, Text>>, state: BlockState, pos: BlockPos, observer: PlayerEntity, world: World, hitFace: Direction){
         val block=state.block
         if(block is BlockSpiritContainer){

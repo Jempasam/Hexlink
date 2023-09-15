@@ -6,6 +6,7 @@ import net.minecraft.item.DyeItem
 import net.minecraft.item.DyeableItem
 import net.minecraft.item.Item
 import net.minecraft.item.Items
+import net.minecraft.nbt.AbstractNbtNumber
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtInt
 import net.minecraft.particle.DustParticleEffect
@@ -84,8 +85,9 @@ class ColorSpirit(private val color: Int) : Spirit {
     object Type: Spirit.SpiritType<ColorSpirit>{
         override fun getName(): Text = Text.translatable("hexlink.spirit.color")
 
-        override fun deserialize(nbt: NbtElement): ColorSpirit?
-            = (nbt as? NbtInt)?.let { ColorSpirit(it.intValue()) }
+        override fun deserialize(nbt: NbtElement): ColorSpirit?{
+            return (nbt as? AbstractNbtNumber)?.let { ColorSpirit(it.intValue()) }
+        }
     }
 
 

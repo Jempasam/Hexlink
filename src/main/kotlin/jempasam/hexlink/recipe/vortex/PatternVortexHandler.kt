@@ -17,6 +17,7 @@ import net.minecraft.recipe.ShapedRecipe
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper
+import kotlin.math.max
 
 class PatternVortexHandler : AbstractVortexHandler {
 
@@ -124,7 +125,7 @@ class PatternVortexHandler : AbstractVortexHandler {
                 val recipe=recipe_manager.getFirstMatch(inventory,world)
                 if(recipe.isPresent){
                     val result=recipe.get().craft(inventory)
-                    var count=Math.max(1,(result.count*multiplier).toInt())
+                    var count= max(1,(result.count*multiplier).toInt())
                     if(useDurability && result.maxDamage>0)count*=result.maxDamage
                     if(!result.isEmpty)return Recipe(result.item, count, this, world)
                 }
@@ -160,7 +161,7 @@ class PatternVortexHandler : AbstractVortexHandler {
                 }
                 else continue@recipe_loop
 
-                val count=Math.max(1,(recipe.output.count*multiplier).toInt())
+                val count= max(1,(recipe.output.count*multiplier).toInt())
                 yield(
                         input.map { HexVortexHandler.Ingredient(it) }
                                 to List(count) { SpiritHelper.asSpirit(recipe.output.item) }

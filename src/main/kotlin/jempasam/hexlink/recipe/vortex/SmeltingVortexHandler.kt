@@ -10,6 +10,7 @@ import net.minecraft.recipe.RecipeManager
 import net.minecraft.recipe.RecipeType
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper
+import kotlin.math.max
 import kotlin.math.min
 
 class SmeltingVortexHandler : AbstractVortexHandler {
@@ -53,7 +54,7 @@ class SmeltingVortexHandler : AbstractVortexHandler {
         return sequence {
             for (recipe in manager.listAllOfType(RecipeType.SMELTING))yield(
                 listOf(HexVortexHandler.Ingredient(recipe.ingredients[0])) to
-                        List(Math.max(1,(multiplier*recipe.output.count).toInt())){ SpiritHelper.asSpirit(recipe.output.item)}
+                        List(max(1,(multiplier*recipe.output.count).toInt())){ SpiritHelper.asSpirit(recipe.output.item)}
             )
         }
     }

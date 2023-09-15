@@ -2,7 +2,6 @@ package jempasam.hexlink.world
 
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.HexlinkRegistry
-import net.minecraft.entity.decoration.ItemFrameEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtHelper
 import net.minecraft.text.Style
@@ -31,8 +30,6 @@ interface LevelRanks {
     }
 
     fun readRanksFromNbt(tag: NbtCompound) {
-        var a: ItemFrameEntity?=null
-
         clearRanks()
         println("NEED TO READ $tag")
         for(key in tag.keys){

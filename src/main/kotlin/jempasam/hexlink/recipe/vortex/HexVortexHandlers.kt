@@ -16,11 +16,11 @@ object HexVortexHandlers {
         return handler
     }
 
-
     val COOKING_SERIALIZER= register("smelting", SmeltingVortexHandler.PARSER)
     val BURNING_SERIALIZER= register("burning", BurningVortexHandler.PARSER)
     val PATTERN_SERIALIZER= register("pattern", PatternVortexHandler.PARSER)
     val COMPOSTING_SERIALIZER= register("composting", CompostingVortexHandler.PARSER)
+    val COLOR_SERIALIZER= register("color", ColorVortexHandler.PARSER)
     val SIMPLE_SERIALIZER= register("simple", SimpleVortexHandler.PARSER)
 
 }

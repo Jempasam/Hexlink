@@ -1,0 +1,9 @@
+{
+  "name": "Biome",
+  "color": [65280],
+  "nodes": [
+    {"node":"hexlink:item_predicate", "items": ["minecraft:diamond"]},
+    "hexlink:item",
+    "hexlink:biome"
+  ]
+}

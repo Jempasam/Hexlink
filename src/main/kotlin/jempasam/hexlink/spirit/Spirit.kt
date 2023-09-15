@@ -120,10 +120,8 @@ interface Spirit {
         fun getName(): Text
 
         fun deserialize(obj: JsonObject): T{
-            val element=obj.get("value")
-            if(element==null)throw JsonSyntaxException("Expected \"value\"")
-            val ret=deserialize(element.asNBT())
-            if(ret==null)throw JsonSyntaxException("Invalid json")
+            val element= obj.get("value") ?: throw JsonSyntaxException("Expected \"value\"")
+            val ret= deserialize(element.asNBT()) ?: throw JsonSyntaxException("Invalid json")
             return ret
         }
 

@@ -1,0 +1,8 @@
+{
+  "name": "Wools",
+  "color": [15527927, 8554122],
+  "nodes": [
+    {"node": "hexlink:item_predicate", "tag": "minecraft:wool"},
+    "hexlink:block"
+  ]
+}

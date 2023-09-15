@@ -39,6 +39,7 @@ object HexlinkItems {
     var BigBag=make("big_bag",SoulContainerItem(simpleProps(), 10, 300))
 
     var Vortex=make("vortex",BlockItem(HexlinkBlocks.VORTEX, stackableProps()))
+    var BigTablet=make("big_tablet",BlockItem(HexlinkBlocks.BIG_TABLET, stackableProps()))
 
     fun epicProps(): Item.Settings{
         return Item.Settings()
