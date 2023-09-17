@@ -22,7 +22,7 @@ import java.util.List;
 public abstract class MsgNewSpellPatternSynMixin {
     @Shadow @Final private Hand handUsed;
 
-    @Shadow @Final private List<ResolvedPattern> resolvedPatterns;
+    @Shadow(remap = false) @Final private List<ResolvedPattern> resolvedPatterns;
 
     @Inject(at = @At("HEAD"), method = "handle", cancellable = true)
     public void handle(MinecraftServer server, ServerPlayerEntity sender, CallbackInfo info){

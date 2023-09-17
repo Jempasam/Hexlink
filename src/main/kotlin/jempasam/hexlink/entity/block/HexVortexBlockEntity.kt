@@ -149,22 +149,22 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
                 if(currentCount>=count)break
             }
         }
-        return SpiritSource.SpiritOutputFlux({
-            age=0
-            var i=0
-            for(id in removedOutput){
+        return SpiritSource.SpiritOutputFlux(currentCount) {
+            age = 0
+            var i = 0
+            for (id in removedOutput) {
                 i++
-                if(i>it)break
+                if (i > it) break
                 output.removeAt(id)
             }
-            for(id in removedInput){
+            for (id in removedInput) {
                 i++
-                if(i>it)break
+                if (i > it) break
                 input.removeAt(id)
             }
             markDirty()
             sendToClient()
-        }, currentCount)
+        }
     }
 
     override fun last(): Spirit? {

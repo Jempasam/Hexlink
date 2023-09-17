@@ -1,0 +1,39 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:constant",
+        "value": 1
+      },
+      "entries": [
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:item", "value": "minecraft:bone_meal"},
+              {"type": "hexlink:block", "value": "minecraft:jungle_sapling"},
+              {"type": "hexlink:block", "value": "minecraft:oak_leaves"}
+            ]}
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:special", "value": "hexlink:earth_element"},
+              {"type": "hexlink:block", "value": "minecraft:dirt"},
+              {"type": "hexlink:block", "value": "minecraft:gravel"}
+            ]}
+          }]
+        }
+
+      ]
+    }
+  ]
+}

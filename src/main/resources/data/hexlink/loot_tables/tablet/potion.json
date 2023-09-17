@@ -1,0 +1,40 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:potion", "value": "minecraft:poison"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:potion", "value": "minecraft:regeneration"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:potion", "value": "minecraft:strength"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:potion", "value": "minecraft:slow_falling"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:potion", "value": "minecraft:invisibility"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:potion", "value": "minecraft:water_breathing"}, "count": 10}]
+        }
+
+      ]
+    }
+  ]
+}

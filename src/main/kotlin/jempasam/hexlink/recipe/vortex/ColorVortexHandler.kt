@@ -5,7 +5,7 @@ import jempasam.hexlink.spirit.ColorSpirit
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.math.ColorHelper
+import net.minecraft.util.math.ColorHelper.Argb.*
 
 class ColorVortexHandler : AbstractVortexHandler {
 
@@ -45,9 +45,19 @@ class ColorVortexHandler : AbstractVortexHandler {
     class Recipe(val handler: ColorVortexHandler): AbstractVortexHandler.Recipe(handler){
         override fun realIngredientCount(): Int = 2
 
+        @OptIn(ExperimentalStdlibApi::class)
         override fun realMix(ingredients: List<Spirit>): List<Spirit> {
+            val color1=(ingredients[0] as ColorSpirit).getColor()
+            val color2=(ingredients[1] as ColorSpirit).getColor()
             return listOf(
-                ColorSpirit(ColorHelper.Argb.mixColor((ingredients[0] as ColorSpirit).getColor(), (ingredients[1] as ColorSpirit).getColor()))
+                ColorSpirit(
+                    getArgb(
+                        0,
+                        (getRed(color1) + getRed(color2))/2,
+                        (getGreen(color1) + getGreen(color2))/2,
+                        (getBlue(color1) + getBlue(color2))/2
+                    )
+                )
             )
         }
     }

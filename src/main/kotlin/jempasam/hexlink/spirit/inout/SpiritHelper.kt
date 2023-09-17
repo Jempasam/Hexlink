@@ -103,7 +103,7 @@ object SpiritHelper{
         val inventory=caster.inventory
         return object: SpiritSource{
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                if(caster.isCreative)return SpiritSource.SpiritOutputFlux({},count)
+                if(caster.isCreative)return SpiritSource.SpiritOutputFlux(count) {}
 
                 val mainFlux= spiritSource(caster,caster.mainHandStack).extract(count,spirit)
                 if(mainFlux.maxcount>0)return mainFlux
@@ -173,7 +173,7 @@ object SpiritHelper{
         override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
             val source=source.extract(count,spirit)
             if(source.maxcount>0){
-                return SpiritSource.SpiritOutputFlux({source.consume(it); stack.update()}, source.maxcount)
+                return SpiritSource.SpiritOutputFlux(source.maxcount) { source.consume(it); stack.update() }
             }
             else return SpiritSource.NONE.FLUX
         }

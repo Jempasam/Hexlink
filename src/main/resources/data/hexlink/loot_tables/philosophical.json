@@ -1,0 +1,21 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/air"},
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/earth"},
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/fire"},
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/water"},
+
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/ice"},
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/rot"},
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/dark"},
+
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/end"},
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/tools"},
+        {"type": "minecraft:loot_table", "name": "hexlink:philosophical/xp"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:constant",
+        "value": 1
+      },
+      "entries": [
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:potion", "value": "minecraft:dolphins_grace"},
+              {"type": "hexlink:block", "value": "minecraft:water"}
+            ]}
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:potion", "value": "minecraft:dolphins_grace"},
+              {"type": "hexlink:block", "value": "minecraft:water"},
+              {"type": "hexlink:special", "value": "hexlink:water_element"}
+            ]}
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:potion", "value": "minecraft:dolphins_grace"},
+              {"type": "hexlink:potion", "value": "minecraft:water_breathing"}
+            ]}
+          }]
+        }
+
+      ]
+    }
+  ]
+}

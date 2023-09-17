@@ -8,7 +8,7 @@ interface SpiritSource {
 
     fun last(): Spirit?
 
-    class SpiritOutputFlux(private val consumer: (Int)->Unit, val maxcount: Int){
+    class SpiritOutputFlux(val maxcount: Int, private val consumer: (Int) -> Unit){
         private var consumed=false
         fun consume(count: Int){
             var finalCount=count
@@ -28,7 +28,7 @@ interface SpiritSource {
     }
 
     object NONE: SpiritSource{
-        val FLUX=SpiritOutputFlux({},0)
+        val FLUX=SpiritOutputFlux(0) {}
         override fun extract(count: Int, spirit: Spirit): SpiritOutputFlux = FLUX
 
         override fun last(): Spirit? = null

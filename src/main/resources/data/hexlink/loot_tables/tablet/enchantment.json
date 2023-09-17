@@ -1,0 +1,45 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+
+        {
+          "weight":10, "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:enchantment", "value": "minecraft:sharpness"}, "count": 10}]
+        },
+
+        {
+          "weight":10, "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:enchantment", "value": "minecraft:fire_aspect"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:enchantment", "value": "minecraft:unbreaking"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:enchantment", "value": "minecraft:protection"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:enchantment", "value": "minecraft:infinity"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:enchantment", "value": "minecraft:looting"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:enchantment", "value": "minecraft:efficiency"}, "count": 10}]
+        }
+
+      ]
+    }
+  ]
+}

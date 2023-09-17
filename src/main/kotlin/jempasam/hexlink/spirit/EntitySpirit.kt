@@ -18,6 +18,7 @@ import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import kotlin.jvm.optionals.getOrNull
 import kotlin.math.sin
 
 class EntitySpirit(val entityType: EntityType<*>): Spirit {
@@ -150,10 +151,10 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
             return Text.translatable("hexlink.spirit.entity")
         }
 
-        override fun deserialize(nbt: NbtElement): EntitySpirit {
+        override fun deserialize(nbt: NbtElement): EntitySpirit? {
             if(nbt is NbtString){
-                val type=Registry.ENTITY_TYPE.getOrEmpty(Identifier.tryParse(nbt.asString())).orElseThrow(::IllegalArgumentException)
-                return EntitySpirit(type)
+                val type=Registry.ENTITY_TYPE.getOrEmpty(Identifier.tryParse(nbt.asString())).getOrNull()
+                return type?.let{EntitySpirit(it)}
             }
             else throw IllegalArgumentException()
         }

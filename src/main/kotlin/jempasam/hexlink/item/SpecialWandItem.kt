@@ -11,6 +11,7 @@ import jempasam.hexlink.item.functionnality.SpellCasterItem
 import jempasam.hexlink.item.functionnality.SpellHolderItem
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.DyeableItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtElement
@@ -21,7 +22,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
-class SpecialWandItem(settings: Settings): Item(settings), SpellCasterItem, SpellHolderItem {
+class SpecialWandItem(settings: Settings): Item(settings), SpellCasterItem, SpellHolderItem, DyeableItem {
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
         return SpellCasterItem.activeSpellCastingGUI(world,user,hand)
     }

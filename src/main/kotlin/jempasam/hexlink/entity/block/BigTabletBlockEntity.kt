@@ -49,16 +49,16 @@ class BigTabletBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
                 if(currentCount>=count)break
             }
         }
-        return SpiritSource.SpiritOutputFlux({
-            var i=0
-            for(id in removedContent){
+        return SpiritSource.SpiritOutputFlux(currentCount) {
+            var i = 0
+            for (id in removedContent) {
                 i++
-                if(i>it)break
+                if (i > it) break
                 content.removeAt(id)
             }
             markDirty()
             sendToClient()
-        }, currentCount)
+        }
     }
 
     override fun last(): Spirit? {

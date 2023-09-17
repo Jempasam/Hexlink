@@ -1,0 +1,50 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:ender_pearl"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:fire_charge"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:wooden_hoe"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:chorus_fruit"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:bow"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:bread"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:golden_apple"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:item", "value": "minecraft:goat_horn"}, "count": 10}]
+        }
+
+      ]
+    }
+  ]
+}

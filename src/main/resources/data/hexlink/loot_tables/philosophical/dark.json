@@ -1,0 +1,51 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:constant",
+        "value": 1
+      },
+      "entries": [
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:potion", "value": "minecraft:night_vision"},
+              {"type": "hexlink:potion", "value": "minecraft:blindness"}
+            ]}
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:potion", "value": "minecraft:night_vision"},
+              {"type": "hexlink:potion", "value": "minecraft:blindness"},
+              {"type": "hexlink:special", "value": "hexlink:dark_element"}
+            ]}
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:philosophical_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:potion", "value": "minecraft:night_vision"},
+              {"type": "hexlink:potion", "value": "minecraft:levitation"},
+              {"type": "hexlink:entity", "value": "minecraft:bat"}
+            ]}
+          }]
+        }
+
+      ]
+    }
+  ]
+}

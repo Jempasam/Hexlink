@@ -32,7 +32,7 @@ class SingleSpiritContainerItem(settings: Settings): Item(settings), ItemSpiritS
         return object:SpiritSource{
             override fun last(): Spirit? = getSpirit(stack)
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                return SpiritSource.SpiritOutputFlux({stack.count-=it}, min(count,stack.count))
+                return SpiritSource.SpiritOutputFlux(min(count,stack.count)) { stack.count -= it }
             }
         }
     }
