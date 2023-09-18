@@ -76,8 +76,6 @@ class SpiritContainerBlock<T: BlockEntity>(settings: Settings, private val type:
         return world.getBlockEntity(pos) as? SpiritTarget ?: SpiritTarget.NONE
     }
 
-
-
     fun addAt(world: ServerWorld, pos: BlockPos): Boolean{
         val bstate=world.getBlockState(pos)
         val block=bstate.block
