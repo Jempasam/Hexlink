@@ -1,0 +1,39 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:constant",
+        "value": 1
+      },
+      "entries": [
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:haunted_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:special", "value": "hexlink:earth_element"},
+              {"type": "hexlink:entity", "value": "minecraft:silverfish"},
+              {"type": "hexlink:block", "value": "minecraft:stone"}
+            ]}
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:haunted_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:special", "value": "hexlink:earth_element"},
+              {"type": "hexlink:entity", "value": "minecraft:iron_golem"},
+              {"type": "hexlink:item", "value": "minecraft:iron_chestplate"}
+            ]}
+          }]
+        }
+
+      ]
+    }
+  ]
+}

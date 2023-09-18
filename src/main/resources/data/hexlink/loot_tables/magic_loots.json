@@ -3,9 +3,10 @@
     {
       "bonus_rolls": 0.0,
       "entries": [
-        {"weight":20, "type": "minecraft:loot_table", "name": "hexlink:tablet"},
+        {"weight":30, "type": "minecraft:loot_table", "name": "hexlink:tablet"},
         {"weight":1, "quality": 5, "type": "minecraft:loot_table", "name": "hexlink:philosophical"},
-        {"weight":5, "type": "minecraft:loot_table", "name": "hexlink:pigment"}
+        {"weight":1, "quality": 5, "type": "minecraft:loot_table", "name": "hexlink:haunted"},
+        {"weight":7, "type": "minecraft:loot_table", "name": "hexlink:pigment"}
       ],
       "rolls": {
         "type": "minecraft:uniform",

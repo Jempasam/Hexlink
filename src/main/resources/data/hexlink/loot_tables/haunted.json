@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+        {"type": "minecraft:loot_table", "name": "hexlink:haunted/dark"},
+        {"type": "minecraft:loot_table", "name": "hexlink:haunted/earth"},
+        {"type": "minecraft:loot_table", "name": "hexlink:haunted/end"},
+        {"type": "minecraft:loot_table", "name": "hexlink:haunted/fire"},
+        {"type": "minecraft:loot_table", "name": "hexlink:haunted/water"}
+      ]
+    }
+  ]
+}
