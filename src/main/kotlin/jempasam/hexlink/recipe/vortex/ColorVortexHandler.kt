@@ -14,8 +14,9 @@ class ColorVortexHandler : AbstractVortexHandler {
     constructor(obj: JsonObject): super(obj)
 
 
-    override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
-        if(ingredients.size>=2 && ingredients[0] is ColorSpirit && ingredients[1] is ColorSpirit){
+    override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
+        val it=ingredients.iterator()
+        if(ingredients.size>=2 && it.next() is ColorSpirit && it.next() is ColorSpirit){
             return Recipe(this)
         }
         return null
@@ -46,9 +47,10 @@ class ColorVortexHandler : AbstractVortexHandler {
         override fun realIngredientCount(): Int = 2
 
         @OptIn(ExperimentalStdlibApi::class)
-        override fun realMix(ingredients: List<Spirit>): List<Spirit> {
-            val color1=(ingredients[0] as ColorSpirit).getColor()
-            val color2=(ingredients[1] as ColorSpirit).getColor()
+        override fun realMix(ingredients: Collection<Spirit>): List<Spirit> {
+            val it=ingredients.iterator()
+            val color1=(it.next() as ColorSpirit).getColor()
+            val color2=(it.next() as ColorSpirit).getColor()
             return listOf(
                 ColorSpirit(
                     getArgb(

@@ -31,9 +31,9 @@ class CompostingVortexHandler : AbstractVortexHandler {
     }
 
 
-    override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
+    override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
         if(ingredients.isNotEmpty()){
-            val ingredient=ingredients[0]
+            val ingredient=ingredients.first()
             val item=SpiritHelper.asItem(ingredient)
             if(item!=null){
                 val count=ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getOrElse(item) { -1.0f }
@@ -57,7 +57,7 @@ class CompostingVortexHandler : AbstractVortexHandler {
     class Recipe(val count: Int, val handler: CompostingVortexHandler): AbstractVortexHandler.Recipe(handler){
         override fun realIngredientCount(): Int = 1
 
-        override fun realMix(ingredients: List<Spirit>): List<Spirit> {
+        override fun realMix(ingredients: Collection<Spirit>): List<Spirit> {
             if(count==0)return listOf()
             else{
                 val ret= mutableListOf<Spirit>()

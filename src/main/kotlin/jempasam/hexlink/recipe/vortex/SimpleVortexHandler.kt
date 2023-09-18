@@ -16,10 +16,11 @@ open class SimpleVortexHandler(private var catalyzer: List<Spirit>, var output: 
 
     override fun getCatalyzer(): List<Spirit> = catalyzer
 
-    override fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
+    override fun findRecipe(ingredients: Collection<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
         if(ingredients.size>=catalyzer.size){
-            for(i in catalyzer.indices){
-                if(ingredients[i]!=catalyzer[i])return null
+            val it=ingredients.iterator()
+            for(ct in catalyzer){
+                if(it.next()!=ct)return null
             }
             return Recipe(this)
         }
@@ -32,7 +33,7 @@ open class SimpleVortexHandler(private var catalyzer: List<Spirit>, var output: 
     open class Recipe(private val handler: SimpleVortexHandler): HexVortexHandler.Recipe {
         final override fun ingredientCount(): Int = handler.catalyzer.size
 
-        final override fun mix(ingredients: List<Spirit>): List<Spirit> = handler.output
+        final override fun mix(ingredients: Collection<Spirit>): List<Spirit> = handler.output
     }
 
     object PARSER: HexVortexHandler.Parser<SimpleVortexHandler> {
