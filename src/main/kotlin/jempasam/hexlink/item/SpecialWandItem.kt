@@ -2,6 +2,7 @@ package jempasam.hexlink.item
 
 import at.petrak.hexcasting.api.spell.casting.ControllerInfo
 import at.petrak.hexcasting.api.spell.casting.ResolvedPatternType
+import at.petrak.hexcasting.api.spell.iota.DoubleIota
 import at.petrak.hexcasting.api.spell.iota.ListIota
 import at.petrak.hexcasting.api.spell.iota.PatternIota
 import at.petrak.hexcasting.api.spell.math.HexPattern
@@ -32,27 +33,51 @@ class SpecialWandItem(settings: Settings): Item(settings), SpellCasterItem, Spel
 
     override fun onCast(stack: ItemStack, hand: Hand, caster: ServerPlayerEntity, pattern: HexPattern): ControllerInfo {
         if(hasSpell(stack)){
-            val spell=getSpell(stack, caster.getWorld())
+            // Close previous parenthese
             val harness = IXplatAbstractions.INSTANCE.getHarness(caster,hand)
+            /*if(harness.parenCount>0){
+                harness.parenCount=0
+                harness.stack.addAll(harness.parenthesized)
+            }*/
+
+            // Execute spell
+            val spell=getSpell(stack, caster.getWorld())
             harness.stack= mutableListOf(
                 ListIota(harness.stack),
                 PatternIota(pattern)
             )
             val info = harness.executeIotas(spell, caster.getWorld())
-            if(info.resolutionType==ResolvedPatternType.EVALUATED){
-                val pharness= IXplatAbstractions.INSTANCE.getHarness(caster,hand)
-                pharness.stack=if(harness.stack.size>0){
-                    val added=harness.stack[0]
-                    if(added is ListIota) added.list.toMutableList()
-                    else mutableListOf(added)
+
+            var resolution=info.resolutionType
+            val pharness= IXplatAbstractions.INSTANCE.getHarness(caster,hand)
+            if(resolution==ResolvedPatternType.EVALUATED){
+                // Fetch Stack
+                val iota_stack=harness.stack
+                    .lastOrNull() ?.let { it as? ListIota } ?.list ?.toMutableList() ?: mutableListOf()
+
+                pharness.stack=iota_stack
+
+                // Fetch Result Code
+                val iota_result=harness.stack
+                    .dropLast(1) .lastOrNull() ?.let { it as? DoubleIota }?.double?.toInt() ?: -1
+
+                resolution=when{
+                    iota_result==1 -> ResolvedPatternType.UNRESOLVED
+                    iota_result==2 -> ResolvedPatternType.ESCAPED
+                    iota_result==3 -> ResolvedPatternType.INVALID
+                    iota_result==4 -> ResolvedPatternType.ERRORED
+                    else -> ResolvedPatternType.EVALUATED
                 }
-                else mutableListOf()
-                IXplatAbstractions.INSTANCE.setHarness(caster,pharness)
             }
-            val pstack=IXplatAbstractions.INSTANCE.getHarness(caster, hand).stack.map { HexIotaTypes.serialize(it) }
+            //pharness.parenthesized= mutableListOf()
+            //pharness.parenCount= 0
+            //pharness.escapeNext= false
+            IXplatAbstractions.INSTANCE.setHarness(caster,pharness)
+
+            val pstack=pharness.stack.map { HexIotaTypes.serialize(it) }
             return ControllerInfo(
                     pstack.isEmpty(),
-                    info.resolutionType,
+                    resolution,
                     pstack,
                     listOf(),
                     info.ravenmind,

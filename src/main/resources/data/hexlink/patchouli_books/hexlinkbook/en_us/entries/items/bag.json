@@ -28,6 +28,19 @@
       "type": "patchouli:crafting",
       "recipe": "hexlink:tablet",
       "text": "hexlink.page.bag.tablet"
+    },
+
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:philosophical_crystal{spirits:[{type:'hexlink:entity',value:'minecraft:blaze'}]}",
+      "text": "hexlink.page.bag.philosophical_crystal",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:haunted_crystal{spirits:[{type:'hexlink:entity',value:'minecraft:zombie'},{type:'hexlink:block',value:'minecraft:fire'}]}",
+      "text": "hexlink.page.bag.haunted_crystal",
+      "link_recipe": true
     }
   ]
 }

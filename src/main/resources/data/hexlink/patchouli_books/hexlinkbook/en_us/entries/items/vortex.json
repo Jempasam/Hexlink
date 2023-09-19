@@ -10,6 +10,13 @@
       "item": "hexlink:vortex",
       "text": "hexlink.page.vortex.desc",
       "link_recipe": true
+    },
+
+    {
+      "type": "patchouli:spotlight",
+      "item": "hexlink:big_tablet",
+      "text": "hexlink.page.big_tablet.desc",
+      "link_recipe": true
     }
   ],
   "extra_recipe_mappings": {
