@@ -1,0 +1,65 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:bat"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:bat"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:fireball"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:boat"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:wolf"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:arrow"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:horse"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:snow_golem"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:iron_golem"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:chicken"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:entity", "value": "minecraft:egg"}, "count": 10}]
+        }
+
+      ]
+    }
+  ]
+}

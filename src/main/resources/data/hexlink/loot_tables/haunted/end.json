@@ -1,0 +1,29 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:constant",
+        "value": 1
+      },
+      "entries": [
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:haunted_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:item", "value": "minecraft:ender_pearl"},
+              {"type": "hexlink:block", "value": "minecraft:end_portal"},
+              {"type": "hexlink:entity", "value": "minecraft:dragon_fireball"},
+              {"type": "hexlink:entity", "value": "minecraft:end_crystal"},
+              {"type": "hexlink:item", "value": "minecraft:chorus_fruit"},
+              {"type": "hexlink:entity", "value": "minecraft:enderman"}
+            ]}
+          }]
+        }
+
+      ]
+    }
+  ]
+}

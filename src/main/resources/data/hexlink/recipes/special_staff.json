@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "I": { "tag": "minecraft:stick" },
+    "I": { "item": "minecraft:stick" },
     "X": { "item": "minecraft:nether_star" },
     "O": { "item": "hexcasting:charged_amethyst" }
   },

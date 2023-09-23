@@ -63,8 +63,12 @@
   "item.hexlink.focus_collar": "Forbidden Focus Collar",
   "item.hexlink.spirit": "%s Spirit",
   "item.hexlink.spirit.none": "Spirit",
+
   "item.hexlink.philosophical_crystal": "Philosophical Crystal of %s",
-  "item.hexlink.philosophical_crystal.none": "Weird Crystal",
+  "item.hexlink.philosophical_crystal.none": "Transparent Crystal",
+  "item.hexlink.haunted_crystal": "Haunted Crystal of %s",
+  "item.hexlink.haunted_crystal.none": "Weird Crystal",
+
   "item.hexlink.tablet": "Tablet of %s",
   "item.hexlink.tablet.none": "Empty Tablet",
   "item.hexlink.small_bag": "Soul Pocket of %s...",
@@ -74,10 +78,12 @@
   "item.hexlink.big_bag": "Large Soul Bag of %s...",
   "item.hexlink.big_bag.none": "Large Soul Bag",
   "item.hexlink.crystal": "Crystal of %s",
-  "item.hexlink.crystal.none": "Empty Crysal",
+  "item.hexlink.crystal.none": "Empty Crystal",
+
 
 
   "block.hexlink.vortex": "Media Vortex",
+  "block.hexlink.big_tablet": "Big Tablet",
 
 
   "itemGroup.hexlink.hexlink": "Hexlink",
@@ -90,9 +96,7 @@
 
 
   "hexlink.entry.readwrite": "Hexlink Read and Write",
-  "hexlink.page.write_trinket": "This pattern can write a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
-  "hexlink.page.read_trinket": "This pattern can read a iota in a $(l:hexlink:items/focus_collar)$(item)Focus Collar/$ I am wearing.",
-  "hexlink.page.write_spell": "This pattern can write a spell into a Special Wand, I am holding.",
+  "hexlink.page.write_spell": "This pattern can write a spell into a Special Wand, as an dropped item, in an item frame or the caster hand.",
 
   "hexlink.page.spirit_extraction.desc": "This spell can extract a spirit from an entity using a extraction catalyzer like an $(l:hexlink:items/crystals)Extraction Crystal/$ into a $(l:hexlink:items/bag)Spirit Container/$. The quantity of spirit extracted depends of the target. The items used in this spells can be dropped, in item frame, in the first slot of a container, or the offhand of the caster.",
   "hexlink.page.spirit_extraction.target.desc": "The first parameter is the entity to extract from, the second parameter is an extractor catalyzer, the third parameter is a spirit container. ",
@@ -120,18 +124,24 @@
   "hexlink.page.crystals.enchantment": "This type of crystal can extract the spirit of a enchanted item or enchanted book. With a Enchantment Spirit, I can enchant a item or create an enchanted book. The target can be the first item of a container, a dropped item, an item in a frame or item of the caster offhand.",
   "hexlink.page.crystals.everything": "This type of crystal can extract the spirit of anything.",
 
-  "hexlink.page.vortex": "Media Vortex",
-  "hexlink.page.vortex.desc": "Media vortexes can contains spirits, and mix them to create new spirits. You can create a Media Vortex using $(l:hexlink:patterns/spirits/other)Vortex Formation/$, and then put spirits in and take spirits out using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
+  "hexlink.page.vortex": "Media Vortex and Containers",
+  "hexlink.page.vortex.desc": "Media vortexes can contains up to 100 spirits, and mix them to create new spirits. You can create a Media Vortex using $(l:hexlink:patterns/spirits/other)Vortex Formation/$, and then put spirits in and take spirits out using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
+  "hexlink.page.big_tablet.desc": "Big Tablets can contains up to 1000 spirits. You can put spirits in and take spirits out using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
 
   "hexlink.page.bag": "Soul Bags",
-  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirits/manifestation)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$. You can sort a spirit container by shift scrolling while holding one like a spell book.",
+  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirits/manifestation)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$. You can select a spirit type of a spirit container by shift scrolling while holding it like a spell book.",
   "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of spirits, and 30 of each.",
   "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of spirits, and 100 of each.",
   "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of spirits, and 300 of each.",
   "hexlink.page.bag.tablet": "Soul tablets can contains up to 10 spirits of one type, you can them in dungeon chests.",
+  "hexlink.page.bag.philosophical_crystal": "Philosophical crystals are infinite sources of spirits.",
+  "hexlink.page.bag.haunted_crystal": "Haunted crystals are unstable rip-off of philosophical crystals.",
 
   "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
+
+  "hexlink.page.special_staff.1": "I discovered how the staffs help me to interfer with the surrounding media. I think I could create a customizable wand with my new knowledge. I have to write a spell in it using $(l:hexlink:patterns/readwrite)Flem's Gambit/$. Then when I'll write a pattern using this wand, the spell will be cast with a stack filled with my current stack and the pattern I drawn on top. Then, the list on top of the remaining stack is taken as my new stack. A number below the remaining stack can tell me how the pattern has been resolved.",
+  "hexlink.page.special_staff.2": "I need a powerful energy to interact directly with the media realm.",
 
   "hexlink.page.focus_collar": "With this focus around my neck, I can read from it with my left hand empty. I have to use $(l:hexlink:patterns/readwrite)these patterns/$."
 }

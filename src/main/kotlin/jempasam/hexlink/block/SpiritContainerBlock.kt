@@ -35,9 +35,9 @@ class SpiritContainerBlock<T: BlockEntity>(settings: Settings, private val type:
             for (j in 0 until count) {
                 val pos=center.add(Math.random(), Math.random(),Math.random())
                 world.addParticle(
-                        HexlinkParticles.SPIRIT,
-                        pos.x, pos.y, pos.z,
-                        r, g, b
+                    HexlinkParticles.SPIRIT,
+                    pos.x, pos.y, pos.z,
+                    r, g, b
                 )
             }
         }
@@ -76,9 +76,7 @@ class SpiritContainerBlock<T: BlockEntity>(settings: Settings, private val type:
         return world.getBlockEntity(pos) as? SpiritTarget ?: SpiritTarget.NONE
     }
 
-
-
-    fun addAt(world: ServerWorld, pos: BlockPos, spirit: Spirit?=null): Boolean{
+    fun addAt(world: ServerWorld, pos: BlockPos): Boolean{
         val bstate=world.getBlockState(pos)
         val block=bstate.block
         if(bstate.isAir){
@@ -87,7 +85,6 @@ class SpiritContainerBlock<T: BlockEntity>(settings: Settings, private val type:
         else if(block!=this)return false
         val vortexEntity=world.getBlockEntity(pos)
         vortexEntity as HexVortexBlockEntity
-        if(spirit!=null)vortexEntity.give(spirit)
         return true
     }
 

@@ -18,9 +18,9 @@ object HexlinkEntities {
     }
 
     val HEX_VORTEX = register("hex_vortex",
-            FabricBlockEntityTypeBuilder .create(::HexVortexBlockEntity, HexlinkBlocks.VORTEX) .build()
+            FabricBlockEntityTypeBuilder .create({bp,bs->HexVortexBlockEntity(bp,bs,60)}, HexlinkBlocks.VORTEX) .build()
     )
     val BIG_TABLET = register("big_tablet",
-            FabricBlockEntityTypeBuilder .create(::BigTabletBlockEntity, HexlinkBlocks.BIG_TABLET) .build()
+            FabricBlockEntityTypeBuilder .create({bp,bs->BigTabletBlockEntity(bp,bs,1000)}, HexlinkBlocks.BIG_TABLET) .build()
     )
 }

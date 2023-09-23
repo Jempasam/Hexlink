@@ -33,6 +33,7 @@ object HexlinkItems {
 
     var Spirit=make("spirit",SingleSpiritContainerItem(stackableProps()))
     var PhilosophicalCrystal=make("philosophical_crystal",InfiniteSpiritItem(epicProps()))
+    var HauntedCrystal=make("haunted_crystal",RandomSpiritItem(epicProps().maxDamage(100)))
     var Tablet=make("tablet",SoulContainerItem(simpleProps(), 1, 10))
     var SmallBag=make("small_bag",SoulContainerItem(simpleProps(), 2, 30))
     var MediumBag=make("medium_bag",SoulContainerItem(simpleProps(), 5, 100))

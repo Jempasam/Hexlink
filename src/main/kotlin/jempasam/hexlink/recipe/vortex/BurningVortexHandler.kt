@@ -32,9 +32,10 @@ class BurningVortexHandler : AbstractVortexHandler {
     }
 
 
-    override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
+    override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
         if(ingredients.isNotEmpty()){
-            val ingredient=ingredients[0]
+            val it=ingredients.iterator()
+            val ingredient=it.next()
             val item=SpiritHelper.asItem(ingredient)
             if(item!=null){
                 val result=FuelRegistry.INSTANCE.get(item)
@@ -63,7 +64,7 @@ class BurningVortexHandler : AbstractVortexHandler {
     class Recipe(val fuel_time: Int, val handler: BurningVortexHandler): AbstractVortexHandler.Recipe(handler){
         override fun realIngredientCount(): Int = 1
 
-        override fun realMix(ingredients: List<Spirit>): List<Spirit> {
+        override fun realMix(ingredients: Collection<Spirit>): List<Spirit> {
             if(fuel_time==0)return listOf()
             else{
                 val maxi= max(1,(fuel_time/200*handler.multiplier).toInt())

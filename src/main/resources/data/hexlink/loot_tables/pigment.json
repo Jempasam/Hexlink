@@ -1,0 +1,50 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Creeper Pigment\"}"}, "color1":"39424", "color2":"11008"}}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Enderman Pigment\"}"}, "color1":"723464", "color2":"10816203"}}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Spider Pigment\"}"}, "color1":"723464", "color2":"12388864"}}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Dimentionnal Pigment\"}"}, "color1":"723464", "color2":"16777215"}}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Zombie Pigment\"}"}, "color1":"4683741", "color2":"6468206"}}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Fiery Pigment\"}"}, "color1":"15576064", "color2":"12007458}"}}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Flowery Pigment\"}"}, "color1":"5427266", "color2":"15878548"}}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:mixed_pigment",
+          "functions": [{"function": "hexlink:easy_nbt", "nbt":{"display":{"Name":"{\"text\":\"Oyster Pigment\"}"}, "color1":"13494271", "color2":"6537727"}}]
+        }
+
+      ]
+    }
+  ]
+}

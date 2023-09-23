@@ -16,17 +16,18 @@ abstract class AbstractVortexHandler(private var catalyzer: List<Spirit>, var ou
 
     override fun getCatalyzer(): List<Spirit> = catalyzer
 
-    final override fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
+    final override fun findRecipe(ingredients: Collection<Spirit>, world: ServerWorld): HexVortexHandler.Recipe? {
         if(ingredients.size>=catalyzer.size){
-            for(i in catalyzer.indices){
-                if(ingredients[i]!=catalyzer[i])return null
+            val it=ingredients.iterator()
+            for(ct in catalyzer){
+                if(it.next()!=ct)return null
             }
-            return findRealRecipe(ingredients.subList(catalyzer.size,ingredients.size), world)
+            return findRealRecipe(ingredients.drop(catalyzer.size), world)
         }
         return null
     }
 
-    abstract fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): Recipe?
+    abstract fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): Recipe?
 
     final override fun getRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>> {
         return getRealRecipesExamples(manager).map {
@@ -43,15 +44,15 @@ abstract class AbstractVortexHandler(private var catalyzer: List<Spirit>, var ou
     abstract class Recipe(private val handler: AbstractVortexHandler): HexVortexHandler.Recipe {
         final override fun ingredientCount(): Int = handler.catalyzer.size + realIngredientCount()
 
-        final override fun mix(ingredients: List<Spirit>): List<Spirit> {
-            val result=realMix(ingredients.subList(handler.catalyzer.size, ingredients.size)).toMutableList()
+        final override fun mix(ingredients: Collection<Spirit>): List<Spirit> {
+            val result=realMix(ingredients.drop(handler.catalyzer.size)).toMutableList()
             result.addAll(handler.output)
             return result
         }
 
         abstract fun realIngredientCount(): Int
 
-        abstract fun realMix(ingredients: List<Spirit>): List<Spirit>
+        abstract fun realMix(ingredients: Collection<Spirit>): List<Spirit>
     }
 
 }

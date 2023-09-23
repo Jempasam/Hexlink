@@ -1,11 +1,14 @@
 package jempasam.hexlink.utils
 
+import com.google.gson.JsonObject
+import com.google.gson.JsonParseException
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
 import net.minecraft.util.Identifier
+import net.minecraft.util.JsonHelper
 import net.minecraft.util.registry.Registry
 
 object NbtHelper {
@@ -16,6 +19,20 @@ object NbtHelper {
 
         val value_nbt= nbt.get("value") ?: return null
         return type.deserialize(value_nbt)
+    }
+
+    fun readSpirit(obj: JsonObject): Spirit{
+        val typeId=JsonHelper.getString(obj, "type")
+            ?: throw JsonParseException("Missing type id")
+
+        val type= HexlinkRegistry.SPIRIT.get(Identifier(typeId))
+            ?: throw JsonParseException("Invalid spirit type \"$typeId\"")
+
+        val value_nbt= obj.get("value")
+            ?: throw JsonParseException("Missing spirit value")
+
+        return type.deserialize(value_nbt.asNBT())
+            ?: throw JsonParseException("Invalid spirit value for \"$typeId\"")
     }
 
     fun writeSpirit(spirit: Spirit): NbtCompound{

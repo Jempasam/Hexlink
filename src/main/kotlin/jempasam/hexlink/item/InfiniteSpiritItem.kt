@@ -18,9 +18,10 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
-class InfiniteSpiritItem(settings: Settings): Item(settings), ItemSpiritSource, ItemSpiritTarget, ItemScrollable {
+open class InfiniteSpiritItem(settings: Settings): Item(settings), ItemSpiritSource, ItemSpiritTarget, ItemScrollable {
 
     fun getSpirits(stack: ItemStack): SpiritList
         = SpiritList(stack.nbt?.getList("spirits",NbtElement.COMPOUND_TYPE.toInt()) ?: NbtList())
@@ -29,7 +30,10 @@ class InfiniteSpiritItem(settings: Settings): Item(settings), ItemSpiritSource, 
         return object:SpiritSource{
             override fun last(): Spirit? = getSpirits(stack).run { if(size>0) this[0] else null }
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-                if(getSpirits(stack).contains(spirit))return SpiritSource.SpiritOutputFlux({}, count)
+                val fcount= if(isDamageable) stack.maxDamage-stack.damage else count
+                if(getSpirits(stack).contains(spirit))return SpiritSource.SpiritOutputFlux(fcount) {
+                    if(stack.isDamageable)stack.damage(fcount, Random.create(),null)
+                }
                 else return SpiritSource.NONE.FLUX
             }
         }

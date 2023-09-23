@@ -79,8 +79,11 @@ fun NbtElement.asJSON(): JsonElement{
 }
 
 fun JsonObject.getSpirit(name: String): Spirit {
-    return NbtHelper.readSpirit(JsonHelper.getObject(this, name).asNBT())
-            ?: throw JsonParseException("Invalid Spirit")
+    try{
+        return NbtHelper.readSpirit(JsonHelper.getObject(this, name))
+    }catch (e: Exception){
+        throw JsonParseException("For \"$name\": ${e.message}")
+    }
 }
 
 fun JsonObject.addSpirit(name: String, spirit: Spirit){

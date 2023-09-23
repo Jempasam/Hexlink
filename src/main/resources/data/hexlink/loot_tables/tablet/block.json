@@ -1,0 +1,50 @@
+{
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:constant", "value": 1 },
+      "entries": [
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:dirt"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:stone"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:lava"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:fire"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:glass"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:magma_block"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:damaged_anvil"}, "count": 10}]
+        },
+
+        {
+          "type": "minecraft:item", "name": "hexlink:tablet",
+          "functions": [{"function": "hexlink:spirit", "spirit": {"type": "hexlink:block", "value": "minecraft:ladder"}, "count": 10}]
+        }
+
+      ]
+    }
+  ]
+}

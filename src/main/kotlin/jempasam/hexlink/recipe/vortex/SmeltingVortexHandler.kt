@@ -31,9 +31,9 @@ class SmeltingVortexHandler : AbstractVortexHandler {
 
     private val recipeManager=RecipeManager.createCachedMatchGetter(RecipeType.SMELTING)
 
-    override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
+    override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
         if(ingredients.isNotEmpty()){
-            val ingredient=ingredients[0]
+            val ingredient=ingredients.first()
             val item= SpiritHelper.asItem(ingredient)
             if(item!=null){
                 val inventory=SimpleInventory(1)
@@ -62,7 +62,7 @@ class SmeltingVortexHandler : AbstractVortexHandler {
     class Recipe(val item: Item, val count: Int, handler: SmeltingVortexHandler, val world: ServerWorld): AbstractVortexHandler.Recipe(handler){
         override fun realIngredientCount(): Int = 1
 
-        override fun realMix(ingredients: List<Spirit>): List<Spirit> {
+        override fun realMix(ingredients: Collection<Spirit>): List<Spirit> {
             val ret= mutableListOf<Spirit>()
             for(i in 0..<count)ret.add(ItemSpirit(item))
             return ret

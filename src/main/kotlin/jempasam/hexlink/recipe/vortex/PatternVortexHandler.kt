@@ -109,7 +109,7 @@ class PatternVortexHandler : AbstractVortexHandler {
         this.multiplier=JsonHelper.getFloat(obj, "multiplier", 1.0f)*/
     }
 
-    override fun findRealRecipe(ingredients: List<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
+    override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
         if(ingredients.size >= ingredientCount){
             val itemsIngredients=ingredients.map { SpiritHelper.asItem(it) }
             if(itemsIngredients.all { it!=null }){
@@ -174,7 +174,7 @@ class PatternVortexHandler : AbstractVortexHandler {
 
         override fun realIngredientCount(): Int = handler.ingredientCount
 
-         override fun realMix(ingredients: List<Spirit>): List<Spirit> {
+         override fun realMix(ingredients: Collection<Spirit>): List<Spirit> {
             return mutableListOf<Spirit>()
                     .also { for(i in 0..<count)it.add(ItemSpirit(item)) }
         }

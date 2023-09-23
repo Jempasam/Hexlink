@@ -8,12 +8,12 @@ import net.minecraft.server.world.ServerWorld
 
 interface HexVortexHandler {
 
-    fun findRecipe(ingredients: List<Spirit>, world: ServerWorld): Recipe?
+    fun findRecipe(ingredients: Collection<Spirit>, world: ServerWorld): Recipe?
 
     fun getRecipesExamples(manager: RecipeManager): Sequence<Pair<List<Ingredient>,List<Spirit>>> = sequenceOf()
 
     interface Recipe{
-        fun mix(ingredients: List<Spirit>): List<Spirit>
+        fun mix(ingredients: Collection<Spirit>): List<Spirit>
         fun ingredientCount(): Int
     }
 

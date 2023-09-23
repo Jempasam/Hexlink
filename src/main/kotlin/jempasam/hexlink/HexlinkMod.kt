@@ -46,7 +46,7 @@ object HexlinkMod : ModInitializer {
 		HexVortexHandlers
 		ExtNodeParsers
 
-		HexlinkDataLoaders.registerLoaders()
+		HexlinkDataLoaders
 
 		Registry.register(HexlinkRegistry.RANK, Identifier(MODID,"testrank"), LevelRanks.Rank(0.1f, 10.0f,DyeColor.YELLOW.fireworkColor))
 

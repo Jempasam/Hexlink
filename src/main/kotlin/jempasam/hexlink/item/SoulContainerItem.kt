@@ -144,13 +144,12 @@ class SoulContainerItem(settings: Settings, val maxBoxCount: Int, val max_soul_c
                 val entry=souls.get(spirit) ?: return SpiritSource.NONE.FLUX
                 val final_count=min(entry.count, count)
                 return SpiritSource.SpiritOutputFlux(
-                        {
-                            val newcount=entry.count-it
-                            if(newcount<=0)souls.remove(entry)
-                            else entry.count=newcount
-                        },
-                        final_count
-                )
+                    final_count
+                ) {
+                    val newcount = entry.count - it
+                    if (newcount <= 0) souls.remove(entry)
+                    else entry.count = newcount
+                }
             }
 
             override fun last(): Spirit? = last(stack)

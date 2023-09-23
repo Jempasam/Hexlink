@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/handheld",
   "textures": {
     "layer0": "hexlink:item/wand/crystal1",
     "layer1": "hexlink:item/wand/handle3"

@@ -1,0 +1,38 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:constant",
+        "value": 1
+      },
+      "entries": [
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:haunted_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:special", "value": "hexlink:fire_element"},
+              {"type": "hexlink:entity", "value": "minecraft:blaze"},
+              {"type": "hexlink:entity", "value": "minecraft:fireball"}
+            ]}
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:haunted_crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{"spirits":[
+              {"type": "hexlink:block", "value": "minecraft:lava"},
+              {"type": "hexlink:entity", "value": "minecraft:magma_cube"},
+              {"type": "hexlink:block", "value": "minecraft:magma_block"}
+            ]}
+          }]
+        }
+      ]
+    }
+  ]
+}

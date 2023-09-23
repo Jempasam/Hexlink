@@ -22,7 +22,7 @@ object ItemExtNode : ExtractionNode {
             val prev=consumer
             consumer={
                 prev(it)
-                val consumed=ceil(it as Float/max(stack.maxDamage,1)) as Int
+                val consumed=ceil(it.toFloat()/max(stack.maxDamage,1)).toInt()
                 if(it>=worldStack.stack.count) worldStack.killer()
                 else{
                     stack.count-=consumed

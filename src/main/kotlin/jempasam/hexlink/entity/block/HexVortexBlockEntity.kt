@@ -5,26 +5,24 @@ import jempasam.hexlink.block.SpiritContainerBlock
 import jempasam.hexlink.block.functionnality.BlockSpiritContainer
 import jempasam.hexlink.entity.HexlinkEntities
 import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.spirit.bag.SpiritBag
 import jempasam.hexlink.spirit.inout.SpiritSource
 import jempasam.hexlink.spirit.inout.SpiritTarget
-import jempasam.hexlink.utils.NbtHelper
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtElement
-import net.minecraft.nbt.NbtList
 import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import kotlin.math.min
 import kotlin.random.Random
-import kotlin.streams.asSequence
 
 
-class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HexlinkEntities.HEX_VORTEX, pos, state), SpiritSource, SpiritTarget, BlockSpiritContainer{
+class HexVortexBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : BlockEntity(HexlinkEntities.HEX_VORTEX, pos, state), SpiritSource, SpiritTarget, BlockSpiritContainer{
 
 
     companion object{
@@ -42,13 +40,15 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
             val recipe=handler.findRecipe(inputs, world)
             if(recipe!=null){
                 val finalInputs=inputs.subList(0,recipe.ingredientCount())
-                for(i in 0..<recipe.ingredientCount()){
-                    if(input.size>0)input.removeAt(0)
-                    else if(output.size>0)output.removeAt(0)
-                    else break
-                }
+
+                val inputIng= min(input.size,recipe.ingredientCount())
+                input.popFront(inputIng)
+                if(inputIng<=recipe.ingredientCount())output.popFront(recipe.ingredientCount()-inputIng)
+
                 val result=recipe.mix(finalInputs)
-                output.addAll(result)
+                result.forEach {
+                    if(output.size+input.size<size)output.pushBack(it,1)
+                }
                 markDirty()
                 sendToClient()
                 return true
@@ -64,10 +64,9 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
 
     fun tick(world: World, pos: BlockPos, state: BlockState) {
         if(world.isClient){
-            if(input.size+output.size>0 && random.nextInt(20)==0){
-                val i=random.nextInt(input.size+output.size)
-                val spirit= if(i>=input.size) output[i-input.size] else input[i]
-                SpiritContainerBlock.coloredParticle(world,pos,spirit.getColor(),1)
+            if(input.size+output.size>0){
+                val bag= if(input.isEmpty()||Random.nextBoolean()) output else input
+                SpiritContainerBlock.coloredParticle(world,pos,bag.random().getColor(),1)
             }
         }
         else{
@@ -88,111 +87,79 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         }
     }
 
-    fun give(spirit: Spirit){
-        input.add(spirit)
-        loading=0
-        age=0
-        markDirty()
-        sendToClient()
-    }
 
-    override fun writeNbt(nbt: NbtCompound) {
-        nbt.putInt("loading", loading)
-        nbt.putInt("age", age)
-        val inputNbt=NbtList()
-        val outputNbt=NbtList()
-        for(spirit in input)inputNbt.add(NbtHelper.writeSpirit(spirit))
-        for(spirit in output)outputNbt.add(NbtHelper.writeSpirit(spirit))
-        nbt.put("input",inputNbt)
-        nbt.put("output",outputNbt)
-    }
-
-    override fun readNbt(nbt: NbtCompound) {
-        loading=nbt.getInt("loading")
-        age=nbt.getInt("age")
-        input.clear()
-        nbt.getList("input",NbtElement.COMPOUND_TYPE.toInt()).forEach{
-            if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{input.add(it)}
-        }
-        val previousOutputSize=output.size
-        output.clear()
-        nbt.getList("output",NbtElement.COMPOUND_TYPE.toInt()).forEach{
-            if(it is NbtCompound)NbtHelper.readSpirit(it)?.also{output.add(it)}
-        }
-
-        val w=world
-        if(w!=null){
-            for(i in previousOutputSize..<output.size){
-                SpiritContainerBlock.coloredParticle(w,pos,output[i].getColor(),6)
-            }
-        }
-    }
-
-
+    /* FLUX */
     override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
-        var currentCount=0
-        val removedOutput= mutableListOf<Int>()
-        val removedInput= mutableListOf<Int>()
-        for(i in (output.size-1) downTo 0){
-            val spi=output[i]
-            if(spi==spirit){
-                currentCount++
-                removedOutput.add(i)
-                if(currentCount>=count)break
-            }
+        val outputCount=output.count(spirit)
+        val currentCount= min(count, outputCount+input.count(spirit))
+        return SpiritSource.SpiritOutputFlux(currentCount) {
+            age = 0
+            output.remove(spirit,min(it,outputCount))
+            if(it>outputCount)input.remove(spirit,it-outputCount)
+            markDirty()
+            sendToClient()
         }
-        if(currentCount<count)for(i in (input.size-1)downTo 0){
-            val spi=input[i]
-            if(spi==spirit){
-                currentCount++
-                removedInput.add(i)
-                if(currentCount>=count)break
-            }
+    }
+
+    override fun last(): Spirit? {
+        return when {
+            output.isNotEmpty() -> output.last()
+            input.isNotEmpty() -> input.last()
+            else -> null
         }
-        return SpiritSource.SpiritOutputFlux({
+    }
+
+    override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
+        val currentCount=min(count, size-input.size-output.size)
+        return SpiritTarget.SpiritInputFlux({
             age=0
-            var i=0
-            for(id in removedOutput){
-                i++
-                if(i>it)break
-                output.removeAt(id)
-            }
-            for(id in removedInput){
-                i++
-                if(i>it)break
-                input.removeAt(id)
-            }
+            loading=0
+            input.pushBack(spirit,it)
             markDirty()
             sendToClient()
         }, currentCount)
     }
 
-    override fun last(): Spirit? {
-        if(output.isNotEmpty())return output.last()
-        if(input.isNotEmpty())return input.last()
-        return null
-    }
 
-    override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
-        return SpiritTarget.SpiritInputFlux({
-            age=0
-            loading=0
-            for(i in 0..<count)input.add(spirit)
-            markDirty()
-            sendToClient()
-        }, count)
-    }
-
+    /* CONTENT */
     override fun getSpiritContent(slot: Int, world: World, pos: BlockPos): Sequence<Spirit> {
-        val vortex=world.getBlockEntity(pos)
-        if(vortex is HexVortexBlockEntity){
-            if(slot==0)return vortex.input.asSequence()
-            else if(slot==1)return vortex.output.asSequence()
+        return when (slot) {
+            0 -> input.asSequence()
+            1 -> output.asSequence()
+            else -> listOf<Spirit>().asSequence()
         }
-        return listOf<Spirit>().stream().asSequence()
     }
 
     override fun getSlotCount(): Int = 2
+
+
+    /* NBT */
+    override fun writeNbt(nbt: NbtCompound) {
+        nbt.apply {
+            putInt("loading", loading)
+            putInt("age", age)
+
+            put("input",input.writeNBT())
+            put("input",output.writeNBT())
+        }
+    }
+
+    override fun readNbt(nbt: NbtCompound) {
+        loading=nbt.getInt("loading")
+        age=nbt.getInt("age")
+
+        val previousOutputSize=output.size
+        input.readNBT(nbt.getList("input",10))
+        output.readNBT(nbt.getList("output",10))
+
+        val w=world
+        if(w!=null){
+            val it=output.reverseIterator()
+            for(i in previousOutputSize..<output.size){
+                SpiritContainerBlock.coloredParticle(w,pos,it.next().getColor(),6)
+            }
+        }
+    }
 
     override fun toUpdatePacket(): Packet<ClientPlayPacketListener> {
         return BlockEntityUpdateS2CPacket.create(this)
@@ -202,10 +169,11 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hexli
         return createNbt()
     }
 
+
     var loading=0
     var age=-START_TIME+ LOADING_TIME
-    val input= mutableListOf<Spirit>()
-    val output= mutableListOf<Spirit>()
+    val input= SpiritBag()
+    val output= SpiritBag()
 
     val random=Random(System.currentTimeMillis())
 }

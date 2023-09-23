@@ -1,0 +1,18 @@
+{
+  "name": "item.hexlink.special_staff",
+  "icon": "hexlink:special_staff",
+  "category": "hexcasting:items",
+  "sortnum": 100,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "hexlink.page.special_staff.1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "hexlink.page.special_staff.2",
+      "recipe": "hexlink:special_staff"
+    }
+  ]
+}
