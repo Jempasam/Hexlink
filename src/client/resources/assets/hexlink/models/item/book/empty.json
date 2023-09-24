@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hexlink:item/book/empty",
+    "layer1": "hexlink:item/book/empty_tint",
+    "layer2": "hexlink:item/book/empty_deco"
+  }
+}

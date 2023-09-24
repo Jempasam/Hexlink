@@ -1,6 +1,8 @@
 package jempasam.hexlink.utils
 
+import at.petrak.hexcasting.api.utils.asInt
 import net.minecraft.nbt.NbtElement
+import net.minecraft.nbt.NbtInt
 import net.minecraft.nbt.NbtList
 
 abstract class NbtAdapterList<T>(val nbt: NbtList): Collection<T>{
@@ -30,4 +32,9 @@ abstract class NbtAdapterList<T>(val nbt: NbtList): Collection<T>{
     override operator fun contains(element: T): Boolean = nbt.contains(to(element))
     override fun containsAll(elements: Collection<T>): Boolean = nbt.containsAll(elements.map { to(it) })
     override fun iterator(): Iterator<T> = nbt.asSequence().mapNotNull { from(it) }.iterator()
+}
+
+class IntListNbtAdapter(list: NbtList): NbtAdapterList<Int>(list){
+    override fun from(e: NbtElement): Int = e.asInt
+    override fun to(e: Int): NbtElement = NbtInt.of(e)
 }

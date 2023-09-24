@@ -98,5 +98,22 @@ fun List<Iota>.getExtractorItem(ctx: CastingContext, index: Int, max: Int): Spir
     return source
 }
 
+
+fun List<Iota>.getVec3orEntity(ctx: CastingContext, index: Int, max: Int): Any{
+    return when(val iota=get(index)){
+        is EntityIota ->{
+            println("ENTITY")
+            ctx.assertEntityInRange(iota.entity)
+            iota.entity
+        }
+        is Vec3Iota ->{
+            println("VEC3D")
+            ctx.assertVecInRange(iota.vec3)
+            iota.vec3
+        }
+        else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+    }
+}
+
 fun List<Iota>.getExtractorItemAndPos(ctx: CastingContext, index: Int, max: Int): Pair<SpiritExtractor<*>,Vec3d>
     = makePosPair(getExtractorItem(ctx,index,max),index)

@@ -6,17 +6,27 @@ import at.petrak.hexcasting.api.spell.Action
 import at.petrak.hexcasting.api.spell.math.HexDir
 import at.petrak.hexcasting.api.spell.math.HexPattern
 import jempasam.hexlink.operators.OpSpiritTest
+import jempasam.hexlink.operators.OpStub
 import jempasam.hexlink.operators.rw.OpReadTrinket
 import jempasam.hexlink.operators.rw.OpWriteTrinket
 import jempasam.hexlink.operators.spells.*
 import jempasam.hexlink.operators.spiritinfo.OpGetSpiritIota
 import jempasam.hexlink.operators.spiritinfo.OpSpiritCountIota
+import jempasam.hexlink.operators.string.OpGetNbt
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 
 object HexlinkPatterns {
 
     private fun register(id: String, pattern: HexPattern, op : Action){
         PatternRegistry.mapPattern(pattern, Identifier(HexlinkMod.MODID,id), op)
+    }
+
+    private fun registerFor(modid: String, id: String, pattern: HexPattern, op: ()->()->Action){
+        if(FabricLoader.getInstance().isModLoaded(modid)){
+            PatternRegistry.mapPattern(pattern, Identifier(HexlinkMod.MODID,id), op()())
+        }
+        else PatternRegistry.mapPattern(pattern, Identifier(HexlinkMod.MODID,id), OpStub(modid))
     }
 
     fun registerAll(){
@@ -90,5 +100,9 @@ object HexlinkPatterns {
                 OpWriteTrinket()
         )
 
+        registerFor("moreiotas", "get_nbt",
+            HexPattern.fromAngles("daadaadawaeaeaeaeaea", HexDir.SOUTH_WEST),
+            {{OpGetNbt}}
+        )
     }
 }

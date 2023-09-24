@@ -29,6 +29,7 @@
   "hexcasting.spell.hexlink:read_trinket": "Boehmer's Reflection",
   "hexcasting.spell.hexlink:write_trinket": "Boehmer's Gambit",
   "hexcasting.spell.hexlink:write_spell": "Flem's Gambit",
+  "hexcasting.spell.hexlink:get_nbt": "Samuel Purification",
 
 
 
@@ -105,6 +106,9 @@
   "hexlink.page.spirit_transfer.transfer.desc": "With this pattern I can transfer spirits from a spirit container to another spirit container. The first parameter is the container to extract from, the second parameter is the container to fill into.",
   "hexlink.page.spirit_transfer.look.desc": "With this pattern I can get the type of the last Spirit of a spirit container or Null if it is empty or if the entity or block is not a spirit source.",
   "hexlink.page.spirit_transfer.count.desc": "With this pattern I can count how many spirits, of a type of spirit, a container contains.",
+
+  "hexlink.page.get_nbt": "NBT Manipulation",
+  "hexlink.page.get_nbt.desc": "[Need MoreIotas]\nI see everything (In a small radius). Wit this pattern I can extract every properties of a block or an entity into a list.",
 
   "hexlink.page.spirit_manifestation.desc": "With these powerful spells, I can manifest spirits in the physical world. I can manifest it through a entity catalyst or at a position.",
   "hexlink.page.spirit_manifestation.target.desc": "The first parameter is a container to extract from, the second, the type of spirit to manifest, the third, the number of spirit to manifest, and the last, the entity or location to manifest at.",
