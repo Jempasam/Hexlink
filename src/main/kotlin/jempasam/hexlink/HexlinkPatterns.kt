@@ -101,7 +101,7 @@ object HexlinkPatterns {
         )
 
         registerFor("moreiotas", "get_nbt",
-            HexPattern.fromAngles("daadaadawaeaeaeaeaea", HexDir.SOUTH_WEST),
+            HexPattern.fromAngles("adaada", HexDir.SOUTH_WEST),
             {{OpGetNbt}}
         )
     }
