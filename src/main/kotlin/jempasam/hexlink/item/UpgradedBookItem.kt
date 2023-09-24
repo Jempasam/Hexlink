@@ -32,7 +32,6 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings), ItemScrolla
         val stack = user.getStackInHand(hand)
         if(world is ServerWorld){
             val iota= readIota(stack, world) ?: return TypedActionResult.fail(stack)
-
             val harness = IXplatAbstractions.INSTANCE.getHarness(user as ServerPlayerEntity, hand)
             val success = useIota(iota, harness)
             IXplatAbstractions.INSTANCE.setHarness(user, harness)
@@ -43,7 +42,7 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings), ItemScrolla
 
     fun useIota(iota: Iota, harness: CastingHarness, doList: Boolean=true): Boolean{
         if(iota is PatternIota){
-            val info = harness.executeIotas(listOf(iota), harness.ctx.caster.getWorld())
+            val info = harness.executeIota(iota, harness.ctx.caster.getWorld())
             if(!info.resolutionType.success)return false
         }
         else if(iota is ListIota && doList){
@@ -78,14 +77,12 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings), ItemScrolla
     }
 
     override fun hasColor(stack: ItemStack): Boolean {
-        println("hasColor")
         val idx = getPage(stack, 1)
         val colors=colors(stack);
         return idx<=colors.size && colors[idx-1]!=-1
     }
 
     override fun getColor(stack: ItemStack): Int {
-        println("getColor")
         val idx = getPage(stack, 1)
         val colors=colors(stack)
         return when{
@@ -105,7 +102,6 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings), ItemScrolla
         val idx = getPage(stack, 1)
         val colors=colorsOrCreate(stack)
         while(colors.size<idx) colors.add(-1)
-        println("setColor.size = ${colors.size}")
         colors[idx-1]=color
     }
 

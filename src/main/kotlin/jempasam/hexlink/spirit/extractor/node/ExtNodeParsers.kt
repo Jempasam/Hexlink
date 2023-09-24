@@ -23,4 +23,5 @@ object ExtNodeParsers {
     val ELSE= register("else", ElseExtNode.Parser)
 
     val RESULT= register("result", ResultExtNode.Parser)
+    val COST= register("cost", CostExtNode.Parser)
 }

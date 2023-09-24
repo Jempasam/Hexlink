@@ -102,12 +102,10 @@ fun List<Iota>.getExtractorItem(ctx: CastingContext, index: Int, max: Int): Spir
 fun List<Iota>.getVec3orEntity(ctx: CastingContext, index: Int, max: Int): Any{
     return when(val iota=get(index)){
         is EntityIota ->{
-            println("ENTITY")
             ctx.assertEntityInRange(iota.entity)
             iota.entity
         }
         is Vec3Iota ->{
-            println("VEC3D")
             ctx.assertVecInRange(iota.vec3)
             iota.vec3
         }

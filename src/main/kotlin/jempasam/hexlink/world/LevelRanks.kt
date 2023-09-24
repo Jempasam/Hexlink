@@ -31,16 +31,13 @@ interface LevelRanks {
 
     fun readRanksFromNbt(tag: NbtCompound) {
         clearRanks()
-        println("NEED TO READ $tag")
         for(key in tag.keys){
             try{
-                println("DATA read "+tag.get(key)+" as $key")
                 val rank=HexlinkRegistry.RANK.get(Identifier(key))
                         ?: throw IllegalArgumentException("No rank associated to this id")
 
                 val player=(tag.get(key) ?: throw IllegalArgumentException("Weird error"))
                         .let { NbtHelper.toUuid(it) }
-                println("DATA read success $player as $rank")
 
                 setRank(player,rank)
             }catch (e: Exception){
@@ -53,10 +50,8 @@ interface LevelRanks {
         for(rank in ranks()){
             val player=getPlayer(rank)
             val id=HexlinkRegistry.RANK.getId(rank)
-            println("DATA write $player as $id")
             if(player!=null && id!=null)
                 tag.put(id.toString(), NbtHelper.fromUuid(player))
         }
-        println("WROTE $tag")
     }
 }

@@ -29,7 +29,7 @@ class BigTabletBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : Bl
 
     fun tick(world: World, pos: BlockPos, state: BlockState) {
         if(world.isClient){
-            if(content.size>0){
+            if(content.size>0 && world.time.toInt()%8==0){
                 SpiritContainerBlock.coloredParticle(world,pos,content.random().getColor(),1)
             }
         }

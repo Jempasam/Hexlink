@@ -7,7 +7,16 @@
     "hexlink:potion",
     "hexlink:enchantment",
     "hexlink:block",
+    [
+      {"node": "hexlink:item_predicate", "tag": "hexlink:limited"},
+      {"node": "hexlink:result", "base": 1, "multiplier": 0},
+      {"node": "hexlink:cost", "base": 1000, "multiplier": 0},
+      "hexlink:item"
+    ],
     "hexlink:item",
-    "hexlink:entity"
+    [
+      {"node": "hexlink:entity_predicate", "type":"#hexlink:not_extractable", "not":true},
+      "hexlink:entity"
+    ]
   ]
 }

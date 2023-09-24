@@ -1,5 +1,8 @@
 {
   "name": "Entity",
   "color": [16711680, 16711795],
-  "nodes": "hexlink:entity"
+  "nodes": [
+    {"node": "hexlink:entity_predicate", "type":"#hexlink:not_extractable", "not":true},
+    "hexlink:entity"
+  ]
 }
