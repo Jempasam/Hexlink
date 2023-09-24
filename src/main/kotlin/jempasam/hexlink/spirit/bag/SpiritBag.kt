@@ -134,11 +134,15 @@ class SpiritBag : Collection<Spirit>{
 
     fun readNBT(nbt: NbtList){
         content.clear()
+        totalCount=0;
         nbt.forEach { cpd ->
             if(cpd is NbtCompound){
                 val count= max(cpd.getInt("count"),1)
                 val spirit= NbtHelper.readSpirit(cpd.getCompound("spirit"))
-                if(spirit!=null)content.add(Stack(spirit,count))
+                if(spirit!=null){
+                    content.add(Stack(spirit,count))
+                    totalCount+=count
+                }
             }
         }
     }

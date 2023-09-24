@@ -64,9 +64,9 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : Bl
 
     fun tick(world: World, pos: BlockPos, state: BlockState) {
         if(world.isClient){
-            if(input.size+output.size>0){
+            if(input.size+output.size>0 && age%5==0){
                 val bag= if(input.isEmpty()||Random.nextBoolean()) output else input
-                SpiritContainerBlock.coloredParticle(world,pos,bag.random().getColor(),1)
+                if(!bag.isEmpty())SpiritContainerBlock.coloredParticle(world,pos,bag.random().getColor(),1)
             }
         }
         else{
@@ -140,7 +140,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : Bl
             putInt("age", age)
 
             put("input",input.writeNBT())
-            put("input",output.writeNBT())
+            put("output",output.writeNBT())
         }
     }
 
@@ -165,9 +165,7 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : Bl
         return BlockEntityUpdateS2CPacket.create(this)
     }
 
-    override fun toInitialChunkDataNbt(): NbtCompound {
-        return createNbt()
-    }
+    override fun toInitialChunkDataNbt(): NbtCompound = createNbt()
 
 
     var loading=0
