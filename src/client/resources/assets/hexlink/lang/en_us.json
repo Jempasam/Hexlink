@@ -108,7 +108,7 @@
   "hexlink.page.spirit_transfer.count.desc": "With this pattern I can count how many spirits, of a type of spirit, a container contains.",
 
   "hexlink.page.get_nbt": "NBT Manipulation",
-  "hexlink.page.get_nbt.desc": "[Need MoreIotas]\nI see everything (In a small radius). Wit this pattern I can extract every properties of a block or an entity into a list.",
+  "hexlink.page.get_nbt.desc": "[Need MoreIotas]  I see everything (In a small radius). Wit this pattern I can extract every properties of a block or an entity into a list.",
 
   "hexlink.page.spirit_manifestation.desc": "With these powerful spells, I can manifest spirits in the physical world. I can manifest it through a entity catalyst or at a position.",
   "hexlink.page.spirit_manifestation.target.desc": "The first parameter is a container to extract from, the second, the type of spirit to manifest, the third, the number of spirit to manifest, and the last, the entity or location to manifest at.",
