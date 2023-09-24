@@ -34,12 +34,13 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : Bl
     }
 
     private fun craft(world: ServerWorld): Boolean{
-        val inputs=input.toMutableList()
-        inputs.addAll(output)
+        val inputs=SpiritBag(input)
+        inputs.pushBack(output)
+
         for(handler in HexlinkRegistry.HEXVORTEX_HANDLER){
             val recipe=handler.findRecipe(inputs, world)
             if(recipe!=null){
-                val finalInputs=inputs.subList(0,recipe.ingredientCount())
+                val finalInputs=inputs.subBag(recipe.ingredientCount())
 
                 val inputIng= min(input.size,recipe.ingredientCount())
                 input.popFront(inputIng)

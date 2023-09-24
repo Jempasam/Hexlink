@@ -10,8 +10,17 @@ import kotlin.math.min
 import kotlin.random.Random
 
 class SpiritBag : Collection<Spirit>{
-    private val content= mutableListOf<Stack>()
-    private var totalCount= 0
+    private val content: MutableList<Stack>
+    private var totalCount: Int
+
+    constructor(){
+        content= mutableListOf<Stack>()
+        totalCount= 0
+    }
+    constructor(copied: SpiritBag){
+        content=copied.content.asSequence().map { it.copy() }.toMutableList()
+        totalCount=copied.totalCount
+    }
 
     fun clear() = content.clear()
 
@@ -27,11 +36,12 @@ class SpiritBag : Collection<Spirit>{
         var curCount=count
         while(content.size>0 && curCount>0){
             val last=content.first()
-            curCount-=last.count
-            last.count-=curCount
+            val removed=min(last.count,curCount)
+            curCount-=removed
+            last.count-=removed
             if(last.count<=0){
                 content.removeAt(0)
-                totalCount-=count
+                totalCount-=removed
             }
         }
     }
@@ -44,17 +54,36 @@ class SpiritBag : Collection<Spirit>{
         totalCount+=count
     }
 
+    fun pushBack(bag: SpiritBag){
+        for(stack in bag.content){
+            pushBack(stack.spirit,stack.count)
+        }
+    }
+
     fun popBack(count: Int){
         var curCount=count
         while(content.size>0 && curCount>0){
             val last=content.last()
-            curCount-=last.count
-            last.count-=curCount
+            val removed=min(last.count,curCount)
+            last.count-=removed
+            curCount-=removed
             if(last.count<=0){
                 content.removeAt(content.size-1)
-                totalCount-=count
+                totalCount-=removed
             }
         }
+    }
+
+    fun subBag(size: Int): SpiritBag{
+        var count=size
+        val ret=SpiritBag()
+        for(e in content){
+            val added=min(count,e.count)
+            ret.pushBack(e.spirit,added)
+            count-=added
+            if(count==0)break
+        }
+        return ret
     }
 
     operator fun get(index: Int) = content[index]
