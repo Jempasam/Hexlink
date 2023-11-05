@@ -29,6 +29,7 @@
   "hexcasting.spell.hexlink:read_trinket": "伯默之精思",
   "hexcasting.spell.hexlink:write_trinket": "伯默之策略",
   "hexcasting.spell.hexlink:write_spell": "弗莱姆之策略",
+  "hexcasting.spell.hexlink:get_nbt": "萨缪尔之纯化",
 
 
 
@@ -106,6 +107,9 @@
   "hexlink.page.spirit_transfer.look.desc": "此图案可查看灵体容器中的上一灵体。若容器为空，或者所给实体或位置向量不是灵体来源，则返回 Null。",
   "hexlink.page.spirit_transfer.count.desc": "此图案可统计灵体容器中某种灵体的存储数量。",
 
+  "hexlink.page.get_nbt": "NBT 操纵",
+  "hexlink.page.get_nbt.desc": "[需要安装更多 Iota] 我能在较短距离内看到所有事物。此图案能将方块或实体的所有属性提取为列表。",
+
   "hexlink.page.spirit_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过某实体或在某位置令其显形。",
   "hexlink.page.spirit_manifestation.target.desc": "第一参数为被提取的容器，第二参数为需显形灵体的类型，第三参数为显形的强度，最末参数则是显形实体或显形位置。",
   "hexlink.page.spirit_self_manifestation.self.desc": "此快捷变种会从施法者物品栏中的灵体容器抽取灵体。第一参数为需显形灵体的类型，第二参数为显形的强度，第三参数则是显形实体或显形位置。",
@@ -137,7 +141,7 @@
   "hexlink.page.bag.philosophical_crystal": "贤者水晶是灵体的无限来源。",
   "hexlink.page.bag.haunted_crystal": "缠魂水晶则是贤者水晶的不稳定仿制品。",
 
-  "hexlink.page.upgraded_book.1": "$(l:hexlink:items/upgraded_book)$(item)升级法术书/$有如一整个图书馆的造物。它不需要绘制图案就能使用我的栈来施法。若其中存有图案 iota，则会像赫尔墨斯之策略一样运行，否则会将 iota 压入栈顶。若存有列表，则会依次对其中每个成员执行上述操作。",
+  "hexlink.page.upgraded_book.1": "$(l:hexlink:items/upgraded_book)$(item)升级法术书/$有如一整个图书馆的造物。它不需要绘制图案就能使用我的栈来施法。若其中存有图案 iota，则会像赫尔墨斯之策略一样运行，否则会将 iota 压入栈顶。若存有列表，则会依次对其中每个成员执行上述操作。可用颜色灵体为各页染色。",
   "hexlink.page.upgraded_book.2": "以下省略！",
 
   "hexlink.page.special_staff.1": "我发现了法杖与周遭媒质交互的奥秘。也许我能用这些新知识制造一个可定制的法杖。我需要用$(l:hexlink:patterns/readwrite)弗莱姆之策略/$向其中写入法术。此后用这种法杖绘制图案时，写入的法术便会以我当前栈和压入栈顶的所绘制图案施放。完毕后，栈上方的列表视作栈的新状态，下方的数则表明图案的解析方式。",
