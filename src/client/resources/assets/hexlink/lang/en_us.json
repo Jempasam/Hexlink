@@ -1,7 +1,7 @@
 {
   "hexlink.mishap.empty_collar": "Your focus collar is empty",
   "hexlink.mishap.no_collar_item": "You don't have any focus collar",
-  "hexlink.mishap.extractor_item": "suitable extraction catalyzer item like a Extraction Crystal",
+  "hexlink.mishap.extractor_item": "suitable extraction catalyzer item like an Extraction Crystal",
   "hexlink.mishap.spell_holder": "spell holder item",
   "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
   "hexlink.mishap.not_enough_soul": "Missing %d spirits",
@@ -97,25 +97,25 @@
 
 
   "hexlink.entry.readwrite": "Hexlink Read and Write",
-  "hexlink.page.write_spell": "This pattern can write a spell into a Special Wand, as an dropped item, in an item frame or the caster hand.",
+  "hexlink.page.write_spell": "This pattern can write a spell into a Special Wand, as an dropped item, in an item frame or in the caster hand.",
 
-  "hexlink.page.spirit_extraction.desc": "This spell can extract a spirit from an entity using a extraction catalyzer like an $(l:hexlink:items/crystals)Extraction Crystal/$ into a $(l:hexlink:items/bag)Spirit Container/$. The quantity of spirit extracted depends of the target. The items used in this spells can be dropped, in item frame, in the first slot of a container, or the offhand of the caster.",
+  "hexlink.page.spirit_extraction.desc": "This spell can extract a spirit from an entity, using a extraction catalyzer like an $(l:hexlink:items/crystals)Extraction Crystal/$, into a $(l:hexlink:items/bag)Spirit Container/$. The quantity of spirit extracted depends of the target. The items used, as a catalyzer or as a extraction target, can be dropped, in item frame, in the first slot of a container, or the offhand of the caster.",
   "hexlink.page.spirit_extraction.target.desc": "The first parameter is the entity to extract from, the second parameter is an extractor catalyzer, the third parameter is a spirit container. ",
 
-  "hexlink.page.spirit_transfer.desc": "These patterns are useful for manipulating and moving spirits. Spirits are stored in spirit containers. Spirit containers can be dropped items, items in frames, the caster holding a spirit container item, media vortexes, block positions of a container containing spirit container items.",
+  "hexlink.page.spirit_transfer.desc": "These patterns are useful for manipulating and moving spirits. Spirits are stored in spirit containers. Spirit containers can be dropped items, items in frames, the caster holding a spirit container item, media vortexes, the block position of a container containing spirit container items.",
   "hexlink.page.spirit_transfer.transfer.desc": "With this pattern I can transfer spirits from a spirit container to another spirit container. The first parameter is the container to extract from, the second parameter is the container to fill into.",
-  "hexlink.page.spirit_transfer.look.desc": "With this pattern I can get the type of the last Spirit of a spirit container or Null if it is empty or if the entity or block is not a spirit source.",
+  "hexlink.page.spirit_transfer.look.desc": "With this pattern I can get the type of the last Spirit stored of a spirit container or Null the container is empty or if the entity or block is not a spirit source.",
   "hexlink.page.spirit_transfer.count.desc": "With this pattern I can count how many spirits, of a type of spirit, a container contains.",
 
   "hexlink.page.get_nbt": "NBT Manipulation",
-  "hexlink.page.get_nbt.desc": "[Need MoreIotas]  I see everything (In a small radius). Wit this pattern I can extract every properties of a block or an entity into a list.",
+  "hexlink.page.get_nbt.desc": "[Need MoreIotas]  I see everything (In a small radius). With this pattern I can extract every property of a block or an entity into a list.",
 
   "hexlink.page.spirit_manifestation.desc": "With these powerful spells, I can manifest spirits in the physical world. I can manifest it through a entity catalyst or at a position.",
-  "hexlink.page.spirit_manifestation.target.desc": "The first parameter is a container to extract from, the second, the type of spirit to manifest, the third, the number of spirit to manifest, and the last, the entity or location to manifest at.",
-  "hexlink.page.spirit_self_manifestation.self.desc": "This shortcut variant take the spirits from an container in the caster inventory. The first parameter is the type of spirit to manifest, the second, the number of spirit to manifest, and the third, the entity or location to manifest at.",
+  "hexlink.page.spirit_manifestation.target.desc": "The first parameter is the container to extract from, the second is the type of spirit to manifest, the third is the number of spirits to manifest, and the last is the entity or location to manifest at.",
+  "hexlink.page.spirit_self_manifestation.self.desc": "This shortcut variant take the spirits from an container in the caster inventory. The first parameter is the type of spirit to manifest, the second is the number of spirit to manifest, and the third is the entity or location to manifest at.",
 
   "hexlink.page.spirit_other": "Other Spells",
-  "hexlink.page.spirit_vortex.desc": "With this pattern, I can summon a $(l:hexlink:items/vortex)Media Vortex/$. I can then transfer spirit into it, to store them. Spirits in a vortex can merge into new Spirits.",
+  "hexlink.page.spirit_vortex.desc": "With this pattern, I can summon a $(l:hexlink:items/vortex)Media Vortex/$. I can then transfer spirits into it, to store them. Spirits in a vortex can merge into new spirits.",
   "hexlink.page.spirit_look.desc": "With this pattern, I can feel the proximity of the spirit with a physical object.",
 
 
@@ -133,7 +133,7 @@
   "hexlink.page.big_tablet.desc": "Big Tablets can contains up to 1000 spirits. You can put spirits in and take spirits out using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$.",
 
   "hexlink.page.bag": "Soul Bags",
-  "hexlink.page.bag.desc": "Souls bags contains spirits that are used for $(l:hexlink:patterns/spirits/manifestation)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$. You can select a spirit type of a spirit container by shift scrolling while holding it like a spell book.",
+  "hexlink.page.bag.desc": "Souls bags contain spirits that are used for $(l:hexlink:patterns/spirits/manifestation)Spirit Manifestation/$. You can fill these using $(l:hexlink:patterns/spirits/transfer)Spirit Transfer/$. You can select a spirit type of a spirit container by shift scrolling while holding it like a spell book.",
   "hexlink.page.bag.small_bag": "Soul pockets can contains up to 2 different types of spirits, and 30 of each.",
   "hexlink.page.bag.medium_bag": "Soul bags can contains up to 5 different types of spirits, and 100 of each.",
   "hexlink.page.bag.big_bag": "Large soul bags can contains up to 10 different types of spirits, and 300 of each.",
@@ -144,8 +144,8 @@
   "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order. You can color each of its pages using Color Spirits.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
 
-  "hexlink.page.special_staff.1": "I discovered how the staffs help me to interfer with the surrounding media. I think I could create a customizable wand with my new knowledge. I have to write a spell in it using $(l:hexlink:patterns/readwrite)Flem's Gambit/$. Then when I'll write a pattern using this staff, the spell written in it will be cast with a stack filled with my current stack and the pattern I just drawn on top. Then, the list on top of the remaining stack is taken as my new stack. A number below the list on top of the remaining stack can tell me how the pattern has been resolved.",
+  "hexlink.page.special_staff.1": "I discovered how the staffs help me interfere with the surrounding media. I think I could create a customizable wand with my new knowledge. To do this, I have to write a spell in it using $(l:hexlink:patterns/readwrite)Flem's Gambit/$. Then when I'll write a pattern using this staff, the spell written in it will be cast with a stack filled with my current stack as a list and the pattern I just drawn on top. Then, the list on top of the remaining stack is taken as my new stack. A number below the list on top of the remaining stack can tell me how the pattern has been resolved.",
   "hexlink.page.special_staff.2": "I need a powerful energy to interact directly with the media realm.",
 
-  "hexlink.page.focus_collar": "With this focus around my neck, I can read from it with my left hand empty. I have to use $(l:hexlink:patterns/readwrite)these patterns/$."
+  "hexlink.page.focus_collar": "[TOTALLY FORBIDDEN] With this FORBIDDEN focus around my *CENSORED*, I can read from it with my FORBIDDEN left hand FORBIDDENLY empty. I *CENSORED* to use $(l:hexlink:patterns/readwrite)these patterns/$."
 }
