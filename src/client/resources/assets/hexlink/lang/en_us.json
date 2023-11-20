@@ -123,7 +123,7 @@
   "hexlink.page.crystals.desc": "Extraction Crystals help me to extract spirits. I can extract spirit using them with $(l:hexlink:patterns/spirits/extraction)Spirit Extraction/$. I can find these in dungeon chests.",
   "hexlink.page.crystals.block": "This type of crystal can extract the spirit of a block. With a Block Spirit, I can summon blocks and simulate interaction with one.",
   "hexlink.page.crystals.item": "This type of crystal can extract the spirit of an item. With an Item Spirit, I can simulate the use of an item.",
-  "hexlink.page.crystals.entity": "This type of crystal can extract the spirit of an entity. With an Entity Spirit, I can summon an entity.",
+  "hexlink.page.crystals.entity": "This type of crystal can extract the spirit of an entity. With an Entity Spirit, I can summon an entity. The entity's health must be at or below 4.",
   "hexlink.page.crystals.potion": "This type of crystal can extract the spirit of a potion effect. With a Potion Spirit, I can give an effect to an entity or summon an effect cloud.",
   "hexlink.page.crystals.enchantment": "This type of crystal can extract the spirit of a enchanted item or enchanted book. With a Enchantment Spirit, I can enchant a item or create an enchanted book. The target can be the first item of a container, a dropped item, an item in a frame or item of the caster offhand.",
   "hexlink.page.crystals.everything": "This type of crystal can extract the spirit of anything.",
@@ -141,7 +141,7 @@
   "hexlink.page.bag.philosophical_crystal": "Philosophical crystals are infinite sources of spirits.",
   "hexlink.page.bag.haunted_crystal": "Haunted crystals are unstable rip-off of philosophical crystals.",
 
-  "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. If it contains a list of Iota it do the same on each iotas of the list in order. You can color each of its pages using Color Spirits.",
+  "hexlink.page.upgraded_book.1": "A $(l:hexlink:items/upgraded_book)$(item)Upgraded Spellbook/$ is like an entire library of artifacts. It can call spell using my own iota stack without drawing patterns with it. If it contains a Pattern iota or a list of patterns, it is evaluated like with Hermes Gambit else the iota is added on top of my stack. You can color each of its pages using Color Spirits.",
   "hexlink.page.upgraded_book.2": "Blablabla... Magic!",
 
   "hexlink.page.special_staff.1": "I discovered how the staffs help me interfere with the surrounding media. I think I could create a customizable wand with my new knowledge. To do this, I have to write a spell in it using $(l:hexlink:patterns/readwrite)Flem's Gambit/$. Then when I'll write a pattern using this staff, the spell written in it will be cast with a stack filled with my current stack as a list and the pattern I just drawn on top. Then, the list on top of the remaining stack is taken as my new stack. A number below the list on top of the remaining stack can tell me how the pattern has been resolved.",

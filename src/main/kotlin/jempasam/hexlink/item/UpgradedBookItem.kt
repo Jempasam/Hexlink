@@ -46,10 +46,8 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings), ItemScrolla
             if(!info.resolutionType.success)return false
         }
         else if(iota is ListIota && doList){
-            for(element in iota.list){
-                val success=useIota(element, harness, false)
-                if(!success)return false
-            }
+            val info = harness.executeIotas(iota.list.toList(), harness.ctx.caster.getWorld())
+            if(!info.resolutionType.success)return false
         }
         else{
             harness.stack.add(iota)
