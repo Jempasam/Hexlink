@@ -1,5 +1,6 @@
 package jempasam.hexlink.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import jempasam.hexlink.data.HexlinkDataLoaders;
 import jempasam.hexlink.item.functionnality.ItemScrollable;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
@@ -18,15 +19,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Mixin(IdentifiableResourceReloadListener.class)
-public interface LootManagerMixin {
-    @Inject(at = @At("RETURN"), method = "getFabricDependencies", cancellable = true, remap = false)
-    default void getFabricDependencies(CallbackInfoReturnable<Collection<Identifier>> info) {
-        if((Object)this instanceof LootManager){
-            var ret = new ArrayList<>(info.getReturnValue());
-            ret.add(HexlinkDataLoaders.getEXTRACTORS());
-            ret.add(HexlinkDataLoaders.getSPIRITS());
-            info.setReturnValue(ret);
-        }
+@Mixin(LootManager.class)
+public abstract class LootManagerMixin implements IdentifiableResourceReloadListener {
+    @ModifyReturnValue(at = @At("RETURN"), method = "getFabricDependencies", remap = false)
+    Collection<Identifier> getFabricDependencies(Collection<Identifier> info) {
+        var ret = new ArrayList<>(info);
+        ret.add(HexlinkDataLoaders.getEXTRACTORS());
+        ret.add(HexlinkDataLoaders.getSPIRITS());
+        return ret;
     }
 }
