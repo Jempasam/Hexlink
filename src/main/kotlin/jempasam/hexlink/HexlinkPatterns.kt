@@ -7,8 +7,6 @@ import at.petrak.hexcasting.api.spell.math.HexDir
 import at.petrak.hexcasting.api.spell.math.HexPattern
 import jempasam.hexlink.operators.OpSpiritTest
 import jempasam.hexlink.operators.OpStub
-import jempasam.hexlink.operators.rw.OpReadTrinket
-import jempasam.hexlink.operators.rw.OpWriteTrinket
 import jempasam.hexlink.operators.spells.*
 import jempasam.hexlink.operators.spiritinfo.OpGetSpiritIota
 import jempasam.hexlink.operators.spiritinfo.OpSpiritCountIota
@@ -85,19 +83,6 @@ object HexlinkPatterns {
         register("write_spell",
                 HexPattern.fromAngles("waaddaawwwddaaddwaweqqqqqwaeaeaeaeaeaqwwwewddaaddwwwaaddaaw",HexDir.NORTH_EAST),
                 OpFillSpell(MediaConstants.CRYSTAL_UNIT)
-        )
-
-
-
-
-        register("read_trinket",
-                HexPattern.fromAngles("aqwqqqwq",HexDir.EAST),
-                OpReadTrinket()
-        )
-
-        register("write_trinket",
-                HexPattern.fromAngles("deweeewe",HexDir.EAST),
-                OpWriteTrinket()
         )
 
         registerFor("moreiotas", "get_nbt",

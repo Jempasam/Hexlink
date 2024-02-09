@@ -81,7 +81,6 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}")
 
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-api:$cardinalComponentsVersion"
-	modImplementation "dev.emi:trinkets:$trinketsVersion"
 	modImplementation "at.petra-k.paucal:paucal-fabric-$minecraft_version:$paucalVersion"
 	modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouliVersion-FABRIC"
 	modImplementation("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion") {

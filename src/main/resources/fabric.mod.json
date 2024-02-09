@@ -52,15 +52,14 @@
 	},
 
 	"depends": {
-		"fabricloader": ">=0.14.21",
+		"fabricloader": ">=0.15.5",
 		"minecraft": "~1.19.2",
 		"java": ">=17",
 		"fabric-api": "*",
 		"fabric-language-kotlin": ">=1.9.0",
 		"hexcasting": ">=0.10.3",
 		"cardinal-components-base": ">=5.0.2",
-		"cardinal-components-level": ">=5.0.2",
-		"trinkets": ">=3.4.0"
+		"cardinal-components-level": ">=5.0.2"
 	},
 
 	"suggests": {
