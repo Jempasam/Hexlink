@@ -147,5 +147,5 @@
   "hexlink.page.special_staff.1": "我发现了法杖与周遭媒质交互的奥秘。也许我能用这些新知识制造一个可定制的法杖。我需要用$(l:hexlink:patterns/readwrite)弗莱姆之策略/$向其中写入法术。此后用这种法杖绘制图案时，写入的法术便会以我当前栈和压入栈顶的所绘制图案施放。完毕后，栈上方的列表视作栈的新状态，下方的数则表明图案的解析方式。",
   "hexlink.page.special_staff.2": "直接与媒质域交互会需要大量能量。",
 
-  "hexlink.page.focus_collar": "有了这个戴在脖子上的核心，我就可以在左手不拿物品时从核心项圈读取了。但必须使用$(l:hexlink:patterns/readwrite)这些图案/$。"
+  "hexlink.page.focus_collar": "[完全禁忌]有了这个戴在[数据屏蔽]上的[禁忌]，我就可以在[禁忌]左手[禁忌]不拿物品时从[数据屏蔽]读取了。但[数据屏蔽]使用$(l:hexlink:patterns/readwrite)这些图案/$。"
 }
