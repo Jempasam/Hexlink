@@ -123,7 +123,7 @@
   "hexlink.page.crystals.desc": "提取水晶有助于提取灵体的过程。将其与$(l:hexlink:patterns/spirits/extraction)灵体提取/$配合使用就能提出灵体。能在地牢箱子中发现这类水晶。",
   "hexlink.page.crystals.block": "此类水晶可以装入方块灵体。可通过此类灵体召唤方块，或是模拟与其的交互。",
   "hexlink.page.crystals.item": "此类水晶可以装入物品灵体。可通过此类灵体模拟使用物品。",
-  "hexlink.page.crystals.entity": "此类水晶可以装入实体灵体。可通过此类灵体召唤实体。",
+  "hexlink.page.crystals.entity": "此类水晶可以装入实体灵体。可通过此类灵体召唤实体。实体的生命值必须小于等于 4。",
   "hexlink.page.crystals.potion": "此类水晶可以装入药水效果灵体。可通过此类灵体给予实体效果，或是召唤效果云。",
   "hexlink.page.crystals.enchantment": "此类水晶可以装入附魔物品和附魔书的灵体。可通过此类灵体附魔物品或制作附魔书。容器中的首个物品、物品实体、物品展示框中的物品，施法者副手中物品等均可视为提取目标。",
   "hexlink.page.crystals.everything": "此类水晶可以装入任意灵体。",
@@ -141,7 +141,7 @@
   "hexlink.page.bag.philosophical_crystal": "贤者水晶是灵体的无限来源。",
   "hexlink.page.bag.haunted_crystal": "缠魂水晶则是贤者水晶的不稳定仿制品。",
 
-  "hexlink.page.upgraded_book.1": "$(l:hexlink:items/upgraded_book)$(item)升级法术书/$有如一整个图书馆的造物。它不需要绘制图案就能使用我的栈来施法。若其中存有图案 iota，则会像赫尔墨斯之策略一样运行，否则会将 iota 压入栈顶。若存有列表，则会依次对其中每个成员执行上述操作。可用颜色灵体为各页染色。",
+  "hexlink.page.upgraded_book.1": "$(l:hexlink:items/upgraded_book)$(item)升级法术书/$有如一整个图书馆的造物。它不需要绘制图案就能使用我的栈来施法。若其中存有图案 iota 或列表，则会像赫尔墨斯之策略一样运行，否则会将 iota 压入栈顶。可用颜色灵体为各页染色。",
   "hexlink.page.upgraded_book.2": "以下省略！",
 
   "hexlink.page.special_staff.1": "我发现了法杖与周遭媒质交互的奥秘。也许我能用这些新知识制造一个可定制的法杖。我需要用$(l:hexlink:patterns/readwrite)弗莱姆之策略/$向其中写入法术。此后用这种法杖绘制图案时，写入的法术便会以我当前栈和压入栈顶的所绘制图案施放。完毕后，栈上方的列表视作栈的新状态，下方的数则表明图案的解析方式。",
