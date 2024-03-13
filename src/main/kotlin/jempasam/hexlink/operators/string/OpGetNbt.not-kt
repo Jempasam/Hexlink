@@ -1,8 +1,10 @@
 package jempasam.hexlink.operators.string
 
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.spell.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.NullIota
 import at.petrak.hexcasting.api.spell.iota.NullIota
 import jempasam.hexlink.operators.getVec3orEntity
 import jempasam.hexlink.utils.NbtToIotaHelper.toIota

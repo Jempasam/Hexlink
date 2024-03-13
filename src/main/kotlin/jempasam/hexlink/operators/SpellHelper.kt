@@ -2,14 +2,11 @@ package jempasam.hexlink.operators
 
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.EntityIota
-import at.petrak.hexcasting.api.spell.iota.EntityIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
+import at.petrak.hexcasting.api.casting.mishaps.MishapBadBlock
+import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import at.petrak.hexcasting.api.spell.iota.Vec3Iota
-import at.petrak.hexcasting.api.spell.mishaps.MishapBadBlock
-import at.petrak.hexcasting.api.spell.mishaps.MishapBadEntity
-import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
 import jempasam.hexlink.iota.SpiritIota
 import jempasam.hexlink.item.functionnality.ExtractorItem
 import jempasam.hexlink.mishap.InvalidSpiritSource
@@ -94,7 +91,7 @@ fun List<Iota>.getExtractorItem(ctx: CastingEnvironment, index: Int, max: Int): 
             val stack=StackHelper.stack(ctx.caster, ctx.world, iota.vec3)?.stack
             val item=stack?.item
             val extractor=if(item is ExtractorItem) item.getExtractor(stack) else null
-            extractor ?: throw MishapBadBlock(BlockPos(iota.vec3), Text.translatable("hexlink.mishap.extractor_item"))
+            extractor ?: throw MishapBadBlock(BlockPos.ofFloored(iota.vec3), Text.translatable("hexlink.mishap.extractor_item"))
         }
         else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }

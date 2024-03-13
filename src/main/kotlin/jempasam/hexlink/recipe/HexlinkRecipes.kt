@@ -3,6 +3,7 @@ package jempasam.hexlink.recipe
 import jempasam.hexlink.HexlinkMod
 import net.minecraft.recipe.Recipe
 import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.registry.Registry
 

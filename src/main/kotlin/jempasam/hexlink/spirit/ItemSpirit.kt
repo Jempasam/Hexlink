@@ -10,6 +10,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.*
@@ -18,7 +19,6 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
-import net.minecraft.registry.Registry
 import kotlin.jvm.optionals.getOrNull
 
 class ItemSpirit(val item: Item): Spirit {
@@ -53,7 +53,7 @@ class ItemSpirit(val item: Item): Spirit {
                         ItemUsageContext(
                                 caster,
                                 Hand.MAIN_HAND,
-                                BlockHitResult(position, Direction.UP, BlockPos(position), true)
+                                BlockHitResult(position, Direction.UP, BlockPos.ofFloored(position), true)
                         )
                 )
             }

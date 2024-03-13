@@ -1,7 +1,7 @@
 package jempasam.hexlink.operators.spiritinfo
 
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
-import at.petrak.hexcasting.api.spell.iota.DoubleIota
+import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import jempasam.hexlink.operators.getSpirit
 import jempasam.hexlink.spirit.inout.SpiritSource

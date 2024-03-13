@@ -1,11 +1,8 @@
 package jempasam.hexlink.utils
 
-import at.petrak.hexcasting.api.spell.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
-import at.petrak.hexcasting.api.spell.iota.ListIota
-import at.petrak.hexcasting.api.spell.iota.NullIota
+import at.petrak.hexcasting.api.casting.iota.ListIota
 import net.minecraft.nbt.*
-import ram.talia.moreiotas.api.spell.iota.StringIota
 
 object NbtToIotaHelper {
     fun NbtCompound.toIota(): ListIota {

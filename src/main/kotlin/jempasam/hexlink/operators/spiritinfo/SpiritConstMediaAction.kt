@@ -1,11 +1,12 @@
 package jempasam.hexlink.operators.spiritinfo
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import jempasam.hexlink.operators.getSpiritSourceOpt
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.spirit.inout.SpiritSource
+import net.minecraft.server.network.ServerPlayerEntity
 
 abstract class SpiritConstMediaAction(val onCaster: Boolean) : ConstMediaAction {
     abstract val argCount: Int
@@ -16,7 +17,9 @@ abstract class SpiritConstMediaAction(val onCaster: Boolean) : ConstMediaAction 
 
     override fun execute(args: List<Iota>, ctx: CastingEnvironment): List<Iota> {
         if(onCaster){
-            val source=SpiritHelper.spiritSource(ctx.caster)
+            val source=(ctx.castingEntity as? ServerPlayerEntity)
+                ?.let { SpiritHelper.spiritSource(it)}
+                ?: SpiritSource.NONE
             return execute(source, args, ctx)
         }
         else{

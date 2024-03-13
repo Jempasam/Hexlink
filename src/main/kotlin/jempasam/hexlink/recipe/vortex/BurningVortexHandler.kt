@@ -6,9 +6,9 @@ import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.utils.getSpirit
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.recipe.RecipeManager
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper.getFloat
-import net.minecraft.registry.Registry
 import kotlin.math.max
 
 class BurningVortexHandler : AbstractVortexHandler {

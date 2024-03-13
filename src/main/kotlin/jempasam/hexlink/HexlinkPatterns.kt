@@ -1,34 +1,34 @@
 package jempasam.hexlink
 
-import at.petrak.hexcasting.api.HexAPI
-import at.petrak.hexcasting.api.PatternRegistry
+
+import at.petrak.hexcasting.api.casting.ActionRegistryEntry
+import at.petrak.hexcasting.api.casting.castables.Action
+import at.petrak.hexcasting.api.casting.math.HexDir
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.misc.MediaConstants
-import at.petrak.hexcasting.api.spell.Action
-import at.petrak.hexcasting.api.spell.math.HexDir
-import at.petrak.hexcasting.api.spell.math.HexPattern
-import at.petrak.hexcasting.common.casting.PatternRegistryManifest
+import at.petrak.hexcasting.xplat.IXplatAbstractions
 import jempasam.hexlink.operators.OpSpiritTest
 import jempasam.hexlink.operators.OpStub
 import jempasam.hexlink.operators.spells.*
 import jempasam.hexlink.operators.spiritinfo.OpGetSpiritIota
 import jempasam.hexlink.operators.spiritinfo.OpSpiritCountIota
-import jempasam.hexlink.operators.string.OpGetNbt
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object HexlinkPatterns {
 
+    private val action_registry=IXplatAbstractions.INSTANCE.actionRegistry
+
     private fun register(id: String, pattern: HexPattern, op : Action){
-        HexPattern.
-        PatternRegistry.mapPattern(pattern, Identifier(HexlinkMod.MODID,id), op)
+        Registry.register(action_registry, Identifier(HexlinkMod.MODID,id), ActionRegistryEntry(pattern,op))
     }
 
     private fun registerFor(modid: String, id: String, pattern: HexPattern, op: ()->()->Action){
         if(FabricLoader.getInstance().isModLoaded(modid)){
-            PatternRegistry.mapPattern(pattern, Identifier(HexlinkMod.MODID,id), op()())
+            Registry.register(action_registry, Identifier(HexlinkMod.MODID,id), ActionRegistryEntry(pattern,op()()))
         }
-        else PatternRegistry.mapPattern(pattern, Identifier(HexlinkMod.MODID,id), OpStub(modid))
+        else Registry.register(action_registry, Identifier(HexlinkMod.MODID,id), ActionRegistryEntry(pattern,OpStub(modid)))
     }
 
     fun registerAll(){
@@ -86,12 +86,13 @@ object HexlinkPatterns {
 
         register("write_spell",
                 HexPattern.fromAngles("waaddaawwwddaaddwaweqqqqqwaeaeaeaeaeaqwwwewddaaddwwwaaddaaw",HexDir.NORTH_EAST),
-                OpFillSpell(MediaConstants.CRYSTAL_UNIT)
+                OpFillSpell(MediaConstants.CRYSTAL_UNIT.toInt())
         )
 
-        registerFor("moreiotas", "get_nbt",
+        /* TODO It need String Iotas from more iotas, which is not in 1.20.1
+            registerFor("moreiotas", "get_nbt",
             HexPattern.fromAngles("adaada", HexDir.SOUTH_WEST),
             {{OpGetNbt}}
-        )
+        )*/
     }
 }

@@ -6,9 +6,9 @@ import jempasam.hexlink.spirit.Spirit
 import net.minecraft.nbt.*
 import net.minecraft.recipe.AbstractCookingRecipe
 import net.minecraft.recipe.RecipeType
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
-import net.minecraft.registry.Registry
 import java.math.BigInteger
 
 fun JsonObject.asNBT(): NbtCompound{

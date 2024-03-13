@@ -7,10 +7,11 @@ import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes
 import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleType
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
-import net.minecraft.registry.Registry
 import net.minecraft.world.World
 
 object HexlinkParticles {

@@ -6,6 +6,7 @@ import net.minecraft.entity.FallingBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
@@ -14,14 +15,13 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
-import net.minecraft.registry.Registry
 import kotlin.jvm.optionals.getOrNull
 
 //TODO Long time block interaction with manifestation
 class BlockSpirit(val block: Block): Spirit{
 
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Spirit.Manifestation {
-        val startpos=BlockPos(position)
+        val startpos=BlockPos.ofFloored(position)
         var testpos=startpos
         var finalPower=0
         while(finalPower<power){
@@ -42,18 +42,18 @@ class BlockSpirit(val block: Block): Spirit{
 
     override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
         return Spirit.Manifestation(1,1){
-            val pos=BlockPos(entity.pos)
+            val pos=BlockPos.ofFloored(entity.pos)
             val state=block.defaultState
             block.onEntityCollision(state, world, pos, entity)
             block.onSteppedOn(world, pos, state, entity)
             if(entity is PlayerEntity){
-                block.onUse(state, world, pos, entity, Hand.MAIN_HAND, BlockHitResult(entity.pos, Direction.UP, BlockPos(entity.pos), true))
+                block.onUse(state, world, pos, entity, Hand.MAIN_HAND, BlockHitResult(entity.pos, Direction.UP, BlockPos.ofFloored(entity.pos), true))
             }
         }
     }
 
     override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {
-        val blockpos=BlockPos(from)
+        val blockpos=BlockPos.ofFloored(from)
         if(!world.getBlockState(blockpos).isAir)return Spirit.NONE_MANIFESTATION
         return Spirit.Manifestation(1,count){
             var direction=to.subtract(from)
@@ -75,7 +75,7 @@ class BlockSpirit(val block: Block): Spirit{
 
 
     override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
-        return world.getBlockState(BlockPos(position)).block==block
+        return world.getBlockState(BlockPos.ofFloored(position)).block==block
     }
 
     override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
