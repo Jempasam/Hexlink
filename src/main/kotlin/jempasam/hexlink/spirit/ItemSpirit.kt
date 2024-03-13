@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 import kotlin.jvm.optionals.getOrNull
 
 class ItemSpirit(val item: Item): Spirit {
@@ -113,7 +113,7 @@ class ItemSpirit(val item: Item): Spirit {
     override fun getName(): Text = item.name
 
     override fun serialize(): NbtElement {
-        return NbtString.of(Registry.ITEM.getId(item).toString())
+        return NbtString.of(Registries.ITEM.getId(item).toString())
     }
 
 
@@ -127,7 +127,7 @@ class ItemSpirit(val item: Item): Spirit {
 
         override fun deserialize(nbt: NbtElement): ItemSpirit? {
             if(nbt is NbtString){
-                val type=Registry.ITEM.getOrEmpty(Identifier(nbt.asString())).getOrNull()
+                val type=Registries.ITEM.getOrEmpty(Identifier(nbt.asString())).getOrNull()
                 return if(type!=null) ItemSpirit(type) else null
             }
             else throw IllegalArgumentException()

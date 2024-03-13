@@ -18,7 +18,7 @@ import jempasam.hexlink.world.LevelRanks
 import net.fabricmc.api.ModInitializer
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry;
 import org.slf4j.LoggerFactory
 
 object HexlinkMod : ModInitializer {

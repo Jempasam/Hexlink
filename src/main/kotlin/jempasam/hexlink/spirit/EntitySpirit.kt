@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
@@ -16,7 +17,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 import net.minecraft.world.World
 import kotlin.jvm.optionals.getOrNull
 import kotlin.math.sin
@@ -139,7 +140,7 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
     override fun getName(): Text = entityType.name
 
     override fun serialize(): NbtElement {
-        return NbtString.of(Registry.ENTITY_TYPE.getId(entityType).toString())
+        return NbtString.of(Registries.ENTITY_TYPE.getId(entityType).toString())
     }
 
 
@@ -153,7 +154,7 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
 
         override fun deserialize(nbt: NbtElement): EntitySpirit? {
             if(nbt is NbtString){
-                val type=Registry.ENTITY_TYPE.getOrEmpty(Identifier.tryParse(nbt.asString())).getOrNull()
+                val type=Registries.ENTITY_TYPE.getOrEmpty(Identifier.tryParse(nbt.asString())).getOrNull()
                 return type?.let{EntitySpirit(it)}
             }
             else throw IllegalArgumentException()

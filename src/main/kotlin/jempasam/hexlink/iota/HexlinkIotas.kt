@@ -1,10 +1,10 @@
 package jempasam.hexlink.iota
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.iota.IotaType
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.IotaType
+import at.petrak.hexcasting.common.lib.hex.IotaType
 import jempasam.hexlink.HexlinkMod
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 
 
 object HexlinkIotas{
@@ -17,7 +17,7 @@ object HexlinkIotas{
     }
 
     fun registerAll(){
-        for(entry in IOTAS) Registry.register(HexIotaTypes.REGISTRY, Identifier(HexlinkMod.MODID,entry.key), entry.value)
+        for(entry in IOTAS) Registry.register(IotaType.REGISTRY, Identifier(HexlinkMod.MODID,entry.key), entry.value)
     }
 
     val SPIRIT= make("spirit", SpiritIota.Type)

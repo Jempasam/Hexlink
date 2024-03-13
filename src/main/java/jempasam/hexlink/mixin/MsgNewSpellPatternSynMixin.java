@@ -1,9 +1,8 @@
 package jempasam.hexlink.mixin;
 
-import at.petrak.hexcasting.api.spell.casting.ControllerInfo;
-import at.petrak.hexcasting.api.spell.casting.ResolvedPattern;
-import at.petrak.hexcasting.common.network.MsgNewSpellPatternAck;
-import at.petrak.hexcasting.common.network.MsgNewSpellPatternSyn;
+import at.petrak.hexcasting.api.casting.eval.ResolvedPattern;
+import at.petrak.hexcasting.common.msgs.MsgNewSpellPatternC2S;
+import at.petrak.hexcasting.common.msgs.MsgNewSpellPatternS2C;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import jempasam.hexlink.item.functionnality.SpellCasterItem;
 import net.minecraft.server.MinecraftServer;
@@ -18,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(MsgNewSpellPatternSyn.class)
+@Mixin(MsgNewSpellPatternC2S.class)
 public abstract class MsgNewSpellPatternSynMixin {
     @Shadow @Final private Hand handUsed;
 
@@ -32,7 +31,7 @@ public abstract class MsgNewSpellPatternSynMixin {
             server.execute(()->{
                 var clientInfo=spellCaster.onCast(stack,this.handUsed, sender, resolvedPatterns.get(resolvedPatterns.size()-1).getPattern());
                 IXplatAbstractions.INSTANCE.sendPacketToPlayer(sender,
-                        new MsgNewSpellPatternAck(clientInfo, resolvedPatterns.size() - 1));
+                        new MsgNewSpellPatternS2C(clientInfo, resolvedPatterns.size() - 1));
             });
             info.cancel();
         }

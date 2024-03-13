@@ -1,13 +1,12 @@
 package jempasam.hexlink.operators.spells
 
-import at.petrak.hexcasting.api.spell.ParticleSpray
-import at.petrak.hexcasting.api.spell.RenderedSpell
-import at.petrak.hexcasting.api.spell.SpellAction
-import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.castables.SpellAction
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.iota.Iota
 import jempasam.hexlink.operators.getSpiritSourceAndPos
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.spirit.inout.SpiritSource
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.Vec3d
 
 abstract class SpiritSpellAction(val onCaster: Boolean) : SpellAction {
@@ -17,10 +16,11 @@ abstract class SpiritSpellAction(val onCaster: Boolean) : SpellAction {
 
     override val argc: Int get() = if(onCaster) argCount else argCount+1
 
-    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
+    override fun execute(args: List<Iota>, ctx: CastingEnvironment): SpellAction.Result {
         if(onCaster){
-            val source=SpiritHelper.spiritSource(ctx.caster)
-            return execute(source, ctx.caster.pos, args, ctx)
+            val caster=ctx.castingEntity
+            if(caster !is ServerPlayerEntity) return execute(SpiritSource.NONE, Vec3d.ZERO, args, ctx)
+            return execute(SpiritHelper.spiritSource(caster), caster.pos, args, ctx)
         }
         else{
             val source=args.getSpiritSourceAndPos(ctx,0,argCount+1)
@@ -28,5 +28,5 @@ abstract class SpiritSpellAction(val onCaster: Boolean) : SpellAction {
         }
     }
 
-    abstract fun execute(source: SpiritSource, sourcePos: Vec3d, args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>>
+    abstract fun execute(source: SpiritSource, sourcePos: Vec3d, args: List<Iota>, ctx: CastingEnvironment): SpellAction.Result
 }

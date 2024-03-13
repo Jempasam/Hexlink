@@ -3,7 +3,7 @@ package jempasam.hexlink.recipe.vortex
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.HexlinkRegistry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 object HexVortexHandlers {
     private fun <T: HexVortexHandler>register(id: String, handler: T): T{

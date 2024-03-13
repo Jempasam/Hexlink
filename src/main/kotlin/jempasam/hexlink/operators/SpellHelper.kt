@@ -1,8 +1,11 @@
 package jempasam.hexlink.operators
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.iota.EntityIota
 import at.petrak.hexcasting.api.spell.iota.EntityIota
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Vec3Iota
+import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.spell.iota.Vec3Iota
 import at.petrak.hexcasting.api.spell.mishaps.MishapBadBlock
 import at.petrak.hexcasting.api.spell.mishaps.MishapBadEntity
@@ -36,7 +39,7 @@ fun List<Iota>.getSpirit(index: Int, max: Int): Spirit{
     else throw MishapInvalidIota(ret, max-index-1, Text.translatable("hexlink.spirit_iota"))
 }
 
-fun List<Iota>.getSpiritSourceOpt(ctx: CastingContext, index: Int, max: Int): SpiritSource?{
+fun List<Iota>.getSpiritSourceOpt(ctx: CastingEnvironment, index: Int, max: Int): SpiritSource?{
     val source=when(val sourceIota=get(index)){
         is EntityIota ->{
             ctx.assertEntityInRange(sourceIota.entity)
@@ -51,15 +54,15 @@ fun List<Iota>.getSpiritSourceOpt(ctx: CastingContext, index: Int, max: Int): Sp
     return source
 }
 
-fun List<Iota>.getSpiritSource(ctx: CastingContext, index: Int, max: Int): SpiritSource
+fun List<Iota>.getSpiritSource(ctx: CastingEnvironment, index: Int, max: Int): SpiritSource
     = getSpiritSourceOpt(ctx, index, max) ?: throw InvalidSpiritSource(get(index))
 
 
-fun List<Iota>.getSpiritSourceAndPos(ctx: CastingContext, index: Int, max: Int): Pair<SpiritSource,Vec3d>
+fun List<Iota>.getSpiritSourceAndPos(ctx: CastingEnvironment, index: Int, max: Int): Pair<SpiritSource,Vec3d>
     = makePosPair(getSpiritSource(ctx,index,max), index)
 
 
-fun List<Iota>.getSpiritTarget(ctx: CastingContext, index: Int, max: Int): SpiritTarget{
+fun List<Iota>.getSpiritTarget(ctx: CastingEnvironment, index: Int, max: Int): SpiritTarget{
     val target=when(val targetIota=get(index)){
         is EntityIota ->{
             ctx.assertEntityInRange(targetIota.entity)
@@ -74,10 +77,10 @@ fun List<Iota>.getSpiritTarget(ctx: CastingContext, index: Int, max: Int): Spiri
     return target ?: throw InvalidSpiritTarget(get(index))
 }
 
-fun List<Iota>.getSpiritTargetAndPos(ctx: CastingContext, index: Int, max: Int): Pair<SpiritTarget,Vec3d>
+fun List<Iota>.getSpiritTargetAndPos(ctx: CastingEnvironment, index: Int, max: Int): Pair<SpiritTarget,Vec3d>
         = makePosPair(getSpiritTarget(ctx,index,max), index)
 
-fun List<Iota>.getExtractorItem(ctx: CastingContext, index: Int, max: Int): SpiritExtractor<*>{
+fun List<Iota>.getExtractorItem(ctx: CastingEnvironment, index: Int, max: Int): SpiritExtractor<*>{
     val source=when(val iota=get(index)){
         is EntityIota ->{
             ctx.assertEntityInRange(iota.entity)
@@ -99,7 +102,7 @@ fun List<Iota>.getExtractorItem(ctx: CastingContext, index: Int, max: Int): Spir
 }
 
 
-fun List<Iota>.getVec3orEntity(ctx: CastingContext, index: Int, max: Int): Any{
+fun List<Iota>.getVec3orEntity(ctx: CastingEnvironment, index: Int, max: Int): Any{
     return when(val iota=get(index)){
         is EntityIota ->{
             ctx.assertEntityInRange(iota.entity)
@@ -113,5 +116,5 @@ fun List<Iota>.getVec3orEntity(ctx: CastingContext, index: Int, max: Int): Any{
     }
 }
 
-fun List<Iota>.getExtractorItemAndPos(ctx: CastingContext, index: Int, max: Int): Pair<SpiritExtractor<*>,Vec3d>
+fun List<Iota>.getExtractorItemAndPos(ctx: CastingEnvironment, index: Int, max: Int): Pair<SpiritExtractor<*>,Vec3d>
     = makePosPair(getExtractorItem(ctx,index,max),index)

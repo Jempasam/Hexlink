@@ -59,7 +59,9 @@ object SpiritHelper{
     }
 
     fun spiritTarget(caster: PlayerEntity?, world: ServerWorld, pos: Vec3d): SpiritTarget?{
-        val bpos=BlockPos(pos)
+        val bpos=BlockPos.ofFloored(pos)
+
+
         val state=world.getBlockState(bpos)
         val blocktype=state.block
         if(blocktype is BlockSpiritTarget){
@@ -138,7 +140,7 @@ object SpiritHelper{
     }
 
     fun spiritSource(caster: PlayerEntity?, world: ServerWorld, pos: Vec3d): SpiritSource?{
-        val bpos=BlockPos(pos)
+        val bpos=BlockPos.ofFloored(pos)
         val state=world.getBlockState(bpos)
         val blocktype=state.block
         if(blocktype is BlockSpiritSource)return blocktype.getSpiritSource(world, bpos)

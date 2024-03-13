@@ -10,7 +10,7 @@ import net.minecraft.particle.ParticleType
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 import net.minecraft.world.World
 
 object HexlinkParticles {
@@ -20,7 +20,7 @@ object HexlinkParticles {
     }
 
     fun <P: ParticleEffect, T: ParticleType<P>>create(name: String, type: T): T{
-        Registry.register(Registry.PARTICLE_TYPE, Identifier(HexlinkMod.MODID,name), type)
+        Registry.register(Registries.PARTICLE_TYPE, Identifier(HexlinkMod.MODID,name), type)
         return type
     }
 

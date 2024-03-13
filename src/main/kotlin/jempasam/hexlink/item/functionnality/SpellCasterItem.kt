@@ -1,9 +1,9 @@
 package jempasam.hexlink.item.functionnality
 
-import at.petrak.hexcasting.api.spell.casting.ControllerInfo
-import at.petrak.hexcasting.api.spell.math.HexPattern
+import at.petrak.hexcasting.api.casting.eval.ExecutionClientView
+import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.HexSounds
-import at.petrak.hexcasting.common.network.MsgOpenSpellGuiAck
+import at.petrak.hexcasting.common.msgs.MsgOpenSpellGuiS2C
 import at.petrak.hexcasting.xplat.IXplatAbstractions
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -14,7 +14,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
 interface SpellCasterItem {
-    fun onCast(stack: ItemStack, hand: Hand, caster: ServerPlayerEntity, pattern: HexPattern): ControllerInfo
+    fun onCast(stack: ItemStack, hand: Hand, caster: ServerPlayerEntity, pattern: HexPattern): ExecutionClientView
 
     companion object{
         /**
@@ -23,17 +23,17 @@ interface SpellCasterItem {
         fun activeSpellCastingGUI(world: World, player: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
             if (player.isSneaking) {
                 if (world.isClient())
-                    player.playSound(HexSounds.FAIL_PATTERN, 1f, 1f)
+                    player.playSound(HexSounds.CAST_FAILURE, 1f, 1f)
                 else if (player is ServerPlayerEntity)
                     IXplatAbstractions.INSTANCE.clearCastingData(player)
             }
             if (!world.isClient() && player is ServerPlayerEntity) {
-                val harness = IXplatAbstractions.INSTANCE.getHarness(player, hand)
-                val patterns = IXplatAbstractions.INSTANCE.getPatterns(player)
-                val (first, second, third) = harness.generateDescs()
+                val machine = IXplatAbstractions.INSTANCE.getStaffcastVM(player, hand)
+                val patterns = IXplatAbstractions.INSTANCE.getPatternsSavedInUi(player)
+                val (first,second) = machine.generateDescs()
                 IXplatAbstractions.INSTANCE.sendPacketToPlayer(player,
-                        MsgOpenSpellGuiAck(hand, patterns, first, second, third,
-                                harness.parenCount))
+                        MsgOpenSpellGuiS2C(hand, patterns, first, second, machine.image.parenCount)
+                )
             }
             player.incrementStat(Stats.USED.getOrCreateStat(player.getStackInHand(hand).item))
             return TypedActionResult.success(player.getStackInHand(hand))

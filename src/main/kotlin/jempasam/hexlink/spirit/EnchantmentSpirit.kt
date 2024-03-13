@@ -7,11 +7,12 @@ import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 import kotlin.math.min
 
 class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
@@ -54,7 +55,7 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
     }
 
     override fun serialize(): NbtElement {
-        return NbtHelper.writeRegistry(Registry.ENCHANTMENT,enchantment)
+        return NbtHelper.writeRegistry(Registries.ENCHANTMENT,enchantment)
     }
 
 
@@ -62,7 +63,7 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
     object Type: Spirit.SpiritType<EnchantmentSpirit>{
         override fun getName(): Text = Text.translatable("hexlink.spirit.enchantment")
         override fun deserialize(nbt: NbtElement): EnchantmentSpirit? {
-            return NbtHelper.readRegistry(Registry.ENCHANTMENT,nbt)?.let { EnchantmentSpirit(it) }
+            return NbtHelper.readRegistry(Registries.ENCHANTMENT,nbt)?.let { EnchantmentSpirit(it) }
         }
     }
 }

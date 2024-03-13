@@ -1,9 +1,9 @@
 package jempasam.hexlink.item.functionnality
 
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.iota.ListIota
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.IotaType
+import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.utils.asCompound
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtElement
@@ -23,12 +23,12 @@ interface SpellHolderItem {
 
     fun getSpell(stack: ItemStack, level: ServerWorld): List<Iota>
         = getSpellNbt(stack)
-            ?.map { HexIotaTypes.deserialize(it.asCompound,level) }
+            ?.map { IotaType.deserialize(it.asCompound,level) }
             ?: listOf()
 
     fun setSpell(stack: ItemStack, spell: List<Iota>){
         val list=NbtList()
-        spell.forEach { list.add(HexIotaTypes.serialize(it)) }
+        spell.forEach { list.add(IotaType.serialize(it)) }
         setSpellNbt(stack,list)
     }
 

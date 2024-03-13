@@ -14,7 +14,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.math.Vec3f
+import org.joml.Vector3f
 
 class ColorSpirit(private val color: Int) : Spirit {
     private val entry= find(color)
@@ -41,7 +41,7 @@ class ColorSpirit(private val color: Int) : Spirit {
 
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation{
         return Spirit.Manifestation(1,count){
-            val color=Vec3f(
+            val color=Vector3f(
                     ColorHelper.Argb.getRed(color)/255f,
                     ColorHelper.Argb.getGreen(color)/255f,
                     ColorHelper.Argb.getBlue(color)/255f

@@ -9,7 +9,7 @@ import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 object NbtHelper {
     fun readSpirit(nbt: NbtCompound): Spirit?{

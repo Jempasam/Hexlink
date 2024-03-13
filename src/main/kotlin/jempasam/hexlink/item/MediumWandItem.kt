@@ -1,12 +1,13 @@
 package jempasam.hexlink.item
 
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.IotaType
+import at.petrak.hexcasting.api.pigment.FrozenPigment
 import at.petrak.hexcasting.api.utils.asCompound
 import at.petrak.hexcasting.api.utils.asList
 import at.petrak.hexcasting.api.utils.getInt
 import at.petrak.hexcasting.api.utils.getOrCreateList
 import at.petrak.hexcasting.common.items.magic.ItemArtifact
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
@@ -46,12 +47,12 @@ class MediumWandItem(settings: Settings, maximumSpell: Int) : ItemArtifact(setti
         val out = ArrayList<Iota>()
         for (patTag in actualSpell.asList) {
             val tag=patTag.asCompound
-            out.add(HexIotaTypes.deserialize(tag, level))
+            out.add(IotaType.deserialize(tag, level))
         }
         return out
     }
 
-    override fun writeHex(stack: ItemStack, program: List<Iota>, media: Int) {
+    override fun writeHex(stack: ItemStack, program: MutableList<Iota>, pigment: FrozenPigment?, media: Long) {
         val actual_spell= getSelectedSpellNbt(stack) ?: return
         val selected_num=stack.getInt(TAG_SELECTED, 0)
         val spell_count=getSpellCount(stack)
@@ -59,7 +60,7 @@ class MediumWandItem(settings: Settings, maximumSpell: Int) : ItemArtifact(setti
         
         actual_spell.clear()
         for (pat in program) {
-            actual_spell.add(HexIotaTypes.serialize(pat))
+            actual_spell.add(IotaType.serialize(pat))
         }
 
         withMedia(stack, media, media)

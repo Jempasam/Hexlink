@@ -1,11 +1,11 @@
 package jempasam.hexlink.operators.spells
 
-import at.petrak.hexcasting.api.spell.ParticleSpray
-import at.petrak.hexcasting.api.spell.RenderedSpell
-import at.petrak.hexcasting.api.spell.SpellAction
-import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.getIntBetween
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.ParticleSpray
+import at.petrak.hexcasting.api.casting.RenderedSpell
+import at.petrak.hexcasting.api.casting.castables.SpellAction
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.getIntBetween
+import at.petrak.hexcasting.api.casting.iota.Iota
 import jempasam.hexlink.mishap.MishapNoEnoughSoul
 import jempasam.hexlink.operators.getSpirit
 import jempasam.hexlink.operators.getSpiritSourceAndPos
@@ -21,17 +21,20 @@ class OpSpiritTransfer: SpellAction {
     override val argc: Int
         get() = 4
 
-    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
+    override fun execute(args: List<Iota>, ctx: CastingEnvironment): SpellAction.Result {
         val spirit=args.getSpirit(0,4)
         val count=args.getIntBetween(1, 1, Int.MAX_VALUE, 4)
         val source=args.getSpiritSourceAndPos(ctx,2,4)
         val target=args.getSpiritTargetAndPos(ctx,3,4)
 
+        ctx.assertVecInRange(source.second)
+        ctx.assertVecInRange(target.second)
+
         val sourceFlux=source.first.extract(count, spirit)
         if(sourceFlux.maxcount>0){
             val targetFlux=target.first.fill(sourceFlux.maxcount, spirit)
             if(targetFlux.maxcount>0){
-                return Triple(
+                return SpellAction.Result(
                         Spell(ctx.world, sourceFlux, targetFlux, targetFlux.maxcount, spirit, source.second, target.second),
                         1,
                         listOf(
@@ -46,7 +49,7 @@ class OpSpiritTransfer: SpellAction {
     }
 
     class Spell(val world: ServerWorld, val output: SpiritSource.SpiritOutputFlux, val input: SpiritTarget.SpiritInputFlux, val count: Int, val spirit: Spirit, val from: Vec3d, val to: Vec3d): RenderedSpell{
-        override fun cast(ctx: CastingContext) {
+        override fun cast(ctx: CastingEnvironment) {
             output.consume(count)
             input.fill(count)
             HexlinkParticles.sendLink(world, from, to, spirit.getColor(), count)

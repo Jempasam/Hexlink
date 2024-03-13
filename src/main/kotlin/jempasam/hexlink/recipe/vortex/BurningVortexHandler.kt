@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper.getFloat
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 import kotlin.math.max
 
 class BurningVortexHandler : AbstractVortexHandler {
@@ -48,7 +48,7 @@ class BurningVortexHandler : AbstractVortexHandler {
     }
 
     override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>> {
-        return Registry.ITEM.entrySet.asSequence().mapNotNull {
+        return Registries.ITEM.entrySet.asSequence().mapNotNull {
             val item=it.value
             val cooktime=FuelRegistry.INSTANCE.get(item)
             if(cooktime!=null){

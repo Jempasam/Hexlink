@@ -1,6 +1,7 @@
 package jempasam.hexlink.spirit
 
 import jempasam.hexlink.HexlinkMod
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.minecraft.block.Blocks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.SpawnGroup
@@ -16,10 +17,12 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.Vec3i
 import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.BuiltinRegistries
-import net.minecraft.util.registry.RegistryEntry
-import net.minecraft.util.registry.RegistryEntryList
-import net.minecraft.util.registry.RegistryKey
+import net.minecraft.registry.BuiltinRegistries
+import net.minecraft.registry.RegistryEntry
+import net.minecraft.registry.RegistryEntryList
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.registry.entry.RegistryEntryList
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.gen.feature.ConfiguredFeature
 import net.minecraft.world.gen.feature.FeaturePlacementContext
@@ -159,11 +162,11 @@ class BiomeSpirit(val biome: RegistryEntry<Biome>): Spirit{
 
 
     override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
-        if(!world.getBlockState(BlockPos(position).up()).isAir)
+        if(!world.getBlockState(BlockPos.ofFloored(position).up()).isAir)
             return Spirit.NONE_MANIFESTATION
         else
             return Spirit.Manifestation(1,count){
-                generateAll(world, BlockPos(position), it)
+                generateAll(world, BlockPos.ofFloored(position), it)
             }
     }
 

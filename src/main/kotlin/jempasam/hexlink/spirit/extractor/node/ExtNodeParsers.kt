@@ -3,7 +3,7 @@ package jempasam.hexlink.spirit.extractor.node
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.HexlinkRegistry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 object ExtNodeParsers {
     private fun <T: ExtractionNode.Parser<*>> register(id: String, node: T): T{

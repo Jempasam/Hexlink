@@ -4,7 +4,7 @@ import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 
 @Suppress("unused")

@@ -1,14 +1,15 @@
 package jempasam.hexlink.item
 
-import at.petrak.hexcasting.api.spell.casting.CastingHarness
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.iota.ListIota
-import at.petrak.hexcasting.api.spell.iota.PatternIota
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.ListIota
+import at.petrak.hexcasting.api.casting.iota.PatternIota
 import at.petrak.hexcasting.api.utils.getCompound
 import at.petrak.hexcasting.api.utils.getList
 import at.petrak.hexcasting.api.utils.getOrCreateList
 import at.petrak.hexcasting.api.utils.remove
-import at.petrak.hexcasting.common.items.ItemSpellbook
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook
 import at.petrak.hexcasting.xplat.IXplatAbstractions
 import jempasam.hexlink.item.functionnality.ItemScrollable
 import jempasam.hexlink.utils.IntListNbtAdapter
@@ -32,27 +33,29 @@ class UpgradedBookItem(settings: Settings): ItemSpellbook(settings), ItemScrolla
         val stack = user.getStackInHand(hand)
         if(world is ServerWorld){
             val iota= readIota(stack, world) ?: return TypedActionResult.fail(stack)
-            val harness = IXplatAbstractions.INSTANCE.getHarness(user as ServerPlayerEntity, hand)
-            val success = useIota(iota, harness)
-            IXplatAbstractions.INSTANCE.setHarness(user, harness)
+            val machine = IXplatAbstractions.INSTANCE.getStaffcastVM(user as ServerPlayerEntity, hand)
+            val (image,success) = useIota(iota, machine, world)
+            IXplatAbstractions.INSTANCE.setStaffcastImage(user,image)
             return if(success) TypedActionResult.success(stack) else TypedActionResult.fail(stack)
         }
         return TypedActionResult.success(stack)
     }
 
-    fun useIota(iota: Iota, harness: CastingHarness, doList: Boolean=true): Boolean{
+    fun useIota(iota: Iota, machine: CastingVM, world: ServerWorld, doList: Boolean=true): Pair<CastingImage, Boolean>{
         if(iota is PatternIota){
-            val info = harness.executeIota(iota, harness.ctx.caster.getWorld())
-            if(!info.resolutionType.success)return false
+            val info = machine.queueExecuteAndWrapIota(iota, world)
+            if(!info.resolutionType.success)return machine.image to false
         }
         else if(iota is ListIota && doList){
-            val info = harness.executeIotas(iota.list.toList(), harness.ctx.caster.getWorld())
-            if(!info.resolutionType.success)return false
+            val info = machine.queueExecuteAndWrapIotas(iota.list.toList(), world)
+            if(!info.resolutionType.success)return machine.image to false
         }
         else{
-            harness.stack.add(iota)
+            val new_stack= machine.image.stack.toMutableList()
+            new_stack.add(iota)
+            return machine.image.copy(stack=new_stack) to true
         }
-        return true
+        return machine.image to true
     }
 
     fun colors(stack: ItemStack): IntListNbtAdapter

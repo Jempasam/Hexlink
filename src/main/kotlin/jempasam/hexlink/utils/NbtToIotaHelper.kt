@@ -1,7 +1,7 @@
 package jempasam.hexlink.utils
 
 import at.petrak.hexcasting.api.spell.iota.DoubleIota
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.spell.iota.ListIota
 import at.petrak.hexcasting.api.spell.iota.NullIota
 import net.minecraft.nbt.*

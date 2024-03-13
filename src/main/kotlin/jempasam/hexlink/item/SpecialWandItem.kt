@@ -1,12 +1,12 @@
 package jempasam.hexlink.item
 
-import at.petrak.hexcasting.api.spell.casting.ControllerInfo
-import at.petrak.hexcasting.api.spell.casting.ResolvedPatternType
-import at.petrak.hexcasting.api.spell.iota.DoubleIota
-import at.petrak.hexcasting.api.spell.iota.ListIota
-import at.petrak.hexcasting.api.spell.iota.PatternIota
-import at.petrak.hexcasting.api.spell.math.HexPattern
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
+import at.petrak.hexcasting.api.casting.eval.ExecutionClientView
+import at.petrak.hexcasting.api.casting.eval.ResolvedPatternType
+import at.petrak.hexcasting.api.casting.iota.DoubleIota
+import at.petrak.hexcasting.api.casting.iota.IotaType
+import at.petrak.hexcasting.api.casting.iota.ListIota
+import at.petrak.hexcasting.api.casting.iota.PatternIota
+import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.xplat.IXplatAbstractions
 import jempasam.hexlink.item.functionnality.SpellCasterItem
 import jempasam.hexlink.item.functionnality.SpellHolderItem
@@ -31,34 +31,33 @@ class SpecialWandItem(settings: Settings): Item(settings), SpellCasterItem, Spel
 
     override fun setSpellNbt(stack: ItemStack, list: NbtList) { stack.orCreateNbt.put("spell",list) }
 
-    override fun onCast(stack: ItemStack, hand: Hand, caster: ServerPlayerEntity, pattern: HexPattern): ControllerInfo {
+    override fun onCast(stack: ItemStack, hand: Hand, caster: ServerPlayerEntity, pattern: HexPattern): ExecutionClientView {
         if(hasSpell(stack)){
-            // Close previous parenthese
-            val harness = IXplatAbstractions.INSTANCE.getHarness(caster,hand)
+            // Get machine and image
+            val machine = IXplatAbstractions.INSTANCE.getStaffcastVM(caster,hand)
             /*if(harness.parenCount>0){
                 harness.parenCount=0
                 harness.stack.addAll(harness.parenthesized)
             }*/
 
             // Execute spell
-            val spell=getSpell(stack, caster.getWorld())
-            harness.stack= mutableListOf(
-                ListIota(harness.stack),
-                PatternIota(pattern)
+            val spell=getSpell(stack, caster.serverWorld)
+            machine.image=machine.image.copy(
+                stack= mutableListOf(
+                    ListIota(machine.image.stack),
+                    PatternIota(pattern)
+                )
             )
-            val info = harness.executeIotas(spell, caster.getWorld())
+            val info = machine.queueExecuteAndWrapIotas(spell, caster.serverWorld)
 
             var resolution=info.resolutionType
-            val pharness= IXplatAbstractions.INSTANCE.getHarness(caster,hand)
             if(resolution==ResolvedPatternType.EVALUATED){
                 // Fetch Stack
-                val iota_stack=harness.stack
+                val new_stack=machine.image.stack
                     .lastOrNull() ?.let { it as? ListIota } ?.list ?.toMutableList() ?: mutableListOf()
 
-                pharness.stack=iota_stack
-
                 // Fetch Result Code
-                val iota_result=harness.stack
+                val iota_result=machine.image.stack
                     .dropLast(1) .lastOrNull() ?.let { it as? DoubleIota }?.double?.toInt() ?: -1
 
                 resolution=when{
@@ -72,25 +71,21 @@ class SpecialWandItem(settings: Settings): Item(settings), SpellCasterItem, Spel
             //pharness.parenthesized= mutableListOf()
             //pharness.parenCount= 0
             //pharness.escapeNext= false
-            IXplatAbstractions.INSTANCE.setHarness(caster,pharness)
+            IXplatAbstractions.INSTANCE.setStaffcastImage(caster,machine.image)
 
-            val pstack=pharness.stack.map { HexIotaTypes.serialize(it) }
-            return ControllerInfo(
+            val pstack=machine.image.stack.map { IotaType.serialize(it) }
+            return ExecutionClientView(
                     pstack.isEmpty(),
                     resolution,
-                    pstack,
                     listOf(),
-                    info.ravenmind,
-                    0
+                    info.ravenmind
             )
         }
-        return ControllerInfo(
+        return ExecutionClientView(
                 true,
                 ResolvedPatternType.ERRORED,
                 listOf(),
-                listOf(),
-                null,
-                0
+                null
         )
     }
 

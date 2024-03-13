@@ -1,8 +1,8 @@
 package jempasam.hexlink.operators.string
 
 import at.petrak.hexcasting.api.spell.ConstMediaAction
-import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.spell.iota.NullIota
 import jempasam.hexlink.operators.getVec3orEntity
 import jempasam.hexlink.utils.NbtToIotaHelper.toIota
@@ -15,7 +15,7 @@ object OpGetNbt : ConstMediaAction {
 
     override val argc: Int = 1
 
-    override fun execute(args: List<Iota>, ctx: CastingContext): List<Iota> {
+    override fun execute(args: List<Iota>, ctx: CastingEnvironment): List<Iota> {
         val target=args.getVec3orEntity(ctx, 0,1)
 
         val nbt=when(target){

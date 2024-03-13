@@ -7,12 +7,8 @@ import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import jempasam.hexlink.spirit.extractor.node.ExtractionNode
 import jempasam.hexlink.world.LevelRanks
+import net.minecraft.registry.*
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.MutableRegistry
-import net.minecraft.util.registry.Registry
-import net.minecraft.util.registry.RegistryKey
-import net.minecraft.util.registry.SimpleRegistry
-import java.util.*
 
 object HexlinkRegistry {
     // Spirit and extractors
@@ -49,14 +45,14 @@ object HexlinkRegistry {
 
     @SuppressWarnings("unchecked-cast")
     private fun <T>registry(key: RegistryKey<Registry<T>>): SimpleRegistry<T>{
-        val registry=SimpleRegistry(key, Lifecycle.stable(), null)
-        val regRegistry=Registry.REGISTRIES as MutableRegistry<MutableRegistry<*>>
+        val registry=SimpleRegistry(key, Lifecycle.stable(), false)
+        val regRegistry=Registries.REGISTRIES as MutableRegistry<MutableRegistry<*>>
         Registry.register(regRegistry, key as RegistryKey<MutableRegistry<*>>, registry)
         return registry
     }
 
     private fun <T> dynamicRegistry(key: RegistryKey<Registry<T>>): SimpleRegistry<T> {
-        return SimpleRegistry(key, Lifecycle.stable(), null)
+        return SimpleRegistry(key, Lifecycle.stable(), false)
     }
 
     fun <T>register(registry: MutableRegistry<T>, id: Identifier, value: T){
@@ -65,7 +61,7 @@ object HexlinkRegistry {
             Registry.register(registry, id, value)
         }
         else{
-            registry.replace(OptionalInt.empty(), RegistryKey.of(registry.key,id), value, Lifecycle.stable())
+            //registry.replace(OptionalInt.empty(), RegistryKey.of(registry.key,id), value, Lifecycle.stable())
         }
     }
 }

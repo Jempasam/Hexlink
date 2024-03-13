@@ -1,10 +1,13 @@
 package jempasam.hexlink
 
+import at.petrak.hexcasting.api.HexAPI
 import at.petrak.hexcasting.api.PatternRegistry
+import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.misc.MediaConstants
 import at.petrak.hexcasting.api.spell.Action
 import at.petrak.hexcasting.api.spell.math.HexDir
 import at.petrak.hexcasting.api.spell.math.HexPattern
+import at.petrak.hexcasting.common.casting.PatternRegistryManifest
 import jempasam.hexlink.operators.OpSpiritTest
 import jempasam.hexlink.operators.OpStub
 import jempasam.hexlink.operators.spells.*
@@ -17,6 +20,7 @@ import net.minecraft.util.Identifier
 object HexlinkPatterns {
 
     private fun register(id: String, pattern: HexPattern, op : Action){
+        HexPattern.
         PatternRegistry.mapPattern(pattern, Identifier(HexlinkMod.MODID,id), op)
     }
 

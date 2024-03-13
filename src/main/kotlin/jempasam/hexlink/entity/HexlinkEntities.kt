@@ -8,12 +8,12 @@ import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntit
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 object HexlinkEntities {
 
     fun <T: BlockEntity>register(id: String, type: BlockEntityType<T>): BlockEntityType<T>{
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, Identifier(HexlinkMod.MODID, id), type)
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier(HexlinkMod.MODID, id), type)
         return type
     }
 

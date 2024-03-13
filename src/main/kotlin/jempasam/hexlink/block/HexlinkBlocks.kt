@@ -6,12 +6,13 @@ import jempasam.hexlink.entity.block.BigTabletBlockEntity
 import jempasam.hexlink.entity.block.HexVortexBlockEntity
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
-import net.minecraft.block.Material
+import net.minecraft.block.Blocks
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.registry.Registry
 import net.minecraft.util.shape.VoxelShapes
 
 object HexlinkBlocks {
@@ -26,12 +27,12 @@ object HexlinkBlocks {
 
     fun registerBlocks(){
         for(entry in blocks)
-            Registry.register(Registry.BLOCK, Identifier(HexlinkMod.MODID, entry.id), entry.block)
+            Registry.register(Registries.BLOCK, Identifier(HexlinkMod.MODID, entry.id), entry.block)
     }
 
 
     val VORTEX: SpiritContainerBlock<HexVortexBlockEntity> = create( "vortex", SpiritContainerBlock(
-        AbstractBlock.Settings.of(Material.AMETHYST).nonOpaque().emissiveLighting{_,_,_->true}.luminance{_->6}.sounds(BlockSoundGroup.AMETHYST_BLOCK),
+        AbstractBlock.Settings.copy(Blocks.AMETHYST_BLOCK).nonOpaque().emissiveLighting{ _, _, _->true}.luminance{ _->6}.sounds(BlockSoundGroup.AMETHYST_BLOCK),
         {HexlinkEntities.HEX_VORTEX},
         { w, bp, bs, t -> t.tick(w,bp,bs) },
         2,
@@ -39,7 +40,7 @@ object HexlinkBlocks {
     ))
 
     val BIG_TABLET: SpiritContainerBlock<BigTabletBlockEntity> = create( "big_tablet", SpiritContainerBlock(
-        AbstractBlock.Settings.of(Material.STONE).nonOpaque().sounds(BlockSoundGroup.STONE),
+        AbstractBlock.Settings.copy(Blocks.STONE).nonOpaque().sounds(BlockSoundGroup.STONE),
         {HexlinkEntities.BIG_TABLET},
         { w, bp, bs, t -> t.tick(w,bp,bs) },
         1,

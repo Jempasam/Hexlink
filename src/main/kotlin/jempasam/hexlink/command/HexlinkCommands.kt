@@ -11,13 +11,13 @@ import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.command.argument.RegistryKeyArgumentType
 import net.minecraft.command.argument.RegistryKeyArgumentType.registryKey
+import net.minecraft.registry.Registry
+import net.minecraft.registry.RegistryKey
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.CommandManager.RegistrationEnvironment
 import net.minecraft.server.command.CommandManager.literal
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.Text
-import net.minecraft.util.registry.Registry
-import net.minecraft.util.registry.RegistryKey
 import java.util.*
 
 
@@ -53,13 +53,13 @@ object HexlinkCommands{
                                                                 ?.let { Text.selector(it, Optional.empty()) }
                                                                 ?: Text.of(player.toString())
                                                         it.source.sendFeedback(
-                                                                name.copy().append(Text.translatable("hexlink.text.is")).append(rank.getName()),
+                                                            {name.copy().append(Text.translatable("hexlink.text.is")).append(rank.getName())},
                                                                 false
                                                         )
                                                         1
                                                     }
                                                     else{
-                                                        it.source.sendFeedback(Text.translatable("no.owner"), false)
+                                                        it.source.sendFeedback({Text.translatable("no.owner")}, false)
                                                         0
                                                     }
                                                 }
@@ -104,7 +104,7 @@ object HexlinkCommands{
                                 }
                                 text.append("\n")
                             }
-                            context.source.sendFeedback(text, false)
+                            context.source.sendFeedback({text}, false)
                             0
                         }
                 )

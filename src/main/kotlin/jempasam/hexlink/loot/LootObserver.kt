@@ -22,7 +22,7 @@ object LootObserver : LootTableEvents.Modify{
     )
     override fun modifyLootTable(resourceManager: ResourceManager, lootManager: LootManager, id: Identifier, tableBuilder: LootTable.Builder, source: LootTableSource) {
         val count= magic_loots[id]
-        val focuses=lootManager.getTable(Identifier(HexlinkMod.MODID,"magic_loots"))
+        val focuses=lootManager.getLootTable(Identifier(HexlinkMod.MODID,"magic_loots"))
         if(count!=null){
             for(i in 0 until count){
                 for(pool in focuses.pools)tableBuilder.pool(pool)

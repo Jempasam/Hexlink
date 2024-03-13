@@ -1,20 +1,16 @@
 package jempasam.hexlink.item
 
-import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.item.functionnality.ItemSpiritSource
 import jempasam.hexlink.item.functionnality.ItemSpiritTarget
-import jempasam.hexlink.spirit.SpecialSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritSource
 import jempasam.hexlink.spirit.inout.SpiritTarget
 import jempasam.hexlink.utils.NbtHelper
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Style
 import net.minecraft.text.Text
-import net.minecraft.util.collection.DefaultedList
 import net.minecraft.world.World
 import kotlin.math.min
 
@@ -53,15 +49,5 @@ class SingleSpiritContainerItem(settings: Settings): Item(settings), ItemSpiritS
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
         val spirit=getSpirit(stack) ?: return
         tooltip.add(spirit.getName().copy().setStyle(Style.EMPTY.withColor(spirit.getColor()).withItalic(true)))
-    }
-
-    override fun appendStacks(group: ItemGroup, stacks: DefaultedList<ItemStack>) {
-        if(isIn(group)){
-            for(specialType in HexlinkRegistry.SPECIAL_SPIRIT){
-                val stack=defaultStack
-                setSpirit(stack,SpecialSpirit(specialType))
-                stacks.add(stack)
-            }
-        }
     }
 }

@@ -1,7 +1,7 @@
 package jempasam.hexlink.block
 
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.iota.NullIota
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.NullIota
 import jempasam.hexlink.block.functionnality.BlockIotaHolder
 import jempasam.hexlink.entity.functionnality.IotaHolder
 import net.minecraft.block.BlockRenderType

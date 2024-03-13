@@ -1,14 +1,16 @@
 package jempasam.hexlink.item
 
 import at.petrak.hexcasting.common.items.ItemFocus
+import at.petrak.hexcasting.common.items.storage.ItemFocus
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.block.HexlinkBlocks
 import jempasam.hexlink.creative_tab.HexlinkCreativeTab
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 object HexlinkItems {
 
@@ -20,13 +22,12 @@ object HexlinkItems {
     }
 
     fun registerAll(){
-        for(entry in items )Registry.register(Registry.ITEM, Identifier(HexlinkMod.MODID, entry.key), entry.value)
+        for(entry in items )Registry.register(Registries.ITEM, Identifier(HexlinkMod.MODID, entry.key), entry.value)
     }
 
     val Crystal= make("crystal", ExtractorCatalyzerItem(epicProps()))
 
     var UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
-    var FocusCollar=make("focus_collar", ItemFocus(forbiddenProps()))
     var SpecialStaff=make("special_staff", SpecialWandItem(simpleProps()))
     //var SpirtualStaff=make("spiritual_staff",SpiritualStaffItem(simpleProps()))
     var MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
@@ -44,28 +45,18 @@ object HexlinkItems {
 
     fun epicProps(): Item.Settings{
         return Item.Settings()
-                .group(HexlinkCreativeTab.MAIN_TAB)
                 .maxCount(1)
                 .rarity(Rarity.EPIC)
     }
 
     fun simpleProps(): Item.Settings{
         return Item.Settings()
-                .group(HexlinkCreativeTab.MAIN_TAB)
                 .maxCount(1)
                 .rarity(Rarity.COMMON)
     }
 
-    fun forbiddenProps(): Item.Settings{
-        return Item.Settings()
-                .fireproof()
-                .maxCount(1)
-                .rarity(Rarity.RARE)
-    }
-
     fun stackableProps(): Item.Settings{
         return Item.Settings()
-                .group(HexlinkCreativeTab.MAIN_TAB)
                 .maxCount(64)
                 .rarity(Rarity.COMMON)
     }

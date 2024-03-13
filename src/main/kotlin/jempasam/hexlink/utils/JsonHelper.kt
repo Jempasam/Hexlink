@@ -8,7 +8,7 @@ import net.minecraft.recipe.AbstractCookingRecipe
 import net.minecraft.recipe.RecipeType
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 import java.math.BigInteger
 
 fun JsonObject.asNBT(): NbtCompound{
@@ -102,13 +102,13 @@ fun Spirit.toJSON(): JsonElement{
 
 @Suppress("UNCHECKED_CAST")
 fun JsonObject.getCookingRecipeType(name: String): RecipeType<AbstractCookingRecipe>{
-    val recipe=Registry.RECIPE_TYPE.get(Identifier(JsonHelper.getString(this,name)))
+    val recipe=Registries.RECIPE_TYPE.get(Identifier(JsonHelper.getString(this,name)))
     recipe ?: throw JsonParseException("No such recipe type of furnace")
     return recipe as RecipeType<AbstractCookingRecipe>
 }
 
 fun JsonObject.addCookingRecipeType(name: String, recipeType: RecipeType<AbstractCookingRecipe>){
-    val id=Registry.RECIPE_TYPE.getKey(recipeType)
+    val id=Registries.RECIPE_TYPE.getKey(recipeType)
     if(id!=null){
         this.addProperty(name,id.toString())
     }

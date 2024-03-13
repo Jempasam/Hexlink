@@ -8,11 +8,11 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
+import net.minecraft.registry.Registries
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.registry.Registry
 import kotlin.jvm.optionals.getOrNull
 
 class PotionSpirit(val potionEffect: StatusEffect): Spirit  {
@@ -66,7 +66,7 @@ class PotionSpirit(val potionEffect: StatusEffect): Spirit  {
     override fun getName(): Text = potionEffect.name
 
     override fun serialize(): NbtElement {
-        return NbtString.of(Registry.STATUS_EFFECT.getId(potionEffect).toString())
+        return NbtString.of(Registries.STATUS_EFFECT.getId(potionEffect).toString())
     }
 
 
@@ -80,7 +80,7 @@ class PotionSpirit(val potionEffect: StatusEffect): Spirit  {
 
         override fun deserialize(nbt: NbtElement): PotionSpirit? {
             if(nbt is NbtString){
-                val type=Registry.STATUS_EFFECT.getOrEmpty(Identifier.tryParse(nbt.asString())).getOrNull() ?: return null
+                val type=Registries.STATUS_EFFECT.getOrEmpty(Identifier.tryParse(nbt.asString())).getOrNull() ?: return null
                 return PotionSpirit(type)
             }
             else throw IllegalArgumentException()
