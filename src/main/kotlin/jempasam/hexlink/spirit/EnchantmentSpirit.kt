@@ -5,6 +5,7 @@ import jempasam.hexlink.utils.NbtHelper
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
 import net.minecraft.registry.Registries
@@ -12,7 +13,6 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.math.Vec3d
-import net.minecraft.registry.Registry
 import kotlin.math.min
 
 class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
@@ -25,11 +25,11 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
 
     override fun hashCode(): Int = enchantment.hashCode()*39
 
-    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
-        return manifestStack(StackHelper.stack(caster,world,position), count)
+    override fun manifestAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+        return manifestStack(StackHelper.stack(caster as? PlayerEntity,world,position), count)
     }
-    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
-        return manifestStack(StackHelper.stack(caster,entity), count)
+    override fun manifestIn(caster: LivingEntity?, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+        return manifestStack(StackHelper.stack(caster as? PlayerEntity,entity), count)
     }
     private fun manifestStack(worldStack: StackHelper.WorldStack?, count: Int): Spirit.Manifestation{
         if(worldStack==null)return Spirit.NONE_MANIFESTATION
@@ -44,11 +44,11 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
         return Spirit.NONE_MANIFESTATION
     }
 
-    override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
-        return lookStack(StackHelper.stack(caster,entity))
+    override fun lookIn(caster: LivingEntity?, world: ServerWorld, entity: Entity): Boolean {
+        return lookStack(StackHelper.stack(caster as? PlayerEntity,entity))
     }
-    override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
-        return lookStack(StackHelper.stack(caster,world,position))
+    override fun lookAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d): Boolean {
+        return lookStack(StackHelper.stack(caster as? PlayerEntity,world,position))
     }
     private fun lookStack(worldStack: StackHelper.WorldStack?): Boolean{
         return worldStack!=null && EnchantmentHelper.getLevel(enchantment,worldStack.stack)!=0

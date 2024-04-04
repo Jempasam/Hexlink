@@ -5,6 +5,7 @@ import com.google.gson.JsonSyntaxException
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.utils.asNBT
 import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
 import net.minecraft.server.world.ServerWorld
@@ -23,7 +24,7 @@ interface Spirit {
      * @param position The location
      * @param count Spirit count used in the infusion
      */
-    fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Manifestation
+    fun manifestAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d, count: Int): Manifestation
 
     /**
      * Manifest the spirit in an entity.
@@ -32,7 +33,7 @@ interface Spirit {
      * @param entity The entity
      * @param count Spirit count used in the infusion
      */
-    fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Manifestation
+    fun manifestIn(caster: LivingEntity?, world: ServerWorld, entity: Entity, count: Int): Manifestation
 
     /**
      * Manifest the spirit as a link between two location.
@@ -42,7 +43,7 @@ interface Spirit {
      * @param to Second location
      * @param count Spirit count used in the infusion
      */
-    fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Manifestation{
+    fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Manifestation{
         return manifestAt(caster,world,from,count)
     }
 
@@ -54,7 +55,7 @@ interface Spirit {
      * @param to Second entity
      * @param count Spirit count used in the infusion
      */
-    fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Entity, count: Int): Manifestation{
+    fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Entity, to: Entity, count: Int): Manifestation{
         return manifestIn(caster,world,from,count)
     }
 
@@ -66,7 +67,7 @@ interface Spirit {
      * @param to A location
      * @param count Spirit count used in the infusion
      */
-    fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Manifestation{
+    fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Manifestation{
         return manifestIn(caster,world,from,count)
     }
 
@@ -88,12 +89,12 @@ interface Spirit {
     /**
      * Make the spirit look at a location
      */
-    fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean
+    fun lookAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d): Boolean
 
     /**
      * Make the spirit look at an entity
      */
-    fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean
+    fun lookIn(caster: LivingEntity?, world: ServerWorld, entity: Entity): Boolean
 
     override fun equals(other: Any?): Boolean
 

@@ -3,6 +3,7 @@ package jempasam.hexlink.spirit
 import net.minecraft.block.Block
 import net.minecraft.entity.Entity
 import net.minecraft.entity.FallingBlockEntity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
@@ -20,7 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 //TODO Long time block interaction with manifestation
 class BlockSpirit(val block: Block): Spirit{
 
-    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, power: Int): Spirit.Manifestation {
+    override fun manifestAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d, power: Int): Spirit.Manifestation {
         val startpos=BlockPos.ofFloored(position)
         var testpos=startpos
         var finalPower=0
@@ -40,7 +41,7 @@ class BlockSpirit(val block: Block): Spirit{
         }
     }
 
-    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+    override fun manifestIn(caster: LivingEntity?, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
         return Spirit.Manifestation(1,1){
             val pos=BlockPos.ofFloored(entity.pos)
             val state=block.defaultState
@@ -52,7 +53,7 @@ class BlockSpirit(val block: Block): Spirit{
         }
     }
 
-    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {
+    override fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {
         val blockpos=BlockPos.ofFloored(from)
         if(!world.getBlockState(blockpos).isAir)return Spirit.NONE_MANIFESTATION
         return Spirit.Manifestation(1,count){
@@ -65,20 +66,20 @@ class BlockSpirit(val block: Block): Spirit{
         }
     }
 
-    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Spirit.Manifestation {
+    override fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Spirit.Manifestation {
         return super.manifestBetween(caster, world, from.pos, to, count)
     }
 
-    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Entity, count: Int): Spirit.Manifestation {
+    override fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Entity, to: Entity, count: Int): Spirit.Manifestation {
         return super.manifestBetween(caster, world, from.pos, to.pos, count)
     }
 
 
-    override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
+    override fun lookAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d): Boolean {
         return world.getBlockState(BlockPos.ofFloored(position)).block==block
     }
 
-    override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
+    override fun lookIn(caster: LivingEntity?, world: ServerWorld, entity: Entity): Boolean {
         return lookAt(caster, world, entity.pos.add(0.0, -0.5, -0.0))
     }
 

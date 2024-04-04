@@ -5,7 +5,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.SpawnGroup
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
@@ -17,7 +16,6 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.ColorHelper
 import net.minecraft.util.math.Vec3d
-import net.minecraft.registry.Registry
 import net.minecraft.world.World
 import kotlin.jvm.optionals.getOrNull
 import kotlin.math.sin
@@ -41,11 +39,11 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
             }
     }
 
-    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
+    override fun manifestAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation {
         return spawn(world, position, count){_,_->}
     }
 
-    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {
+    override fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Vec3d, to: Vec3d, count: Int): Spirit.Manifestation {
         var direction=to.subtract(from)
         if(direction.length()>5)direction=direction.normalize().multiply(5.0)
         return spawn(world, from, count){ i,e->
@@ -53,7 +51,7 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
         }
     }
 
-    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Spirit.Manifestation {
+    override fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Entity, to: Vec3d, count: Int): Spirit.Manifestation {
         return spawn(world, to, count){ i, e ->
             if(from is LivingEntity && e is LivingEntity)from.attacker=e
         }
@@ -82,11 +80,11 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
             }
     }
 
-    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
+    override fun manifestIn(caster: LivingEntity?, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation {
         return spawn(world, entity, count){}
     }
 
-    override fun manifestBetween(caster: PlayerEntity, world: ServerWorld, from: Entity, to: Entity, count: Int): Spirit.Manifestation {
+    override fun manifestBetween(caster: LivingEntity?, world: ServerWorld, from: Entity, to: Entity, count: Int): Spirit.Manifestation {
         return spawn(world, from, count){
             if(it is LivingEntity && to is LivingEntity)it.attacker=to
         }
@@ -98,11 +96,11 @@ class EntitySpirit(val entityType: EntityType<*>): Spirit {
 
 
 
-    override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
+    override fun lookIn(caster: LivingEntity?, world: ServerWorld, entity: Entity): Boolean {
         return entity.type==entityType
     }
 
-    override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
+    override fun lookAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d): Boolean {
         val entities=world.getEntitiesByType( entityType, Box.of(position, 0.7, 0.7, 0.7), Predicates.alwaysTrue())
         return entities.isNotEmpty()
     }

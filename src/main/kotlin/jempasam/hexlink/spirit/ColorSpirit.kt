@@ -1,6 +1,7 @@
 package jempasam.hexlink.spirit
 
 import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.DyeItem
 import net.minecraft.item.DyeableItem
@@ -39,7 +40,7 @@ class ColorSpirit(private val color: Int) : Spirit {
         return Spirit.NONE_MANIFESTATION
     }
 
-    override fun manifestAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation{
+    override fun manifestAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d, count: Int): Spirit.Manifestation{
         return Spirit.Manifestation(1,count){
             val color=Vector3f(
                     ColorHelper.Argb.getRed(color)/255f,
@@ -56,8 +57,8 @@ class ColorSpirit(private val color: Int) : Spirit {
         }
     }
 
-    override fun manifestIn(caster: PlayerEntity, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation
-        = colorize(StackHelper.stack(caster,entity))
+    override fun manifestIn(caster: LivingEntity?, world: ServerWorld, entity: Entity, count: Int): Spirit.Manifestation
+        = colorize(StackHelper.stack(caster as? PlayerEntity,entity))
 
 
     fun testColor(stack: StackHelper.WorldStack?): Boolean{
@@ -68,11 +69,11 @@ class ColorSpirit(private val color: Int) : Spirit {
         }
         return false
     }
-    override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean
-            = testColor(StackHelper.stack(caster,world,position))
+    override fun lookAt(caster: LivingEntity?, world: ServerWorld, position: Vec3d): Boolean
+            = testColor(StackHelper.stack(caster as? PlayerEntity,world,position))
 
-    override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean
-            = testColor(StackHelper.stack(caster,entity))
+    override fun lookIn(caster: LivingEntity?, world: ServerWorld, entity: Entity): Boolean
+            = testColor(StackHelper.stack(caster as? PlayerEntity,entity))
 
 
 
