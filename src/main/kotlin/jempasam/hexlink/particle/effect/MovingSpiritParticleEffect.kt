@@ -50,7 +50,7 @@ class MovingSpiritParticleEffect(val red: Float, val green: Float, val blue: Flo
                     buf.readFloat(),
                     buf.readFloat(),
                     buf.readFloat(),
-                    buf.readInt(),
+                    buf.readVarInt(),
                     Vec3d(
                             buf.readDouble(),
                             buf.readDouble(),
