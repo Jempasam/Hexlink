@@ -9,10 +9,12 @@ import net.minecraft.resource.JsonDataLoader
 import net.minecraft.resource.ResourceManager
 import net.minecraft.util.Identifier
 import net.minecraft.util.profiler.Profiler
+import net.minecraft.util.registry.DynamicRegistryManager
 
 abstract class JsonEntryDataLoader(private val name: String): JsonDataLoader(Gson(),name), IdentifiableResourceReloadListener {
     override fun apply(prepared: MutableMap<Identifier, JsonElement>, manager: ResourceManager, profiler: Profiler) {
         before()
+        DynamicRegistryManager.createAndLoad()
         for(entry in prepared){
             try{
                 val jsonObject=entry.value.asJsonObject

@@ -7,7 +7,9 @@ import net.minecraft.entity.Entity
 import net.minecraft.server.network.ServerPlayerEntity
 
 interface ExtractionNode {
+
     fun filter(source: Source): Source
+
     class Source(var count: Int, var caster: ServerPlayerEntity?, var entity: Entity, var spirit: Spirit?, var consumer: (Int)->Unit){
         private var consumed=false
         fun consume(count: Int){

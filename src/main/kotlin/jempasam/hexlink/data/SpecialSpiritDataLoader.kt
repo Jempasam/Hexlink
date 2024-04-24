@@ -14,21 +14,23 @@ import net.minecraft.util.JsonHelper
 
 object SpecialSpiritDataLoader: JsonEntryDataLoader("special_spirits") {
 
+    override fun before() = HexlinkRegistry.SPECIAL_SPIRIT.clear()
+
     override fun apply(id: Identifier, obj: JsonObject) {
         fun getSpiritOpt(obj: JsonObject, name: String): Spirit? {
             return obj.get(name)
-                    ?.asNBT()
-                    ?.let { if(it is NbtCompound) NbtHelper.readSpirit(it) else null }
+                ?.asNBT()
+                ?.let { if(it is NbtCompound) NbtHelper.readSpirit(it) else null }
         }
 
-        fun cast(spirit: Spirit?, name: String): Spirit{
+        fun cast(spirit: Spirit?, name: String): Spirit {
             return spirit ?: throw JsonParseException("Missing or invalid \"$name\"")
         }
         val name=obj.get("name")
-                ?.let { Text.Serializer.fromJson(it) }
-                ?: throw JsonParseException("Missing or invalid \"name\"")
+            ?.let { Text.Serializer.fromJson(it) }
+            ?: throw JsonParseException("Missing or invalid \"name\"")
 
-        val color=JsonHelper.getInt(obj,"color")
+        val color= JsonHelper.getInt(obj,"color")
 
         var manifestAt: Spirit?=null
         var manifestIn: Spirit?=null
@@ -67,15 +69,17 @@ object SpecialSpiritDataLoader: JsonEntryDataLoader("special_spirits") {
         getSpiritOpt(obj,"lookAt")?.also { lookAt=it }
         getSpiritOpt(obj,"lookIn")?.also { lookIn=it }
 
-        val type=SpecialSpirit.SpecialType(
-                cast(manifestAt,"manifestAt"),
-                cast(manifestIn,"manifestIn"),
-                cast(lookAt,"lookAt"),
-                cast(lookIn,"lookIn"),
-                name, color
+        val type= SpecialSpirit.SpecialType(
+            cast(manifestAt,"manifestAt"),
+            cast(manifestIn,"manifestIn"),
+            cast(lookAt,"lookAt"),
+            cast(lookIn,"lookIn"),
+            name, color
         )
 
-        HexlinkRegistry.register(HexlinkRegistry.SPECIAL_SPIRIT, id, type)
+        HexlinkRegistry.SPECIAL_SPIRIT.register(id,type)
     }
+
+    override fun after() = HexlinkRegistry.SPECIAL_SPIRIT.lock()
 
 }

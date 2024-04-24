@@ -9,6 +9,7 @@ import jempasam.hexlink.iota.HexlinkIotas
 import jempasam.hexlink.item.HexlinkItems
 import jempasam.hexlink.loot.LootObserver
 import jempasam.hexlink.loot.function.HexlinkLootFunctions
+import jempasam.hexlink.network.SendDataPacket
 import jempasam.hexlink.particle.HexlinkParticles
 import jempasam.hexlink.recipe.HexlinkRecipes
 import jempasam.hexlink.recipe.vortex.HexVortexHandlers
@@ -18,7 +19,6 @@ import jempasam.hexlink.world.LevelRanks
 import net.fabricmc.api.ModInitializer
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import org.slf4j.LoggerFactory
 
 object HexlinkMod : ModInitializer {
@@ -45,8 +45,10 @@ object HexlinkMod : ModInitializer {
 		ExtNodeParsers
 
 		HexlinkDataLoaders
+		SendDataPacket
 
-		Registry.register(HexlinkRegistry.RANK, Identifier(MODID,"testrank"), LevelRanks.Rank(0.1f, 10.0f,DyeColor.YELLOW.fireworkColor))
-
+		HexlinkRegistry.RANK.clear()
+		HexlinkRegistry.RANK.register(Identifier(MODID,"testrank"), LevelRanks.Rank(0.1f, 10.0f,DyeColor.YELLOW.fireworkColor))
+		HexlinkRegistry.RANK.lock()
 	}
 }
