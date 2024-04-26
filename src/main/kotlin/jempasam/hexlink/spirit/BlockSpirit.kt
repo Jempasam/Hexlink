@@ -3,7 +3,9 @@ package jempasam.hexlink.spirit
 import net.minecraft.block.Block
 import net.minecraft.entity.Entity
 import net.minecraft.entity.FallingBlockEntity
+import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.BlockItem
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
 import net.minecraft.server.world.ServerWorld
@@ -79,7 +81,10 @@ class BlockSpirit(val block: Block): Spirit{
     }
 
     override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
-        return lookAt(caster, world, entity.pos.add(0.0, -0.5, -0.0))
+        if(entity !is ItemEntity)return false
+        val item=entity.stack.item
+        if(item !is BlockItem)return false
+        return item.block==block
     }
 
 
