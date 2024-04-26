@@ -92,7 +92,9 @@ class ItemSpirit(val item: Item): Spirit {
 
 
     override fun lookIn(caster: PlayerEntity, world: ServerWorld, entity: Entity): Boolean {
-        return entity is LivingEntity && (entity.getStackInHand(Hand.MAIN_HAND).item==item) && entity.getStackInHand(Hand.OFF_HAND).item==item
+        val stack= StackHelper.stack(caster,entity) ?: return false
+        val item=stack.stack.item
+        return item==this.item
     }
 
     override fun lookAt(caster: PlayerEntity, world: ServerWorld, position: Vec3d): Boolean {
