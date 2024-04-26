@@ -29,6 +29,7 @@ open class InfiniteSpiritItem(settings: Settings): Item(settings), ItemSpiritSou
     override fun getSpiritSource(stack: ItemStack): SpiritSource {
         return object:SpiritSource{
             override fun last(): Spirit? = getSpirits(stack).run { if(size>0) this[0] else null }
+            override fun all(): Set<Spirit> = getSpirits(stack).run { toSet() }
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
                 val fcount= if(isDamageable) stack.maxDamage-stack.damage else count
                 if(getSpirits(stack).contains(spirit))return SpiritSource.SpiritOutputFlux(fcount) {

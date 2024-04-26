@@ -103,12 +103,17 @@ class HexVortexBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : Bl
     }
 
     override fun last(): Spirit? {
+        sequence{
+            yield(1)
+        }
         return when {
             output.isNotEmpty() -> output.last()
             input.isNotEmpty() -> input.last()
             else -> null
         }
     }
+
+    override fun all() = (output.asSequence() + input.asSequence()).toSet()
 
     override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
         val currentCount=min(count, size-input.size-output.size)

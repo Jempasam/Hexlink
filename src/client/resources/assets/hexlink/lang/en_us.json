@@ -16,6 +16,7 @@
   "hexcasting.spell.hexlink:spirit_extraction": "Spirit Extraction",
   "hexcasting.spell.hexlink:spirit_transfer": "Spirit Transfer",
   "hexcasting.spell.hexlink:spirit_transfer_look": "Spirit Storage Look",
+  "hexcasting.spell.hexlink:spirit_transfer_look_all": "Spirit Storage Look All",
   "hexcasting.spell.hexlink:spirit_self_transfer_look": "Spirit Self Storage Look",
   "hexcasting.spell.hexlink:spirit_transfer_count": "Spirit Storage Count",
   "hexcasting.spell.hexlink:spirit_self_transfer_count": "Spirit Self Storage Count",
@@ -104,7 +105,8 @@
 
   "hexlink.page.spirit_transfer.desc": "These patterns are useful for manipulating and moving spirits. Spirits are stored in spirit containers. Spirit containers can be dropped items, items in frames, the caster holding a spirit container item, media vortexes, the block position of a container containing spirit container items.",
   "hexlink.page.spirit_transfer.transfer.desc": "With this pattern I can transfer spirits from a spirit container to another spirit container. The first parameter is the container to extract from, the second parameter is the container to fill into.",
-  "hexlink.page.spirit_transfer.look.desc": "With this pattern I can get the type of the last Spirit stored of a spirit container or Null the container is empty or if the entity or block is not a spirit source.",
+  "hexlink.page.spirit_transfer.look.desc": "With this pattern I can get the type of the last Spirit stored in a spirit container or Null if the container is empty or if the entity or block is not a spirit source.",
+  "hexlink.page.spirit_transfer.look_all.desc": "With this pattern I can get the type of the all Spirits stored in a spirit container or Null if the container is empty or if the entity or block is not a spirit source.",
   "hexlink.page.spirit_transfer.count.desc": "With this pattern I can count how many spirits, of a type of spirit, a container contains.",
 
   "hexlink.page.get_nbt": "NBT Manipulation",

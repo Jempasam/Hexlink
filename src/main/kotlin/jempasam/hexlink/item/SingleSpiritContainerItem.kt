@@ -31,6 +31,7 @@ class SingleSpiritContainerItem(settings: Settings): Item(settings), ItemSpiritS
     override fun getSpiritSource(stack: ItemStack): SpiritSource {
         return object:SpiritSource{
             override fun last(): Spirit? = getSpirit(stack)
+            override fun all(): Set<Spirit> = last()?.let { setOf(it) } ?: emptySet()
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
                 return SpiritSource.SpiritOutputFlux(min(count,stack.count)) { stack.count -= it }
             }

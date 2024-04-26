@@ -50,6 +50,10 @@ class BigTabletBlockEntity(pos: BlockPos, state: BlockState, val size: Int) : Bl
         return if(content.isNotEmpty()) content.last() else null
     }
 
+    override fun all(): Set<Spirit> {
+        return content.toSet()
+    }
+
     override fun fill(count: Int, spirit: Spirit): SpiritTarget.SpiritInputFlux {
         val currentCount= min(count, size-content.size)
         return SpiritTarget.SpiritInputFlux({

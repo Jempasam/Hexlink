@@ -133,6 +133,19 @@ object SpiritHelper{
                 }
                 return null
             }
+
+            override fun all(): Set<Spirit> {
+                val ret= mutableSetOf<Spirit>()
+
+                spiritSource(caster,caster.mainHandStack).all().let { ret.addAll(it) }
+                spiritSource(caster,caster.offHandStack).all().let { ret.addAll(it) }
+
+                for(i in 0 ..< inventory.size()){
+                    val stack=inventory.getStack(i)
+                    spiritSource(caster,stack).all().let { ret.addAll(it) }
+                }
+                return ret
+            }
         }
 
     }
@@ -177,8 +190,8 @@ object SpiritHelper{
             }
             else return SpiritSource.NONE.FLUX
         }
-
         override fun last(): Spirit? = source.last()
+        override fun all(): Set<Spirit> = source.all()
     }
 
     private class StackUpdateSpiritTarget(val stack: StackHelper.WorldStack, val target: SpiritTarget): SpiritTarget{

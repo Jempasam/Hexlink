@@ -13,6 +13,7 @@ class RandomSpiritItem(settings: Settings): InfiniteSpiritItem(settings) {
                 return getSpirits(stack)
                     .run { if(size>0) this[Random.create(System.currentTimeMillis()/1000).nextInt(this.size)] else null }
             }
+            override fun all(): Set<Spirit> = last()?.let { setOf(it) } ?: emptySet()
             override fun extract(count: Int, spirit: Spirit): SpiritSource.SpiritOutputFlux {
                 val fcount= if(isDamageable) stack.maxDamage-stack.damage else count
                 if(getSpirits(stack).contains(spirit))return SpiritSource.SpiritOutputFlux(fcount) {

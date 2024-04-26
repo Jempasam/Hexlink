@@ -153,6 +153,8 @@ class SoulContainerItem(settings: Settings, val maxBoxCount: Int, val max_soul_c
             }
 
             override fun last(): Spirit? = last(stack)
+
+            override fun all(): Set<Spirit> = souls(stack)?.map { it.spirit }?.filterNotNull()?.toSet() ?: setOf()
         }
     }
 
