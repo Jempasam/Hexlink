@@ -30,6 +30,8 @@ fun <T>List<Iota>.makePosPair(first: T, index: Int): Pair<T,Vec3d>{
     return first to pos
 }
 
+
+
 fun List<Iota>.getSpirit(index: Int, max: Int): Spirit{
     val ret= this[index]
     if(ret is SpiritIota)return ret.getSpirit()
@@ -46,7 +48,7 @@ fun List<Iota>.getSpiritSourceOpt(ctx: CastingContext, index: Int, max: Int): Sp
             ctx.assertVecInRange(sourceIota.vec3)
             SpiritHelper.spiritSource(ctx.caster, ctx.world, sourceIota.vec3)
         }
-        else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+        else -> throw MishapInvalidIota(get(index), max-index-1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
     return source
 }
@@ -69,7 +71,7 @@ fun List<Iota>.getSpiritTarget(ctx: CastingContext, index: Int, max: Int): Spiri
             ctx.assertVecInRange(targetIota.vec3)
             SpiritHelper.spiritTarget(ctx.caster, ctx.world, targetIota.vec3)
         }
-        else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+        else -> throw MishapInvalidIota(get(index), max-index-1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
     return target ?: throw InvalidSpiritTarget(get(index))
 }
@@ -93,7 +95,7 @@ fun List<Iota>.getExtractorItem(ctx: CastingContext, index: Int, max: Int): Spir
             val extractor=if(item is ExtractorItem) item.getExtractor(stack) else null
             extractor ?: throw MishapBadBlock(BlockPos(iota.vec3), Text.translatable("hexlink.mishap.extractor_item"))
         }
-        else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+        else -> throw MishapInvalidIota(get(index), max-index-1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
     return source
 }
@@ -109,7 +111,7 @@ fun List<Iota>.getVec3orEntity(ctx: CastingContext, index: Int, max: Int): Any{
             ctx.assertVecInRange(iota.vec3)
             iota.vec3
         }
-        else -> throw MishapInvalidIota(get(index), max-index+1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+        else -> throw MishapInvalidIota(get(index), max-index-1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
     }
 }
 

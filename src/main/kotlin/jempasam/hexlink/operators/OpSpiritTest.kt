@@ -24,7 +24,7 @@ class OpSpiritTest : ConstMediaAction {
                 is EntityIota ->
                     listOf(BooleanIota(spirit.getSpirit().lookIn(ctx.caster,ctx.world,target.entity)))
                 else ->
-                    throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+                    throw MishapInvalidIota(target, 0, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
             }
         }
         else throw MishapInvalidIota(spirit,1, Text.translatable("hexlink.spirit_iota"))

@@ -40,7 +40,7 @@ class OpManisfestSpirit(oncaster: Boolean) : SpiritSpellAction(oncaster) {
                 ctx.assertEntityInRange(target.entity)
                 spirit.manifestIn(ctx.caster,ctx.world, target.entity, input.maxcount) to target.entity.pos
             }
-            else -> throw MishapInvalidIota(target, 1, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
+            else -> throw MishapInvalidIota(target, 0, Text.translatable("hexcasting.iota.hexcasting:entity").append(Text.translatable("hexlink.or")).append(Text.translatable("hexcasting.iota.hexcasting:vec3")))
         }
 
         if(manifestation.spiritCount==0)throw MishapNotManifestable(spirit, target)

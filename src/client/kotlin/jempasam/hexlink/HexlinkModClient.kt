@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import jempasam.hexlink.block.HexlinkBlockClient
 import jempasam.hexlink.config.Config
+import jempasam.hexlink.entity.HexlinkEntityRenderers
 import jempasam.hexlink.item.color.HexlinkColorProviders
 import jempasam.hexlink.lens.HexlinkScryingLensDisplay
 import jempasam.hexlink.model.predicate.HexlinkModelPredicates
@@ -42,6 +43,7 @@ object HexlinkModClient : ClientModInitializer {
 		HexlinkBlockClient.registerBlockRender()
 		HexlinkScryingLensDisplay.registerDisplays()
 		HexlinkClientParticles
+		HexlinkEntityRenderers
 		ClientSendDataPacket
 		//HudRenderCallback.EVENT.register(SpellHUD())
 	}
