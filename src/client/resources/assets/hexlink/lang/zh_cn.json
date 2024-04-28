@@ -16,6 +16,7 @@
   "hexcasting.spell.hexlink:spirit_extraction": "灵体提取",
   "hexcasting.spell.hexlink:spirit_transfer": "灵体转移",
   "hexcasting.spell.hexlink:spirit_transfer_look": "灵体容器探察",
+  "hexcasting.spell.hexlink:spirit_transfer_look_all": "灵体容器探察全部",
   "hexcasting.spell.hexlink:spirit_self_transfer_look": "自身灵体容器探察",
   "hexcasting.spell.hexlink:spirit_transfer_count": "灵体容器计数",
   "hexcasting.spell.hexlink:spirit_self_transfer_count": "自身灵体容器计数",
@@ -105,6 +106,7 @@
   "hexlink.page.spirit_transfer.desc": "这些图案是操纵和移动灵体的好帮手。灵体存储于灵体容器。物品实体、物品展示框中的物品、施法者手持物品、媒质涡旋，装有灵体容器的容器位置向量等均可视为灵体容器。",
   "hexlink.page.spirit_transfer.transfer.desc": "此图案可将灵体在两灵体容器间转移。第一参数为转移起点，第二参数为转移终点。",
   "hexlink.page.spirit_transfer.look.desc": "此图案可查看灵体容器中的上一灵体。若容器为空，或者所给实体或位置向量不是灵体来源，则返回 Null。",
+  "hexlink.page.spirit_transfer.look_all.desc": "此图案可查看灵体容器中的所有灵体的类型。若容器为空，或者所给实体或位置向量不是灵体来源，则返回 Null。",
   "hexlink.page.spirit_transfer.count.desc": "此图案可统计灵体容器中某种灵体的存储数量。",
 
   "hexlink.page.get_nbt": "NBT 操纵",
