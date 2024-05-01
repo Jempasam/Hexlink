@@ -38,7 +38,7 @@ object HexlinkBlocks {
         VoxelShapes.cuboid(Box.of(Vec3d(.5,.5,.5), 0.8, 1.0, 0.8))
     ))
 
-    val BIG_TABLET: SpiritContainerBlock<BigTabletBlockEntity> = create( "big_tablet", SpiritContainerBlock(
+    val BIG_TABLET: SpiritContainerBlock<BigTabletBlockEntity> = create( "big_tablet", FacingSpiritContainerBlock(
         AbstractBlock.Settings.of(Material.STONE).nonOpaque().sounds(BlockSoundGroup.STONE),
         {HexlinkEntities.BIG_TABLET},
         { w, bp, bs, t -> t.tick(w,bp,bs) },

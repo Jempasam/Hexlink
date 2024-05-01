@@ -1,9 +1,8 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "hexlink:block/big_tablet"
-      }
-    ]
+    "facing=north": { "model": "hexlink:block/big_tablet", "y": 180 },
+    "facing=east": { "model": "hexlink:block/big_tablet", "y": 270 },
+    "facing=south": { "model": "hexlink:block/big_tablet", "y": 0 },
+    "facing=west": { "model": "hexlink:block/big_tablet", "y": 90 }
   }
 }

@@ -5,6 +5,7 @@
       "entries": [
         {"weight":30, "type": "minecraft:loot_table", "name": "hexlink:tablet"},
         {"weight":1, "quality": 5, "type": "minecraft:loot_table", "name": "hexlink:philosophical"},
+        {"weight":8, "quality": 3, "type": "minecraft:loot_table", "name": "hexlink:crystals"},
         {"weight":1, "quality": 5, "type": "minecraft:loot_table", "name": "hexlink:haunted"},
         {"weight":7, "type": "minecraft:loot_table", "name": "hexlink:pigment"}
       ],

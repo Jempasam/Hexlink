@@ -23,7 +23,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 
-class SpiritContainerBlock<T: BlockEntity>(settings: Settings, private val type: ()->BlockEntityType<T>, private val ticker: BlockEntityTicker<T>, private val slot_count: Int, private val shape: VoxelShape)
+open class SpiritContainerBlock<T: BlockEntity>(settings: Settings, private val type: ()->BlockEntityType<T>, private val ticker: BlockEntityTicker<T>, private val slot_count: Int, private val shape: VoxelShape)
     : BlockWithEntity(settings), BlockSpiritSource, BlockSpiritTarget, BlockSpiritContainer{
 
     companion object{
@@ -94,7 +94,7 @@ class SpiritContainerBlock<T: BlockEntity>(settings: Settings, private val type:
         return bstate.isAir || block==this
     }
 
-    override fun getOutlineShape(state: BlockState?, world: BlockView?, pos: BlockPos?, context: ShapeContext?): VoxelShape {
+    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape {
         return shape;
     }
 

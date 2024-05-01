@@ -1,0 +1,67 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:constant",
+        "value": 1
+      },
+      "entries": [
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{ "extractor":"hexlink:entity" }
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{ "extractor":"hexlink:block" }
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{ "extractor":"hexlink:item" }
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{ "extractor":"hexlink:potion" }
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{ "extractor":"hexlink:enchantment" }
+          }]
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "hexlink:crystal",
+          "functions": [{
+            "function": "hexlink:easy_nbt",
+            "nbt":{ "extractor":"hexlink:everything" }
+          }]
+        }
+
+      ]
+    }
+  ]
+}
