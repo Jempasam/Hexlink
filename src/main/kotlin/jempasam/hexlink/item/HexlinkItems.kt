@@ -1,6 +1,7 @@
 package jempasam.hexlink.item
 
 import at.petrak.hexcasting.common.items.ItemFocus
+import at.petrak.hexcasting.common.items.ItemStaff
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.block.HexlinkBlocks
 import jempasam.hexlink.creative_tab.HexlinkCreativeTab
@@ -41,6 +42,9 @@ object HexlinkItems {
 
     var Vortex=make("vortex",BlockItem(HexlinkBlocks.VORTEX, stackableProps()))
     var BigTablet=make("big_tablet",BlockItem(HexlinkBlocks.BIG_TABLET, stackableProps()))
+
+    var TabletStaff=make("tablet_staff", ItemStaff(simpleProps()))
+    var SpiritStaff=make("spirit_staff", ItemStaff(simpleProps()))
 
     fun epicProps(): Item.Settings{
         return Item.Settings()

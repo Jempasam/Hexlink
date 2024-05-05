@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": { "item": "minecraft:stick" },
+    "X": { "item": "hexlink:philosophical_crystal" },
+    "O": { "item": "hexcasting:charged_amethyst" }
+  },
+  "pattern": [
+    " IO",
+    " XI",
+    "I  "
+  ],
+  "result": { "item": "hexlink:spirit_staff" }
+}

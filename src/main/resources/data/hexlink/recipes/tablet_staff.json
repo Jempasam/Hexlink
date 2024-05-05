@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": { "item": "minecraft:stick" },
+    "X": { "item": "hexlink:tablet" },
+    "O": { "item": "hexcasting:charged_amethyst" }
+  },
+  "pattern": [
+    " IO",
+    " XI",
+    "I  "
+  ],
+  "result": { "item": "hexlink:tablet_staff" }
+}
