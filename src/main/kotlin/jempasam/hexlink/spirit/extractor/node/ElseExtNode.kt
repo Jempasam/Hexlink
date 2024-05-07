@@ -1,6 +1,7 @@
 package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
+import com.mojang.serialization.Codec
 
 object ElseExtNode : ExtractionNode {
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
@@ -13,4 +14,6 @@ object ElseExtNode : ExtractionNode {
     object Parser: ExtractionNode.Parser<ElseExtNode> {
         override fun parse(obj: JsonObject): ElseExtNode = ElseExtNode
     }
+
+    val CODEC= Codec.unit(ElseExtNode)
 }

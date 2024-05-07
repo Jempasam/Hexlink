@@ -2,10 +2,14 @@ package jempasam.hexlink.utils
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
+import com.mojang.serialization.Codec
+import com.mojang.serialization.DataResult
+import com.mojang.serialization.Dynamic
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.spirit.Spirit
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
+import net.minecraft.nbt.NbtOps
 import net.minecraft.nbt.NbtString
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
@@ -51,4 +55,14 @@ object NbtHelper {
                     ?.let { reg.getId(value) }
                     ?.let { NbtString.of(it.toString()) }
                     ?: NbtString.of("")
+
+    val ELEMENT_CODEC= Codec.PASSTHROUGH.comapFlatMap(
+        { dynamic: Dynamic<*> ->
+            val nbtElement = dynamic.convert(NbtOps.INSTANCE).value as NbtElement
+            DataResult.success(nbtElement)
+        },
+        { nbt: NbtElement? ->
+            Dynamic( NbtOps.INSTANCE, nbt )
+        }
+    )
 }

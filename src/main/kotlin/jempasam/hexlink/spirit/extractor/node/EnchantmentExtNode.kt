@@ -1,6 +1,7 @@
 package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
+import com.mojang.serialization.Codec
 import jempasam.hexlink.spirit.EnchantmentSpirit
 import jempasam.hexlink.spirit.StackHelper
 import jempasam.hexlink.utils.EnchantHelper
@@ -36,4 +37,6 @@ object EnchantmentExtNode : ExtractionNode {
     object Parser: ExtractionNode.Parser<EnchantmentExtNode> {
         override fun parse(obj: JsonObject): EnchantmentExtNode = EnchantmentExtNode
     }
+
+    val CODEC= Codec.unit(EnchantmentExtNode)
 }

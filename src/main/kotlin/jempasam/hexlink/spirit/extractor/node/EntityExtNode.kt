@@ -1,6 +1,7 @@
 package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
+import com.mojang.serialization.Codec
 import jempasam.hexlink.spirit.EntitySpirit
 import net.minecraft.entity.LivingEntity
 
@@ -22,4 +23,6 @@ object EntityExtNode : ExtractionNode {
     object Parser: ExtractionNode.Parser<EntityExtNode> {
         override fun parse(obj: JsonObject): EntityExtNode = EntityExtNode
     }
+
+    val CODEC= Codec.unit(EntityExtNode)
 }

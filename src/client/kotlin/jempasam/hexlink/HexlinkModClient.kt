@@ -45,6 +45,7 @@ object HexlinkModClient : ClientModInitializer {
 		HexlinkClientParticles
 		HexlinkEntityRenderers
 		ClientSendDataPacket
+
 		//HudRenderCallback.EVENT.register(SpellHUD())
 	}
 

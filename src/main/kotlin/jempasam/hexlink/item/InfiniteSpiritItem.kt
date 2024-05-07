@@ -24,7 +24,7 @@ import net.minecraft.world.World
 open class InfiniteSpiritItem(settings: Settings): Item(settings), ItemSpiritSource, ItemSpiritTarget, ItemScrollable {
 
     fun getSpirits(stack: ItemStack): SpiritList
-        = SpiritList(stack.nbt?.getList("spirits",NbtElement.COMPOUND_TYPE.toInt()) ?: NbtList())
+        = SpiritList(stack.nbt?.getList("spirits",NbtElement.COMPOUND_TYPE.toInt()) ?: NbtList().also { stack.orCreateNbt.put("spirits",it) })
 
     override fun getSpiritSource(stack: ItemStack): SpiritSource {
         return object:SpiritSource{

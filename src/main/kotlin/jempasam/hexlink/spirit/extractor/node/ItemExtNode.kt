@@ -1,6 +1,7 @@
 package jempasam.hexlink.spirit.extractor.node
 
 import com.google.gson.JsonObject
+import com.mojang.serialization.Codec
 import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.item.BlockItem
@@ -36,4 +37,6 @@ object ItemExtNode : ExtractionNode {
     object Parser: ExtractionNode.Parser<ItemExtNode> {
         override fun parse(obj: JsonObject): ItemExtNode = ItemExtNode
     }
+
+    val CODEC= Codec.unit(ItemExtNode)
 }
