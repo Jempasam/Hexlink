@@ -7,7 +7,7 @@ add_vscode: true
 advanced: true
 author: Jempasam
 base_book_url: https://jempasam.github.io/Hexlink/
-book_id: hexcasting:hexbook
+book_id: hexlink:hexlinkbook
 capitalize_platforms: false
 default_branch: master
 github_repo: Hexlink
