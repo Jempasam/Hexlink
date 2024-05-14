@@ -38,3 +38,19 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+
+# hexdoc
+
+/_site/
+__gradle_version__.py
+.hexdoc*/
+
+# Python
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so

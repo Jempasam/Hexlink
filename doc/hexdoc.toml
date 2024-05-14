@@ -1,0 +1,33 @@
+modid = "hexlink"
+book = "hexcasting:hexbook"
+default_lang = "en_us"
+default_branch = "master"
+
+resource_dirs = [  # top takes priority
+    # hexdoc-only resources
+    "resources",
+    # resource dirs for Hexlink
+    "{_common.src}/main/resources",
+    { path="{^_common.src}/generated/resources", required=false },
+    # other hexdoc plugins
+    { modid="minecraft" },
+    { modid="hexdoc" },
+]
+export_dir = "src/hexdoc_hexlink/_export/generated"
+
+[template]
+icon = "icon.png"
+include = [
+    "hexlink",
+    "hexdoc",
+]
+
+[template.args]
+mod_name = "Hexlink"
+author = "Jempasam"
+show_landing_text = true
+
+# platforms
+
+[_common]
+src = "../src"
