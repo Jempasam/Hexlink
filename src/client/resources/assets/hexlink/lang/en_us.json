@@ -114,10 +114,10 @@
 
   "hexlink.page.get_nbt": "NBT Manipulation",
   "hexlink.page.get_nbt.desc": "[Need MoreIotas]  I see everything (In a small radius). With this pattern I can extract every property of a block or an entity into a list.",
-  "hexlink.page.find_nbt.desc": "\n[Need MoreIotas] With this pattern I can extract a specific property of a block or an entity. I must provide the path that leads to the sought-after essence. For example, [\"Inventory\",0,\"id\"].",
+  "hexlink.page.find_nbt.desc": "$(br)[Need MoreIotas] With this pattern I can extract a specific property of a block or an entity. I must provide the path that leads to the sought-after essence. For example, [\"Inventory\",0,\"id\"].",
 
   "hexlink.page.spirit_manifestation.desc": "With these powerful spells, I can manifest spirits in the physical world. I can manifest it through a entity catalyst or at a position.",
-  "hexlink.page.spirit_manifestation.target.desc": "The first parameter is the container to extract from, the second is the type of spirit to manifest, the third is the number of spirits to manifest, and the last is the entity or location to manifest at.",
+  "hexlink.page.spirit_manifestation.target.desc": "$(br)The first parameter is the container to extract from, the second is the type of spirit to manifest, the third is the number of spirits to manifest, and the last is the entity or location to manifest at.",
   "hexlink.page.spirit_self_manifestation.self.desc": "This shortcut variant take the spirits from an container in the caster inventory. The first parameter is the type of spirit to manifest, the second is the number of spirit to manifest, and the third is the entity or location to manifest at.",
 
   "hexlink.page.spirit_other": "Other Spells",
