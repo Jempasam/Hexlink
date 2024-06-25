@@ -3,7 +3,7 @@
   "hexlink.mishap.no_collar_item": "You don't have any focus collar",
   "hexlink.mishap.extractor_item": "suitable extraction catalyzer item like an Extraction Crystal",
   "hexlink.mishap.spell_holder": "spell holder item",
-  "hexlink.mishap.not_extractable": "%s Spirit is not extractable with %s",
+  "hexlink.mishap.not_extractable": "This %s Spirit is not extractable with %s",
   "hexlink.mishap.not_enough_soul": "Missing %d spirits",
   "hexlink.mishap.cant_mix_at": "You cannot summon a vortex at this location, you can summon a vortex at an empty place",
   "hexlink.mishap.invalid_spirit_source": "The Spirit source is invalid, you need a valid target from where to get spirits",
@@ -31,6 +31,7 @@
   "hexcasting.spell.hexlink:write_trinket": "Boehmer's Gambit",
   "hexcasting.spell.hexlink:write_spell": "Flem's Gambit",
   "hexcasting.spell.hexlink:get_nbt": "Samuel Purification",
+  "hexcasting.spell.hexlink:find_nbt": "Gabriel Distillation",
 
 
 
@@ -102,7 +103,7 @@
   "hexlink.entry.readwrite": "Hexlink Read and Write",
   "hexlink.page.write_spell": "This pattern can write a spell into a Special Wand, as an dropped item, in an item frame or in the caster hand.",
 
-  "hexlink.page.spirit_extraction.desc": "This spell can extract a spirit from an entity, using a extraction catalyzer like an $(l:hexlink:items/crystals)Extraction Crystal/$, into a $(l:hexlink:items/bag)Spirit Container/$. The quantity of spirit extracted depends of the target. The items used, as a catalyzer or as a extraction target, can be dropped, in item frame, in the first slot of a container, or the offhand of the caster.",
+  "hexlink.page.spirit_extraction.desc": "This spell can extract a spirit from an entity, using a extraction catalyzer like an $(l:hexlink:items/crystals)Extraction Crystal/$, into a $(l:hexlink:items/bag)Spirit Container/$. The quantity of spirit extracted depends of the target. The items used, as a catalyzer or as a extraction target, can be dropped, in item frame, in the first slot of a container, or the offhand of the caster. I have to check the extraction conditions, it could go wrong.",
   "hexlink.page.spirit_extraction.target.desc": "The first parameter is the entity to extract from, the second parameter is an extractor catalyzer, the third parameter is a spirit container. ",
 
   "hexlink.page.spirit_transfer.desc": "These patterns are useful for manipulating and moving spirits. Spirits are stored in spirit containers. Spirit containers can be dropped items, items in frames, the caster holding a spirit container item, media vortexes, the block position of a container containing spirit container items.",
@@ -113,6 +114,7 @@
 
   "hexlink.page.get_nbt": "NBT Manipulation",
   "hexlink.page.get_nbt.desc": "[Need MoreIotas]  I see everything (In a small radius). With this pattern I can extract every property of a block or an entity into a list.",
+  "hexlink.page.find_nbt.desc": "\n[Need MoreIotas] With this pattern I can extract a specific property of a block or an entity. I must provide the path that leads to the sought-after essence. For example, [\"Inventory\",0,\"id\"].",
 
   "hexlink.page.spirit_manifestation.desc": "With these powerful spells, I can manifest spirits in the physical world. I can manifest it through a entity catalyst or at a position.",
   "hexlink.page.spirit_manifestation.target.desc": "The first parameter is the container to extract from, the second is the type of spirit to manifest, the third is the number of spirits to manifest, and the last is the entity or location to manifest at.",

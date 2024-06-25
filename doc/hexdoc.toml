@@ -1,5 +1,5 @@
 modid = "hexlink"
-book = "hexcasting:hexbook"
+book = "hexlink:hexlinkbook"
 default_lang = "en_us"
 default_branch = "master"
 
@@ -8,10 +8,11 @@ resource_dirs = [  # top takes priority
     "resources",
     # resource dirs for Hexlink
     "{_common.src}/main/resources",
+    "{_common.src}/client/resources",
     { path="{^_common.src}/generated/resources", required=false },
     # other hexdoc plugins
     { modid="minecraft" },
-    { modid="hexdoc" },
+    { modid="hexdoc" }
 ]
 export_dir = "src/hexdoc_hexlink/_export/generated"
 

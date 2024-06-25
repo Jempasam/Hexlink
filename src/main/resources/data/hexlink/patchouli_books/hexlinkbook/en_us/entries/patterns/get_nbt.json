@@ -12,6 +12,14 @@
       "input": "ent|vec",
       "output": "list",
       "text": "hexlink.page.get_nbt.desc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexlink:find_nbt",
+      "anchor": "hexlink:find_nbt",
+      "input": "ent|vec, list of str|num",
+      "output": "list|num|str|null",
+      "text": "hexlink.page.find_nbt.desc"
     }
   ]
 }

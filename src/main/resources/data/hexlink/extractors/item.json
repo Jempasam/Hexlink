@@ -6,7 +6,7 @@
     "hexlink:item",
     ["ANY",
       [
-        {"node": "hexlink:item_predicate", "tag": "hexlink:limited"},
+        {"node": "hexlink:item_predicate", "tag": "hexlink:stack_sized", "not": true},
         {"node": "hexlink:result", "base": 1, "multiplier": 0},
         {"node": "hexlink:cost", "base": 1000, "multiplier": 0}
       ],

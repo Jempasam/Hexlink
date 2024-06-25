@@ -3,6 +3,7 @@ package jempasam.hexlink.spirit.extractor.node
 import com.google.gson.JsonObject
 import com.mojang.serialization.Codec
 import jempasam.hexlink.spirit.EntitySpirit
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 
 object EntityExtNode : ExtractionNode {
@@ -14,7 +15,7 @@ object EntityExtNode : ExtractionNode {
         {
             return source.with {
                 spirit=EntitySpirit(target.type)
-                consumer={ target.kill() }
+                consumer={ target.remove(Entity.RemovalReason.KILLED) }
             }
         }
         return source
