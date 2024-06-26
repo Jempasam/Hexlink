@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": { "item": "minecraft:amethyst_shard" },
+    "#": { "item": "hexcasting:edified_planks" },
+    "X": { "item": "hexcasting:charged_amethyst" }
+  },
+  "pattern": [
+    " IX",
+    " #I",
+    "I  "
+  ],
+  "result": { "item": "hexlink:pure_media_staff" }
+}

@@ -26,6 +26,7 @@ class OpExtractSpirit : SpellAction{
         val target=args.getSpiritTargetAndPos(ctx,2,3)
 
         ctx.assertEntityInRange(extracted)
+
         val extraction=extractor.first.extract(ctx.caster, extracted)
         if(extraction.spirit!=null){
             return Triple(

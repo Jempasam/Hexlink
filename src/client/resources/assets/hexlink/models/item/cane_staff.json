@@ -1,0 +1,30 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "hexlink:item/wands/cane"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [90, -84, 71],
+			"translation": [0.5, -2.5, -5.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [90, -84, -20],
+			"translation": [0.5, -2.5, -5.25]
+		},
+		"firstperson_righthand": {
+			"rotation": [13, -91, 44],
+			"translation": [1, -1.25, -1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [13, -91, -40],
+			"translation": [1, -1.25, -1]
+		},
+		"head": {
+			"rotation": [99.75, 0, 41.5],
+			"translation": [-0.25, 7.5, -6.75],
+			"scale": [1.77, 1.77, 1.77]
+		}
+	}
+}

@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "I": { "item": "minecraft:stick" },
-    "X": { "item": "hexlink:crystal" },
+    "X": { "item": "hexlink:big_tablet" },
     "O": { "item": "hexcasting:charged_amethyst" }
   },
   "pattern": [
-    " IO",
-    " XI",
+    " IX",
+    " OI",
     "I  "
   ],
-  "result": { "item": "hexlink:spirit_staff" }
+  "result": { "item": "hexlink:big_tablet_on_a_stick" }
 }

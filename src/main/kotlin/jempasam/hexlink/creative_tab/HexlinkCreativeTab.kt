@@ -44,6 +44,11 @@ object HexlinkCreativeTab {
                 list.add(HexlinkItems.SpecialStaff.defaultStack)
                 list.add(HexlinkItems.TabletStaff.defaultStack)
                 list.add(HexlinkItems.SpiritStaff.defaultStack)
+                list.add(HexlinkItems.BigTabletStaff.defaultStack)
+                list.add(HexlinkItems.HandmadeStaff.defaultStack)
+                list.add(HexlinkItems.PureMediaStaff.defaultStack)
+                list.add(HexlinkItems.SnakeStaff.defaultStack)
+                list.add(HexlinkItems.CaneStaff.defaultStack)
 
                 list.add(HexlinkItems.Vortex.defaultStack)
 

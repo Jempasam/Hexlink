@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": { "item": "minecraft:stick" },
+    "#": { "item": "minecraft:iron_ingot" },
+    "X": { "item": "hexcasting:charged_amethyst" }
+  },
+  "pattern": [
+    " #X",
+    " I#",
+    "I  "
+  ],
+  "result": { "item": "hexlink:cane_staff" }
+}
