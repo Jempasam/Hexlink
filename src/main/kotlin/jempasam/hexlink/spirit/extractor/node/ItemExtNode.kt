@@ -5,10 +5,11 @@ import com.mojang.serialization.Codec
 import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.StackHelper
 import net.minecraft.item.BlockItem
+import net.minecraft.util.JsonHelper
 import kotlin.math.ceil
 import kotlin.math.max
 
-object ItemExtNode : ExtractionNode {
+class ItemExtNode(val useDurability: Boolean) : ExtractionNode {
 
     override fun filter(source: ExtractionNode.Source): ExtractionNode.Source {
         val worldStack=StackHelper.stack(source.caster,source.entity)
@@ -17,13 +18,13 @@ object ItemExtNode : ExtractionNode {
         val stack=worldStack.stack
         val item=stack.item
         if(item is BlockItem) return source
-
+        println("Trap: "+useDurability)
         return source.with {
-            count *= stack.count*max(stack.maxDamage,1)
+            count *= stack.count * (if(useDurability) max(stack.maxDamage,1) else 1)
             val prev=consumer
             consumer={
                 prev(it)
-                val consumed=ceil(it.toFloat()/max(stack.maxDamage,1)).toInt()
+                val consumed=ceil(it.toFloat()/(if(useDurability) max(stack.maxDamage,1) else 1)).toInt()
                 if(it>=worldStack.stack.count) worldStack.killer()
                 else{
                     stack.count-=consumed
@@ -35,8 +36,8 @@ object ItemExtNode : ExtractionNode {
     }
 
     object Parser: ExtractionNode.Parser<ItemExtNode> {
-        override fun parse(obj: JsonObject): ItemExtNode = ItemExtNode
+        override fun parse(obj: JsonObject) = ItemExtNode(JsonHelper.getBoolean(obj,"useDurability",false))
     }
 
-    val CODEC= Codec.unit(ItemExtNode)
+    val CODEC get() = Codec.unit(ItemExtNode(true))
 }

@@ -43,3 +43,4 @@ interface HexVortexHandler {
         fun serialize(json: JsonObject): T
     }
 }
+

@@ -1,6 +1,7 @@
 package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
+import jempasam.hexlink.recipe.vortex.HexVortexHandler.Ingredient
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.utils.getSpirit
@@ -47,17 +48,23 @@ class BurningVortexHandler : AbstractVortexHandler {
         return null
     }
 
-    override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>> {
-        return Registry.ITEM.entrySet.asSequence().mapNotNull {
-            val item=it.value
-            val cooktime=FuelRegistry.INSTANCE.get(item)
-            if(cooktime!=null){
-                val result= mutableListOf<Spirit>()
-                val count=max(1,(cooktime/200*multiplier).toInt())
-                for(i in 0..<count)result.add(burningResult)
-                listOf(HexVortexHandler.Ingredient(SpiritHelper.asSpirit(item))) to result
-            }
-            else null
+    override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<Ingredient>, List<Spirit>>> {
+        return sequence {
+            Registry.ITEM.entrySet.asSequence()
+                // Associate cookable item to result count
+                .mapNotNull { item->
+                    val cooktime=FuelRegistry.INSTANCE.get(item.value)
+                    if(cooktime==null) null
+                    else max(1,(cooktime/200*multiplier).toInt()) to item.value
+                }
+                .groupBy { it.first }
+
+                // Create the recipe
+                .entries.forEach { (result_count,items) ->
+                    val ingredients= listOf(Ingredient(items.asSequence().map{ SpiritHelper.asSpirit(it.second) }, this::class.hashCode()+result_count))
+                    val results= List(result_count){burningResult}
+                    yield(ingredients to results)
+                }
         }
     }
 

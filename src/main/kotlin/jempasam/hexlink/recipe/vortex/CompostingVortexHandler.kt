@@ -1,6 +1,7 @@
 package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
+import jempasam.hexlink.recipe.vortex.HexVortexHandler.Ingredient
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
 import jempasam.hexlink.utils.getSpirit
@@ -8,7 +9,7 @@ import net.minecraft.block.ComposterBlock
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.JsonHelper.getFloat
-import kotlin.math.max
+import kotlin.math.ceil
 
 class CompostingVortexHandler : AbstractVortexHandler {
 
@@ -30,40 +31,42 @@ class CompostingVortexHandler : AbstractVortexHandler {
         this.multiplier=getFloat(obj,"multiplier",1.0f)
     }
 
+    private fun probaToCount(proba: Float) = ceil(1/proba*7).toInt()
 
     override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
-        if(ingredients.isNotEmpty()){
-            val ingredient=ingredients.first()
-            val item=SpiritHelper.asItem(ingredient)
-            if(item!=null){
-                val count=ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getOrElse(item) { -1.0f }
-                if(count!=-1.0f){
-                    return Recipe(max(1, (count.toFloat()*multiplier).toInt()), this)
-                }
-            }
-        }
-        return null
+        val it=ingredients.iterator()
+
+        if(!it.hasNext()) return null
+        val first=SpiritHelper.asItem(it.next()) ?: return null
+        val proba=ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getOrElse(first) { -1.0f }
+
+        if(proba==-1.0f)return null
+        val count=probaToCount(proba)
+        for(i in 1..<count) if(!it.hasNext() || SpiritHelper.asItem(it.next())!=first) return null
+        return Recipe(count, this)
     }
 
     override fun getRealRecipesExamples(manager: RecipeManager): Sequence<Pair<List<HexVortexHandler.Ingredient>, List<Spirit>>> {
-        return ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.asSequence().map {
-            val result= mutableListOf<Spirit>()
-            val count= max(1, (it.value*multiplier).toInt())
-            for(i in 0..<count)result.add(compostingResult)
-            listOf(HexVortexHandler.Ingredient(SpiritHelper.asSpirit(it.key.asItem()))) to result
+        return sequence {
+            ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.asSequence()
+                // Associate item to input count
+                .map { (item,increase)-> probaToCount(increase) to item.asItem() }
+                .groupBy { it.first }
+                // Create the recipe
+                .entries.forEach { (input_count,items) ->
+                    val ingredient=Ingredient(items.asSequence().map{ SpiritHelper.asSpirit(it.second) }, this::class.hashCode()+input_count)
+                    val ingredients= List(input_count){ingredient}
+                    val results= listOf(compostingResult)
+                    yield(ingredients to results)
+                }
         }
     }
 
-    class Recipe(val count: Int, val handler: CompostingVortexHandler): AbstractVortexHandler.Recipe(handler){
-        override fun realIngredientCount(): Int = 1
+    class Recipe(val price: Int, val handler: CompostingVortexHandler): AbstractVortexHandler.Recipe(handler){
+        override fun realIngredientCount(): Int = price
 
         override fun realMix(ingredients: Collection<Spirit>): List<Spirit> {
-            if(count==0)return listOf()
-            else{
-                val ret= mutableListOf<Spirit>()
-                for(i in 0..<count)ret.add(handler.compostingResult)
-                return ret
-            }
+            return listOf(handler.compostingResult)
         }
     }
 

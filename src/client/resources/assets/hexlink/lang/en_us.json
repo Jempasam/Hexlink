@@ -91,8 +91,6 @@
   "item.hexlink.snake_staff": "Snake Staff",
   "item.hexlink.cane_staff": "Cane Staff",
 
-
-
   "block.hexlink.vortex": "Media Vortex",
   "block.hexlink.big_tablet": "Big Tablet",
 
@@ -100,10 +98,12 @@
   "itemGroup.hexlink.hexlink": "Hexlink",
 
 
-
   "hexlink.category.spirits": "Spirit Spells",
   "hexlink.category.spirits.desc": "Turn anything into media spirits, then mix them and finally manifest them.",
 
+
+  "tag.item.hexlink.stack_sized": "Extraction count depend on durability",
+  "tag.item.hexlink.staves": "Hexlink Staves",
 
 
   "hexlink.entry.readwrite": "Hexlink Read and Write",
