@@ -3,7 +3,7 @@
   "hexlink.mishap.no_collar_item": "未佩戴核心项圈",
   "hexlink.mishap.extractable_to": "提取水晶之类的有效提取催化物",
   "hexlink.mishap.spell_holder": "可存有咒术的物品",
-  "hexlink.mishap.not_extractable": "%s灵体无法被%s提取",
+  "hexlink.mishap.not_extractable": "该%s灵体无法被%s提取",
   "hexlink.mishap.not_enough_soul": "缺少%d个灵体",
   "hexlink.mishap.cant_mix_at": "无法在此处召唤涡旋，应当在空气处召唤",
   "hexlink.mishap.invalid_spirit_source": "无效灵体来源，需要有效的灵体获取来源",
@@ -30,7 +30,8 @@
   "hexcasting.spell.hexlink:read_trinket": "伯默之精思",
   "hexcasting.spell.hexlink:write_trinket": "伯默之策略",
   "hexcasting.spell.hexlink:write_spell": "弗莱姆之策略",
-  "hexcasting.spell.hexlink:get_nbt": "萨缪尔之纯化",
+  "hexcasting.spell.hexlink:get_nbt": "撒母耳之纯化",
+  "hexcasting.spell.hexlink:find_nbt": "加百列之馏化",
 
 
 
@@ -82,7 +83,13 @@
   "item.hexlink.crystal": "%s之水晶",
   "item.hexlink.crystal.none": "空提取水晶",
 
-
+  "item.hexlink.tablet_staff": "石板法杖",
+  "item.hexlink.big_tablet_on_a_stick": "镶大石板法杖",
+  "item.hexlink.spirit_staff": "灵体法杖",
+  "item.hexlink.handmade_staff": "手工法杖",
+  "item.hexlink.pure_media_staff": "纯媒质法杖",
+  "item.hexlink.snake_staff": "蛇形法杖",
+  "item.hexlink.cane_staff": "棍状法杖",
 
   "block.hexlink.vortex": "媒质涡旋",
   "block.hexlink.big_tablet": "大石板",
@@ -91,10 +98,12 @@
   "itemGroup.hexlink.hexlink": "Hexlink",
 
 
-
   "hexlink.category.spirits": "灵体法术",
   "hexlink.category.spirits.desc": "将事物变为媒质灵体，混合交融再令其显形。",
 
+
+  "tag.item.hexlink.stack_sized": "提取量由耐久度决定",
+  "tag.item.hexlink.staves": "Hexlink 法杖",
 
 
   "hexlink.entry.readwrite": "Hexlink 读取与写入",
@@ -111,9 +120,10 @@
 
   "hexlink.page.get_nbt": "NBT 操纵",
   "hexlink.page.get_nbt.desc": "[需要安装更多 Iota] 我能在较短距离内看到所有事物。此图案能将方块或实体的所有属性提取为列表。",
+  "hexlink.page.find_nbt.desc": "$(br)[需要安装更多 Iota] 此图案能提取某个方块或实体的特定属性。提取时必须要给定所探寻的灵魂本质的路径。例如，[\"Inventory\",0,\"id\"]。",
 
   "hexlink.page.spirit_manifestation.desc": "这个强力法术能将灵体显形至物理世界。我能通过某实体或在某位置令其显形。",
-  "hexlink.page.spirit_manifestation.target.desc": "第一参数为被提取的容器，第二参数为需显形灵体的类型，第三参数为显形的强度，最末参数则是显形实体或显形位置。",
+  "hexlink.page.spirit_manifestation.target.desc": "$(br)第一参数为被提取的容器，第二参数为需显形灵体的类型，第三参数为显形的强度，最末参数则是显形实体或显形位置。",
   "hexlink.page.spirit_self_manifestation.self.desc": "此快捷变种会从施法者物品栏中的灵体容器抽取灵体。第一参数为需显形灵体的类型，第二参数为显形的强度，第三参数则是显形实体或显形位置。",
 
   "hexlink.page.spirit_other": "其他法术",
