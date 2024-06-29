@@ -3,17 +3,14 @@
 	"id": "hexlink",
 	"version": "${version}",
 	"name": "Hexlink",
-	"description": "Hex casting cool addon.",
-	"authors": [
-		"jempasam"
-	],
+	"description": "Add the art of spirit manipulation to hexcasting.",
+	"authors": [ "jempasam" ],
 	"contact": {
-		"sources": "https://github.com/Jempasam/Hexlink"
+		"sources": "https://github.com/Jempasam/Hexlink",
+		"homepage": "https://modrinth.com/mod/hexlink",
+		"issues": "https://github.com/Jempasam/Hexlink/issues"
 	},
-	"contributors": [
-		"jempasam",
-		"ChuijkYahus"
-	],
+	"contributors": [ "jempasam", "ChuijkYahus" ],
 	"license": "MIT",
 	"icon": "assets/hexlink/icon.png",
 	"environment": "*",
@@ -37,14 +34,10 @@
 			"jempasam.hexlink.emi.HexlinkEMIPlugin"
 		]
 	},
-	"mixins": [
-		"hexlink.mixins.json"
-	],
+	"mixins": [ "hexlink.mixins.json" ],
 
 	"custom": {
-		"cardinal-components": [
-			"hexlink:world_data"
-		]
+		"cardinal-components": [ "hexlink:world_data" ]
 	},
 
 	"depends": {
@@ -59,6 +52,6 @@
 	},
 
 	"suggests": {
-		"another-mod": "*"
+		"moreiotas": ">=0.0.4"
 	}
 }
