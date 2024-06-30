@@ -73,11 +73,14 @@ interface Spirit {
         return manifestIn(caster,world,from,count)
     }
 
-    class Manifestation(val perSpiritCost: Int, val spiritCount: Int, private val action: (Int)->Unit){
+    class Manifestation(val perSpiritCost:Int, val spiritCount:Int, val minimumCount:Int=0, private val action: (Int)->Unit){
         fun execute(count: Int){
             if(count>spiritCount){
                 HexlinkMod.logger.warn("Try to manifest more spirit than the Manifestation maximum")
                 action(spiritCount)
+            }
+            else if(minimumCount>count){
+                HexlinkMod.logger.warn("Try to manifest less spirit than the Manifestation minimum")
             }
             else action(count)
         }

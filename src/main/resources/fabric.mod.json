@@ -10,7 +10,7 @@
 		"homepage": "https://modrinth.com/mod/hexlink",
 		"issues": "https://github.com/Jempasam/Hexlink/issues"
 	},
-	"contributors": [ "jempasam", "ChuijkYahus" ],
+	"contributors": [ "ChuijkYahus" ],
 	"license": "MIT",
 	"icon": "assets/hexlink/icon.png",
 	"environment": "*",
@@ -37,7 +37,15 @@
 	"mixins": [ "hexlink.mixins.json" ],
 
 	"custom": {
-		"cardinal-components": [ "hexlink:world_data" ]
+		"cardinal-components": [ "hexlink:world_data" ],
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/FqxUdmrrSb",
+				"modmenu.wiki": "https://github.com/Jempasam/Hexlink/wiki",
+				"modmenu.modrinth": "https://modrinth.com/mod/hexlink"
+			},
+			"update_checker": true
+		}
 	},
 
 	"depends": {

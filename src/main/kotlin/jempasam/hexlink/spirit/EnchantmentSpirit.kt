@@ -32,11 +32,11 @@ class EnchantmentSpirit(val enchantment: Enchantment): Spirit {
     }
     private fun manifestStack(worldStack: StackHelper.WorldStack?, count: Int): Spirit.Manifestation{
         if(worldStack==null)return Spirit.NONE_MANIFESTATION
-        val level= min((count.countTrailingZeroBits()+1), enchantment.maxLevel)
+        val level= min((count.takeHighestOneBit().countTrailingZeroBits()+1), enchantment.maxLevel)
         if(EnchantHelper.canEnchant(worldStack.stack, enchantment, level)){
             val cost=1 shl (level-1)
             val new_stack= EnchantHelper.enchant(worldStack.stack, enchantment, level) ?: return Spirit.NONE_MANIFESTATION
-            return Spirit.Manifestation(1, cost){
+            return Spirit.Manifestation(1, cost, cost){
                 worldStack.replace(new_stack)
             }
         }

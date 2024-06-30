@@ -22,7 +22,7 @@ object EnchantmentExtNode : ExtractionNode {
                 prev(it)
                 val nlevel=extracted.value-it.countTrailingZeroBits()-1
                 worldStack.replace(
-                    if(nlevel==0){
+                    if(nlevel<=0){
                         EnchantHelper.removeEnchantment(worldStack.stack, extracted.key)
                     }
                     else{
