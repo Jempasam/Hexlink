@@ -1,9 +1,11 @@
 package jempasam.hexlink.recipe.vortex
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.utils.asSpirit
 import jempasam.hexlink.utils.read
+import jempasam.hexlink.utils.toJSON
 import net.minecraft.recipe.RecipeManager
 import net.minecraft.server.world.ServerWorld
 
@@ -13,6 +15,11 @@ abstract class AbstractVortexHandler(private var catalyzer: List<Spirit>, var ou
             obj.get("catalyzer")?.asJsonArray?.read { it.asSpirit() } ?: listOf(),
             obj.get("result")?.asJsonArray?.read { it.asSpirit() } ?: listOf()
     )
+
+    override fun serialize(json: JsonObject){
+        json.add("catalyzer", JsonArray().apply { catalyzer.forEach{add(it.toJSON())} })
+        json.add("result", JsonArray().apply { output.forEach{add(it.toJSON())} })
+    }
 
     override fun getCatalyzer(): List<Spirit> = catalyzer
 

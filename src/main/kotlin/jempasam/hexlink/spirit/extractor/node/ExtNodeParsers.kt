@@ -21,6 +21,7 @@ object ExtNodeParsers {
     val FILTER_ENTITY= register("entity_predicate", FilterEntityExtNode.Parser)
     val FILTER_ITEM= register("item_predicate", FilterItemExtNode.Parser)
     val ELSE= register("else", ElseExtNode.Parser)
+    val REFERENCE= register("reference", ReferenceExtNode.Parser)
 
     val RESULT= register("result", ResultExtNode.Parser)
     val COST= register("cost", CostExtNode.Parser)

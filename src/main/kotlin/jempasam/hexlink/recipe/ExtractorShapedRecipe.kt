@@ -2,7 +2,7 @@ package jempasam.hexlink.recipe
 
 import com.google.gson.JsonObject
 import jempasam.hexlink.item.functionnality.ExtractorItem
-import jempasam.hexlink.spirit.extractor.SpiritExtractor
+import jempasam.hexlink.spirit.extractor.NodeExtractor
 import net.minecraft.inventory.CraftingInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
@@ -20,7 +20,7 @@ class ExtractorShapedRecipe(val recipe: ShapedRecipe) : CraftingRecipe {
         val result=recipe.craft(craftingInventory)
         val resultItem=result.item
         if(resultItem is ExtractorItem){
-            var extractor: SpiritExtractor<*>?=null
+            var extractor: NodeExtractor?=null
             for(i in 0 until craftingInventory.size()){
                 val stack=craftingInventory.getStack(i)
                 val item=stack.item

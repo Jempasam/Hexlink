@@ -16,6 +16,7 @@ import kotlin.math.min
 class SmeltingVortexHandler : AbstractVortexHandler {
 
     val multiplier: Float
+
     constructor(catalyzer: List<Spirit>, output: List<Spirit>, multiplier: Float)
             : super(catalyzer, output)
     {
@@ -26,6 +27,11 @@ class SmeltingVortexHandler : AbstractVortexHandler {
             : super(obj)
     {
         this.multiplier=JsonHelper.getFloat(obj, "multiplier", 1.0f)
+    }
+
+    override fun serialize(obj: JsonObject){
+        super.serialize(obj)
+        obj.addProperty("multiplier", multiplier)
     }
 
 
@@ -70,7 +76,9 @@ class SmeltingVortexHandler : AbstractVortexHandler {
 
     }
 
+    override val parser get() = PARSER
+
     object PARSER: HexVortexHandler.Parser<SmeltingVortexHandler> {
-        override fun serialize(json: JsonObject): SmeltingVortexHandler = SmeltingVortexHandler(json)
+        override fun parse(json: JsonObject): SmeltingVortexHandler = SmeltingVortexHandler(json)
     }
 }

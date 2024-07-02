@@ -16,12 +16,14 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.JsonHelper
 import net.minecraft.util.math.ColorHelper.Argb.*
 
-class NodeExtractor(private val name: Text, private val colors: List<Int>, private val cost: Int, private val duration: Int, private val root: PlacedNode): SpiritExtractor<Spirit> {
+class NodeExtractor(private val name: Text, public val colors: List<Int>, private val cost: Int, public val duration: Int, private val root: PlacedNode): SpiritExtractor<Spirit> {
 
     override fun extract(caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<Spirit> {
         val ret=root.filter(Source(1, caster, target, null) {})
         return SpiritExtractor.ExtractionResult(ret.spirit, ret.count, ret::consume)
     }
+
+    fun filter(source: ExtractionNode.Source): ExtractionNode.Source = root.filter(source)
 
     override fun getColor(): Int{
         if(colors.isEmpty())return 0x000000
@@ -77,6 +79,9 @@ class NodeExtractor(private val name: Text, private val colors: List<Int>, priva
     }
 
     companion object{
+
+        fun of(name: Text, colors: List<Int>, duration: Int, cost: Int, node: ExtractionNode) = NodeExtractor(name,colors,duration,cost,UniquePlacedNode(node))
+
         fun parse(obj: JsonObject): NodeExtractor {
             return NodeExtractor(
                 obj.get("name")?.let { Text.Serializer.fromJson(it) } ?: Text.of("INVALIDNAME"),

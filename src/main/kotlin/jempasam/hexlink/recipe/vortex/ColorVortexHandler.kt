@@ -13,7 +13,6 @@ class ColorVortexHandler : AbstractVortexHandler {
 
     constructor(obj: JsonObject): super(obj)
 
-
     override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
         val it=ingredients.iterator()
         if(ingredients.size>=2 && it.next() is ColorSpirit && it.next() is ColorSpirit){
@@ -64,8 +63,10 @@ class ColorVortexHandler : AbstractVortexHandler {
         }
     }
 
+    override val parser get() = PARSER
+
     object PARSER: HexVortexHandler.Parser<ColorVortexHandler> {
-        override fun serialize(json: JsonObject): ColorVortexHandler = ColorVortexHandler(json)
+        override fun parse(json: JsonObject): ColorVortexHandler = ColorVortexHandler(json)
     }
 
 }

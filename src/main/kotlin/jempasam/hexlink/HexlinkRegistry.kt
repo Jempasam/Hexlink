@@ -4,6 +4,7 @@ import com.mojang.serialization.Lifecycle
 import jempasam.hexlink.recipe.vortex.HexVortexHandler
 import jempasam.hexlink.spirit.SpecialSpirit
 import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.spirit.extractor.NodeExtractor
 import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import jempasam.hexlink.spirit.extractor.node.ExtractionNode
 import jempasam.hexlink.utils.LoadableRegistry
@@ -20,7 +21,7 @@ object HexlinkRegistry {
     val SPIRIT_KEY=registryId<Spirit.SpiritType<*>>("spirit")
     val SPIRIT=registry(SPIRIT_KEY)
 
-    val EXTRACTOR_KEY=registryId<SpiritExtractor<*>>("spirit_extractor")
+    val EXTRACTOR_KEY=registryId<NodeExtractor>("spirit_extractor")
     val EXTRACTOR=loadableRegistry(EXTRACTOR_KEY)
 
     val EXTRACTOR_SERIALIZER_KEY=registryId<SpiritExtractor.Serializer<*>>("extractor_serializer")

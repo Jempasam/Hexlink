@@ -60,15 +60,12 @@ object EnchantHelper {
         val enchants= EnchantmentHelper.get(target)
 
         // Check incompatible
-        println("Can combine")
         if(enchants.keys.any { enchantment!=it && !enchantment.canCombine(it)  })return false
 
-        println("$level>${enchantment.maxLevel}")
         if(level>enchantment.maxLevel)return false
 
         // Already present and with a incompatible level
         val already= enchants[enchantment] ?: 0
-        println("$level<=$already")
         if(level<=already)return false
 
         return true

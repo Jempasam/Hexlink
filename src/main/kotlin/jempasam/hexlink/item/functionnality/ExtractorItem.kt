@@ -2,6 +2,7 @@ package jempasam.hexlink.item.functionnality
 
 import jempasam.hexlink.HexlinkRegistry
 import jempasam.hexlink.spirit.Spirit
+import jempasam.hexlink.spirit.extractor.NodeExtractor
 import jempasam.hexlink.spirit.extractor.SpiritExtractor
 import net.minecraft.entity.Entity
 import net.minecraft.item.Item
@@ -19,12 +20,12 @@ interface ExtractorItem {
     fun extractFrom(stack: ItemStack, caster: ServerPlayerEntity?, target: Entity): SpiritExtractor.ExtractionResult<*>
         = getExtractor(stack)?.extract(caster, target) ?: SpiritExtractor.noResult<Spirit>()
 
-    fun setExtractor(stack: ItemStack, extractor: SpiritExtractor<*>){
+    fun setExtractor(stack: ItemStack, extractor: NodeExtractor){
         val id= HexlinkRegistry.EXTRACTOR.getId(extractor)
         stack.orCreateNbt.put("extractor", NbtString.of(id?.toString() ?: "none"))
     }
 
-    fun getExtractor(stack: ItemStack): SpiritExtractor<*>?{
+    fun getExtractor(stack: ItemStack): NodeExtractor?{
         val extractor=stack.nbt?.getString("extractor") ?: ""
         if(extractor.isEmpty())return null
         else return HexlinkRegistry.EXTRACTOR.get(Identifier(extractor))

@@ -2,7 +2,7 @@ package jempasam.hexlink.spirit
 
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.HexlinkRegistry
-import jempasam.hexlink.spirit.extractor.SpiritExtractor
+import jempasam.hexlink.spirit.extractor.NodeExtractor
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
@@ -14,7 +14,7 @@ object HexlinkSpirits {
         return spirit
     }
 
-    private fun <T: Spirit>create(id: String, spirit: SpiritExtractor<T>): SpiritExtractor<T>{
+    private fun <T: Spirit>create(id: String, spirit: NodeExtractor): NodeExtractor{
         Registry.register(HexlinkRegistry.EXTRACTOR, Identifier(HexlinkMod.MODID, id), spirit)
         return spirit
     }

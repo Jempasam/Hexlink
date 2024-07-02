@@ -2,6 +2,7 @@ package jempasam.hexlink.recipe.vortex
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
+import jempasam.hexlink.recipe.vortex.BurningVortexHandler.PARSER
 import jempasam.hexlink.spirit.ItemSpirit
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
@@ -31,6 +32,7 @@ class PatternVortexHandler : AbstractVortexHandler {
     private val useDurability: Boolean
     private val width: Int
     private val height: Int
+    private val json: JsonObject
 
 
     constructor(catalyzer: List<Spirit>, output: List<Spirit>, pattern: List<Slot>, width: Int, height: Int, useDurability: Boolean, multiplier: Float)
@@ -44,6 +46,7 @@ class PatternVortexHandler : AbstractVortexHandler {
         this.multiplier=multiplier
         this.width=width
         this.height=height
+        this.json=JsonObject()
     }
 
     constructor(obj: JsonObject) : super(obj)
@@ -76,37 +79,11 @@ class PatternVortexHandler : AbstractVortexHandler {
         this.materialCount=pattern.maxOf { it.mat }+1
         this.useDurability=JsonHelper.getBoolean(obj,"use_durability", false)
         this.multiplier=JsonHelper.getFloat(obj, "multiplier", 1.0f)
+        this.json=obj
+    }
 
-        /*this.pattern=JsonHelper.getArray(obj,"pattern").let{
-            if(it.size()==3*3){
-                val ret= mutableListOf<Slot>()
-                for(json_slot in it){
-                    if(json_slot.isJsonObject){
-                        val obj=json_slot.asJsonObject
-                        if(obj.size()==0)ret.add(NoneSlot())
-                        else{
-                            val input=obj.get("input")?.asInt
-                            if(input!=null){
-                                val mat=obj.get("mat")?.asInt ?: 0
-                                if(input<0)throw JsonParseException("Input slot input id below 0")
-                                if(mat<0)throw JsonParseException("Input slot mat id below 0")
-                                else ret.add(InputSlot(input,mat))
-                            }
-                            else ret.add(ItemStackSlot(ItemStack.fromNbt(json_slot.asJsonObject.asNBT())))
-                        }
-
-                    }
-                    else throw JsonParseException("Pattern slot not of object type")
-                }
-                ret
-            }
-            else throw JsonParseException("Pattern not of good size, need 9 slots")
-        }
-        assert(this.pattern.size==3*3)
-        this.ingredient_count=pattern.maxOf { it.id }+1
-        this.material_count=pattern.maxOf { it.mat }+1
-        this.useDurability=JsonHelper.getBoolean(obj,"use_durability", false)
-        this.multiplier=JsonHelper.getFloat(obj, "multiplier", 1.0f)*/
+    override fun serialize(json: JsonObject) {
+        this.json.entrySet().forEach{ json.add(it.key,it.value)}
     }
 
     override fun findRealRecipe(ingredients: Collection<Spirit>, world: ServerWorld): AbstractVortexHandler.Recipe? {
@@ -233,9 +210,9 @@ class PatternVortexHandler : AbstractVortexHandler {
 
     }
 
-
+    override val parser get() = PARSER
 
     object PARSER: HexVortexHandler.Parser<PatternVortexHandler> {
-        override fun serialize(json: JsonObject): PatternVortexHandler = PatternVortexHandler(json)
+        override fun parse(json: JsonObject): PatternVortexHandler = PatternVortexHandler(json)
     }
 }

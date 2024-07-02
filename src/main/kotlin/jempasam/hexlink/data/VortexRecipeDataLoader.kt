@@ -15,7 +15,7 @@ object VortexRecipeDataLoader: JsonEntryDataLoader("vortex_recipes") {
         val typeid=JsonHelper.getString(obj,"type")
         val type=HexlinkRegistry.HEXVORTEX_HANDLER_PARSER.get(Identifier(typeid))
         type ?: throw JsonParseException("$typeid is not a valid vortex recipe type")
-        HexlinkRegistry.HEXVORTEX_HANDLER.register(id, type.serialize(obj))
+        HexlinkRegistry.HEXVORTEX_HANDLER.register(id, type.parse(obj))
     }
 
     override fun after(){

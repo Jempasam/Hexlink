@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import jempasam.hexlink.recipe.vortex.HexVortexHandler.Ingredient
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
+import jempasam.hexlink.utils.addSpirit
 import jempasam.hexlink.utils.getSpirit
 import net.fabricmc.fabric.api.registry.FuelRegistry
 import net.minecraft.recipe.RecipeManager
@@ -30,6 +31,12 @@ class BurningVortexHandler : AbstractVortexHandler {
     {
         this.burningResult=obj.getSpirit("burning_result")
         this.multiplier=getFloat(obj,"multiplier",1.0f)
+    }
+
+    override fun serialize(obj: JsonObject){
+        super.serialize(obj)
+        obj.addProperty("multiplier", multiplier)
+        obj.addSpirit("burning_result", burningResult)
     }
 
 
@@ -82,8 +89,10 @@ class BurningVortexHandler : AbstractVortexHandler {
         }
     }
 
+    override val parser get() = PARSER
+
     object PARSER: HexVortexHandler.Parser<BurningVortexHandler> {
-        override fun serialize(json: JsonObject): BurningVortexHandler = BurningVortexHandler(json)
+        override fun parse(json: JsonObject): BurningVortexHandler = BurningVortexHandler(json)
     }
 
 }

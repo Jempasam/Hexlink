@@ -18,7 +18,6 @@ class ItemExtNode(val useDurability: Boolean) : ExtractionNode {
         val stack=worldStack.stack
         val item=stack.item
         if(item is BlockItem) return source
-        println("Trap: "+useDurability)
         return source.with {
             count *= stack.count * (if(useDurability) max(stack.maxDamage,1) else 1)
             val prev=consumer

@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import jempasam.hexlink.recipe.vortex.HexVortexHandler.Ingredient
 import jempasam.hexlink.spirit.Spirit
 import jempasam.hexlink.spirit.inout.SpiritHelper
+import jempasam.hexlink.utils.addSpirit
 import jempasam.hexlink.utils.getSpirit
 import net.minecraft.block.ComposterBlock
 import net.minecraft.recipe.RecipeManager
@@ -24,11 +25,16 @@ class CompostingVortexHandler : AbstractVortexHandler {
         this.compostingResult=composting_result
     }
 
-    constructor(obj: JsonObject)
-            : super(obj)
+    constructor(obj: JsonObject) : super(obj)
     {
         this.compostingResult=obj.getSpirit("composting_result")
         this.multiplier=getFloat(obj,"multiplier",1.0f)
+    }
+
+    override fun serialize(obj: JsonObject) {
+        super.serialize(obj)
+        obj.addProperty("multiplier", multiplier)
+        obj.addSpirit("composting_result", compostingResult)
     }
 
     private fun probaToCount(proba: Float) = ceil(1/proba*7).toInt()
@@ -70,8 +76,10 @@ class CompostingVortexHandler : AbstractVortexHandler {
         }
     }
 
+    override val parser get() = PARSER
+
     object PARSER: HexVortexHandler.Parser<CompostingVortexHandler> {
-        override fun serialize(json: JsonObject): CompostingVortexHandler = CompostingVortexHandler(json)
+        override fun parse(json: JsonObject): CompostingVortexHandler = CompostingVortexHandler(json)
     }
 
 }

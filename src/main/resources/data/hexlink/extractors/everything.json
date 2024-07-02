@@ -7,14 +7,7 @@
     "hexlink:potion",
     "hexlink:enchantment",
     "hexlink:block",
-    [
-      {"node": "hexlink:item_predicate", "tag": "hexlink:stack_sized"},
-      {"node": "hexlink:item", "useDurability:": true}
-    ],
-    "hexlink:item",
-    [
-      {"node": "hexlink:entity_predicate", "type":"#hexlink:not_extractable", "not":true},
-      "hexlink:entity"
-    ]
+    {"node": "hexlink:reference", "id": "hexlink:item"},
+    {"node": "hexlink:reference", "id": "hexlink:entity"}
   ]
 }

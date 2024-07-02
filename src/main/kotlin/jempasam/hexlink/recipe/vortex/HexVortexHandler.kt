@@ -12,6 +12,10 @@ interface HexVortexHandler {
 
     fun getRecipesExamples(manager: RecipeManager): Sequence<Pair<List<Ingredient>,List<Spirit>>> = sequenceOf()
 
+    fun serialize(json: JsonObject)
+
+    val parser: Parser<*>
+
     interface Recipe{
         fun mix(ingredients: Collection<Spirit>): List<Spirit>
         fun ingredientCount(): Int
@@ -40,7 +44,7 @@ interface HexVortexHandler {
     }
 
     interface Parser<T: HexVortexHandler>{
-        fun serialize(json: JsonObject): T
+        fun parse(json: JsonObject): T
     }
 }
 
