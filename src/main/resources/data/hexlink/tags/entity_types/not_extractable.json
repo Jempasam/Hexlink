@@ -4,6 +4,14 @@
     "minecraft:glow_item_frame",
     "minecraft:leash_knot",
     "minecraft:painting",
-    "minecraft:item"
+    "minecraft:item",
+    "minecraft:leash_knot",
+    "minecraft:marker",
+    {"id": "create:stationary_contraption", "required": false},
+    {"id": "create:gantry_contraption", "required": false},
+    {"id": "create:carriage_contraption", "required": false},
+    {"id": "create:super_glue", "required": false},
+    {"id": "create:crafting_blueprint", "required": false},
+    {"id": "create:seat", "required": false}
   ]
 }
