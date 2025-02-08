@@ -1,6 +1,5 @@
 package jempasam.hexlink.item
 
-import at.petrak.hexcasting.common.items.ItemFocus
 import at.petrak.hexcasting.common.items.ItemStaff
 import jempasam.hexlink.HexlinkMod
 import jempasam.hexlink.block.HexlinkBlocks
@@ -25,10 +24,6 @@ object HexlinkItems {
     }
 
     val Crystal= make("crystal", ExtractorCatalyzerItem(epicProps()))
-
-    val UpgradedBook=make("upgraded_book", UpgradedBookItem(epicProps()))
-    val FocusCollar=make("focus_collar", ItemFocus(forbiddenProps()))
-    val SpecialStaff=make("special_staff", SpecialWandItem(simpleProps()))
     //val SpirtualStaff=make("spiritual_staff",SpiritualStaffItem(simpleProps()))
     val MixedPigment=make("mixed_pigment", MixedPigmentItem(stackableProps()))
 
@@ -46,10 +41,7 @@ object HexlinkItems {
     val TabletStaff=make("tablet_staff", ItemStaff(simpleProps()))
     val SpiritStaff=make("spirit_staff", ItemStaff(simpleProps()))
     val BigTabletStaff=make("big_tablet_on_a_stick", ItemStaff(simpleProps()))
-    val HandmadeStaff=make("handmade_staff", ItemStaff(simpleProps()))
     val PureMediaStaff=make("pure_media_staff", ItemStaff(simpleProps()))
-    val SnakeStaff=make("snake_staff", ItemStaff(simpleProps()))
-    val CaneStaff=make("cane_staff", ItemStaff(simpleProps()))
 
     fun epicProps(): Item.Settings{
         return Item.Settings()

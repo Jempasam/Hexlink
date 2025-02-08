@@ -11,8 +11,6 @@ import jempasam.hexlink.operators.spells.*
 import jempasam.hexlink.operators.spiritinfo.OpGetSpiritIota
 import jempasam.hexlink.operators.spiritinfo.OpGetSpiritListIota
 import jempasam.hexlink.operators.spiritinfo.OpSpiritCountIota
-import jempasam.hexlink.operators.string.OpFindNbt
-import jempasam.hexlink.operators.string.OpGetNbt
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 
@@ -89,16 +87,6 @@ object HexlinkPatterns {
         register("write_spell",
                 HexPattern.fromAngles("waaddaawwwddaaddwaweqqqqqwaeaeaeaeaeaqwwwewddaaddwwwaaddaaw",HexDir.NORTH_EAST),
                 OpFillSpell(MediaConstants.CRYSTAL_UNIT)
-        )
-
-        registerFor("moreiotas", "get_nbt",
-            HexPattern.fromAngles("adaada", HexDir.SOUTH_WEST),
-            {{OpGetNbt}}
-        )
-
-        registerFor("moreiotas", "find_nbt",
-            HexPattern.fromAngles("daddad", HexDir.SOUTH_EAST),
-            {{OpFindNbt}}
         )
     }
 }

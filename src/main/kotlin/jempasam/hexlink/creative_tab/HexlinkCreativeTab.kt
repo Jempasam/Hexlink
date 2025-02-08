@@ -11,11 +11,9 @@ import net.minecraft.util.Identifier
 object HexlinkCreativeTab {
 
     val MAIN_TAB: ItemGroup = FabricItemGroupBuilder.create(Identifier(HexlinkMod.MODID,"hexlink"))
-            .icon { HexlinkItems.UpgradedBook.defaultStack }
+            .icon { HexlinkItems.MediumBag.defaultStack }
             .appendItems{ list, group ->
                 val spirits=HexlinkRegistry.SPECIAL_SPIRIT.entrySet.map { it.value }.toList()
-
-                list.add(HexlinkItems.UpgradedBook.defaultStack)
 
                 list.add(HexlinkItems.BigTablet.defaultStack)
                 list.add(HexlinkItems.BigBag.defaultStack)
@@ -41,14 +39,10 @@ object HexlinkCreativeTab {
                     stack
                 })
 
-                list.add(HexlinkItems.SpecialStaff.defaultStack)
                 list.add(HexlinkItems.TabletStaff.defaultStack)
                 list.add(HexlinkItems.SpiritStaff.defaultStack)
                 list.add(HexlinkItems.BigTabletStaff.defaultStack)
-                list.add(HexlinkItems.HandmadeStaff.defaultStack)
                 list.add(HexlinkItems.PureMediaStaff.defaultStack)
-                list.add(HexlinkItems.SnakeStaff.defaultStack)
-                list.add(HexlinkItems.CaneStaff.defaultStack)
 
                 list.add(HexlinkItems.Vortex.defaultStack)
 
